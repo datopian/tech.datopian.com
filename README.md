@@ -2,22 +2,22 @@
 home: true
 heroImage: https://www.datopian.com/img/datopian-logo.png
 actionText: Get Started →
-actionLink: /ckan-next-gen/
+actionLink: /frontend/
 footer: Copyright © 2016-present Datopian (Atomatic Ltd)
 ---
 
 <div class="features">
   <div class="feature">
-    <h2>CKAN Next Generation</h2>
+    <h2>Frontend</h2>
     <p>
-      <a href="/ckan-next-gen/">Read more &raquo;</a>
+      <a href="/frontend/">Read more &raquo;</a>
     </p>
   </div>
   <div class="feature">
-    <h2>Data Portals</h2>
+    <h2>Harvesting</h2>
     <p></p>
     <p>
-      <a href="/agile/">Read more &raquo;</a>
+      <a href="/harvesting/">Read more &raquo;</a>
     </p>
   </div>
   <div class="feature">

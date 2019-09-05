@@ -2,26 +2,9 @@
 sidebar: auto
 ---
 
-# CKAN Next Gen - Documentation
+# Frontend
 
-::: warning
-#### These docs are a work in progress!  
-[Leave comments](https://gitlab.com/datopian/ckan-next-gen/issues/3)
-...or better yet [Submit a PR](https://gitlab.com/datopian/tech/kb)
-
-Tag Paul Walker or Rufus for a review
-:::
-
-CKAN “Next Gen” (NG) is our name for the evolution of CKAN from its current state as “CKAN Classic”.
-
-CKAN Next Gen will have a decoupled microservice architecture.
-
-## Features / Highlights
-
-* **Data catalog / portal** -- *CKAN NG* provides a clean and intuitive interface for managing and providing access to data catalogs on the web.
-* **Data previews / downloads** -- Data can be easily previewed when browsing data catalogs.
-* **Frictionless data & data packages** -- *NG* uses [Frictionless Data](https://frictionlessdata.io) to provide interoperability, portability, and security to data within our ecosystem.
-* **Custom Content** -- It is simple to configure a backend for custom content, allowing site operators to continue using their 
+The frontend component covers all of the traditional "read" frontend functionality of a data portal: front page, searching datasets, viewing datasets etc.
 
 ## Installation 
 

@@ -1,0 +1,19 @@
+image: node:9.11.1
+
+pages:
+  cache:
+    paths:
+    - node_modules/
+
+  script:
+  - yarn install
+  - yarn build:docs
+  - cp -r .vuepress/dist public
+
+  artifacts:
+    paths:
+    - public
+  
+  only:
+  - master
+

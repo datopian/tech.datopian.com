@@ -1,0 +1,19 @@
+{
+  "name": "tech.datopian.com",
+  "version": "1.0.0",
+  "description": "Datopian Technical Docs",
+  "main": "index.js",
+  "repository": "git@gitlab.com:datopian/tech/tech.datopian.com.git",
+  "author": "Datopian <contact@datopian.com>",
+  "devDependencies": {
+    "vuepress": "^1.0.2"
+  },
+  "scripts": {
+    "start": "yarn start:docs",
+    "start:docs": "npx vuepress dev",
+    "build:docs": "npx vuepress build"
+  },
+  "dependencies": {
+    "mermaid": "^8.1.0"
+  }
+}

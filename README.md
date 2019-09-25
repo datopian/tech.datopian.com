@@ -8,6 +8,12 @@ footer: Copyright © 2016-present Datopian (Atomatic Ltd)
 
 <div class="features">
   <div class="feature">
+    <h2>CKAN Classic</h2>
+    <p>
+      <a href="/ckan/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
     <h2>Frontend</h2>
     <p>
       <a href="/frontend/">Read more &raquo;</a>

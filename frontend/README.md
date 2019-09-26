@@ -104,7 +104,7 @@ Congratulations!
 
 You can link your frontend to an existing *CKAN Classic* instance as [shown above](/#installation).
 
-If you want to create a new *CKAN Classic* instance as a backend for CKAN, [see the instructions here](https://docs.ckan.org/en/2.8/maintaining/installing/).
+If you want to create a new *CKAN Classic* instance as a backend for CKAN, [see the instructions here](/ckan/).
 
 To use the new backend, update your `.env` file to include the url to the ckan api, as follows:
 ```

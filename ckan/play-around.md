@@ -34,7 +34,7 @@ Install a [JSON formatter plugin for Chrome](https://chrome.google.com/webstore/
 If you are familiar the command line tool [curl] you can use that
 :::
 
-In this tutorial we will be using `curl` but for most of the commands you can paster link to your browser. For POST command you can [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
+In this tutorial we will be using `curl` but for most of the commands you can paste a link to your browser. For POST command you can use [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
 
 Let's check portal status:
 
@@ -46,11 +46,11 @@ You should see something like:
 
 ```
 {
-  "help": "https://ckan:5000/api/3/action/help_show?name=status_show",
+  "help": "https://localhost:5000/api/3/action/help_show?name=status_show",
   "success": true,
   "result": {
   "ckan_version": "2.8.2",
-  "site_url": "https://ckan:5000",
+  "site_url": "https://localhost:5000",
   "site_description": "Testing",
   "site_title": "CKAN Demo",
   "error_emails_to": null,
@@ -75,7 +75,7 @@ Let's Get list of all datasets dataset on the portal
 ```
 curl http://localhost:5000/api/3/action/package_list
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=package_list",
+  "help": "http://localhost:5000/api/3/action/help_show?name=package_list",
   "success": true,
   "result": ["annakarenina", "warandpeace"]
 }
@@ -86,7 +86,7 @@ Search for dataset
 ```
 curl http://localhost:5000/api/3/action/package_search?q=russian
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=package_search",
+  "help": "http://localhost:5000/api/3/action/help_show?name=package_search",
   "success": true,
   "result": {
     "count": 2,
@@ -100,7 +100,7 @@ Get dataset details
 ```
 curl http://localhost:5000/api/3/action/package_show?id=annakarenina
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=package_show",
+  "help": "http://localhost:5000/api/3/action/help_show?name=package_show",
   "success": true,
   "result": {
     "license_title": "Other (Open)",
@@ -114,7 +114,7 @@ Search for resource
 ```
 curl http://localhost:5000/api/3/action/resource_search?query=format:plain%20text
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=resource_search",
+  "help": "http://localhost:5000/api/3/action/help_show?name=resource_search",
   "success": true,
   "result": {
     "count": 1,
@@ -133,7 +133,7 @@ Get resource details
 ```
 curl http://localhost:5000/api/3/action/resource_show?id=288455e8-c09c-4360-b73a-8b55378c474a
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=resource_show",
+  "help": "http://localhost:5000/api/3/action/help_show?name=resource_show",
   "success": true,
   "result": {
     "mimetype": null,
@@ -161,7 +161,7 @@ You can see sysadmin credentials in `.env.example`. By default they should be
 - Username: ckan_admin
 - Password: test1234
 
-1. Navigate to http://ckan:5000/user/login and login
+1. Navigate to http://localhost:5000/user/login and login
 2. Click on your username (`ckan_admin`) in the up right corner
 3. Scroll down until you see `API Key` on the left screen and copy it's value. Should look something simlar to `c7325sd4-7sj3-543a-90df-kfifsdk335`
 
@@ -176,7 +176,7 @@ curl -X POST http://localhost:5000/api/3/action/organization_create -H "Authoriz
   "description": "This is my awesome organization"}'
 
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=organization_create",
+  "help": "http://localhost:5000/api/3/action/help_show?name=organization_create",
   "success": true,
   "result": {"users": [
     {
@@ -199,7 +199,7 @@ curl -X POST http://localhost:5000/api/3/action/package_create -H "Authorization
  "owner_org": "demo-organization"
 }'
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=package_create",
+  "help": "http://localhost:5000/api/3/action/help_show?name=package_create",
   "success": true,
   "result": {
     "license_title": null,
@@ -219,7 +219,7 @@ curl -X POST http://localhost:5000/api/3/action/resource_create -H "Authorizatio
 }'
 
 {
-  "help": "http://ckan:5000/api/3/action/help_show?name=resource_create",
+  "help": "http://localhost:5000/api/3/action/help_show?name=resource_create",
   "success": true,
   "result": {
     "cache_last_updated": null,

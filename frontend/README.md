@@ -6,54 +6,32 @@ sidebar: auto
 
 The frontend component covers all of the traditional "read" frontend functionality of a data portal: front page, searching datasets, viewing datasets etc.
 
-## Installation 
+## Getting started
 
 ::: tip
 Requires node.js v8.10.0 or later
 :::
 
-Clone the frontend app
+Clone the repo:
 
 ```bash
 $ git clone https://github.com/datopian/frontend-v2.git
 ```
 
-Use yarn or npm to install the project dependencies
+Install project dependencies:
+
 ```bash
 $ cd frontend-v2
-$ yarn install
+$ yarn # or you can use `npm i`
 ```
 
-Copy the environment settings to `.env`
-```bash
-$ cp env.template .env
-```
-
-Now edit `.env` so that it points to your *CKAN Classic* instance
-(For this example we will use https://demo.ckan.org as our data backend)
-
-After editing, your `.env` file should look like this:
-
-```bash
-PLUGINS=
-WP_TOKEN=
-NODE_ENV=development
-THEME=example
-TRANSLATIONS=
-API_URL=https://demo.ckan.org/api/3/action/
-WP_URL=http://127.0.0.1:6000
+You can now run the frontend app in dev mode:
 
 ```
-
-You can now run the frontend app
-
-```
-$ yarn start
+$ yarn dev
 ```
 
-Open a browser and navigate to `localhost:4000`
-
-If everything went correctly you should see the *CKAN NG* frontend app!
+Open a browser and navigate to http://localhost:4000. If everything went correctly you should see the *CKAN NG* frontend app!
 
 > ![NG Home](../img/ckan_ng_home.png)
 
@@ -63,67 +41,35 @@ You should see the data catalog from demo.ckan.org
 
 > ![NG Home](../img/ckan_ng_search.png)
 
-
 Congratulations! You have a working data portal!
 
-## Hello world
+## Theming
 
-Now we will use the `example` theme to provide a customization to the home page -- our "Hello World"!
+Frontend app is fully customizable - we suggest starting with this [hello world tutorial](/frontend/theming/).
 
-(Not sure what a theme is? See the sections [theming](#themes) below)
+Further reading: see the frontend docs for an in-depth discussion of theming - https://github.com/datopian/frontend-v2#extensions.
 
-In order to override the home page template we first need to copy it to the `views` folder of our `example` theme
+## Installing CKAN Classic as data backend
 
-```bash
-$ cp views/home.html themes/example/views/
+You can link your frontend to an existing *CKAN Classic* instance as shown above.
+
+If you want to create a new *CKAN Classic* instance as a backend for CKAN, [see the instructions here](/ckan/).
+
+To use the new backend, update your `.env` file (read more about it [here](/frontend/configs/)) to include the url to the CKAN api, as follows:
+
 ```
-
-Use a text editor to edit the `themes/example/views/home.html` file and find the `<div>` containing the home page `<h1>` heading and replace the text so that it resembles the following:
-
-`themes/example/home.html`
-```html
-            <div class="left-sec">
-                <h1>Hello World</h1>
-                <p>Hello world, how are you?</p>
-```
-
-And enable the theme in your `.env` file
-
-`.env`
-```
-THEME=example
-```
-
-Save the file. The express should re-load automatically, and show you the update to the home page template.
-
-> ![Hello world!](../img/hello_world.png)
-
-Congratulations!
-
-## Installing CKAN Classic as Data backend
-
-You can link your frontend to an existing *CKAN Classic* instance as [shown above](/#installation).
-
-If you want to create a new *CKAN Classic* instance as a backend for CKAN, [see the instructions here](https://docs.ckan.org/en/2.8/maintaining/installing/).
-
-To use the new backend, update your `.env` file to include the url to the ckan api, as follows:
-```
-API_URL=https:yoursite.com/api/3/action/
+API_URL=https://yoursite.com/api/action/
 ```
 
 ## Adding CMS
 
-The *CKAN Next Gen* frontend currently integrates easily with wordpress. Just update the `.env` file in your frontend application directory to point to a publicly accessible wordpress site.
-
-In your `.env` file:
+The *CKAN Next Gen* frontend currently integrates easily with wordpress. Just update the `.env` file (read more about it [here](/frontend/configs/)) in your frontend application directory to point to a publicly accessible wordpress site.
 
 ```
 WP_URL=https://blog.wordpress.org
 ```
 
-If the API for the site is private, you can also enter add an access token to your config.
-
-In your `.env` file:
+If the API for the site is private, you can also enter add an access token to your config:
 
 ```
 WP_TOKEN=123abc
@@ -132,8 +78,8 @@ WP_TOKEN=123abc
 By default your wordpress posts will appear in the `/news` section of your CKAN site.
 
 ### Customizing your content
-[@@TODO] 
 
+[@@TODO]
 
 ## Ecosystem
 
@@ -156,12 +102,12 @@ You can easily write your own frontend service in any language or framework you 
 The aim of the Frictionless Data spec is to provides a uniform specification for metadata and data as *Data Packages* and to provide a set of tools for working with Data Packagehe aim of the Frictionless Data spec is to provides a uniform specification for metadata and data as *Data Packages* and to provide a set of tools for working with Data Packages
 
 *CKAN Classic* can be used as a backend for *CKAN NG*, a place to store and manage your data.
-  
+
 ## Technical overview
 
 ### Frictionless Data
 
-[Frictionless Data](https://frictionlessdata.io) is a collection of specifications and software for the publication, transport, and consumption of data. 
+[Frictionless Data](https://frictionlessdata.io) is a collection of specifications and software for the publication, transport, and consumption of data.
 
 #### Data Packages
 
@@ -191,13 +137,11 @@ There are tools available for working with data packages in multiple languages a
 
 [See the exhaustive list of data package tools here](https://frictionlessdata.io/docs/)
 
-
-
 # Technical Topics
 
 ## Extending Frontend
 
-The *CKAN Next Gen* frontend can be extended and customized. We saw in the [Hello World] section how we can use a custom theme to override site html using a views template. In addition to html templates, we can add custom routes and middleware via a custom theme. 
+The *CKAN Next Gen* frontend can be extended and customized. We saw in the [Hello World] section how we can use a custom theme to override site html using a views template. In addition to html templates, we can add custom routes and middleware via a custom theme.
 
 ### Themes
 
@@ -210,7 +154,7 @@ module.exports = function (app) {
 
 ```
 
-The app object is the express app. We can extend this object to add routes to our application, to provide middleware layers, or to do anything that express allows us to do. 
+The app object is the express app. We can extend this object to add routes to our application, to provide middleware layers, or to do anything that express allows us to do.
 
 For instance, we can add a custom route with a simple message:
 
@@ -261,9 +205,9 @@ THEME_DIR=node_modules
 
 ### Plugins
 
-In some cases we may want functionality that applies to every request, regardless of what theme we are using. 
+In some cases we may want functionality that applies to every request, regardless of what theme we are using.
 
-We can package such functionality as plugins. 
+We can package such functionality as plugins.
 
 There are currently two types of plugins: user-defined plugins which we add to the `/plugins` directory, and npm plugins, which we install via npm.
 
@@ -303,12 +247,12 @@ If an express middleware plugin is available as a standalone module on npm you c
 
 For example, we will install the cookie-parser plugin, alongside our addheader plugin.
 
-Install the npm package: 
+Install the npm package:
 ```
 $ yarn add cookie-parser
 ```
 
-Now add the plugins to your `.env`, alongside the custom `addheader` plugin we created above: 
+Now add the plugins to your `.env`, alongside the custom `addheader` plugin we created above:
 ```
 PLUGINS="addheader cookie-parser"
 ```
@@ -320,14 +264,9 @@ Cookie-parser will now be applied to all of your requests as express middleware!
 For more on express middleware: https://expressjs.com/en/guide/using-middleware.html
 
 ### Backends
+
 * DMS -- The Data Management System used by *CKAN NG*
 Currently the only supported DMS Backend is *CKAN Classic* (CKAN <= v2.8) but there is no reason why additional integrations cannot be included. Stay tuned!
 
 * CMS -- The Content Management System used by *CKAN NG*
 Currently the only supported CMS Backend is Wordpress but there is nothing stopping us / you from writing integrations to additional Content Management Systems. Stay tuned!
-
-## Theming (from frontend-v2 README)
-
-See the [frontend docs](https://github.com/datopian/frontend-v2#theming) for an in-depth discussion of theming.
-
-See the frontend docs for an in-depth discussion of theming: https://github.com/datopian/frontend-v2#theming

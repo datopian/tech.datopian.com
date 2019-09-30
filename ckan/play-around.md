@@ -74,6 +74,11 @@ Let's Get list of all datasets dataset on the portal
 
 ```
 curl http://localhost:5000/api/3/action/package_list
+```
+
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=package_list",
   "success": true,
@@ -85,6 +90,11 @@ Search for dataset
 
 ```
 curl http://localhost:5000/api/3/action/package_search?q=russian
+```
+
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=package_search",
   "success": true,
@@ -99,6 +109,11 @@ Get dataset details
 
 ```
 curl http://localhost:5000/api/3/action/package_show?id=annakarenina
+```
+
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=package_show",
   "success": true,
@@ -113,6 +128,11 @@ Search for resource
 
 ```
 curl http://localhost:5000/api/3/action/resource_search?query=format:plain%20text
+```
+
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=resource_search",
   "success": true,
@@ -132,6 +152,11 @@ Get resource details
 
 ```
 curl http://localhost:5000/api/3/action/resource_show?id=288455e8-c09c-4360-b73a-8b55378c474a
+```
+
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=resource_show",
   "success": true,
@@ -150,7 +175,7 @@ There are 3 steps:
 
 - Get an API key
 - Create organization
-- And create dataset inside organization (you can't cretae a dataset without a parent organization)
+- And create dataset inside organization (you can't create a dataset without a parent organization)
 
 #### Get a Sysadmin Key
 
@@ -163,18 +188,22 @@ You can see sysadmin credentials in `.env.example`. By default they should be
 
 1. Navigate to http://localhost:5000/user/login and login
 2. Click on your username (`ckan_admin`) in the up right corner
-3. Scroll down until you see `API Key` on the left screen and copy it's value. Should look something simlar to `c7325sd4-7sj3-543a-90df-kfifsdk335`
+3. Scroll down until you see `API Key` on the left screen and copy it's value. It should look something simlar to `c7325sd4-7sj3-543a-90df-kfifsdk335`
 
 #### Create Organization
 
 You can create organization from browser easely, but let's use [CKAN API](https://docs.ckan.org/en/2.8/api/#ckan.logic.action.create.organization_create) to do so.
 
 ```
-curl -X POST http://localhost:5000/api/3/action/organization_create -H "Authorization: 9c04a69d-79f4-4b4b-b4e1-f2ac31ed961c" -d '{
+curl -X POST http://localhost:5000/api/3/action/organization_create -H "Authorization: <YOUR-API-KEY>" -d '{
   "name": "demo-organization",
   "title": "Demo Organization",
   "description": "This is my awesome organization"}'
+```
 
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=organization_create",
   "success": true,
@@ -192,12 +221,17 @@ curl -X POST http://localhost:5000/api/3/action/organization_create -H "Authoriz
 Now we are ready to create our first dataset.
 
 ```
-curl -X POST http://localhost:5000/api/3/action/package_create -H "Authorization: 9c04a69d-79f4-4b4b-b4e1-f2ac31ed961c" -d '{
+curl -X POST http://localhost:5000/api/3/action/package_create -H "Authorization: <YOUR-API-KEY>" -d '{
  "name": "my-first-dataset",
  "title": "My First Dataset",
  "description": "This is my first dataset!",
  "owner_org": "demo-organization"
 }'
+```
+
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=package_create",
   "success": true,
@@ -211,13 +245,17 @@ curl -X POST http://localhost:5000/api/3/action/package_create -H "Authorization
 This will create an empty (draft) dataset. Now let's add resource to it
 
 ```
-curl -X POST http://localhost:5000/api/3/action/resource_create -H "Authorization: 9c04a69d-79f4-4b4b-b4e1-f2ac31ed961c" -d '{
+curl -X POST http://localhost:5000/api/3/action/resource_create -H "Authorization: <YOUR-API-KEY>" -d '{
   "package_id": "my-first-dataset",
   "url":  "https://raw.githubusercontent.com/frictionlessdata/test-data/master/files/csv/100kb.csv",
   "description": "This is the best resource ever!" ,
   "name": "brand-new-resource"
 }'
+```
 
+Response
+
+```
 {
   "help": "http://localhost:5000/api/3/action/help_show?name=resource_create",
   "success": true,

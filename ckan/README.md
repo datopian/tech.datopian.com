@@ -31,6 +31,13 @@ Create a local environment file:
 cp .env.example .env
 ```
 
+Edit the new `.env ` at the line 7 to look like this:
+
+```
+CKAN_SITE_URL=http://localhost:5000
+```
+
+
 Build and Run the instances:
 
 ```

@@ -4,35 +4,48 @@ sidebar: auto
 
 # Theming frontend
 
-## Hello world!
+In this article, we explain how you can create a theme and develop it.
 
-We've prepared an `example` theme (located in `./themes/` directory) that you can use to get started with theming frontend app. Let's customize the home page -- our "Hello World"!
+## Getting started
 
-Enable the theme in your `.env` file (read more about configs [here](/frontend/configs/)):
+To add a theme, create a folder in the `/themes` directory. At very least you must add a `index.js` file with the following code in it:
 
-```
-THEME=example
-```
-
-In order to override the home page template we first need to copy it to the `views` folder of our `example` theme
-
-```bash
-$ cp views/home.html themes/example/views/
+```javascript
+module.exports = function (app) {
+  // no-ops
+}
 ```
 
-Use a text editor to edit the `themes/example/views/home.html` file and find the `<div>` containing the home page `<h1>` heading and replace the text so that it resembles the following:
+The app object is the express app. We can extend this object to add routes to our application, to provide middleware layers, or to do anything that express allows us to do.
+
+For instance, we can add a custom route with a simple message:
+
+```javascript
+module.exports = function (app) {
+  app.get('/hello', (req, res) => {
+    console.log('example route')
+    res.render('example.html', {
+      title: 'Example Theme route',
+      content: {hello: 'Hello from my theme!'}
+    })  
+  })  
+}
+```
+
+If you have worked with Express.js, this will look quite familiar. For more on working with Express.js, see the [complete documentation here](https://expressjs.com/en/5x/api.html).
+
+Note that the first argument to the `res.render` function is the name of a template. We can define this template in our themes folder at `themes/mytheme/views/example.html`:
 
 ```html
-<div class="left-sec">
-  <h1>Hello World</h1>
-  <p>Hello world, how are you?</p>
+{% extends "base.html" %}
+
+{% block bodyclass %}dash{% endblock %}
+{% block content %}
+<div class="pt-6">
+    {{ content.foo }}
+</div>
+{% endblock %}
 ```
-
-Save the file. If you're running the app in dev mode, it should re-load automatically, and show you the update to the home page template.
-
-> ![Hello world!](../../img/hello_world.png)
-
-Congratulations!
 
 ## Theme distribution and installation
 
@@ -64,6 +77,7 @@ Once you've installed the theme, you need to enable it via `.env` config file:
 
 ```
 THEME=my-theme-name
+THEME_DIR=node_modules
 ```
 
 Done! Start the server and checkout how your theme looks like :wave:

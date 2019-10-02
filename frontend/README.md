@@ -6,7 +6,7 @@ sidebar: auto
 
 The frontend component covers all of the traditional "read" frontend functionality of a data portal: front page, searching datasets, viewing datasets etc.
 
-## Getting started
+## Installation
 
 ::: tip
 Requires node.js v8.10.0 or later
@@ -27,181 +27,68 @@ $ yarn # or you can use `npm i`
 
 You can now run the frontend app in dev mode:
 
-```
-$ yarn dev
+```bash
+$ yarn dev # or `npm run dev`
 ```
 
 Open a browser and navigate to http://localhost:4000. If everything went correctly you should see the *CKAN NG* frontend app!
 
 > ![NG Home](../img/ckan_ng_home.png)
 
-Now navigate to `localhost:4000/search`
+Now navigate to http://localhost:4000/search and you should see the data catalog - these are mocked at the moment. Let's now unmock it and use demo CKAN instance. To do that we need to change DMS API configuration. First stop the server and then run:
 
-You should see the data catalog from demo.ckan.org
+```bash
+$ API_URL=http://demo.ckan.org/api/3/action/ yarn dev
+```
 
-> ![NG Home](../img/ckan_ng_search.png)
+Now you should see datasets from demo.ckan.org on your search page - http://localhost:4000/search.
 
-Congratulations! You have a working data portal!
+Congratulations! You have a working data portal with live data backend!
 
 ## Theming
 
-Frontend app is fully customizable - we suggest starting with this [hello world tutorial](/frontend/theming/).
+Changing the appearance of the site is easy and quick - we suggest starting with this [hello world tutorial](/frontend/theming/hello-world).
 
-Further reading: see the frontend docs for an in-depth discussion of theming - https://github.com/datopian/frontend-v2#extensions.
+Next step would be to check out the docs about [how themes work](/frontend/theming/) in NG frontend.
 
-## Installing CKAN Classic as data backend
+## Set up your own backend
 
-You can link your frontend to an existing *CKAN Classic* instance as shown above.
+*By default, the frontend runs against mocked API so you don't need to setup your own backend.*
 
-If you want to create a new *CKAN Classic* instance as a backend for CKAN, [see the instructions here](/ckan/).
+To change environment variables, you can rename `env.template` as `.env` and set the values. Here you can find more about configurations and how to set it up - [frontend configurations](/frontend/configs/).
 
-To use the new backend, update your `.env` file (read more about it [here](/frontend/configs/)) to include the url to the CKAN api, as follows:
+### DMS
 
-```
-API_URL=https://yoursite.com/api/action/
-```
-
-## Adding CMS
-
-The *CKAN Next Gen* frontend currently integrates easily with wordpress. Just update the `.env` file (read more about it [here](/frontend/configs/)) in your frontend application directory to point to a publicly accessible wordpress site.
+Setup `API_URL` environment variable so it points to your CKAN instance, e.g., for demo.ckan.org it would be:
 
 ```
-WP_URL=https://blog.wordpress.org
+export API_URL=https://demo.ckan.org/api/3/action/
 ```
 
-If the API for the site is private, you can also enter add an access token to your config:
+### CMS
+
+You can use one of built-in CMS plugins - check it out below.
+
+#### Wordpress
+
+Read about WordPress plugin here: https://github.com/datopian/frontend-v2/blob/master/plugins/wp/README.md
+
+#### CKAN Pages
+
+To use CKAN Pages as your CMS backend, add it to your list of `PLUGINS` in `.env` file:
 
 ```
-WP_TOKEN=123abc
+PLUGINS=ckan_pages
 ```
 
-By default your wordpress posts will appear in the `/news` section of your CKAN site.
+When enabled, CKAN Pages plugin will use the CKAN `API_URL` environment variable by default.
+To configure a different URL for your CKAN Pages backend add `CKAN_PAGES_URL=https://yourckan.com/api/3/action/` to your environment.
 
-### Customizing your content
+For more info about enabling and using CKAN Pages - https://github.com/ckan/ckanext-pages
 
-[@@TODO]
+## Extending frontend
 
-## Ecosystem
-
-### frontend-v2
-
-*CKAN Next Gen* includes many changes. One major update is that the (read) “frontend” component is now a separate microservice.
-
-The CKAN frontend communicates with a CMS and DMS [backend](/#backends) to deliver content:
-
-![Frontend Sequence Diagram](../img/frontend-sequence-1.png)
-
-The official NG frontend implementation is written in ExpressJS and is here: https://github.com/datopian/frontend-v2
-
-You can easily write your own frontend service in any language or framework you like.
-
-
-### CKAN Classic
-
-*CKAN Classic* is the name for the current version (2.8) of CKAN.
-The aim of the Frictionless Data spec is to provides a uniform specification for metadata and data as *Data Packages* and to provide a set of tools for working with Data Packagehe aim of the Frictionless Data spec is to provides a uniform specification for metadata and data as *Data Packages* and to provide a set of tools for working with Data Packages
-
-*CKAN Classic* can be used as a backend for *CKAN NG*, a place to store and manage your data.
-
-## Technical overview
-
-### Frictionless Data
-
-[Frictionless Data](https://frictionlessdata.io) is a collection of specifications and software for the publication, transport, and consumption of data.
-
-#### Data Packages
-
-A Data Package consists of:
-
-* Metadata that describes the structure and contents of the package
-* Resources such as data files that form the contents of the package
-* The Data Package metadata is stored in a "descriptor". This descriptor is what makes a collection of data a Data Package. The structure of this descriptor is the main content of the specification below.
-
-*CKAN NG* uses [Data Packages](https://frictionlessdata.io/specs/data-package/) to manage data resources across the ecosystem.
-
-#### Working with Data Packages
-
-::: warning
-It is important when working with data in *CKAN NG* to use the data packages format, and to use the appropriate tools.
-:::
-
-#### Javascript - data.js
-
-[data.js](https://github.com/datopian/data.js) is a lightweight, standardized "stream-plus-metadata" interface for accessing files and datasets, especially tabular ones (CSV, Excel).
-
-Internally, *CKAN NG* uses *data.js* to provide the tools needed to work with data packages.
-
-#### Other languages
-
-There are tools available for working with data packages in multiple languages and environments.
-
-[See the exhaustive list of data package tools here](https://frictionlessdata.io/docs/)
-
-# Technical Topics
-
-## Extending Frontend
-
-The *CKAN Next Gen* frontend can be extended and customized. We saw in the [Hello World] section how we can use a custom theme to override site html using a views template. In addition to html templates, we can add custom routes and middleware via a custom theme.
-
-### Themes
-
-To add a theme, create a folder in the `/themes` directory. At very least you must add a `index.js` file with the following code in it:
-
-```javascript
-module.exports = function (app) {
-  // no-ops
-}
-
-```
-
-The app object is the express app. We can extend this object to add routes to our application, to provide middleware layers, or to do anything that express allows us to do.
-
-For instance, we can add a custom route with a simple message:
-
-```javascript
-module.exports = function (app) {
-  app.get('/hello', (req, res) => {
-    console.log('example route')
-    res.render('example.html', {
-      title: 'Example Theme route',
-      content: {hello: 'Hello from my theme!'}
-    })  
-  })  
-}
-```
-
-If you have worked with Express.js, this will look quite familiar. For more on working with Express.js, see the [complete documentation here](https://expressjs.com/en/5x/api.html).
-
-Note that the first argument to the `res.render` function is the name of a template. We can define this template in our themes folder at `themes/mytheme/views/example.html`:
-
-```html
-{% extends "base.html" %}
-
-{% block bodyclass %}dash{% endblock %}
-{% block content %}
-<div class="pt-6">
-    {{ content.foo }}
-</div>
-{% endblock %}
-```
-
-For a complete guide to theming, see [below](#themes)
-
-#### NPM Themes
-
-Themes can be loaded via npm:
-
-```
-$ yarn add your_ckan_ng_theme
-```
-
-And in `.env`
-```
-THEME=your_ckan_ng_theme
-THEME_DIR=node_modules
-```
-
-> *NOTE*: Make sure to set `THEME_DIR` to `node_modules`!!!
+The *CKAN Next Gen* frontend can be extended and customized. We saw in the [Hello World](/frontend/theming/hello-world/) section how we can use a custom theme to override site html using a views template. In addition to html templates, we can add custom routes and middleware via a theme or plugin. Below we explain more about plugins, if you would like to read about themes, please, follow [this link](/frontend/theming/).
 
 ### Plugins
 
@@ -219,8 +106,7 @@ Create a directory with the plugin's name in the `/plugins` directory.
 $ mkdir plugins/addheader
 ```
 
-Inside of this directory create a file called index.js with the following contents:
-
+Inside of this directory create a file called `index.js` with the following contents:
 
 ```javascript
 module.exports = function(app) {
@@ -261,12 +147,41 @@ Cookie-parser will now be applied to all of your requests as express middleware!
 
 (For instance, you could take advantage of this in custom routes, etc)
 
-For more on express middleware: https://expressjs.com/en/guide/using-middleware.html
+For more on express middleware: https://expressjs.com/en/guide/using-middleware.html.
 
-### Backends
+#### Google analytics plugin
 
-* DMS -- The Data Management System used by *CKAN NG*
-Currently the only supported DMS Backend is *CKAN Classic* (CKAN <= v2.8) but there is no reason why additional integrations cannot be included. Stay tuned!
+To add Google Analytics tracking code to page templates,
+enable the plugin in your `.env` file:
 
-* CMS -- The Content Management System used by *CKAN NG*
-Currently the only supported CMS Backend is Wordpress but there is nothing stopping us / you from writing integrations to additional Content Management Systems. Stay tuned!
+```bash
+PLUGINS="... google-analytics ..."
+GA_ID=UA-000000000-0
+```
+
+#### Mailer plugin
+
+To enable mailer plugin, you need to update your `.env` as following:
+
+```
+PLUGINS="... mailer ..."
+SMTP_SERVICE=gmail (optional if you have host and port details)
+SMTP_HOST=smtp.example.com (optional if you set 'SMTP_SERVICE')
+SMTP_PORT=587 (optional if you set 'SMTP_SERVICE')
+EMAIL_FROM=from@example.com
+EMAIL_PASSWORD=*****
+EMAIL_TO=to@example.com
+```
+
+#### Applications showcase plugin
+
+To add applications showcase plugin to your application you need to
+enable the plugin in your `.env` file:
+
+```bash
+PLUGINS="... applications-showcase ..."
+```
+
+Here is the list of well-known services that can be used without setting host and port of your SMTP server: [Supported services](https://nodemailer.com/smtp/well-known/#supported-services).
+
+Then you need to implement `contact.html` template in your theme so that a contact form can be rendered at `/contact`.

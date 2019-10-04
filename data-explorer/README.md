@@ -1,0 +1,113 @@
+---
+sidebar: auto
+---
+<div style="background-color: rgba(254, 232, 108, .5); padding: 2em; font-size: 1.2em; line-height:1.2em">
+<strong>These docs are a work in progress!</strong>
+<p>If you have issues, <a href="https://gitlab.com/datopian/tech/tech.datopian.com/issues" target="_blank">Submit an issue</a></p>
+<p>If you have improvements, <a href="https://gitlab.com/datopian/tech/tech.datopian.com/merge_requests" target="_blank">Submit a merge request</a></p>
+</div>
+
+# Data Explorer
+
+![Data Explorer](../img/data-explorer/data-explorer.png)
+> [Data Explorer for the City of Montreal](http://montreal.ckan.io/ville-de-montreal/geobase-double#resource-G%C3%83%C2%A9obase%20double)
+
+## Features / Highlights
+
+"Data Explorer" refers to an embedable  React/Redux application that allows users to:
+* Explore tabular, map, PDF, and other types of data
+* Create map views of tabular data using the [Map Builder](#map-builder)
+* Create charts and graphs of tabular data using [Chart Builder](#chart-builder)
+
+## Components
+
+The Data Explorer application acts as a coordinating layer and state management solution -- via [Redux](https://redux.js.org/) -- for several libraries, also maintained by Datopian.
+
+### [Datapackage Views](https://github.com/datopian/datapackage-views-js)
+
+![Datapackage Views](../img/data-explorer/datapackage-views.png)
+
+Datapackage View is the rendering engine for the main window of the Data Explorer.
+
+The above image displays a table shown at the `Table` tab, but note that Datapackage-views renders _all_ data visualizations: Tables, Charts, Maps, and others.
+
+### [Query Builder](https://github.com/datopian/datastore-query-builder)
+
+<img alt="Query Builder" src="../img/data-explorer/query-builder.png" width="250px" />
+
+The Query Builder interfaces with the Datastore API to allow users to search data resources using an SQL like interface.
+
+### [Map Builder](https://github.com/datopian/map-builder)
+
+<img alt="Map Builder" src="../img/data-explorer/map-builder.png" width="250px" />
+
+Map Builder allows users to build maps based on geo-data contained in tabular resources.
+
+Supported geo formats:
+* lon / lat (separate columns)
+
+### [Chart Builder](https://github.com/datopian/chart-builder)
+
+<img alt="Chart Builder" src="../img/data-explorer/chart-builder.png" width="250px" />
+
+Chart Builder allows users to create charts and graphs from tabular data.
+
+## Quick-start (Sandbox)
+
+* Clone the data explorer
+```bash
+$ git clone git@gitlab.com:datopian/data-explorer.git
+```
+* Use yarn to install the project dependencies
+```bash
+$ cd data-explorer
+$ yarn
+```
+* To see the Data Explorer running in a sandbox environment run [Cosmos](https://github.com/react-cosmos/react-cosmos) 
+
+## Configuration
+
+### Fixtures
+
+Until we have better documentation on Data Explorer settings, use the [Cosmos fixtures](https://gitlab.com/datopian/data-explorer/blob/master/__fixtures__/with_widgets/geojson_simple.js) as an example of how to instantiate / configure the Data Explorer.
+
+## Embedding in CKAN NG Theme
+
+### Copy bundle files to theme's `public` directory
+
+```bash
+$ cp data-explorer/build/static/js/*.js frontend-v2/themes/your_theme/public/js
+$ cp data-explorer/build/static/js/*.map frontend-v2/themes/your_theme/public/js
+$ cp data-explorer/build/static/css/* frontend-v2/themes/your_theme/public/css
+```
+
+### Require Data Explorer resources in NG theme template
+
+In `/themes/your-theme/views/your-template-wth-explplorer.html`
+
+```html
+<!-- Everything before the content block goes here -->
+{% block content %}
+
+<!-- Data Explorer CSS -->
+<link rel="stylesheet" type="text/css" href="/static/css/main.chunk.css">
+<link rel="stylesheet" type="text/css" href="/static/css/2.chunk.css">
+<!-- End Data Explorer CSS -->
+```
+
+### Add data-explorer tags to the page markup
+
+Each Data Explorer instance needs a corresponding `<div>` in the DOM. For example:
+
+```html
+{% for resource in dataset.resources %}
+  <div class="data-explorer" id="data-explorer-{{ loop.index - 1 }}" data-datapackage='{{ dataset.dataExplorers[loop.index - 1] | safe}}'></div>
+{% endfor %}
+```
+
+Note that each container div needs the following attributes:
+* `class="data-explorer"` (All explorer divs should have this class)
+* `id="data-explorer-0"` (1, 2, etc...)
+* `data-datapackage=`{JSON CONFIG}` (A valid JSON configuration)
+
+

@@ -84,6 +84,31 @@ $ cp data-explorer/build/static/js/*.map frontend-v2/themes/your_theme/public/js
 $ cp data-explorer/build/static/css/* frontend-v2/themes/your_theme/public/css
 ```
 
+Load the scripts in your template:
+```html
+<script type="text/javascript" src="/static/js/runtime~main.js"></script>
+<script type="text/javascript" src="/static/js/2.chunk.js"></script>
+<script type="text/javascript" src="/static/js/main.chunk.js"></script>
+```
+*NOTE* that the script should be loaded _after the container divs are in the DOM, typically by placing the `<script>` tags at the bottom of the footer_
+
+See [a real-world example here](https://gitlab.com/datopian/clients/ckan-montreal/blob/master/views/showcase.html)
+
+#### Note on app bundles
+
+The bundled resources have a hash in the filename, for example `2.a3e71132.chunk.js`
+
+During development it may be preferable to remove the hash from the file name to avoid having to update the script tag during iteration, for example
+
+```bash
+$ mv 2.a3e71132.chunk.js 2.chunk.js
+```
+
+A couple caveats:
+* The `.map` file names should remain the same so that they are loaded properly
+* Browser cache may need to be invalidated manually to ensure that the latest script is loaded
+
+
 ### Require Data Explorer resources in NG theme template
 
 In `/themes/your-theme/views/your-template-wth-explplorer.html`

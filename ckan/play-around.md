@@ -2,7 +2,7 @@
 sidebar: auto
 ---
 
-In this section we are going to show some basic functionality of CKAN focused on the API
+# How to play around with CKAN
 
 ## Prerequisites
 

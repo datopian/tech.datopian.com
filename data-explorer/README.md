@@ -64,6 +64,9 @@ $ cd data-explorer
 $ yarn
 ```
 * To see the Data Explorer running in a sandbox environment run [Cosmos](https://github.com/react-cosmos/react-cosmos) 
+```bash
+$ yarn cosmos
+```
 
 ## Configuration
 

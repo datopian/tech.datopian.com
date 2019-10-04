@@ -25,7 +25,7 @@ In this tutorial, we will be using curl, but for most of the commands, you can p
 :::
 
 
-## Play Around with Your Instance
+## First steps
 
 At this point, you should be able to access the portal on http://ckan:5000
 
@@ -166,11 +166,12 @@ http://ckan:5000/api/3/action/resource_show?id=288455e8-c09c-4360-b73a-8b55378c4
 
 ### Create Organizations, Datasets and Resources
 
-There are 3 steps:
+There are 4 steps:
 
 - Get an API key
-- Create organization
-- And create dataset inside organization (you can't cretae a dataset without a parent organization)
+- Create an organization
+- Create dataset inside an organization (you can't create a dataset without a parent organization)
+- And add resources to the dataset
 
 #### Get a Sysadmin Key
 

@@ -8,8 +8,8 @@ In this section, we are going to show some basic functionality of CKAN focused o
 
 ## Prerequisites
 
-- We assume you've already complete the [Getting Started Guide](/ckan).
-- You have basic understanding of Key data portal concepts:
+- We assume you've already completed the [Getting Started Guide](/ckan).
+- You have a basic understanding of Key data portal concepts:
 
 CKAN is a tool for making data portals to manage and publish datasets. You can read about the key concepts such as Datasets and Organizations in the User Guide -- or you can just dive in and play around!
 
@@ -19,28 +19,28 @@ https://docs.ckan.org/en/2.8/user-guide.html
 ::: tip
 Install a [JSON formatter plugin for Chrome](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa?hl=en) or browser of your choice
 
-If you are familiar the command line tool [curl] you can use that.
+If you are familiar with the command line tool [curl], you can use that.
 
-In this tutorial we will be using `curl` but for most of the commands you can paste a link to your browser. For POST command you can use [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
+In this tutorial, we will be using curl, but for most of the commands, you can paste a link to your browser. For POST command you can use [Postman](https://www.getpostman.com/) or [Google Chrome Plugin](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
 :::
 
 
 ## Play Around with Your Instance
 
-At this point you should be able to access the portal on http://ckan:5000
+At this point, you should be able to access the portal on http://ckan:5000
 
 ![CKAN Home Page](https://i.imgur.com/T5LWo8A.png)
 
 ::: tip
 By default portal is accessible on http://localhost:5000, Let's update your `/etc/hosts` access it on http:///ckan:5000:
 ```
-vi /etc/hosts    #You can choose editor of your choce
+vi /etc/hosts    #You can choose editor of your choice
 # add following
 127.0.0.1 ckan
 ```
 :::
 
-Lets add some fixtures to it - run following from your terminal:
+Let's add some fixtures to it. For software, a fixture is something used consistently, in this case, data for you to play around  - run following from your terminal:
 
 ```
 docker-compose -f docker-compose.dev.yml exec ckan-dev paster --plugin=ckan create-test-data -c production.ini
@@ -52,7 +52,7 @@ You should be able to see 2 new datasets on home page
 
 ### Check CKAN API
 
-For this tutorial we are focusing on the API as that is central to your work as a Developer. If you want to explore the web user interface more go to http://ckan:5000 and play around yourself.
+"This tutorial focuses on the CKAN API as that is central to development work and requires more guidance. We also invite you to explore the user interface which you can do directly yourself by visiting https://ckan:5000/"
 
 #### Let's check portal status
 
@@ -80,13 +80,13 @@ You should see something like:
 }
 ```
 
-This means everything is ok, CKAN poral is up and running, API is working as expected. In case you see internal server error please check the logs in your terminal.
+This means everything is ok, CKAN portal is up and running, API is working as expected. In case you see internal server error please check the logs in your terminal.
 
 ### A Few useful API endpoints to start with
 
-CKAN’s Action API is a powerful, RPC-style API that exposes all of CKAN’s core features to API clients. All of a CKAN website’s core functionality (everything you can do with the web interface and more) can be used by external code that calls the CKAN API.
+CKAN's Action API is a powerful, RPC-style API that exposes all of CKAN's core features to API clients. All of a CKAN website's core functionality (everything you can do with the web interface and more) can be used by external code that calls the CKAN API.
 
-#### Get list of all datasets dataset on the portal
+#### Get a list of all datasets dataset on the portal
 
 http://ckan:5000/api/3/action/package_list
 
@@ -162,7 +162,7 @@ http://ckan:5000/api/3/action/resource_show?id=288455e8-c09c-4360-b73a-8b55378c4
 }
 ```
 
-*Note:* These are only few examples. You can find full list of API actions in [CKAN API guide](https://docs.ckan.org/en/2.8/api/#action-api-reference)
+*Note:* These are only a few examples. You can find a full list of API actions in [CKAN API guide](https://docs.ckan.org/en/2.8/api/#action-api-reference)
 
 ### Create Organizations, Datasets and Resources
 
@@ -174,20 +174,20 @@ There are 3 steps:
 
 #### Get a Sysadmin Key
 
-In order to create your first dataset you need an API key.
+To create your first dataset, you need an API key.
 
-You can see sysadmin credentials in `.env`. By default they should be
+You can see sysadmin credentials in `.env`. By default, they should be
 
 - Username: ckan_admin
 - Password: test1234
 
 1. Navigate to http://ckan:5000/user/login and login
-2. Click on your username (`ckan_admin`) in the up right corner
-3. Scroll down until you see `API Key` on the left screen and copy it's value. Should look something simlar to `c7325sd4-7sj3-543a-90df-kfifsdk335`
+2. Click on your username (`ckan_admin`) in the upright corner
+3. Scroll down until you see `API Key` on the left screen and copy its value. Should look something simliar to `c7325sd4-7sj3-543a-90df-kfifsdk335`
 
 #### Create Organization
 
-You can create organization from browser easely, but let's use [CKAN API](https://docs.ckan.org/en/2.8/api/#ckan.logic.action.create.organization_create) to do so.
+You can create an organization from the browser easily, but let's use [CKAN API](https://docs.ckan.org/en/2.8/api/#ckan.logic.action.create.organization_create) to do so.
 
 ```
 curl -X POST http://ckan:5000/api/3/action/organization_create -H "Authorization: 9c04a69d-79f4-4b4b-b4e1-f2ac31ed961c" -d '{
@@ -240,7 +240,7 @@ Response:
 
 This will create an empty (draft) dataset.
 
-#### Add resource to it
+#### Add a resource to it
 
 ```
 curl -X POST http://ckan:5000/api/3/action/resource_create -H "Authorization: 9c04a69d-79f4-4b4b-b4e1-f2ac31ed961c" -d '{
@@ -264,4 +264,4 @@ Response:
 }
 ```
 
-That's it! Now you should be able to see your adtaset on the portal http://ckan:5000/dataset/my-first-dataset
+That's it! Now you should be able to see your dataset on the portal http://ckan:5000/dataset/my-first-dataset

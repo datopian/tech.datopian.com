@@ -4,6 +4,8 @@ sidebar: auto
 
 # How to play around with CKAN
 
+In this section, we are going to show some basic functionality of CKAN focused on the API
+
 ## Prerequisites
 
 - We assume you've already complete the [Getting Started Guide](/ckan).

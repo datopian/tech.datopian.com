@@ -14,6 +14,12 @@ footer: Copyright © 2016-present Datopian (Atomatic Ltd)
     </p>
   </div>
   <div class="feature">
+    <h2>CKAN Next Gen</h2>
+    <p>
+      <a href="/next-gen/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
     <h2>Frontend</h2>
     <p>
       <a href="/frontend/">Read more &raquo;</a>
@@ -24,6 +30,13 @@ footer: Copyright © 2016-present Datopian (Atomatic Ltd)
     <p></p>
     <p>
       <a href="/harvesting/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
+    <h2>Data Explorer</h2>
+    <p></p>
+    <p>
+      <a href="/data-explorer/">Read more &raquo;</a>
     </p>
   </div>
   <div class="feature">

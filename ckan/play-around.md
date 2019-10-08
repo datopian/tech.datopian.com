@@ -266,3 +266,7 @@ Response:
 ```
 
 That's it! Now you should be able to see your dataset on the portal http://ckan:5000/dataset/my-first-dataset
+
+## Next steps
+
+[Install Extensions](/ckan/install-extension)

@@ -10,12 +10,12 @@ In this sections we will teach you only how to install existing extensions. See 
 
 ## Add new extension
 
-Lets install [Hellow World](https://github.com/rclark/ckanext-helloworld) on the portal. For that we need to do 2 thing:
+Lets install [Hello World](https://github.com/rclark/ckanext-helloworld) on the portal. For that we need to do 2 thing:
 
 1. Install extension when building docker image
 2. Add new extension to CKAN plugins
 
-### Install extension on docer build
+### Install extension on docker build
 
 For this we need to modify Dockerfile for ckan service. Let's edit it:
 
@@ -23,7 +23,7 @@ For this we need to modify Dockerfile for ckan service. Let's edit it:
 vi ckan/Dockerfile.dev
 
 # Add following
-RUN pip install -e git+https://github.com/PublicaMundi/ckanext-helloworld.git#egg=ckanext-helloworld
+RUN pip install -e git+https://github.com/rclark/ckanext-helloworld.git#egg=ckanext-helloworld
 ```
 
 *Note:* In this example we use vi editor, but you can choose any of your choice.

@@ -26,18 +26,20 @@ You can read more about monolithic vs microservice architectures in the Appendix
 
 ## Next Gen lays the foundation for the future and brings major immediate benefits
 
-This new architecture and approach is important in several ways.
+Next Gen's new approach is important in several major ways.
 
-### Microservices are big for Scalability, Reliability, Extensibility and Flexibility
+### Microservices are the Future
 
-First, decoupled microservices have become *the* way to design and deploy (web) applications (after first being pioneered by the likes of Amazon in the early 2000s). In particular, in the last five-to-ten years have brought microservice "for the masses" where relevant tooling and technology has been standardized, open-sourced and widely deployed -- e.g. not only containerization tech such as Docker, Kubernetes etc but even programming languages like (server-side) Javascript and Golang.
+First, decoupled microservices have become *the* way to design and deploy (web) applications after first being pioneered by the likes of Amazon in the early 2000s. In particular, in the last five-to-ten years have brought microservice "for the masses" where relevant tooling and technology has been standardized, open-sourced and widely deployed -- e.g. not only in containerization such as Docker, Kubernetes but even in programming languages like (server-side) Javascript and Golang.
 
-By adopting a microservice approach CKAN can reap the the benefits of what is becoming a mature and standard way to design and build (web) applications. This includes the immediate advantages of being aligned with the technical paradigm such as tooling and developer familiarity. But it also includes the major benefits of the microservice approach in general:
+By adopting a microservice approach CKAN can reap the the benefits of what is becoming a mature and standard way to design and build (web) applications. This includes the immediate advantages of being aligned with the technical paradigm such as tooling and developer familiarity.
 
-1. **Scalability**: dramatically easier and cheaper to scale up -- and down -- both in size *and* complexity. Size-wise this is because you can replicate eplicate individual services rather than the whole application. Complexity-wise this is because monolithic architectures tend to become "big" where service-oriented encourages smaller lightweight components. This means you can have a much smaller core.
-    * not so big or difficult to install
-    * use what you need (smaller core)
-2. **Reliability**: easier (and cheaper) to build highly reliable, high availability solutions (because you can replicate).
+### Microservices bring Scalability, Reliability, Extensibility and Flexibility
+
+In addition, and even more importantly, the microservices approach brings major benefits in:
+
+1. **Scalability**: dramatically easier and cheaper to scale up -- and down -- in size *and* complexity. Size-wise this is because you can replicate individual services rather than the whole application. Complexity-wise this is because monolithic architectures tend to become "big" where service-oriented encourages smaller lightweight components with cleaner interfaces. This means you can have a much smaller core making it easier to install, setup and extend. It also means you can use what you need making solutions easier to maintain and upgrade.
+2. **Reliability**: easier (and cheaper) to build highly reliable, high availability solutions because microservices make it easier to replicate.
 3. **Extensibility**: much easier to create and maintain extensions because they are more decoupled with cleaner interfaces.
 4. **Flexibility** aka "Bring your own tech": services can be written in any language so, for example, you can write your frontend in javascript and your backend in Python. In a monolithic architecture all parts must be written in the same language because everything is compiled together. This flexibility makes it easier to use the best tool for the job. It also makes it much easier for teams to collaborate and cooperate and fewer bottlenecks in development.
 
@@ -49,12 +51,11 @@ In summary, the Next Gen approach provides an essential foundation for the conti
 
 *Gradual evolution from CKAN classic (keep what is working, keep your investments, incremental change)*
 
-
 Next Gen components are specifically designed to work with CKAN "Classic" in its current form. This means existing CKAN users can immediately benefit from Next Gen components and features whilst retaining the value of their existing investment. New (or existing) CKAN-based solutions can adopt a "hybrid" approach using components from both Classic and Next Gen. It also means that the owner of a CKAN-based solution can incrementally evolve from "Classic" to "Next Gen" by replacing one component one at a time, gaining new functionality without sacrificing existing work.
 
 ASIDE: we're fortunate that CKAN Classic itself was ahead of its time in its level of "service-orientation". From the start, it had a very rich and robust API and it has continued to develop this with almost almost all functionality exposed via the API. It is this rich API and well factored design that makes it relatively straightforward to evolve CKAN in its current "Classic" form towards Next Gen.
 
-### New Features, Improved Existing Functionality ...
+### Many New Features plus Existing Functionality Improved
 
 In addition to its architecture, Next Gen provides a rapidly growing set of improvements and extensions of existing CKAN functionality. For example:
 

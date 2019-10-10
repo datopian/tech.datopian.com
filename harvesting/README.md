@@ -1,8 +1,8 @@
 # Harvesting
 
-Harvesting is the automated collection into a CKAN instance of metadata (and maybe data) from other catalogs and sources.
+Harvesting is the automated collection into a Data Portal of metadata (and maybe data) from other catalogs and sources. The core epic is:
 
-As X I want to harvest datasets' metadata (and maybe data) into one CKAN instance from other catalogs so that all the metadata is in one place (and hence searchable there)
+As a Data Portal Manager I want to harvest datasets' metadata (and maybe data) into one CKAN instance from other catalogs so that all the metadata is in one place and hence searchable/discoverable there
 
 Desired features include:
 

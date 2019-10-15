@@ -1,10 +1,13 @@
 // .vuepress/components/mermaid.vue
 
 <template>
-  <div class="mermaid">
-    <slot></slot>
-  </div>
 </template>
+
+<style>
+div.language-mermaid {
+  background-color: inherit
+}
+</style>
 
 <script>
 export default {
@@ -13,7 +16,7 @@ export default {
       m.initialize({
         startOnLoad: true
       });
-      m.init();
+      m.init('div.language-mermaid>pre>code');
     });
   }
 };

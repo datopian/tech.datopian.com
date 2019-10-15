@@ -10,16 +10,19 @@ CKAN classic: monolithic architecture -- everything is one big python applicatio
 
 CKAN Next Gen: decoupled, service-oriented -- services connected by network calls. Extension is done by adding new services,
 
-<mermaid>
+```mermaid
 graph LR
+
 subgraph "CKAN Classic"
   plugins
 end
+
 subgraph "CKAN Next Gen"
   microservices
 end
+
 plugins --> microservices
-</mermaid>
+```
 
 You can read more about monolithic vs microservice architectures in the Appendix below.
 
@@ -81,20 +84,22 @@ https://martinfowler.com/articles/microservices.html
 
 ### Monolithic
 
-<mermaid>
+```mermaid
 graph TD
+
 subgraph "Monolithic - all inside"
   a
   b
   c
 end
+
 a --in-memory function all--> b
 a --in-memory function all--> c
-</mermaid>
+```
 
 ### Microservice
 
-<mermaid>
+```mermaid
 graph TD
 subgraph "A Container"
   a
@@ -107,5 +112,7 @@ subgraph "C Container"
 end
 a -.network call.-> b
 a -.network call.-> c
-</mermaid>
+```
+
+<mermaid />
 

@@ -49,10 +49,10 @@ The design allows the Next Gen Harvester to be used with both CKAN Classic and C
 
 ### Features
 
-* Simple: Easy to write harvesters -- just a python script
-* Runnable and testable standalone (without the rest of CKAN)
-* Testing is much easier 
+* Simple: Easy to write harvesters -- just a python script and you can create harvesters without needing to know almost anything about CKAN
+* Runnable and testable standalone (without the rest of CKAN) which makes running and testing much easier
 * Uses the latest standard ETL techniques and technologies
+* Multi-cluster support: run one harvester for multiple CKAN instances
 * Data Package based
 
 ### Installation
@@ -75,6 +75,12 @@ TODO
 
 TODO
 
+### How do I ...
+
+Support parent-child relationships in harvested datasets e.g. in data.json?
+
+Enhance / transform incoming datasets e.g. assigning topics based on sources e.g. this is geodata
+
 
 ## Harvester Architecture
 
@@ -86,32 +92,96 @@ This insight allows us to see harvesting as just like any other ETL process. At 
 
 We can use standard ETL tools to do harvesting, loosely coupling their operation to the CKAN Classic (or CKAN Next Gen) metastore. 
 
+### Domain Model
+
+* **Pipeline**: a generic "harvester" pipeline for harvesting a particular data type e.g. data.json, dcat. A pipeline consists of Processors.
+* **Source (aka Harvester)**: the entire spec of a repeatable harvest from a given source including the pipeline to use, the source info and any additional configuration e.g. the schedule on which to run this
+* **Run (Job)**: a given run of a Source
+* **Dataset**: a resulting dataset.
+* **Log (Entry)**: (including errors)
+
+NB: the term harvester is often used both for a pipeline (e.g. the DCAT Harvester) and for a Source e.g. "XYZ Agency data.json Harvester". We prefer to reserve it for the Source.
+
 ### Key Components
 
-Harvesting as consists of the following key components:
+Harvesting consists of the following key components:
 
-* **Configuration** e.g. of harvest sources (including UI and API for this)
-* **Pipelines** to do the harvesting of the metadata
-* **Runner**
-* **Logging**
+* **Source Store**: database of Sources
+* **Pipelines**: a standard way of creating pipelines and processors in code
+* **Runner**: a system for executing Runs of the harvesters. This should be queue based.
+* **Logging**: a system for logging (and reporting) including of errors
+* **Interfaces**: UI, API and CLI usually covering Source Store plus reporting on them e.g. Runs, Errors etc
 * **Storage**
   * Final storage for harvested metadata -- this is considered to be outside the harvesting system itself
   * Intermediate storage for temporary or partial outputs
 
+TODO: explain how each of these is implemented in NG harvesting (maybe in a table) and compare with Classic
+
 ### Pipelines
 
-The key steps in a harvesting pipeline (may not even need these stages separated)
+Harvesting pipelines should be divided into two parts:
+
+* Extract and Transform: (fetch and convert) fetching remote datasets and converting them into a standard intermediate form (Data Packages)
+* Load: loading that intermediate form into the CKAN instance. This includes not only the format conversion but the work to synchronize state i.e. to create, update or delete in CKAN based on whether a given dataset from the source already has a representation in CKAN (harvests run repeatedly).
 
 ```mermaid
 graph LR
 
-fetch --data package--> converter
-converter --pushes--> ckan
+subgraph "Extract and Transform"
+  extract[Extract] --> transform[Transform]
+end
+
+subgraph "Load"
+  transform --data package--> load[Load]
+end
+
+load --> ckan((CKAN))
 ```
 
-### Principles
+This pattern is beneficial because:
 
-All "fetchers" produce data packages 
+* Allow Load functionality to be reused across Harvest Pipelines (the same Load functionality can be used again and again)
+* Cleaner testing: you can test extract and load without needing to have a CKAN instance 
+* Reuse of Data Package related functionality
+
+### Pipeline Example: Fetch and process a data.json
+
+```mermaid
+graph TD
+
+get[Retrieve data.json]
+validate[Validate data.json]
+split[Split data.json into datasets]
+datapkg[Convert each data.json dataset into Data Package]
+write[Write results somewhere local]
+ckan[Sync to CKAN - work out diff and implement]
+
+get --> validate
+validate --> split
+split --> datapkg
+datapkg --> write
+write --> ckan
+```
+
+### Source Spec
+
+This the specification of the Source object
+
+You can compare this to [CKAN Classic HarvestSource objects below](#harvest-source-objects).
+
+```javascript
+id:
+url:
+title:
+description:
+created:
+harvester_pipeline_id: // type in old CKAN
+config:
+enabled:              // is this harvester enabled at the moment
+owner: // user_id
+publisher_id: // what is this?? Maybe the org the dataset is attached to ...
+frequency:  // MANUAL, DAILY etc
+```
 
 
 ## Appendix: Hybrid Harvesting: Evolving CKAN Classic
@@ -185,10 +255,27 @@ https://github.com/ckan/ckanext-harvest
 
 README is excellent and def worth reading - key parts of that are also below.
 
+### Key Aspects
 
-### Analysis - How it works
+* Redis and AMQP (does anyone use AMQP)
+* Logs to database with API access (off by default) - https://github.com/ckan/ckanext-harvest#database-logger-configurationoptional
+* Dataset name generation (to avoid overwriting)
+* Send mail when harvesting fails
+* CLI - https://github.com/ckan/ckanext-harvest#command-line-interface
+* Authorization - https://github.com/ckan/ckanext-harvest#authorization
+* Built in CKAN harvester - https://github.com/ckan/ckanext-harvest#the-ckan-harvester
+* Running it: you run the queue listeners (gather )
 
-Domain model - [Here](https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py)
+Existing harvesters
+
+* CKAN - ckanext-harvest
+* DCAT - https://github.com/ckan/ckanext-dcat/tree/master/ckanext/dcat/harvesters
+* Spatial - https://github.com/ckan/ckanext-spatial/tree/master/ckanext/spatial/harvesters
+
+
+### Domain model
+
+See https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py
 
 * HarvestSource - a remote source for harvesting datasets from e.g. a CSW server or CKAN instance 
 * HarvestJob - a job to do the harvesting (done in 2 stages: gather and then fetch and import). This is basically state for the overall process of doing a harvest.
@@ -197,28 +284,38 @@ Domain model - [Here](https://github.com/ckan/ckanext-harvest/blob/master/ckanex
 * HarvestObjectError
 * HarvestLog
 
-```mermaid
-graph LR
+#### Harvest Source Objects
 
-subgraph "Config / Storage"
-  sources[List of Sources<br/><br/>Currently stored as datasets in CKAN]
-  errors[Errors stored in CKAN DB]
-end
+https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py#L230-L245
 
-subgraph "Harvester Interface"
-  api[API]
-  wui[Web UI]
-  cli[CLI]
-end
-
-subgraph Harvester
-  queue[Queue: Redis or AMQP]
-  gather[Gather]
-  fetch
-  import
-  scheduler[Scheduler: cron - runs harvest run]
-end
+```python
+# harvest_source_table
+Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+Column('url', types.UnicodeText, nullable=False),
+Column('title', types.UnicodeText, default=u''),
+Column('description', types.UnicodeText, default=u''),
+Column('config', types.UnicodeText, default=u''),
+Column('created', types.DateTime, default=datetime.datetime.utcnow),
+Column('type', types.UnicodeText, nullable=False),
+Column('active', types.Boolean, default=True),
+Column('user_id', types.UnicodeText, default=u''),
+Column('publisher_id', types.UnicodeText, default=u''),
+Column('frequency', types.UnicodeText, default=u'MANUAL'),
+Column('next_run', types.DateTime), # not needed
 ```
+
+### Key components
+
+* Configuration: HarvestSource objects
+* Pipelines: Gather, Fetch, Import stages in a given harvest extension
+* Runner: bespoke queue system (backed by Redis or AMQP). Scheduler is external e.g. Cron
+* Logging: logged into CKAN DB (as Harvest Errors)
+* Interface: API, Web UI and CLI
+* Storage:
+  * Final: Datasets are in CKAN MetaStore
+  * Intermediate: HarvestObject in CKAN MetaStore
+
+### Flow
 
 0. *Harvest run:* a regular run of the Harvester that generates a HarvestJob object. This is then passed to gather stage. This is what is generated by cron `harvest run` execution (or from web UI)
 1.  The **gather** stage compiles all the resource identifiers that need to be fetched in the next stage (e.g. in a CSW server, it will perform a GetRecords operation).
@@ -306,20 +403,5 @@ def import_stage(self, harvest_object):
     '''
 ```
 
-### Features
-
-* Redis and AMQP (does anyone use AMQP)
-* Logs to database with API access (off by default) - https://github.com/ckan/ckanext-harvest#database-logger-configurationoptional
-* Dataset name generation (to avoid overwriting)
-* Send mail when harvesting fails
-* CLI - https://github.com/ckan/ckanext-harvest#command-line-interface
-* Authorization - https://github.com/ckan/ckanext-harvest#authorization
-* Built in CKAN harvester - https://github.com/ckan/ckanext-harvest#the-ckan-harvester
-* Running it: you run the queue listeners (gather )
-
-Existing harvesters
-
-* CKAN - ckanext-harvest
-* DCAT - https://github.com/ckan/ckanext-dcat/tree/master/ckanext/dcat/harvesters
-* Spatial - https://github.com/ckan/ckanext-spatial/tree/master/ckanext/spatial/harvesters
+<mermaid />
 

@@ -70,7 +70,29 @@ Auth: Note that the token used needs to be associated with an API user with writ
 
 ### CKAN Pages
 
+To use CKAN Pages as your CMS backend, add it to your list of `PLUGINS` in `.env` file:
+
+```
+PLUGINS=ckan_pages
+```
+
+When enabled, CKAN Pages plugin will use the CKAN `API_URL` environment variable by default.
+To configure a different URL for your CKAN Pages backend add `CKAN_PAGES_URL=https://yourckan.com/api/3/action/` to your environment.
+
+For more info about enabling and using CKAN Pages - https://github.com/ckan/ckanext-pages
+
 ### Dashboard
+
+Integration of https://github.com/datopian/dashboard-js/ library. Dashboard configurations are fetched from a git repository. You need to set it up via your config file:
+
+```
+GIT_BASE_URL=
+GIT_OWNER=
+```
+
+We've created a tutorial about how to create and use dashboards:
+
+http://tech.datopian.com/dashboards/
 
 ### Google analytics
 

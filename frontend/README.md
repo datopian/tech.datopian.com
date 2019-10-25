@@ -59,7 +59,7 @@ To change environment variables, you can rename `env.template` as `.env` and set
 
 ### DMS
 
-Setup `API_URL` environment variable so it points to your CKAN instance, e.g., for demo.ckan.org it would be:
+Setup `API_URL` environment variable so it points to your CKAN Classic instance, e.g., for demo.ckan.org it would be:
 
 ```
 export API_URL=https://demo.ckan.org/api/3/action/
@@ -71,20 +71,11 @@ You can use one of built-in CMS plugins - check it out below.
 
 #### Wordpress
 
-Read about WordPress plugin here: https://github.com/datopian/frontend-v2/blob/master/plugins/wp/README.md
+Read about WordPress plugin here: http://tech.datopian.com/frontend/plugins/#wp
 
 #### CKAN Pages
 
-To use CKAN Pages as your CMS backend, add it to your list of `PLUGINS` in `.env` file:
-
-```
-PLUGINS=ckan_pages
-```
-
-When enabled, CKAN Pages plugin will use the CKAN `API_URL` environment variable by default.
-To configure a different URL for your CKAN Pages backend add `CKAN_PAGES_URL=https://yourckan.com/api/3/action/` to your environment.
-
-For more info about enabling and using CKAN Pages - https://github.com/ckan/ckanext-pages
+Read about CKAN Pages plugin here: http://tech.datopian.com/frontend/plugins/#ckan-pages
 
 ## Extending frontend
 

@@ -33,6 +33,13 @@ footer: Copyright © 2016-present Datopian (Atomatic Ltd)
     </p>
   </div>
   <div class="feature">
+    <h2>Deploy</h2>
+    <p></p>
+    <p>
+      <a href="/deploy/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
     <h2>Data Explorer</h2>
     <p></p>
     <p>
@@ -46,4 +53,3 @@ footer: Copyright © 2016-present Datopian (Atomatic Ltd)
     </p>
   </div>
 </div>
-

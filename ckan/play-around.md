@@ -32,7 +32,7 @@ At this point, you should be able to access the portal on http://ckan:5000
 ![CKAN Home Page](https://i.imgur.com/T5LWo8A.png)
 
 ::: tip
-By default portal is accessible on http://localhost:5000, Let's update your `/etc/hosts` access it on http:///ckan:5000:
+By default portal is accessible on http://localhost:5000, Let's update your `/etc/hosts` access it on http://ckan:5000:
 ```
 vi /etc/hosts    #You can choose editor of your choice
 # add following
@@ -52,7 +52,7 @@ You should be able to see 2 new datasets on home page
 
 ### Check CKAN API
 
-"This tutorial focuses on the CKAN API as that is central to development work and requires more guidance. We also invite you to explore the user interface which you can do directly yourself by visiting https://ckan:5000/"
+"This tutorial focuses on the CKAN API as that is central to development work and requires more guidance. We also invite you to explore the user interface which you can do directly yourself by visiting http://ckan:5000/"
 
 #### Let's check portal status
 

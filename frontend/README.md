@@ -59,7 +59,7 @@ To change environment variables, you can rename `env.template` as `.env` and set
 
 ### DMS
 
-Setup `API_URL` environment variable so it points to your CKAN instance, e.g., for demo.ckan.org it would be:
+Setup `API_URL` environment variable so it points to your CKAN Classic instance, e.g., for demo.ckan.org it would be:
 
 ```
 export API_URL=https://demo.ckan.org/api/3/action/
@@ -71,20 +71,11 @@ You can use one of built-in CMS plugins - check it out below.
 
 #### Wordpress
 
-Read about WordPress plugin here: https://github.com/datopian/frontend-v2/blob/master/plugins/wp/README.md
+Read about WordPress plugin here: http://tech.datopian.com/frontend/plugins/#wp
 
 #### CKAN Pages
 
-To use CKAN Pages as your CMS backend, add it to your list of `PLUGINS` in `.env` file:
-
-```
-PLUGINS=ckan_pages
-```
-
-When enabled, CKAN Pages plugin will use the CKAN `API_URL` environment variable by default.
-To configure a different URL for your CKAN Pages backend add `CKAN_PAGES_URL=https://yourckan.com/api/3/action/` to your environment.
-
-For more info about enabling and using CKAN Pages - https://github.com/ckan/ckanext-pages
+Read about CKAN Pages plugin here: http://tech.datopian.com/frontend/plugins/#ckan-pages
 
 ## Extending frontend
 
@@ -149,39 +140,125 @@ Cookie-parser will now be applied to all of your requests as express middleware!
 
 For more on express middleware: https://expressjs.com/en/guide/using-middleware.html.
 
-#### Google analytics plugin
+#### Built-in plugins
 
-To add Google Analytics tracking code to page templates,
-enable the plugin in your `.env` file:
+When we worked in various projects, we started discovering that there are common things you need to develop. For example, most of the projects need a CMS solution (most commonly WordPress or CKAN Pages) or analytics system such as Google Analytics. So we've developed number of built-in plugins that you can use in your project and deliver features easily and reliably. Check out [this page](/frontend/plugins) for list of plugins and usage information.
+
+## How frontend app works?
+
+*All of the controller and views use the API module - they don’t see backend.*
+
+### API
+
+We have separated API module into `DmsModel` and `CmsModel`. The former part talks to CKAN (or can be any DMS), while the latter fetches content for static pages, for example, it can be WordPress. Below is the flow of how it works together:
+
+```mermaid
+sequenceDiagram
+    Browser->>Controller: /
+    Controller->>Browser: home.html
+
+    alt Exists in CMS
+      Browser->>Controller: /about
+      Controller-->>CMS: slug=about
+      CMS-->>Controller: found: page content
+      Controller->>Browser: static.html
+
+      Browser->>Controller: /news
+      Controller-->>CMS: slug=news
+      CMS-->>Controller: found: list of posts
+      Controller->>Browser: blog.html
+
+      Browser->>Controller: /news/my-blog-post
+      Controller-->>CMS: slug=my-blog-post
+      CMS-->>Controller: found: post content
+      Controller->>Browser: static.html
+    end
+    alt Not Found in CMS
+      Browser->>Controller: /search
+      Controller-->>CMS: slug=search
+      CMS-->>Controller: not found: 404
+      Controller-->>DMS: search api
+      DMS-->>Controller: result: list of data packages + summary
+      Controller->>Browser: search.html
+
+      Browser->>Controller: /org/gdp
+      Controller-->>CMS: slug=org/gdp
+      CMS-->>Controller: not found: 404
+      Controller-->>DMS: getPackage api
+      DMS-->>Controller: result: data package
+      Controller->>Browser: showcase.html
+    end
+```
+
+### Routes
+
+Here is the summary of existing routes at the moment:
+
+* Home: `/`
+* Search: `/search`
+  * with query: `/search?q=gdp`
+* Showcase: `/organization/dataset`
+* Organization: `/my_org`
+  * It gets redirected from CKAN like path: `/organization/my_org`
+* Collections: `/collections`
+  * It gets redirected from CKAN groups page: `/group`
+* CMS:
+  * About: `/about`
+  * Blog: `/news`
+  * Post: `/news/my-post`
+  * Anything else: `/foo/bar`
+
+## Tests
+
+Set `.env` to hit mocked services:
 
 ```bash
-PLUGINS="... google-analytics ..."
-GA_ID=UA-000000000-0
+API_URL=http://127.0.0.1:5000/api/3/action/
+WP_URL=http://127.0.0.1:6000
 ```
 
-#### Mailer plugin
-
-To enable mailer plugin, you need to update your `.env` as following:
-
-```
-PLUGINS="... mailer ..."
-SMTP_SERVICE=gmail (optional if you have host and port details)
-SMTP_HOST=smtp.example.com (optional if you set 'SMTP_SERVICE')
-SMTP_PORT=587 (optional if you set 'SMTP_SERVICE')
-EMAIL_FROM=from@example.com
-EMAIL_PASSWORD=*****
-EMAIL_TO=to@example.com
-```
-
-#### Applications showcase plugin
-
-To add applications showcase plugin to your application you need to
-enable the plugin in your `.env` file:
-
+Run tests:
 ```bash
-PLUGINS="... applications-showcase ..."
+yarn test
+
+# watch mode:
+yarn test:watch
 ```
 
-Here is the list of well-known services that can be used without setting host and port of your SMTP server: [Supported services](https://nodemailer.com/smtp/well-known/#supported-services).
+## Deployment
 
-Then you need to implement `contact.html` template in your theme so that a contact form can be rendered at `/contact`.
+*You can deploy this app to any host that supports NodeJS.*
+
+### Heroku
+
+Read the docs about Deployment of NodeJS apps on Heroku - https://devcenter.heroku.com/articles/deploying-nodejs.
+
+### Zeit Now
+
+Read the docs - https://zeit.co/examples/nodejs
+
+Suggested config file (`now.json`):
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@now/node-server",
+      "config": { "maxLambdaSize": "50mb" }
+    }
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
+    }
+  ]
+}
+```
+
+<mermaid />

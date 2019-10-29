@@ -4,7 +4,7 @@ sidebar: auto
 
 # Hello world!
 
-We've prepared an `example` theme (located in `./themes/` directory) that you can use to get started with theming frontend app. Let's customize the home page -- our "Hello World"!
+Now you will learn how to customize the home page. We've prepared an `example` theme (located in `./themes/` directory) that you can use to get started with theming frontend app. Let's customize the home page -- our "Hello World"!
 
 Enable the theme in your `.env` file (read more about configs [here](/frontend/configs/)):
 
@@ -12,7 +12,7 @@ Enable the theme in your `.env` file (read more about configs [here](/frontend/c
 THEME=example
 ```
 
-## Change template
+## Changing template
 
 In order to override the home page template we first need to copy it to the `views` folder of our `example` theme
 
@@ -28,13 +28,13 @@ Use a text editor to edit the `themes/example/views/home.html` file and find the
   <p>Hello world, how are you?</p>
 ```
 
-Save the file. If you're running the app in dev mode, it should re-load automatically, and show you the update to the home page template.
+Save the file. If you're running the app in [dev mode](/frontend/#installation), it should re-load automatically, and show you the update to the home page template.
 
 ![Hello world!](../../../img/hello_world.png)
 
 Congratulations :tada:
 
-## Change styles
+## Changing styles
 
 Default stylesheets are imported in the `views/base.html` so you can either extend them or replace it by creating your own `base.html` template. Let's replace `home.html` and `base.html` so we can see how you can add your own CSS:
 

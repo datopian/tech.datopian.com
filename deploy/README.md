@@ -4,12 +4,16 @@ sidebar: auto
 
 # Deploy To CKAN Cloud
 
-As a developer you will need to deploy changes to Datopian servers. CKAN portals hosted by Datopian are living on Google Cloud Platform run by Kubernetes engine.
+As a developer you will need to create new instance and deploy to Datopian servers. CKAN portals hosted by Datopian are living on Google Cloud Platform run by Kubernetes engine.
 
 ## Prerequisites
 
-- Make sure you have access to Datopian Jenkins account - See [Create new project in Gitlab](#Creating-CKAN-porotal---Deploying-for-first-time)
-- Make sure you have write permission to Datopian Gitlab account - see [Create .gitlab-ci.yml](#Create-gitlab-ciyml)
+- Make sure you have access to [Datopian Jenkins](https://cc-p-jenkins.ckan.io/) account
+- Make sure you have write permissions to [Datopian Gitlab account](https://gitlab.com/viderum)
+
+:::info
+Please contact devops@datopian.com if you don’t have access to the Jenkins account or permissions to create new project on GitLab.
+:::
 
 ## Creating CKAN Portal - Deploying for first time
 
@@ -32,10 +36,6 @@ Create new project in Gitlab:
 - Click "Create Project"
 
 You should be able to see empty repository on https://gitlab.com/viderum/cloud-deploy-demo-exercise. Let's now add necessary files.
-
-:::info
-Please contact devops@datopian.com in case you don't have permission to create new project.
-:::
 
 ### Create Dockerfile
 
@@ -63,10 +63,6 @@ Some of the CKAN configuration options can be defined as Environment variables o
 - Click `Build with Parameters` button
 - Change `viderum/cloud-instance-id` to `viderum/cloud-deploy-demo-exercise`
 - Click `Build` button
-
-:::info
-In case you see "Access Denied" please send an email on devops@datopian.com with request to get one.
-:::
 
 ![](https://i.imgur.com/9xGKXOd.png)
 

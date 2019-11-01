@@ -11,7 +11,7 @@ As a developer you will need to create new instance and deploy to Datopian serve
 - Make sure you have access to [Datopian Jenkins](https://cc-p-jenkins.ckan.io/) account
 - Make sure you have write permissions to [Datopian Gitlab account](https://gitlab.com/viderum)
 
-:::info
+::: tip
 Please contact devops@datopian.com if you don’t have access to the Jenkins account or permissions to create new project on GitLab.
 :::
 

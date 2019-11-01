@@ -7,7 +7,7 @@ As a developer, you will need to deploy changes to Datopian servers. CKAN portal
 - Make sure you have access to [Datopian Jenkins](https://cc-p-jenkins.ckan.io/) account
 - Make sure you have write permissions to [Datopian Gitlab account](https://gitlab.com/viderum)
 
-:::info
+::: tip
 Please contact devops@datopian.com if you don’t have access to the Jenkins account or permissions to create new project on GitLab.
 :::
 
@@ -21,7 +21,7 @@ Let's say you need to make several changes to the portal we created in [Creating
 
 ### Install a new extension
 
-:::	info
+::: tip
 CKAN Extensions are installed inside the docker containers during the build with `pip install `. Normally CKAN extensions are stored in github repositories, and we install from there. But it can actually be any place (e. g. GitLab, PyPI, Bitbucket, etc...)
 
 This way we can install extensions
@@ -37,7 +37,7 @@ Let's install the [Hello World Extension](https://github.com/rclark/ckanext-hell
 #RUN pip install --no-cache-dir git+https://github.com/rclark/ckanext-helloworld.git#egg=ckanext-helloworld
   ```
 
-:::	info
+:::	tip
 
 Alternatively, you can add that line to the existing `pip install` section:
 ```
@@ -85,7 +85,7 @@ Commit the changes and wait until the build is successful.
 
 ![](https://i.imgur.com/v7b8Z1c.png)
 
-:::danger
+::: tip
 If the build is not successful check its logs. You might have a typo in branch, release name or similar...
 :::
 

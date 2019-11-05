@@ -4,7 +4,7 @@ sidebar: auto
 
 # How to play around with CKAN
 
-In this section, we are going to show some basic functionality of CKAN focused on the API
+In this section, we are going to show some basic functionality of CKAN focused on the API.
 
 ## Prerequisites
 
@@ -17,22 +17,18 @@ https://docs.ckan.org/en/2.8/user-guide.html
 
 
 ::: tip
-Install a [JSON formatter plugin for Chrome](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa?hl=en) or browser of your choice
+Install a [JSON formatter plugin for Chrome](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa?hl=en) or browser of your choice.
 
 If you are familiar with the command line tool [curl], you can use that.
 
-In this tutorial, we will be using curl, but for most of the commands, you can paste a link to your browser. For POST command you can use [Postman](https://www.getpostman.com/) or [Google Chrome Plugin](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
+In this tutorial, we will be using curl, but for most of the commands, you can paste a link in your browser. For POST commands you can use [Postman](https://www.getpostman.com/) or [Google Chrome Plugin](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop).
 :::
 
 
 ## First steps
 
-At this point, you should be able to access the portal on http://ckan:5000
-
-![CKAN Home Page](https://i.imgur.com/T5LWo8A.png)
-
 ::: tip
-By default portal is accessible on http://localhost:5000, Let's update your `/etc/hosts` access it on http://ckan:5000:
+By default the portal is accessible on http://localhost:5000. Let's update your `/etc/hosts` to access it on http://ckan:5000:
 ```
 vi /etc/hosts    #You can choose editor of your choice
 # add following
@@ -40,13 +36,17 @@ vi /etc/hosts    #You can choose editor of your choice
 ```
 :::
 
-Let's add some fixtures to it. For software, a fixture is something used consistently, in this case, data for you to play around  - run following from your terminal:
+At this point, you should be able to access the portal on http://ckan:5000.
+
+![CKAN Home Page](https://i.imgur.com/T5LWo8A.png)
+
+Let's add some fixtures to it. For software, a fixture is something used consistently (in this case, data for you to play around with). Run the following from your terminal:
 
 ```
 docker-compose -f docker-compose.dev.yml exec ckan-dev paster --plugin=ckan create-test-data -c production.ini
 ```
 
-You should be able to see 2 new datasets on home page
+You should be able to see 2 new datasets on home page:
 
 ![CKAN with data](https://i.imgur.com/BiSifyb.png)
 
@@ -54,11 +54,11 @@ You should be able to see 2 new datasets on home page
 
 "This tutorial focuses on the CKAN API as that is central to development work and requires more guidance. We also invite you to explore the user interface which you can do directly yourself by visiting http://ckan:5000/"
 
-#### Let's check portal status
+#### Let's check the portal status
 
 http://ckan:5000/api/3/action/status_show
 
-You should see something like:
+You should see something like this:
 
 ```
 {
@@ -80,7 +80,7 @@ You should see something like:
 }
 ```
 
-This means everything is ok, CKAN portal is up and running, API is working as expected. In case you see internal server error please check the logs in your terminal.
+This means everything is ok, CKAN portal is up and running, API is working as expected. In case you see an internal server error, please check the logs in your terminal.
 
 ### A Few useful API endpoints to start with
 
@@ -182,9 +182,9 @@ You can see sysadmin credentials in `.env`. By default, they should be
 - Username: ckan_admin
 - Password: test1234
 
-1. Navigate to http://ckan:5000/user/login and login
-2. Click on your username (`ckan_admin`) in the upright corner
-3. Scroll down until you see `API Key` on the left screen and copy its value. Should look something simliar to `c7325sd4-7sj3-543a-90df-kfifsdk335`
+1. Navigate to http://ckan:5000/user/login and login.
+2. Click on your username (`ckan_admin`) in the upright corner.
+3. Scroll down until you see `API Key` on the left side of the screen and copy its value. It should look simliar to `c7325sd4-7sj3-543a-90df-kfifsdk335`.
 
 #### Create Organization
 

@@ -38,6 +38,16 @@ cp .env.example .env
 
 Build and Run the instances:
 
+::: tip
+`docker-compose` must be run with `sudo`. If you want to change this, you can follow the steps below. NOTE: The `docker` group grants privileges equivalent to the `root` user.  
+
+Create the `docker` group: `sudo groupadd docker`  
+
+Add your user to the `docker` group: `sudo usermod -aG docker $USER`  
+
+At this point, you can log out and log back in for these changes to apply. You can also use the command `newgrp docker` to temporarily enable the new group for the current terminal session.
+:::
+
 ```
 docker-compose -f docker-compose.dev.yml up --build
 ```

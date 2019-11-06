@@ -1,4 +1,8 @@
-# Deploy To CKAN Cloud
+---
+sidebar: auto
+---
+
+# Redeploy To CKAN Cloud
 
 As a developer, you will need to deploy changes to Datopian servers. CKAN portals, hosted by Datopian, are living on Google Cloud Platform run by Kubernetes engine.
 

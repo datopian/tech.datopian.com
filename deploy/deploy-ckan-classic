@@ -1,6 +1,10 @@
-# Deploy Frontend APP To CKAN Cloud
+---
+sidebar: auto
+---
 
-As a developer, you will need to deploy next-gen frontend app to Datopian servers. CKAN portals, hosted by Datopian, are living on Google Cloud Platform run by Kubernetes engine.
+# Deploy To CKAN Cloud
+
+As a developer you will need to create new instance and deploy to Datopian servers. CKAN portals hosted by Datopian are living on Google Cloud Platform run by Kubernetes engine.
 
 ## Prerequisites
 
@@ -27,30 +31,27 @@ Create new project in Gitlab:
 
 - Navigate to https://gitlab.com/viderum
 - Click "New Project" Button on the right
-- Let's name it `cloud-deploy-demo-exercise-ng`
-  - We use following name convention: `cloud-[project-id]-ng`
+- Let's name it `cloud-deploy-demo-exercise`
+  - We use following name convention: `cloud-[project-id]`
 - Click "Create Project"
 
-You should be able to see empty repository on https://gitlab.com/viderum/cloud-deploy-demo-exercise-ng. Let's now add necessary files.
+You should be able to see empty repository on https://gitlab.com/viderum/cloud-deploy-demo-exercise. Let's now add necessary files.
 
 ### Create Dockerfile
 
-`Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image. Usually all you need is to copy `Dockerfile` from the existing project and update it's `API_URL` variable.
+`Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image. Usually all you need is to copy `Dockerfile` from the existing project and modify per your needs.
 
-- Click on "New File" Button
-- Copy everything from https://gitlab.com/viderum/cloud-deploy-demo-ng/blob/master/Dockerfile and paste there
+- Click on "Add File" Button
+- Copy everything from https://gitlab.com/viderum/cloud-deploy-demo/blob/master/Dockerfile and paste there
 - Name the file `Dockerfile`
 - Click "Commit Changes" Button
 
-**Note:**
-- Please define **All** environment variables here as shown in example `ENV API_URL https://deploy-demo.ckan.io/api/3/action/`
-
 ### Create .env file
 
-Please create ths file as a placeholder for now. It will **not be used** when deployd. Define all your environment variables in `Docerfile`
+Some of the CKAN configuration options can be defined as Environment variables on the server operating system. We keep this variables in `.env` file.
 
 - Click `+` and choose "Add File"
-- Copy everything from https://gitlab.com/viderum/cloud-deploy-demo-ng/blob/master/.env
+- Copy everything from https://gitlab.com/viderum/cloud-deploy-demo/blob/master/.env
 - Name the file `.env`
 - Click "Commit Changes" Button
 
@@ -60,7 +61,7 @@ Please create ths file as a placeholder for now. It will **not be used** when de
 
 - got to https://cc-p-jenkins.ckan.io/job/Initialize%20Gitlab/
 - Click `Build with Parameters` button
-- Change `viderum/cloud-instance-id` to `viderum/cloud-deploy-demo-exercise-ng`
+- Change `viderum/cloud-instance-id` to `viderum/cloud-deploy-demo-exercise`
 - Click `Build` button
 
 ![](https://i.imgur.com/9xGKXOd.png)
@@ -75,16 +76,16 @@ Wait until the Gitlab Build is successful.
 
 Green means build was successful and our image was deployed to Gitlab Container registry. That means we are ready to create new instance on K8 cluster. :rocket:
 
-### Create Frontend APP
+### Create Instance
 
 Now we need to deploy the new image to CKAN Cloud
 
-- Go to https://cc-p-jenkins.ckan.io/job/create%20frontend%20instance/
+- Go to https://cc-p-jenkins.ckan.io/job/create%20new%20instance/
 - Click `Build With Parameters` Button
-- Update `INSTANCE_NAME` and `GITLAB_REPO` inputs per your needs
+- Update `INSTANCE_ID` and `GITLAB_REPO` inputs per your needs
 - Click `Build` Button
 
-![](https://i.imgur.com/GxLvkpe.png)
+![](https://i.imgur.com/0Dwzvct.png)
 
 Wait until build is successful. Once done, that's it! Our instance is deployed to K8 cluster. Now let's create a route for it.
 
@@ -94,17 +95,17 @@ We need now to create the route for your portal so that it's publicly accessible
 
 - Go to https://cc-p-jenkins.ckan.io/job/create%20route
 - Click `Build With Parameters` Button
-- Update `EXTRA_ARGS` with following: `instances-default deploy-demo-exercise-ng deploy-demo-exercise-ng`
+- Update `EXTRA_ARGS` with following: `instances-default deploy-demo-exercise deploy-demo-exercise`
 - Set `DRY_RUN` to `no`
 - Click `Build` button
 
-![](https://i.imgur.com/lZWoB4Q.png)
+![](https://i.imgur.com/fpOCZV2.png)
 
 ### Check it is working
 
-That's It! :fireworks: You should now be able to visit https://cloud-deploy-demo-ng-exercise.ckan.io and see the live portal.
+That's It! :fireworks: You should now be able to visit https://deploy-demo-exercise.ckan.io and see the live portal.
 
-![](https://i.imgur.com/TqD8GCY.png)
+![](https://i.imgur.com/qk8j15Z.png)
 
 ## Next steps
 

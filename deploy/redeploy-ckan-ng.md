@@ -1,4 +1,4 @@
-# Redeploy a frontend app to CKAN Cloud
+# Redeploy A frontend APP To CKAN Cloud
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Let's say you need to make several changes to the frontend app we created in [De
 
 ### Enable a new theme
 
-All you need to do is update the Dockerfile. Frontend applications are Node-js apps that are colned in `themes` directory. 
+All you need to do is update the Dockerfile. Frontend applications are Node-js apps that are colned in `themes` directory.
 
 - Go to https://gitlab.com/viderum/cloud-deploy-demo-exercise-ng/edit/master/Dockerfile
 - Uncomment the commented part (remove)
@@ -41,7 +41,7 @@ ENV ENV_KEY=ENV_VALUE
 
 ## Deploy the new version of frontend-v2
 
-We are not versioning fronten-v2, so all you need is to trigger the latest Gitlab-CI build. 
+We are not versioning fronten-v2, so all you need is to trigger the latest Gitlab-CI build.
 
 - Got to https://gitlab.com/viderum/cloud-deploy-demo-exercise-ng
 - Click the Green tick button and restart
@@ -70,4 +70,3 @@ If the build is not successful check its logs. You might have a typo in branch, 
 
 
 Wait for the successful build and that's it! You've just deployed your changes to the CKAN cloud servers :rocket:
-

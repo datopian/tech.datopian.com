@@ -95,15 +95,15 @@ We need now to create the route for your portal so that it's publicly accessible
 
 - Go to https://cc-p-jenkins.ckan.io/job/create%20route
 - Click `Build With Parameters` Button
-- Update `EXTRA_ARGS` with following: `instances-default cloud-deploy-demo-exercise cloud-deploy-demo-exercise`
+- Update `EXTRA_ARGS` with following: `instances-default deploy-demo-exercise deploy-demo-exercise`
 - Set `DRY_RUN` to `no`
 - Click `Build` button
 
-![](https://i.imgur.com/lZWoB4Q.png)
+![](https://i.imgur.com/fpOCZV2.png)
 
 ### Check it is working
 
-That's It! :fireworks: You should now be able to visit https://cloud-deploy-demo-exercise.ckan.io and see the live portal.
+That's It! :fireworks: You should now be able to visit https://deploy-demo-exercise.ckan.io and see the live portal.
 
 ![](https://i.imgur.com/qk8j15Z.png)
 

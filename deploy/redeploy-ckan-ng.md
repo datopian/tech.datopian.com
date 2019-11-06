@@ -20,7 +20,7 @@ All you need to do is update the Dockerfile. Frontend applications are Node-js a
 - Go to https://gitlab.com/viderum/cloud-deploy-demo-exercise-ng/edit/master/Dockerfile
 - Uncomment the commented part (remove)
   ```
-  # RUN git clone https://cloud-service-account:sQ_K9yqyFvn93m_6wcNy@gitlab.com/datopian/clients/[client-id] ./themes/client-id
+  # RUN git clone https://cloud-service-account:password@gitlab.com/datopian/clients/[client-id] ./themes/client-id
   # RUN cd client-id && yarn && cd -
   ```
 - Replace the `[client-id]` - with the actuall client name and save the changes.

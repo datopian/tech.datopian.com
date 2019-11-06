@@ -98,4 +98,4 @@ That's It! :fireworks: You should now be able to visit https://deploy-demo-exerc
 
 ## Next steps
 
-[Deploy To CKAN Cloud](/deploy/deploy-ckan-classic)
+[Redeploy To CKAN Cloud](/deploy/redeploy-ckan-classic)

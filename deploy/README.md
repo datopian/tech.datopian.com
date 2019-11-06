@@ -18,6 +18,6 @@ Please contact devops@datopian.com if you don’t have access to the Jenkins acc
 ## Deploy Guides
 
 - [Deploy To CKAN Cloud](/deploy/deploy-ckan-classic)
-- [Redeploy To CKAN Cloud](/redeploy/deploy-ckan-classic)
+- [Redeploy To CKAN Cloud](/deploy/redeploy-ckan-classic)
 - [Deploy A Frontend APP To CKAN Cloud](/deploy/deploy-ckan-ng)
-- [Redeploy A Frontend APP To CKAN Cloud](/redeploy/deploy-ckan-classic)
+- [Redeploy A Frontend APP To CKAN Cloud](/deploy/redeploy-ckan-ng)

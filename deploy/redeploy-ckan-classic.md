@@ -4,17 +4,6 @@ sidebar: auto
 
 # Redeploy To CKAN Cloud
 
-As a developer, you will need to deploy changes to Datopian servers. CKAN portals, hosted by Datopian, are living on Google Cloud Platform run by Kubernetes engine.
-
-## Prerequisites
-
-- Make sure you have access to [Datopian Jenkins](https://cc-p-jenkins.ckan.io/) account
-- Make sure you have write permissions to [Datopian Gitlab account](https://gitlab.com/viderum)
-
-::: tip
-Please contact devops@datopian.com if you don’t have access to the Jenkins account or permissions to create new project on GitLab.
-:::
-
 ## Make changes to a deployed instance
 
 Let's say you need to make several changes to the portal we created in [Creating CKAN Portal - Deploying for first time](/deploy/#creating-ckan-portal-deploying-for-first-time):
@@ -102,3 +91,7 @@ If the build is not successful check its logs. You might have a typo in branch, 
 ![](https://i.imgur.com/MeGaGOZ.png)
 
 Wait for the successful build and that's it! You've just deployed your changes to the CKAN cloud servers :rocket:
+
+## Next Steps
+
+[Deploy A Frontend APP To CKAN Cloud](/deploy/deploy-ckan-ng)

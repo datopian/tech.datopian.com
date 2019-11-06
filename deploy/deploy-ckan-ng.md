@@ -4,17 +4,6 @@ sidebar: auto
 
 # Deploy A Frontend APP To CKAN Cloud
 
-As a developer, you will need to deploy next-gen frontend app to Datopian servers. CKAN portals, hosted by Datopian, are living on Google Cloud Platform run by Kubernetes engine.
-
-## Prerequisites
-
-- Make sure you have access to [Datopian Jenkins](https://cc-p-jenkins.ckan.io/) account
-- Make sure you have write permissions to [Datopian Gitlab account](https://gitlab.com/viderum)
-
-::: tip
-Please contact devops@datopian.com if you don’t have access to the Jenkins account or permissions to create new project on GitLab.
-:::
-
 ## Creating CKAN Portal - Deploying for first time
 
 In order to deploy CKAN portal on Kubernetes cluster, you will need to first dockerize the CKAN application. For that you will need:
@@ -112,4 +101,4 @@ That's It! :fireworks: You should now be able to visit https://cloud-deploy-demo
 
 ## Next steps
 
-[Redeploy CKAN instance](/deploy/redeploy)
+[Redeploy A Frontend APP To CKAN Cloud](/deploy/redeploy-ckan-ng)

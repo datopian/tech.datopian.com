@@ -1,13 +1,9 @@
+---
+sidebar: auto
+---
+
+
 # Redeploy A frontend APP To CKAN Cloud
-
-## Prerequisites
-
-- Make sure you have access to [Datopian Jenkins](https://cc-p-jenkins.ckan.io/) account
-- Make sure you have write permissions to [Datopian Gitlab account](https://gitlab.com/viderum)
-
-::: tip
-Please contact devops@datopian.com if you don’t have access to the Jenkins account or permissions to create new project on GitLab.
-:::
 
 ## Make changes to a deployed instance
 

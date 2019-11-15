@@ -6,6 +6,10 @@ sidebar: auto
 
 In this article, we explain how you can create a theme and develop it.
 
+::: tip
+If you prefer learning from examples, jump to [this section](#examples).
+:::
+
 ## Getting started
 
 To add a theme, create a folder in the `/themes` directory. At very least you must add a `index.js` file with the following code in it:
@@ -61,6 +65,20 @@ If you need to customize the design of the site, you can create your own theme i
 
 The default assets and templates are used, if a file isn't found in your theme. This allows you to change specific part of the templates or assets.
 :::
+
+## Theme naming convention
+
+Key points are:
+
+* first part of the name is `frontend-{project name}`
+* keep it short but meaningful
+* use lower case
+* use hyphens instead of underscores
+
+Examples:
+
+* frontend-company
+* frontend-city
 
 ## Variables available in each page
 
@@ -307,3 +325,103 @@ THEME_DIR=node_modules
 ```
 
 Done! Start the server and checkout how your theme looks like :wave:
+
+## Examples
+
+### Open Data Denmark
+
+Technologies and plugins used:
+
+* CSS framework: Tailwind
+* CMS: WordPress
+* DMS: CKAN Classic
+* Other plugins: proxy
+
+Features and functionalities implemented in the theme:
+
+* Search in static content
+  * Searches in WordPress instance
+  * Has a dedicated search page: `/search/content`
+* Search box with the dropdown with 2 options for searching data and content
+* Displaying random groups on the front page
+* Categories for blog posts and ability to filter by category
+* Displaying featured posts
+
+Useful links:
+
+* Site: https://frontend-v2-openddk.herokuapp.com/
+* Repo: https://github.com/datopian/frontend-v2/tree/master/themes/opendk
+
+### Energinet
+
+Technologies and plugins used:
+
+* CSS framework: Tailwind
+* CMS: WordPress
+* DMS: CKAN Classic
+* Other plugins: proxy, google-analytics, mailer
+
+Features and functionalities implemented in the theme:
+
+* TODO
+
+Useful links:
+
+* Site: https://frontend-v2-eds.herokuapp.com/
+* Repo: https://gitlab.com/datopian/eds/frontend-eds
+* NPM: https://www.npmjs.com/package/@datopian/eds
+
+### Montreal
+
+Technologies and plugins used:
+
+* CSS framework: Tailwind
+* CMS: CKAN Pages
+* DMS: CKAN Classic
+* Other plugins: carto, dashboard, applications-showcase, disqus
+
+Features and functionalities implemented in the theme:
+
+* TODO
+
+Useful links:
+
+* Site: http://montreal.ckan.io/
+* Repo: https://gitlab.com/datopian/clients/ckan-montreal
+* NPM: https://www.npmjs.com/package/@datopian/ckan-montreal
+
+### Department of Education
+
+Technologies and plugins used:
+
+* CSS framework: Tailwind (based on Open Data Denmark)
+* CMS: TODO
+* DMS: CKAN Classic
+* Other plugins: TODO
+
+Features and functionalities implemented in the theme:
+
+* TODO
+
+Useful links:
+
+* Site: https://us-ed-ng.ckan.io/
+* Repo: https://gitlab.com/datopian/dept-ed-frontend
+
+### Axenit
+
+Technologies and plugins used:
+
+* CSS framework: TODO
+* CMS: TODO
+* DMS: TODO
+* Other plugins: TODO
+
+Features and functionalities implemented in the theme:
+
+* TODO
+
+Useful links:
+
+* Site: TODO
+* Repo: https://gitlab.com/datopian/clients/axenit-theme

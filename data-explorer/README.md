@@ -1,6 +1,7 @@
 ---
 sidebar: auto
 ---
+
 <div style="background-color: rgba(254, 232, 108, .5); padding: 2em; font-size: 1.2em; line-height:1.2em">
 <strong>These docs are a work in progress!</strong>
 <p>If you have issues, <a href="https://gitlab.com/datopian/tech/tech.datopian.com/issues" target="_blank">Submit an issue</a></p>
@@ -14,7 +15,8 @@ sidebar: auto
 
 ## Features / Highlights
 
-"Data Explorer" refers to an embedable  React/Redux application that allows users to:
+"Data Explorer" is an embedable React/Redux application that allows users to:
+
 * Explore tabular, map, PDF, and other types of data
 * Create map views of tabular data using the [Map Builder](#map-builder)
 * Create charts and graphs of tabular data using [Chart Builder](#chart-builder)

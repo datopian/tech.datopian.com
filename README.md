@@ -1,12 +1,16 @@
 ---
 home: true
 heroImage: https://www.datopian.com/img/datopian-logo.png
-actionText: Get Started →
-actionLink: /frontend/
-footer: Copyright © 2016-present Datopian (Atomatic Ltd)
+footer: Copyright © 2016-present Datopian
 ---
 
 <div class="features">
+  <div class="feature">
+    <h2>Data Portals</h2>
+    <p>
+      <a href="/data-portals/">Read more &raquo;</a>
+    </p>
+  </div>
   <div class="feature">
     <h2>CKAN Classic</h2>
     <p>

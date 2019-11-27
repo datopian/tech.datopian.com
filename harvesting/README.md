@@ -6,13 +6,15 @@ As a Data Portal Manager I want to harvest datasets' metadata (and maybe data) i
 
 Desired features include:
 
-* Easily create and maintain harvesters
-* Off-the-shelf harvesting for common metadata formats
+* Create and maintain (generic) harvesters for different types of metadata (e.g. data.json, DCAT) (below we call these pipelines)
+  * Off-the-shelf harvesting for common metadata formats e.g. data.json, DCAT etc
+* Incremental, efficient harvesting from a given source. For example, imagine a source catalog that has ~100k datasets and adds 100 new datasets every day. Assuming you have already harvested this catalog, when running your harvester each day you only want to harvest those 100 new datasets (and not re-harvest all 100k). Similarly, you want to be able to handle deletions and modifications of existing datasets.
+  * And even more complex case is where the harvested metadata is edited in the harvesting catalog and one has to handle merging of changes from the source catalog into the harvesting catalog (i.e. you can handle changes in both locations).
 * Create and update harvest sources via API and UI
-* Run and view harvests via API
-* Logging and monitoring
+* Run and view harvests via API (and UI)
+  * Logging and monitoring
 * Robust and reliable performance
-* Scalabiliity: support harvesting thousands or even millions of datasets a day
+  * Scalability: support harvesting thousands or even millions of datasets a day
 
 ## How does CKAN Classic do harvesting?
 
@@ -24,7 +26,7 @@ A detailed analysis of how it works is in the appendix below.
 
 The main critique is that ckanext-harvest builds a full mini-ETL system into CKAN.
 
-Good: Using CKAN as metadata (config) store and having a UI for that
+Good: Using CKAN as config store and having a UI for that
 
 Not so good:
 
@@ -100,7 +102,7 @@ We can use standard ETL tools to do harvesting, loosely coupling their operation
 * **Dataset**: a resulting dataset.
 * **Log (Entry)**: (including errors)
 
-NB: the term harvester is often used both for a pipeline (e.g. the DCAT Harvester) and for a Source e.g. "XYZ Agency data.json Harvester". We prefer to reserve it for the Source.
+NB: the term harvester is often used both for a pipeline (e.g. the DCAT Harvester) and for a Source e.g. "XYZ Agency data.json Harvester". We prefer not to use it, or to reserve it for an active Source e.g. "the GSA data.json harvester".
 
 ### Key Components
 
@@ -275,7 +277,7 @@ Existing harvesters
 
 ### Domain model
 
-See https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py
+See <https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py>
 
 * HarvestSource - a remote source for harvesting datasets from e.g. a CSW server or CKAN instance 
 * HarvestJob - a job to do the harvesting (done in 2 stages: gather and then fetch and import). This is basically state for the overall process of doing a harvest.
@@ -286,7 +288,7 @@ See https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__
 
 #### Harvest Source Objects
 
-https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py#L230-L245
+<https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py#L230-L245>
 
 ```python
 # harvest_source_table
@@ -302,6 +304,42 @@ Column('user_id', types.UnicodeText, default=u''),
 Column('publisher_id', types.UnicodeText, default=u''),
 Column('frequency', types.UnicodeText, default=u'MANUAL'),
 Column('next_run', types.DateTime), # not needed
+```
+
+#### Harvest Error and Log Objects
+
+<https://github.com/ckan/ckanext-harvest/blob/master/ckanext/harvest/model/__init__.py#L303-L331>
+
+```python
+# New table
+harvest_gather_error_table = Table(
+    'harvest_gather_error',
+    metadata,
+    Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+    Column('harvest_job_id', types.UnicodeText, ForeignKey('harvest_job.id')),
+    Column('message', types.UnicodeText),
+    Column('created', types.DateTime, default=datetime.datetime.utcnow),
+)
+# New table
+harvest_object_error_table = Table(
+    'harvest_object_error',
+    metadata,
+    Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+    Column('harvest_object_id', types.UnicodeText, ForeignKey('harvest_object.id')),
+    Column('message', types.UnicodeText),
+    Column('stage', types.UnicodeText),
+    Column('line', types.Integer),
+    Column('created', types.DateTime, default=datetime.datetime.utcnow),
+)
+# Harvest Log table
+harvest_log_table = Table(
+    'harvest_log',
+    metadata,
+    Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
+    Column('content', types.UnicodeText, nullable=False),
+    Column('level', types.Enum('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL', name='log_level')),
+    Column('created', types.DateTime, default=datetime.datetime.utcnow),
+)
 ```
 
 ### Key components

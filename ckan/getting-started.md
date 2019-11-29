@@ -1,17 +1,28 @@
----
-sidebar: auto
----
+# CKAN: Getting Started for Development
 
-## Running CKAN locally for Development
+## Prerequisites
 
-### Cloning the repo
+CKAN has a rich tech stack so we have opted to standardize our instructions with Docker Compose, which will help you spin up every service in a few commands.
+
+If you already have Docker-compose, you are ready to go!
+
+If not, please, follow instructions on [how to install docker-compose](https://docs.docker.com/compose/install/)
+
+On Ubuntu you can run:
+
+```
+sudo apt-get update
+sudo apt-get install docker-compose
+```
+
+## Cloning the repo
 
 ```
 git clone https://github.com/okfn/docker-ckan
 cd docker-ckan
 ```
 
-### Booting CKAN
+## Booting CKAN
 
 Create a local environment file:
 
@@ -58,3 +69,4 @@ For the key concepts of what is CKAN and how it works you can read the [CKAN Use
 Login / Logout button breaks the experience:
 
 - Change the `http://ckan:5000` to `http://localhost:5000`. A complete fix is described in the [Play around with CKAN portal](/ckan/play-around). ( You next step ;) )
+

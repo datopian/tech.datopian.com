@@ -2,27 +2,21 @@
 sidebar: auto
 ---
 
-# Getting Started: CKAN Classic
+# CKAN Classic
 
-Here you'll learn how to install and run CKAN on your local machine. In the end, you can play with it importing and visualising data.
+CKAN (Classic) already has great documentation at: https://docs.ckan.org/
 
-## Prerequisites
+This material is a complement to those docs as well as details of our particular setup.  Here, among other things, you'll learn how to: 
 
-As CKAN stack is not simple we opted for standardizing our instructions with Docker Compose, which will help you spin up every service in a few commands.
+* [Get Started with CKAN for Development -- install and run CKAN on your local machine](./getting-started)
+* [Play around with a CKAN instance including mporting and visualising data][play]
+* [Install Extensions](./install-extension)
+* [Create Your Own Extension](./create-extension)
+* [FAQ](ckan/FAQ)
 
-If you already have Docker-compose, you are up to go! If not, please, follow instructions on [how to install docker-compose](https://docs.docker.com/compose/install/)
+[start]: ./getting-started
+[play]: ./play-around
 
-On Ubuntu you can run:
+[CKAN]: https://ckan.org/
+[docs]: https://docs.ckan.org/
 
-```
-sudo apt-get update
-sudo apt-get install docker-compose
-```
-
-## Development Guides
-
-- [Running CKAN Locally For Development](/ckan/getting-started)
-- [Play Around With CKAN Portal](/ckan/play-around)
-- [Install Extensions](/ckan/install-extension)
-- [Create Your Own Extension](/ckan/create-extension)
-- [FAQ](ckan/FAQ)

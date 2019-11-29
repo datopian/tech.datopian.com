@@ -2,6 +2,10 @@
 
 > *Data Portals have become essential tools in unlocking the value of data for organizations and enterprises ranging from the US government to Fortune 500 pharma companies, from non-profits to startups. They provide a convenient point of truth for discovery and use of an organization's data assets. Read on to find out more.*
 
+[[toc]]
+
+## Introduction: Data Portals are Gateways to Data
+
 A Data Portal is a gateway to data. That gateway can be big or small, open or limited. For example, data.gov provides a gateway to US Government for everyone, whilst an enterprise "intra" data portal is limited to that company's personnel.
 
 A Data Portal's core purpose is to enable the rapid discovery and use of data. However, as a flexible, central point of truth on an organizations data assets, a Data Portal can become essential data infrastructure and be extended or integrated to provide many additional features:
@@ -16,22 +20,29 @@ The rise of Data Portals reflect the rapid growth in the volume and variety of d
 
 Concretely: how does Jane in the new data science team know that Geoff in accounting has the spreadsheet she needs for her analysis for the COO? Moreover, it is not enough just to have a dataset's location: if users are easily to discover and access data it has to be suitably organized and presented.
 
-Data portals answer this need: by making it easy to find and access data, a data portal helps solve these problems. As a result, data portals have become essential tools for organizations to bring order to the "data swamp" and unlock the value of their data assets.[^case] [^1] [^lakes]
+Data portals answer this need: by making it easy to find and access data, a data portal helps solve these problems. As a result, data portals have become essential tools for organizations to bring order to the "data swamp" and unlock the value of their data assets.[^case][^1]
 
 [^case]: TODO: maybe link to case studies ...
 
 [^1]: ASIDE: the nature of the problem that Data Portals solve (i.e. bringing order to diverse, distributed data assets) explains why data portals first arose in Government and as *open* data portals. Government had lots of useful data, much of it shareable, but poorly organized and strewn all over the place. In addition, much of the value of that data lay in unexpected or unforeseen uses. Thus, Data Portals in their modern form started in Government in the mid-late 2000s. They then spread into large companies and then with the spread of data into all kinds of organizations big and small.
 
-
 ## Why Data Portals?
 
-The volume and variety of data have exploded. Even small organizations nowadays have dozens of data assets ranging from spreadsheets in their cloud drive to web analytics. Meanwhile large organizations can have an incredible -- and bewildering -- variety of data ranging from Hadoop clusters and data warehouses to CRM systems plus, of course, plenty of internal spreadsheets, databases etc.
+### Data Variety and Volume have Grown Enormously
 
-In addition to this diversity of *supply* there has been a huge growth in the potential and diversity of *demand* in the form of users and use cases. Self-service business intelligence, machine learning and even tools like google spreadsheets have democratized and expanded the range of users. Meanwhile data is no longer limited to a single purpose: much of the *new* value for data for enterprises comes from unexpected or unplanned uses and from combining data across divisions and systems.
+The volume and variety of data available has grown enormously. Today, even small organizations have dozens of data assets ranging from spreadsheets in their cloud drive to web analytics. Meanwhile, large organizations can have an enormous -- and bewildering -- amount and variety of data ranging from Hadoop clusters and data warehouses to CRM systems plus, of course, plenty of internal spreadsheets, databases etc.
 
-As organizations seek to reap the benefits of this data cornucopia they face a problem: with so much data around its easy to get lost -- or just not to know that data even exists. And as supply and demand have expanded and diversified it has got both harder and more important to match them up. The addition of data integration and data engineering actually makes this problem even worse -- do we need to create this new dataset X from Y and Z or do we already have that somewhere (and how can people find X once we have created it? Is X a finished a dataset that people can rely on or is it a one-off. Even if a one-off do we want to record that we created this kind of dataset so we can create it again in the future if we need it?).[^lakes]
+In addition to this diversity of *supply* there has been a huge growth in the potential and diversity of *demand* in the form of users and use cases. Self-service business intelligence, machine learning and even tools like google spreadsheets have democratized and expanded the range of users. Meanwhile, data is no longer limited to a single purpose: much of the *new* value for data for enterprises comes from unexpected or unplanned uses and from combining data across divisions and systems.
 
-By making it easy to find and access data, a data portal helps solve these problems and therefore plays an essential role in unlocking the value of data for an organization.
+### This Creates a Challenge: Getting Lost in Data
+
+As organizations seek to reap the benefits of this data cornucopia they face a problem: with so much data around its easy to get lost -- or even just not know that data even exists. And, as supply and demand have expanded and diversified it has got both harder and more important to match them up.
+
+The addition of data integration and data engineering can actually makes this problem even worse -- do we need to create this new dataset X from Y and Z or do we already have that somewhere? And how can people find X once we have created it? Is X a finished a dataset that people can rely on or is it a one-off. Even if a one-off do we want to record that we created this kind of dataset so we can create it again in the future if we need it?[^lakes]
+
+### Data Portals are a Platform that Connect Supply and Demand for Data
+
+By making it easy to find and access data, a data portal helps address all these problems. As a platform it connects creators and users of data in a single place. As a single source of base metadata it provides essential infrastructure for data integration. By acting as a central repository of data it enables new forms of publication and sharing. Data Portals therefore play a central role in unlocking the value of data for organizations.
 
 [^lakes]: Ditto for data lakes: the growth of data lakes have made data portals (and metadata management) even more important because without them your data lake quickly turns into a data swamp where data is hard to locate and even if found lacks esssential metadata and structure that would make make it usable.
 
@@ -60,23 +71,29 @@ Even in more sophisticated situations, a data portal is a great place to start. 
 
 There is a good chance your data lake is rapidly becoming a data swamp and there is nothing to track dependencies and connections in those data and analytics pipelines. Again a simple data portal is a great place to start in bringing some order to this: lightweight, vendor-independent and (if you choose CKAN) open source infrastructure that gives you a simple solution for collecting and tracking metadata across datasets and data workflows.
 
-### Data Portals make Data Discoverable and Accessible and promote Integratability
+### Summary: Data Portals make Data Discoverable and Accessible and provide a Foundation for Integration
 
 In summary, Data Portals deliver value in three distinct, interlocking and incremental ways by:
 
-* Making data discoverable: ranging from Excel files to Hadoop clusters. The portal deos this by providing the infrastructure *and* process for reliable, cross-system metadata management and access (via humans *and* machines)
-* Make data accessible: whether its an Excel file or a database cluster, common metadata, data showcases and data APIs make data easily and quickly accessible to technical and non-technical users. Data can now be previewed and even explored in one location prior to use.
-* Making data reliable and integrable: as central store of metadata and data access points, the data portal can be naturally used as a starting point for enriching data with data dictionaries (what does column custid mean?), data mappings (this column in this data file is a customer ID and the customer master data is in this other dataset there), and data validation (are the dates valid dates, are some of them out of range?)
-* Provide a solid foundation / initial starting point and / or scaffolding for proper internal data infrastructure and data engineering. They are an organizing point and rosetta stone for data discovery and metadata.
-  * TODO: this really links into the story of how to start doing data engineering / building a data lake / doing agile data etc etc
-  * For example, suppose you want to do some non-trivial business intelligence. You'll need a list of the datasets you'll need -- maybe sales, plus analytics, plus some public economic data. Where are you going to track those datasets? Where are you going to track the resulting datasets you produce?
-  * For example, suppose your data engineering team are building out data pipelines. These pipelines pull in a variety of datasets, integrate and transform them and then save the results. How are they going to track what datasets they are using and what they have produced? They are going to need a catalog. Rather than inventing their own (the classic "json file in git or spreadsheet in google docs etc" you want them to use a proper catalog (or integrate with your existing one).
-  * Using an open source service-oriented data portal framework like CKAN you can rapidly integrate and scale out your data orchestration. It provides a "small pieces, loosely joined" approach to developing your data infrastructure starting from the basics: what datasets do you have, what datasets do you want to create?
+* Making data discoverable: ranging from Excel files to Hadoop clusters. The portal does this by providing the infrastructure *and* process for reliable, cross-system metadata management and access (via humans *and* machines)
+* Make data accessible: whether its an Excel file or a database cluster, the portal's combination of common metadata, data showcases and data APIs make data easily and quickly accessible to technical and non-technical users. Data can now be previewed and even explored in one location prior to use.
+* Making data reliable and integrable: as central store of metadata and data access points, the data portal can be naturally used as a starting point for enriching data with data dictionaries (what does column `custid` mean?), data mappings (this column in this data file is a customer ID and the customer master data is in this other dataset there), and data validation (does this column of dates contain valid dates, are some of them out of range?)
+
+In addition, in terms of proper data infrastructure and data engineering, a Data Portal provides both initial starting point, simple scaffolding and a solid foundation. It is an organizing point and rosetta stone for data discovery and metadata.
+
+* TODO: this really links into the story of how to start doing data engineering / building a data lake / doing agile data etc etc
+* For example, suppose you want to do some non-trivial business intelligence. You'll need a list of the datasets you'll need -- maybe sales, plus analytics, plus some public economic data. Where are you going to track those datasets? Where are you going to track the resulting datasets you produce?
+* For example, suppose your data engineering team are building out data pipelines. These pipelines pull in a variety of datasets, integrate and transform them and then save the results. How are they going to track what datasets they are using and what they have produced? They are going to need a catalog. Rather than inventing their own (the classic "json file in git or spreadsheet in google docs etc" you want them to use a proper catalog (or integrate with your existing one).
+* Using an open source service-oriented data portal framework like CKAN you can rapidly integrate and scale out your data orchestration. It provides a "small pieces, loosely joined" approach to developing your data infrastructure starting from the basics: what datasets do you have, what datasets do you want to create?
 
 
 ## What does a Data Portal do?
 
+### A Data Portal provides a Catalog
+
 In its most basic essence, a Data Portal is a catalog of datasets. Even here there are degrees: at its simplest a catalog is just a list of dataset names and links; whilst more sophisticated catalogs will have elaborate metadata on each dataset.
+
+### And Much More ...
 
 Along with the essential basic catalog features, modern portals now incorporate an extensive range of functionality for organizing, structuring and presenting data including:
 

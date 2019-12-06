@@ -20,7 +20,7 @@ Docker compose setup, covered in this guide, takes care of installing and connec
 
 - [Before Deployment](/migration/ccd/before-deployment)
 - [Deployment](/migration/ccd/deployment)
-- [Post Deployment](migration/ccd/post-deployment)
+- [Post Deployment](/migration/ccd/post-deployment)
 
 ## Useful Links and Readings
 

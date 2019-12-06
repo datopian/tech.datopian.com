@@ -52,3 +52,7 @@ Checklist of items to take into account before deploying:
 |Set up SSL|(If client is ok with letsencrypt:) <br> Use traefik to set it up. <br> (If client has their own certificate:) <br>Install on traefik.
 |Test|Common tests using automation tool.<br>Specific tests to custom extensions.<br>Acceptance tests as agreed upon with the client.
 |Monitoring, logging and backup|Connect with local systems for monitoring, logging and backup. <br><br>Set up our own solutions such as: <br>- Sentry<br>- TBD (need to create a list of 'recommended providers', in case the client doesn't have own solution)<br>- Backups - we need to make sure to expose the correct volumes (TBD a list of which ones)|
+
+## Next Steps
+
+Read the [Deployment Guide](/migration/ccd/deployment)

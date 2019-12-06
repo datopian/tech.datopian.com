@@ -205,3 +205,6 @@ After migration rebuild the SOLR search index.
 ```
 sudo make shell O=<<instance-id>> S=ckan C='/usr/local/bin/ckan-paster --plugin=ckan search-index rebuild  -c /etc/ckan/production.ini'
 ```
+## Next Steps
+
+Read the [Post Deployment Guide](migration/ccd/post-deployment)

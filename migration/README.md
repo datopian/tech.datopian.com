@@ -8,5 +8,5 @@ This section includes guides for migration off Ckan-Cloud from datopian servers.
 
 ## Guides
 
-- (Ckan Cloud Docker Deployment Guide)[/migration/ccd-guide]
-- (CCO Kubernetes Deployment)[cco-deployment] (not yet implemented)
+- [Ckan Cloud Docker Deployment Guide](/migration/ccd-guide)
+- [CCO Kubernetes Deployment](/migration/cco-deployment) (not yet implemented)

@@ -51,6 +51,13 @@ footer: Copyright © 2016-present Datopian
     </p>
   </div>
   <div class="feature">
+    <h2>Migration off CKAN-Cloud</h2>
+    <p></p>
+    <p>
+      <a href="/migration/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
     <h2>Dashboards</h2>
     <p>
       <a href="/dashboards/">Read more &raquo;</a>

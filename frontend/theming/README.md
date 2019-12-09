@@ -66,6 +66,56 @@ If you need to customize the design of the site, you can create your own theme i
 The default assets and templates are used, if a file isn't found in your theme. This allows you to change specific part of the templates or assets.
 :::
 
+## Extending core controller
+
+The controllers are called in the following order:
+
+1. Plugins - e.g., WordPress plugin controller is called prior to theme and core controllers.
+2. Theme - you can either extend or override a controller here.
+3. Core - finally, core controller is called.
+
+Below we have couple of examples of how would you extend the controllers.
+
+### Home controller
+
+Imagine you need to pass some more variables to home template. For example, you need to display featured groups/collections:
+
+```javascript
+// your index.js
+module.exports = function (app) {
+  const config = app.get('config')
+  const dms = app.get('dms')
+  const DmsModel = new dms.DmsModel(config)
+
+  app.get('/', async (req, res, next) => {
+    const collections = await DmsModel.getCollections()
+    // You probably want to display only 3-4 collections. You can filter them here.
+    // The template now has 'collections' variable:
+    res.locals.collections = collections.slice(0, 3)
+    next()
+  })
+}
+```
+
+### Showcase (dataset) controller
+
+The showcase page is mostly rendered from a `datapackage` object so you might want to make some tweaks to it before it gets passed to the template. You always can override the controller but if you only want to make small tweaks, you can extend it:
+
+```javascript
+module.exports = function (app) {
+  const config = app.get('config')
+  const dms = app.get('dms')
+  const DmsModel = new dms.DmsModel(config)
+
+  app.get('/:owner/:name', async (req, res, next) => {
+    res.locals.datapackage = await DmsModel.getPackage(req.params.name)
+    // Now you can alter `datapackage` for your needs:
+    res.locals.datapackage.title = 'My title'
+    next()
+  })
+}
+```
+
 ## Theme naming convention
 
 Key points are:

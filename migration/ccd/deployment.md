@@ -207,4 +207,4 @@ sudo make shell O=<<instance-id>> S=ckan C='/usr/local/bin/ckan-paster --plugin=
 ```
 ## Next Steps
 
-Read the [Post Deployment Guide](migration/ccd/post-deployment)
+Read the [Post Deployment Guide](/migration/ccd/post-deployment)

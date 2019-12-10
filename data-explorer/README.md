@@ -2,11 +2,13 @@
 sidebar: auto
 ---
 
-<div style="background-color: rgba(254, 232, 108, .5); padding: 2em; font-size: 1.2em; line-height:1.2em">
-<strong>These docs are a work in progress!</strong>
-<p>If you have issues, <a href="https://gitlab.com/datopian/tech/tech.datopian.com/issues" target="_blank">Submit an issue</a></p>
-<p>If you have improvements, <a href="https://gitlab.com/datopian/tech/tech.datopian.com/merge_requests" target="_blank">Submit a merge request</a></p>
-</div>
+::: warning
+**These docs are a work in progress!**
+
+If you have issues, [submit an issue](https://gitlab.com/datopian/tech/tech.datopian.com/issues).
+
+If you have improvements, [submit a merge request](https://gitlab.com/datopian/tech/tech.datopian.com/merge_requests)
+:::
 
 # Data Explorer
 
@@ -33,11 +35,11 @@ Datapackage View is the rendering engine for the main window of the Data Explore
 
 The above image displays a table shown at the `Table` tab, but note that Datapackage-views renders _all_ data visualizations: Tables, Charts, Maps, and others.
 
-### [Query Builder](https://github.com/datopian/datastore-query-builder)
+### [Datastore Query Builder](https://github.com/datopian/datastore-query-builder)
 
-<img alt="Query Builder" src="../img/data-explorer/query-builder.png" width="250px" />
+<img alt="Datastore Query Builder" src="../img/data-explorer/query-builder.png" width="250px" />
 
-The Query Builder interfaces with the Datastore API to allow users to search data resources using an SQL like interface.
+The Datastore Query Builder interfaces with the Datastore API to allow users to search data resources using an SQL like interface. See the docs for this module here - [Datastore Query Builder docs](/data-explorer/datastore-query-builder/).
 
 ### [Map Builder](https://github.com/datopian/map-builder)
 

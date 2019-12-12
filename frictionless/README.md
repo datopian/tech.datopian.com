@@ -51,5 +51,9 @@ For developers of the specs latter may be better.
 
 For ordinary users I imagine the former is better.
 
+## Tutorials
+
+Data Package Find-Prepare-Share Guide: https://datahub.io/docs/getting-started/datapackage-find-prepare-share-guide
+
 <mermaid />
 

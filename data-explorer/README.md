@@ -78,6 +78,40 @@ $ yarn cosmos
 
 Until we have better documentation on Data Explorer settings, use the [Cosmos fixtures](https://gitlab.com/datopian/data-explorer/blob/master/__fixtures__/with_widgets/geojson_simple.js) as an example of how to instantiate / configure the Data Explorer.
 
+## Translations
+
+### Add a Translation To Data Explorer
+
+To add a translation to a new language to the data explorer you need to:
+
+1. clone the repository you need to update
+
+  ```bash
+  git clone git@gitlab.com:datopian/data-explorer.git
+  ```
+2. go to `src/i18n` folder
+3. add the new language json file (e.g. `ru.json`)
+4. create a merge request with the changes
+
+### Add a translation To a Component
+
+Some strings may come from a component, to add translation for them will require some extra steps, e.g. datapackage-views-js:
+
+1. clone the repository
+  ```bash
+  https://github.com/datopian/datapackage-views-js.git
+  ```
+2. go to `src/i18n` folder
+3. add the new language json file (e.g. `ru.json`)
+4. create a pull request for datapackage-views-js
+5. get the new datapackage-views-js version after merging (e.g. 1.3.0)
+6. clone data-explorer
+7. upgrade the data-explorer's datapackage-views-js dependency with the new version
+  ```bash
+  yarn upgrade @datopian/datapackage-views-js@^1.3.0
+  ```
+8. create a merge request for data-explorer
+
 ## Embedding in CKAN NG Theme
 
 ### Copy bundle files to theme's `public` directory

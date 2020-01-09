@@ -89,8 +89,8 @@ To add a translation to a new language to the data explorer you need to:
   ```bash
   git clone git@gitlab.com:datopian/data-explorer.git
   ```
-2. go to `src/i18n` folder
-3. add the new language json file (e.g. `ru.json`)
+2. go to `public/locales/` folder
+3. add a new sub-folder with locale name and the new language json file (e.g. `public/locales/ru/translation.json`)
 4. create a merge request with the changes
 
 ### Add a translation To a Component
@@ -101,8 +101,8 @@ Some strings may come from a component, to add translation for them will require
   ```bash
   https://github.com/datopian/datapackage-views-js.git
   ```
-2. go to `src/i18n` folder
-3. add the new language json file (e.g. `ru.json`)
+2. go to `public/locales/` folder
+3. add a new sub-folder with locale name and the new language json file (e.g. `public/locales/ru/translation.json`)
 4. create a pull request for datapackage-views-js
 5. get the new datapackage-views-js version after merging (e.g. 1.3.0)
 6. clone data-explorer

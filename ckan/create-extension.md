@@ -24,7 +24,7 @@ This command will create an extension template in your local `./src` folder that
 3. Add the plugin to the `CKAN__PLUGINS` setting in your `.env` file.
 
 ```
-CKAN__PLUGINS = stats text_view recline_view example_extension
+CKAN__PLUGINS=stats text_view recline_view example_extension
 ```
 
 
@@ -52,11 +52,15 @@ Let's edit a template to change the way CKAN is displayed to the user!
 
 1. First you will need write permissions to the extension folder since it was created by the user running docker. Replace `your_username` and execute the following command:
 
+::: tip
+You can find out your current username by typing `echo $USER` in the terminal.
+:::
+
 ```
 sudo chown -R <your_username>:<your_username> src/ckanext-example_extension
 ```
 
-2. The previous comamand creates all the files and folder structure needed for our extension. Open `ckanext-example_theme/ckanext/example_theme/plugin.py` to see the main file of our extension that we will edit to add custom functionality:
+2. The previous comamand creates all the files and folder structure needed for our extension. Open `src/ckanext-example_extension/ckanext/example_extension/plugin.py` to see the main file of our extension that we will edit to add custom functionality:
 
 ```python
 import ckan.plugins as plugins

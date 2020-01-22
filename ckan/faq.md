@@ -2,11 +2,13 @@
 sidebar: auto
 ---
 
-# F.A.Q
+# FAQ
+
+This page provides answers to some frequently asked questions.
 
 ## How to create an extension template in my local machine
 
-You can use the `paster` command in much the same way as a source install. To create an extension execute the following command:
+You can use the `paster` command in the same way as a source install. To create an extension execute the following command:
 
 ```
 docker-compose -f docker-compose.dev.yml exec ckan-dev /bin/bash -c "paster --plugin=ckan create -t ckanext ckanext-myext -o /srv/app/src_extensions"
@@ -17,11 +19,11 @@ This will create an extension template inside the container's folder `/srv/app/s
 Now you can navigate to your local folder `src/` and see the extension created by the previous command and open the project in your favorite IDE.
 
 
-## How to separate that extension in a new git repository so I can have independence to install it in other instances
+## How to separate that extension in a new git repository so I can have the independence to install it in other instances
 
-Crucial thing is to understand that extensions get their own repositories on GitHub (or elsewhere). You can first create repostiroy for extension and later clone in `src/` or do opposite as following:
+Crucial thing is to understand that extensions get their repositories on GitHub (or elsewhere). You can first create a repository for extension and later clone in `src/` or do opposite as following:
 
-* Create the Extension, for this example: `ckanext-myext`.
+* Create the Extension, for example: `ckanext-myext`.
 ```
 docker-compose -f docker-compose.dev.yml exec ckan-dev /bin/bash -c "paster --plugin=ckan create -t ckanext ckanext-myext -o /srv/app/src_extensions"
 ```
@@ -42,11 +44,11 @@ git commit -m 'Initial Commit'
 git push
 ```
 
-**Note:** Notice that the `src/` folder is gitignored in `okfn/docker-ckan` repository, so initializing new git repositories inside is ok.
+**Note:** The `src/` folder is gitignored in `okfn/docker-ckan` repository, so initializing new git repositories inside is ok.
 
 ## How to quickly refresh the changes in my extension into the dockerized environment so I can have quick feedback of my changes
 
-This docker-compose setup for dev environment is already configured so that it sets `debug=True` inside configuration file and auto reloads on python and templates related changes. You do not have to reload when making changes to HTML, JavaScript files neither configuration files - you just need to refresh the page in the browser.
+This docker-compose setup for dev environment is already configured so that it sets `debug=True` inside configuration file and auto reloads on python and templates related changes. You do not have to reload when making changes to HTML, javascript or configuration files - you just need to refresh the page in the browser.
 
 See the CKAN images section of the [repository documentation](https://github.com/okfn/docker-ckan#ckan-images) for more detail
 
@@ -78,7 +80,7 @@ This will start a new container, displaying the standard output in your terminal
 
 ## How to debug core CKAN code
 
-Currently, this docker-compose setup doesn't allow us to debug core CKAN code since it lives inside the container. However we can do some hacks so the container uses a local clone of the CKAN core hosted in our machine. To do it:
+Currently, this docker-compose setup doesn't allow us to debug core CKAN code since it lives inside the container. However, we can do some hacks so the container uses a local clone of the CKAN core hosted in our machine. To do it:
 
 - Create a new folder called `ckan_src` in this `docker-ckan` folder at the same level of the `src/`
 - Clone ckan and checkout the version you want to debug/edit

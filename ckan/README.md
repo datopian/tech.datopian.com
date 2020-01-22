@@ -12,7 +12,7 @@ This material is a complement to those docs as well as details of our particular
 * [Play around with a CKAN instance including importing and visualising data][play]
 * [Install Extensions](./install-extension)
 * [Create Your Own Extension](./create-extension)
-* [FAQ](./FAQ)
+* [FAQ](./faq)
 
 [start]: ./getting-started
 [play]: ./play-around

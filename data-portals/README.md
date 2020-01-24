@@ -120,6 +120,32 @@ E.g. each technical feature may require one or more of these technical features:
 * Frontend
 * Admin UI (WebUI, possibly CLI, Mobile etc)
 
+### High Level Overview
+
+```mermaid
+graph LR
+
+perdataset --> storage[Store Data]
+perdataset --> metadata[Store Metadata]
+perdataset --> versioning
+perdataset --> events[Notifications of Life Cycle events]
+perdataset --> basic[Basic Access Control]
+
+permissions --> auth[Identify]
+permissions --> authz[Authorization]
+permissions --> permintr[Permissions Integration]
+
+hub --> showcase["(Pre)Viewing the Dataset"]
+hub --> discovery[Discovery]
+hub --> orgs[Users, Teams and Ownership]
+hub --> tags[Tags, Themes]
+hub --> audit[Audit and Notifications]
+
+integration[Data Integration] --> pipelines
+integration --> harvesting
+```
+
+### Detailed Feature Breakdown
 
 ```mermaid
 graph LR

@@ -19,9 +19,7 @@ module.exports = {
     editLinks: true,
     sidebar: 'auto',
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Dashboards', link: '/dashboards/'},
-      { text: 'FAQ', link: '/faq/' }
+      { text: 'Home', link: '/' }
     ]
   }
 }

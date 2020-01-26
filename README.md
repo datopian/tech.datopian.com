@@ -63,4 +63,16 @@ footer: Copyright © 2016-present Datopian
       <a href="/dashboards/">Read more &raquo;</a>
     </p>
   </div>
+  <div class="feature">
+    <h2>Permissions</h2>
+    <p>
+      <a href="/permissions/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
+    <h2>Versioning</h2>
+    <p>
+      <a href="/versioning/">Read more &raquo;</a>
+    </p>
+  </div>
 </div>

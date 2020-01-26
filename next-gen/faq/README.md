@@ -1,4 +1,4 @@
-# FAQ
+# Next Gen FAQ
 
 ## Are NG Plugins just Express middleware?
 

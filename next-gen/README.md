@@ -6,7 +6,7 @@ Next Gen has a decoupled, microservice architecture in contrast to CKAN Classic'
 
 ## Classic to Next Gen
 
-CKAN classic: monolithic architecture -- everything is one big python application. Extension is done at code level and "compiled in" at compile/run-time (i.e. you end up with one bigger docker file).
+CKAN classic: monolithic architecture -- everything is one big python application. Extension is done at code level and "compiled in" at compile/run-time (i.e. you end up with one big docker file).
 
 CKAN Next Gen: decoupled, service-oriented -- services connected by network calls. Extension is done by adding new services,
 
@@ -24,7 +24,7 @@ end
 plugins --> microservices
 ```
 
-You can read more about monolithic vs microservice architectures in the Appendix below.
+You can read more about monolithic vs microservice architectures in the [Appendix below](#appendix-monolithic-vs-microservice-architecture).
 
 
 ## Next Gen lays the foundation for the future and brings major immediate benefits
@@ -33,7 +33,7 @@ Next Gen's new approach is important in several major ways.
 
 ### Microservices are the Future
 
-First, decoupled microservices have become *the* way to design and deploy (web) applications after first being pioneered by the likes of Amazon in the early 2000s. In particular, in the last five-to-ten years have brought microservice "for the masses" where relevant tooling and technology has been standardized, open-sourced and widely deployed -- e.g. not only in containerization such as Docker, Kubernetes but even in programming languages like (server-side) Javascript and Golang.
+First, decoupled microservices have become *the* way to design and deploy (web) applications after first being pioneered by the likes of Amazon in the early 2000s. And in the last five to ten years have brought microservices "for the masses" with relevant tooling and technology standardized, open-sourced and widely deployed -- not only with containerization such as Docker, Kubernetes but also in programming languages like (server-side) Javascript and Golang.
 
 By adopting a microservice approach CKAN can reap the the benefits of what is becoming a mature and standard way to design and build (web) applications. This includes the immediate advantages of being aligned with the technical paradigm such as tooling and developer familiarity.
 
@@ -42,11 +42,11 @@ By adopting a microservice approach CKAN can reap the the benefits of what is be
 In addition, and even more importantly, the microservices approach brings major benefits in:
 
 1. **Scalability**: dramatically easier and cheaper to scale up -- and down -- in size *and* complexity. Size-wise this is because you can replicate individual services rather than the whole application. Complexity-wise this is because monolithic architectures tend to become "big" where service-oriented encourages smaller lightweight components with cleaner interfaces. This means you can have a much smaller core making it easier to install, setup and extend. It also means you can use what you need making solutions easier to maintain and upgrade.
-2. **Reliability**: easier (and cheaper) to build highly reliable, high availability solutions because microservices make isolation and replication easier. For example, in a microservice architecture a problem in CKAN's harvester won't take down your portal because they run in separate containers. Similarly, you can scale the harvester system separately from the web frontend.
-3. **Extensibility**: much easier to create and maintain extensions because they are more decoupled with cleaner interfaces.
+2. **Reliability**: easier (and cheaper) to build highly reliable, high availability solutions because microservices make isolation and replication easier. For example, in a microservice architecture a problem in CKAN's harvester won't impact your main portal because they run in separate containers. Similarly, you can scale the harvester system separately from the web frontend.
+3. **Extensibility**: much easier to create and maintain extensions because they are a decoupled service and interfaces are leaner and cleaner.
 4. **Flexibility** aka "Bring your own tech": services can be written in any language so, for example, you can write your frontend in javascript and your backend in Python. In a monolithic architecture all parts must be written in the same language because everything is compiled together. This flexibility makes it easier to use the best tool for the job. It also makes it much easier for teams to collaborate and cooperate and fewer bottlenecks in development.
 
-ASIDE: decoupled microservices reflect the "unix" way of building networked applications. As with the "unix way" in general, whilst this approach better -- and simpler -- in the long-run, in the short-run it often demands a substantial amount of foundational work (those Unix authors were legends!) and is, at least initially, more resource demanding and more complex infrastructurally and so more appropriate for high end applications (not every one was Amazon!). This is why it took a while to get adoption and it is only really now that we have robust, easy to use microservices for the "masses".
+ASIDE: decoupled microservices reflect the "unix" way of building networked applications. As with the "unix way" in general, whilst this approach better -- and simpler -- in the long-run, in the short-run it often needs sustantial foundational work (those Unix authors were legends!). It may also be, at least initially, more resource intensive and more complex infrastructurally. Thus, whilst this approach is "better" it was not suprising that it was initially used for for complex and/or high end applications e.g. Amazon. This also explains why it took a while for this approach to get adoption -- it is only in the last few year that we have robust, lightweight, easy to use tooling and patterns for microservices -- "microservices for the masses" if you like.
 
 In summary, the Next Gen approach provides an essential foundation for the continuing growth and evolution of CKAN as a platform for building world-class data portal and data management solutions.
 
@@ -77,9 +77,9 @@ Monolithic: Libraries or modules communicate via function calls (inside one big 
 
 Microservices: Services communicate over a network
 
-https://martinfowler.com/articles/microservices.html
+The best introduction and definition of microservices comes from Martin Fowler https://martinfowler.com/microservices/
 
-> Microservice architectures will use libraries, but their primary way of componentizing their own software is by breaking down into services. We define libraries as components that are linked into a program and called using in-memory function calls, while services are out-of-process components who communicate with a mechanism such as a web service request, or remote procedure call.
+> Microservice architectures will use libraries, but their primary way of componentizing their own software is by breaking down into services. We define libraries as components that are linked into a program and called using in-memory function calls, while services are out-of-process components who communicate with a mechanism such as a web service request, or remote procedure call. https://martinfowler.com/articles/microservices.html
 
 
 ### Monolithic

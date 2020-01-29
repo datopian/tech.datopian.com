@@ -64,6 +64,12 @@ footer: Copyright © 2016-present Datopian
     </p>
   </div>
   <div class="feature">
+    <h2>Data API and DataStore</h2>
+    <p>
+      <a href="/data-api/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
     <h2>Permissions</h2>
     <p>
       <a href="/permissions/">Read more &raquo;</a>

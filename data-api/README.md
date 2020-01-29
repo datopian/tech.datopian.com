@@ -365,9 +365,9 @@ Crude Overview
 ```mermaid
 graph LR
 
-usercsv[User CSV,XLS etc]
-userdr[User Data Resource]
-dr["Tabular Data Resource]
+usercsv[User has CSV,XLS etc]
+userdr[User has Tabular Data Resource]
+dr[Tabular Data Resource]
 
 usercsv --1. some steps--> dr
 userdr -. direct .-> dr

@@ -171,48 +171,7 @@ The plugin adds/changes the following routes:
 
 ### Disqus
 
-Enable it via `.env` config file:
-
-```
-PLUGINS=disqus
-```
-
-Define routes where it should be displayed, e.g., you can use regex to define all showcase (dataset) pages:
-
-```
-DISQUS_PAGES=\/(dataset)\/.+
-```
-
-Note that you need to setup an account on https://disqus.com/ and get a snippet that you can paste in your template.
-
-Now, you need to put the snippet provided by Disqus platform somewhere in your templates. E.g., you can paste it in the `base.html` and put your `if` statement to identify if Disqus section should appear:
-
-```
-{% if disqusEnabled %}
-<div class="container mx-auto p-gutter">
-  <div id="disqus_thread"></div>
-</div>
-<script>
-
-  /**
-   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-
-  (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://{your-account}.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-{% endif %}
-```
+We don't have special plugin for this feature as you can simply setup an account on https://disqus.com/ and get a snippet that you can paste in your template. E.g., you can paste it in the `showcase.html` if you need it for every dataset page and so on.
 
 ## Where should I look for source code of these plugins?
 

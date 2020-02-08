@@ -145,6 +145,12 @@ integration[Data Integration] --> pipelines
 integration --> harvesting
 ```
 
+### Coggle Detailed Overview
+
+https://coggle.it/diagram/Xiw2ZmYss-ddJVuK/t/data-portal-feature-breakdown
+
+<iframe width='853' height='480' src='https://embed.coggle.it/diagram/Xiw2ZmYss-ddJVuK/b24d6f959c3718688fed2a5883f47d33f9bcff1478a0f3faf9e36961ac0b862f' frameborder='0' allowfullscreen></iframe>
+
 ### Detailed Feature Breakdown
 
 ```mermaid

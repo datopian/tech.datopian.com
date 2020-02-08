@@ -81,4 +81,22 @@ footer: Copyright © 2016-present Datopian
       <a href="/versioning/">Read more &raquo;</a>
     </p>
   </div>
+  <div class="feature">
+    <h2>Storage</h2>
+    <p>
+      <a href="/storage/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
+    <h2>Blob Storage</h2>
+    <p>
+      <a href="/blob-storage/">Read more &raquo;</a>
+    </p>
+  </div>
+  <div class="feature">
+    <h2>Import UI</h2>
+    <p>
+      <a href="/import-ui/">Read more &raquo;</a>
+    </p>
+  </div>
 </div>

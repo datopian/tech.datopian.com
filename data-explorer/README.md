@@ -89,9 +89,24 @@ To add a translation to a new language to the data explorer you need to:
   ```bash
   git clone git@gitlab.com:datopian/data-explorer.git
   ```
-2. go to `public/locales/` folder
-3. add a new sub-folder with locale name and the new language json file (e.g. `public/locales/ru/translation.json`)
-4. create a merge request with the changes
+2. go to `src/i18n/locales/` folder
+3. add a new sub-folder with locale name and the new language json file (e.g. `src/i18n/locales/ru/translation.json`)
+4. add the new file to resources settings in `i18n.js`:
+`src/i18n/i18n.js`:
+```javascript
+import en from './locales/en/translation.json'
+import da from './locales/da/translation.json'
+import ru from './locales/ru/translation.json'
+    ...
+      ru: {
+        translation: {
+          ...require('./locales/ru/translation.json'),
+          ...
+        }
+      },
+    ...
+```
+5. create a merge request with the changes
 
 ### Add a translation To a Component
 
@@ -101,16 +116,52 @@ Some strings may come from a component, to add translation for them will require
   ```bash
   https://github.com/datopian/datapackage-views-js.git
   ```
-2. go to `public/locales/` folder
-3. add a new sub-folder with locale name and the new language json file (e.g. `public/locales/ru/translation.json`)
-4. create a pull request for datapackage-views-js
-5. get the new datapackage-views-js version after merging (e.g. 1.3.0)
-6. clone data-explorer
-7. upgrade the data-explorer's datapackage-views-js dependency with the new version
+2. go to `src/i18n/locales/` folder
+3. add a new sub-folder with locale name and the new language json file (e.g. `src/i18n/locales/ru/translation.json`)
+4. add the new file to resources settings in `i18n.js`:
+`src/i18n/i18n.js`:
+```javascript
+...
+import ru from './locales/ru/translation.json'
+    ...
+    resources: {
+      ...
+      ru: {translation: ru},
+    },
+    ...
+```
+5. create a pull request for datapackage-views-js
+6. get the new datapackage-views-js version after merging (e.g. 1.3.0)
+7. clone data-explorer
+8. upgrade the data-explorer's datapackage-views-js dependency with the new version
   ```bash
   yarn upgrade @datopian/datapackage-views-js@^1.3.0
   ```
-8. create a merge request for data-explorer
+9. add the component's translations path to Data Explorer:
+```javascript
+import en from './locales/en/translation.json'
+import da from './locales/da/translation.json'
+import ru from './locales/ru/translation.json'
+    ...
+      ru: {
+        translation: {
+          ...require('./locales/ru/translation.json'),
+          ...require('datapackage-views-js/src/i18n/locales/ru/translation.json'),
+        }
+      },
+    ...
+```
+10. create a merge request for data-explorer
+
+### Testing a Newly Added Language
+
+To see your language changes in Data Explorer you can run `yarn start` and change the language cookie of the page (`defaultLocale`):
+
+![i18n Cookie](../img/data-explorer/i18n-cookie.png)
+
+### Language detection
+
+Language detection rules are determined by `detection` option in `src/i18n/i18n.js` file. Please edit with care, as other projects may already depend on them.
 
 ## Embedding in CKAN NG Theme
 

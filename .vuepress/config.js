@@ -21,5 +21,13 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' }
     ]
-  }
+  },
+  plugins: [
+    [
+      "@vuepress/plugin-google-analytics",
+      {
+        ga: "UA-157796850-2" 
+      }
+    ]
+  ]
 }

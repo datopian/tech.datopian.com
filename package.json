@@ -6,7 +6,8 @@
   "repository": "git@gitlab.com:datopian/tech/tech.datopian.com.git",
   "author": "Datopian <contact@datopian.com>",
   "devDependencies": {
-    "vuepress": "^1.0.2"
+    "@vuepress/plugin-google-analytics": "^1.3.0",
+    "vuepress": "^1.3.0"
   },
   "scripts": {
     "start": "yarn start:docs",

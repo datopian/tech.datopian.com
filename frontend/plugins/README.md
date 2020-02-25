@@ -97,12 +97,52 @@ http://tech.datopian.com/dashboards/
 
 ### Google analytics
 
-To add Google Analytics tracking code to page templates,
-enable the plugin in your `.env` file:
+To add Google Analytics enable the plugin in your `.env` file:
 
 ```bash
 PLUGINS="... google-analytics ..."
+```
+
+#### Tracking code
+
+To add tracking code to page templates, set up `GA_ID` env variable:
+
+```bash
 GA_ID=UA-000000000-0
+```
+
+#### Google Analytics Api
+
+To set up [google analytics API](https://developers.google.com/analytics/devguides/reporting/core/v3/reference):
+1. create [Service Account credentials in google developer console](https://developers.google.com/analytics/devguides/reporting/core/v3/quickstart/service-py#clientId)
+2. use the credentials from the json file for the following env variables:
+```bash
+GA_CLIENT_EMAIL=<client_email>
+GA_PRIVATE_KEY=<private_key, a long string with line breaks, should be inside inside quotes (")>
+```
+3. find the view id in google analytics, 
+  * you can specify it in the env file:
+```bash
+GA_VIEW_ID=<optional, can be specified in request params>
+```
+  * or specify it directly in the code later, in case you'll need different views
+4. example of the google analytics api object use:
+```javascript
+...
+const view_id = <view id from google analytics>
+const gaApi = app.get('ga-api')
+const params = {
+      'ids': 'ga:' + view_id, //optionally here or in env file
+      'start-date': '30daysAgo',
+      'end-date': 'today',
+      'sort': '-ga:uniquePageviews',
+      'dimensions': 'ga:pagePathLevel2',
+      'metrics': 'ga:uniquePageviews',
+      'max-results': 30,
+      'filters': 'ga:pagePathLevel1==/dataset/'
+    }
+const googleAnalyticsData = gaApi.get(params)
+...
 ```
 
 ### Mailer

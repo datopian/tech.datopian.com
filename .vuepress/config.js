@@ -19,7 +19,13 @@ module.exports = {
     editLinks: true,
     sidebar: 'auto',
     nav: [
-      { text: 'Home', link: '/' }
+      { text: 'Home', link: '/' },
+      { 
+        text: 'Features',
+        items: [
+          { text: 'Views', link: '/views/' }
+        ]
+      }
     ]
   }
 }

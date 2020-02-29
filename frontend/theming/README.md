@@ -10,6 +10,14 @@ In this article, we explain how you can create a theme and develop it.
 If you prefer learning from examples, jump to [this section](#examples).
 :::
 
+## Introduction
+
+Theming is extremely easy. Remember the Next Gen frontend is just an express app. Themes are just a folder in the themes directory with templates plus an `index.js`. The `index.js` receives the Express app object which means a theme can also extend the core app with routes and/or middleware. If you aren't familiar with Express or Express routes, you may want to get up to speed: https://expressjs.com/en/guide/
+
+Templating is done by default with [Nunjucks][]. It is essentially a node.js port of [jinja2](http://jinja.pocoo.org/docs/) which is the templating engine for CKAN Classic which makes it both familiar and extremely easy to port existing template code from Classic.
+
+[Nunjucks]: https://mozilla.github.io/nunjucks/templating.html
+
 ## Getting started
 
 To add a theme, create a folder in the `/themes` directory. At very least you must add a `index.js` file with the following code in it:

@@ -1,10 +1,33 @@
----
-sidebar: auto
----
-
 # Frontend
 
-The frontend component covers all of the traditional "read" frontend functionality of a data portal: front page, searching datasets, viewing datasets etc.
+The (read) frontend component covers all of the traditional "read" frontend functionality of a data portal: front page, searching datasets, viewing datasets etc.
+
+This page is primarily about the Next Gen approach to the Frontend, however we provide a brief overview of the Classic approach at the start.
+
+## CKAN Classic
+
+The Frontend is implemented in the core app spread across various controllers, templates etc.
+
+### Theming
+
+Theming is done via CKAN Classic extensions. See https://docs.ckan.org/en/2.8/theming/index.html
+
+### Extending (Plugins)
+
+In CKAN Classic you extend the frontend e.g. adding new pages or altering existing ones by creating an extension using specific plugin points (e.g. IController): https://docs.ckan.org/en/2.8/extensions/index.html
+
+
+## Next Gen
+
+The default (read) frontend for Next Gen is written in NodeJS using ExpressJS.
+
+For templating we use [Nunjucks][]. We chose Nunjucks because it is a Node port of Python's [Jinja2](http://jinja.pocoo.org/docs/) and Jinja2 is is the templating engine for CKAN Classic. Thus, using Nunjucks templating means templating is both familiar and existing Classic templates can be easily ported across.
+
+[Nunjucks]: https://mozilla.github.io/nunjucks/templating.html
+
+:::tip
+Note: it is easy to write your own Next Gen frontend in any language or framework you like -- much like the frontend of a headless CMS site. And obviously you can still reuse the patterns (and even code if you are using JS) from the default approach presented here.
+:::
 
 ## Installation
 
@@ -77,76 +100,26 @@ Read about WordPress plugin here: http://tech.datopian.com/frontend/plugins/#wp
 
 Read about CKAN Pages plugin here: http://tech.datopian.com/frontend/plugins/#ckan-pages
 
-## Extending frontend
+## Extending (Plugins)
 
-The *CKAN Next Gen* frontend can be extended and customized. We saw in the [Hello World](/frontend/theming/hello-world/) section how we can use a custom theme to override site html using a views template. In addition to html templates, we can add custom routes and middleware via a theme or plugin. Below we explain more about plugins, if you would like to read about themes, please, follow [this link](/frontend/theming/).
+The frontend can be extended and customized. We saw in the [Hello World](/frontend/theming/hello-world/) section how we can use a custom theme to override site html using a views template.
 
-### Plugins
+In addition to html templates, you can add custom routes, additional middleware and more via plugins (and themes). Read more about this in the [Plugins section][plugins].
 
-In some cases we may want functionality that applies to every request, regardless of what theme we are using.
+[plugins]: ./plugins/
 
-We can package such functionality as plugins.
+### Themes vs Plugins
 
-There are currently two types of plugins: user-defined plugins which we add to the `/plugins` directory, and npm plugins, which we install via npm.
+Themes and Plugins are actually very similar, for example you can create new routes or changes templates in both themes and plugins.
 
-#### User-defined Plugins
+When do you want to create a theme and when a plugin?
 
-Create a directory with the plugin's name in the `/plugins` directory.
+* Plugins: functionality that applies to every request, regardless of what theme we are using.
+* Themes: go for a theme if you are customizing the look and feel. You can also use the theme if you are e.g. adding routes and and you are just doing this for a single portal (and you don't intend to swap around between themes for this portal).
 
-```bash
-$ mkdir plugins/addheader
-```
+## Design - How it works
 
-Inside of this directory create a file called `index.js` with the following contents:
-
-```javascript
-module.exports = function(app) {
-  app.use((req, res, next) => {
-    res.header('x-my-custom-header', 1234)
-    next()
-  })
-}
-```
-
-If you have worked with express middleware, you may recognize this pattern. For more on working with middleware in Express, see the docs [here](https://expressjs.com/en/guide/writing-middleware.html).
-
-Add the plugin name to your `.env` file:
-
-```
-PLUGINS="addheader"
-```
-
-Run your application. Web responses from the frontend application should include your custom header.
-
-#### NPM Plugins
-
-If an express middleware plugin is available as a standalone module on npm you can install it as-is by installing the package via npm, and adding it to your PLUGINS variable in `.env`
-
-For example, we will install the cookie-parser plugin, alongside our addheader plugin.
-
-Install the npm package:
-```
-$ yarn add cookie-parser
-```
-
-Now add the plugins to your `.env`, alongside the custom `addheader` plugin we created above:
-```
-PLUGINS="addheader cookie-parser"
-```
-
-Cookie-parser will now be applied to all of your requests as express middleware!
-
-(For instance, you could take advantage of this in custom routes, etc)
-
-For more on express middleware: https://expressjs.com/en/guide/using-middleware.html.
-
-#### Built-in plugins
-
-When we worked in various projects, we started discovering that there are common things you need to develop. For example, most of the projects need a CMS solution (most commonly WordPress or CKAN Pages) or analytics system such as Google Analytics. So we've developed number of built-in plugins that you can use in your project and deliver features easily and reliably. Check out [this page](/frontend/plugins) for list of plugins and usage information.
-
-## How frontend app works?
-
-*All of the controller and views use the API module - they don’t see backend.*
+All of the controller and views MUST use the "API" modules, they don’t directly access the backend.
 
 ### API
 

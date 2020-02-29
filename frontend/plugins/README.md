@@ -1,12 +1,80 @@
----
-sidebar: auto
----
-
 # Frontend plugins
 
-All built-in plugins are located here - https://github.com/datopian/frontend-v2/tree/master/plugins.
+Plugins allow you to extend the functionality of the Frontend in all important ways:
 
-## What are built-in plugins in frontend app?
+* Adding new pages (or overriding existing ones)
+* Add or adjust authentication and authorization
+* Add functionality to every page e.g. add analytics
+* Overriding or adding data sources
+
+## Introduction
+
+Plugins are extremely easy. Remember the Next Gen frontend is just an express app.
+
+Plugins are therefore just vanilla Express!
+
+Plugin files are passed the Express `app` object which they can then extend with middleware or routes. If you aren't familiar with Express or Express middleware, you may  want to get up to speed: https://expressjs.com/en/guide/writing-middleware.html
+
+There are currently two types of plugins: "local" plugins which are added to the `/plugins` directory, and npm plugins, which we install via npm.
+
+There are also a variety of built-in plugins that come with the default system.
+
+## Local Plugins
+
+Create a directory with the plugin's name in the `/plugins` directory.
+
+```bash
+$ mkdir plugins/addheader
+```
+
+Inside of this directory create a file called `index.js` with the following contents:
+
+```javascript
+module.exports = function(app) {
+  app.use((req, res, next) => {
+    res.header('x-my-custom-header', 1234)
+    next()
+  })
+}
+```
+
+If you have worked with express middleware, you may recognize this pattern. For more on working with middleware in Express, see the docs [here](https://expressjs.com/en/guide/writing-middleware.html).
+
+Add the plugin name to your `.env` file:
+
+```
+PLUGINS="addheader"
+```
+
+Run your application. Web responses from the frontend application should include your custom header.
+
+## NPM Plugins
+
+If an express middleware plugin is available as a standalone module on npm you can install it as-is by installing the package via npm, and adding it to your PLUGINS variable in `.env`
+
+For example, we will install the cookie-parser plugin, alongside our addheader plugin.
+
+Install the npm package:
+```
+$ yarn add cookie-parser
+```
+
+Now add the plugins to your `.env`, alongside the custom `addheader` plugin we created above:
+```
+PLUGINS="addheader cookie-parser"
+```
+
+Cookie-parser will now be applied to all of your requests as express middleware!
+
+(For instance, you could take advantage of this in custom routes, etc)
+
+For more on express middleware: https://expressjs.com/en/guide/using-middleware.html.
+
+## Built-in Plugins
+
+There are a variety of built-in plugins that provide common functionality "out of the box". For example, most of the projects need a CMS solution (most commonly WordPress or CKAN Pages) or analytics system such as Google Analytics. So we've developed number of built-in plugins that you can use in your project and deliver features easily and reliably.
+
+All built-in plugins are located here - https://github.com/datopian/frontend-v2/tree/master/plugins.
 
 We constantly add something new but here is the list of currently available plugins:
 

@@ -1,19 +1,6 @@
 # Roadmap for "Next Gen"
 
-Summary
-
-* [x] Frontend (against Classic)
-* [ ] Harvesting (in progress)
-* [ ] DataLoad for DataStore (similar to DataLoad)
-* [ ] DataStore
-* [ ] Explorer
-  * [ ] Views as a backend object (with permissions)
-  * [ ] Admin UI for Views ...
-    * [ ] GeoViews
-    * [ ] Charts ...
-* [ ] Admin UI ...
-  * [ ] Import a Dataset ...
-  * [ ] ...
+Here's an overview of the implementation status of CKAN Next Gen. More granular information on particular features may sometimes be found on the individual feature page, for example for [Harvesting here](/harvesting/#design).
 
 ```mermaid
 graph LR
@@ -40,8 +27,8 @@ subgraph Frontend
 end
 
 subgraph Harvesting
-  start --> harvestarc[Harvesting Architecture]
-  harvestarc --> runner[Harvest Runner]
+  start --> harvestetl[Harvesting ETL + Runner]
+  harvestetl --> harvestui[Harvest UI]
 end
 
 subgraph "Admin UI"
@@ -73,14 +60,25 @@ subgraph Explorer
 end
 
 subgraph Organizations
-  orgs
+  start --> orgs
 end
 
-classDef done fill:lightgreen,stroke:#333,stroke-width:4px;
-classDef next fill:#f9f,stroke:#333,stroke-width:4px;
+subgraph Key
+  done[Done]
+  nearlydone[Nearly Done]
+  inprogress[In Progress]
+  next[Next Up]
+end
 
-class themefe done;
-class dataload,permsserv next;
+classDef done fill:#21bf73,stroke:#333,stroke-width:3px;
+classDef nearlydone fill:lightgreen,stroke:#333,stroke-width:3px;
+classDef inprogress fill:orange,stroke:#333,stroke-width:2px;
+classDef next fill:pink,stroke:#333,stroke-width:1px;
+
+class done,themefe,previews,explorer,harvestetl done;
+class nearlydone,authfe,harvestui nearlydone;
+class inprogress,dataload inprogress;
+class next,permsserv next;
 ```
 
 <mermaid />

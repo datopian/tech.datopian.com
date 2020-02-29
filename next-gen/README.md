@@ -50,7 +50,7 @@ ASIDE: decoupled microservices reflect the "unix" way of building networked appl
 
 In summary, the Next Gen approach provides an essential foundation for the continuing growth and evolution of CKAN as a platform for building world-class data portal and data management solutions.
 
-### Next Gen Components Work with CKAN Classic, Evolution not Revolution
+## Evolution not Revolution: Next Gen Components Work with CKAN Classic
 
 *Gradual evolution from CKAN classic (keep what is working, keep your investments, incremental change)*
 
@@ -58,18 +58,22 @@ Next Gen components are specifically designed to work with CKAN "Classic" in its
 
 ASIDE: we're fortunate that CKAN Classic itself was ahead of its time in its level of "service-orientation". From the start, it had a very rich and robust API and it has continued to develop this with almost almost all functionality exposed via the API. It is this rich API and well factored design that makes it relatively straightforward to evolve CKAN in its current "Classic" form towards Next Gen.
 
-### Many New Features plus Existing Functionality Improved
+## New Features plus Existing Functionality Improved
 
-In addition to its architecture, Next Gen provides a rapidly growing set of improvements and extensions of existing CKAN functionality. For example:
+In addition to its architecture, Next Gen provides a variety of improvements and extensions to CKAN Classic's functionality. For example:
 
-* Theming and Frontend Customization: theming and customizing CKAN's frontend has got radically easier and quicker.
-* DMS + CMS unified: integrate the full power of a modern CMS into your data portal and have one unified interface for data and content.
-* Data Explorer: the existing CKAN data preview/explorer has been completely rewritten in modern React-based Javascript (ReclineJS is now 7y old!)
-* Dashboards: build rich data-driven dashboards and integrate
-* Harvesting: simpler, more powerful harvesting built on modern ETL
+* Theming and Frontend Customization: theming and customizing CKAN's frontend has got radically easier and quicker. See [Frontend section &raquo;][frontend]
+* DMS + CMS unified: integrate the full power of a modern CMS into your data portal and have one unified interface for data and content. See [Frontend section &raquo;][frontend]
+* Data Explorer: the existing CKAN data preview/explorer has been completely rewritten in modern React-based Javascript (ReclineJS is now 7y old!). See [Data Explorer section &raquo;][explorer]
+* Dashboards: build rich data-driven dashboards and integrate. See [Dashboards section &raquo;][dashboards]
+* Harvesting: simpler, more powerful harvesting built on modern ETL. See [Harvesting section &raquo;][harvesting]
 
 And each of these features is easily deployed into an existing CKAN solution!
 
+[frontend]: /frontend/
+[explorer]: /data-explorer/
+[dashboards]: /dashboards/
+[harvesting]: /harvesting/
 
 ## Appendix: Monolithic vs Microservice architecture
 

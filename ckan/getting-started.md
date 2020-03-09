@@ -39,6 +39,13 @@ Create the `docker` group: `sudo groupadd docker`
 
 Add your user to the `docker` group: `sudo usermod -aG docker $USER`  
 
+Change the storage directory ownership from `root` to `ckan` by adding the commads below to the `ckan/Dockerfile.dev`
+
+```
+RUN mkdir -p /var/lib/ckan/storage/uploads
+RUN chown -R ckan:ckan /var/lib/ckan/storage
+```
+
 At this point, you can log out and log back in for these changes to apply. You can also use the command `newgrp docker` to temporarily enable the new group for the current terminal session.
 :::
 

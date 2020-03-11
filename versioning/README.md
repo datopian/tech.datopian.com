@@ -72,6 +72,10 @@ For now definitely CKAN Classic MetaStore
 * Gitea
 * Azure Git Repos https://azure.microsoft.com/en-us/services/devops/repos/
 
+## Research
+
+For research on how to build the next generation versioning solution see the [Versioning Research page &raquo;](./research.html)
+
 ## References
 
 * [Git (and Github) for Data - Rufus Pollock - blog.okfn.org - July 2013](https://blog.okfn.org/2013/07/02/git-and-github-for-data/)

@@ -272,3 +272,5 @@ NB: this is actually untrue about Git-LFS. Git LFS server could be backed by any
   * Powered by gogs
   * Classic somewhat crude academic effort i suspect
   * Uses git, git-annex and gogs
+
+<mermaid />

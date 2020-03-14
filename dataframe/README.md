@@ -134,23 +134,19 @@ A list of existing libraries.
 
 *Note: when we started research on this in 2015 there were none that we could find so a good sign that they are developing.*
 
-* https://github.com/StratoDem/pandas-js 280⭐️ - last update sep 2017
-* https://github.com/fredrick/gauss 428⭐️ - last update 2015 - JavaScript statistics, analytics, and data library - Node.js and web browser ready
-* https://github.com/Gmousse/dataframe-js - last update in early 2019 but changes seemed minor
-  * Started July 2016
+* https://github.com/StratoDem/pandas-js 280⭐️ - INACTIVE last update sep 2017
+* https://github.com/fredrick/gauss 428⭐️ - INACTIVE last update 2015 - JavaScript statistics, analytics, and data library - Node.js and web browser ready
+* https://github.com/Gmousse/dataframe-js 283⭐️ - INACTIVE? started in 2016 and largely inactive since 2018 (though minor update in early 2019)
   * dataframe-js provides another way to work with data in javascript (browser or server side) by using DataFrame, a data structure already used in some languages (Spark, Python, R, ...).
-  * v1.1.1 as Nov 2016
-  * 12 ⭐️ (now 258 :star: as of oct 2019)
   * Comment: support browser and node etc. Pretty well structured. A long way from Pandas still.
-* https://github.com/osdat/jsdataframe
-  * Started: March 6 2016
+* https://github.com/osdat/jsdataframe 26⭐️ - INACTIVE started in 2016 and not much activity since 2017. Seems fairly R oriented (e.g. melt)
   * Jsdataframe is a JavaScript data wrangling library inspired by data frame functionality in R and Python Pandas. Vector and data frame constructs are implemented to provide vectorized operations, summarization methods, subset selection/modification, sorting, grouped split-apply-combine operations, database-style joins, reshaping/pivoting, JSON serialization, and more. It is hoped that users of R and Python Pandas will find the concepts in jsdataframe quite familiar.
-  * 7 :star:
-* https://github.com/misoproject/dataset 1.2k ⭐️ - now abandonware as no development since 2014, site is down (and maintainers seem unresponsive) (was a nice project!)
-* https://github.com/walnutgeek/wdf - 1 ⭐️  "web data frame" last commit in 2014 http://walnutgeek.github.io/wdf/DataFrame.html
+* https://github.com/maxto/ubique 91⭐️ - ABANDONED last update in 2015 and stated as discontinued. A mathematical and quantitative library for Javascript and Node.js
+* https://github.com/misoproject/dataset 1.2k⭐️ - now abandonware as no development since 2014, site is down (and maintainers seem unresponsive) (was a nice project!)
 
 Other ones (not very active or without much info):
 
+* https://github.com/walnutgeek/wdf - 1⭐️  "web data frame" last commit in 2014 http://walnutgeek.github.io/wdf/DataFrame.html
 * https://github.com/cjroth/dataframes
 * https://github.com/jpoles1/dataframe.js
 * https://github.com/danrobinson/dataframes
@@ -159,3 +155,4 @@ Other ones (not very active or without much info):
 
 * https://stackoverflow.com/questions/30610675/python-pandas-equivalent-in-javascript/43825646 (has a community wiki section)
 * https://www.man.com/maninstitute/short-review-of-dataframes-in-javascript (2018) - pretty good review in june 2018. As it points there is no clear solution.
+

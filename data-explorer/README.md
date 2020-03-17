@@ -12,6 +12,8 @@ If you have improvements, [submit a merge request](https://gitlab.com/datopian/t
 
 # Data Explorer
 
+The Datopian Data Explorer is a React single page application and framework for creating and displaying rich data explorers (think Tableau-lite). Use stand-alone or with CKAN. For CKAN it is a drop-in replacement for ReclineJS in CKAN Classic.
+
 ![Data Explorer](../img/data-explorer/data-explorer.png)
 > [Data Explorer for the City of Montreal](http://montreal.ckan.io/ville-de-montreal/geobase-double#resource-G%C3%83%C2%A9obase%20double)
 
@@ -75,9 +77,22 @@ $ yarn cosmos
 
 ## Configuration
 
+[`data-datapackage` attribute](#add-data-explorer-tags-to-the-page-markup) may influence how the element will be displayed. It can be created from a [datapackage descriptor](https://frictionlessdata.io/specs/data-package/).
+
 ### Fixtures
 
 Until we have better documentation on Data Explorer settings, use the [Cosmos fixtures](https://gitlab.com/datopian/data-explorer/blob/master/__fixtures__/with_widgets/geojson_simple.js) as an example of how to instantiate / configure the Data Explorer.
+
+### Serialized state 
+
+`store->serializedState` is a representation of the application state _without fetched data_
+A data-explorer can be "hydrated" using the serialized state, it will refetch the data, and will render in the same state it was exported in
+
+### Share links
+
+Share links can be added in `datapakage.resources[0].api` attribute.
+
+There is common limit of up 2000 characters on URL strings. Our share links contain the entire application store tree, which is often larger than 2000 characters, in which the application state cannot be shared via URL. Thems the breaks.
 
 ## Translations
 
@@ -204,6 +219,22 @@ In `/themes/your-theme/views/your-template-wth-explplorer.html`
 <!-- End Data Explorer CSS -->
 ```
 
+### Configure datapackage
+
+```htmlmixed=
+<!-- where datapackage is -->
+<srcipt>
+  const datapackage = {
+    resources: [{resource}], // single resource for this view
+    views: [...], // can be 3 views aka widgets
+    controls: { 
+      showChartBuilder: true,
+      showMapBuilder: true 
+    }
+  }
+</srcipt>
+```
+
 ### Add data-explorer tags to the page markup
 
 Each Data Explorer instance needs a corresponding `<div>` in the DOM. For example:
@@ -230,3 +261,9 @@ Note that each container div needs the following attributes:
 *NOTE* that the scripts should be loaded _after the container divs are in the DOM, typically by placing the `<script>` tags at the bottom of the footer_
 
 See [a real-world example here](https://gitlab.com/datopian/clients/ckan-montreal/blob/master/views/showcase.html)
+
+## New builds
+
+In order to build files for production, run `npm run build` or `yarn build`.
+
+You need to have **node version >= 12** in order to build files. Otherwise a 'heap out of memory error' gets thrown.

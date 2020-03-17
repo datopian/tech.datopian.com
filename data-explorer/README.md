@@ -22,6 +22,7 @@ If you have improvements, [submit a merge request](https://gitlab.com/datopian/t
 * Explore tabular, map, PDF, and other types of data
 * Create map views of tabular data using the [Map Builder](#map-builder)
 * Create charts and graphs of tabular data using [Chart Builder](#chart-builder)
+* Easily build SQL queries for Data Store API using graphical interface of [Datastore Query Builder](#datastore-query-builder)
 
 ## Components
 

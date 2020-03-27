@@ -149,10 +149,9 @@ import ru from './locales/ru/translation.json'
 5. create a pull request for datapackage-views-js
 6. get the new datapackage-views-js version after merging (e.g. 1.3.0)
 7. clone data-explorer
-8. upgrade the data-explorer's datapackage-views-js dependency with the new version
-  ```bash
-  yarn upgrade @datopian/datapackage-views-js@^1.3.0
-  ```
+8. upgrade the data-explorer's datapackage-views-js dependency with the new version:
+  a. update package.json
+  b. run `yarn install`
 9. add the component's translations path to Data Explorer:
 ```javascript
 import en from './locales/en/translation.json'

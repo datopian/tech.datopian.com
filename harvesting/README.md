@@ -79,7 +79,7 @@ This extension stores configuration in the main DB and harvesters run off a queu
 
 ### Limitations 
 
-The main problem is that ckanext-harvest builds its own bespoke mini-ETL system and builds this into CKAN. A bespoke system is less good, harder to maintain etc and building it in makes CKAN more bulky (conceptually, resource wise etc).
+The main problem is that ckanext-harvest builds its own bespoke mini-ETL system and builds this into CKAN. A bespoke system is less powerful and flexible, harder to maintain etc and building it in makes CKAN more bulky (conceptually, resource wise etc) and creates unnecessary coupling.
 
 Good: Using CKAN as config store and having a UI for that
 
@@ -91,7 +91,7 @@ Not so good:
   * Dependent on CKAN upgrade cycles (tied via code rather than service API)
   * CKAN is more complex
 * Bespoke ETL system is both less powerful and harder to maintain
-  * For example, the Runner is bespoke to CKAN rather than using something standard like e.g. AirFlow
+  * For example, the Runner is bespoke to CKAN rather than using something standard like e.g. Airflow
   * Rigid structure (gather, fetch, import) which may not fit many situations e.g. data.json harvesting (one big file with many datasets where everything done in gather) or where dependencies between stages
 * Logging and reporting is not great and hard to customize (logs into CKAN)
 * Maintenance Status - Some maintenance but not super it looks like but quite a lot outstanding (as of Aug 2019):
@@ -104,6 +104,8 @@ Not so good:
 Next Gen harvesting decouples the core "ETL" part of harvesting into a small, self-contained microservice that is runnable on its own and communicates with the rest of CKAN over APIs. This is consistent with the general [next gen microservice approach](/next-gen/).
 
 The design allows the Next Gen Harvester to be used with both CKAN Classic and CKAN Next Gen.
+
+Perhaps most important of all, the core harvester can use standard third-party patterns and tools to make it both more powerful, easier to maintain and easier to use. For example, it can use Airflow for its runner rather than a bespoke system built into CKAN.
 
 ### Features
 
@@ -236,6 +238,76 @@ datapkg --> write
 write --> ckan
 ```
 
+#### Pipeline example detailed
+
+```mermaid
+graph TD
+
+download[Download data]
+fetch[Fetch]
+validate[Validate data]
+get_previous_datasets(Get previous harvested data)
+save_download_results(Save as Data Package)
+compare(Compare)
+save_compare_results(Save compare results)
+write_destination(Write to destination)
+save_previous_data(Save as Data Package)
+save_log_report(Save final JSON log)
+federal[Federal]
+non_federal[Non Federal]
+dataset_adapter[Dataset Adapter]
+resource_adapter[Resource Adapter]
+
+classDef green fill:lightgreen;
+class download,fetch,validate,get_previous_datasets,save_download_results,compare,save_compare_results,write_destination,save_previous_data,save_log_report,federal,non_federal,dataset_adapter,resource_adapter green;
+
+subgraph "Harvest source derivated (data.json, WAF, CSW)"
+  download
+  save_download_results
+end
+
+subgraph "Harvester core"
+  fetch
+  subgraph Validators
+    validate
+    federal
+    non_federal
+  end
+  subgraph Adapters
+    dataset_adapter
+    resource_adapter
+  end
+end
+
+subgraph "Harvest Source base class"
+  save_download_results
+  compare
+  save_compare_results
+  save_log_report
+end
+
+subgraph "Harvest Destination"
+  get_previous_datasets
+  write_destination
+  save_previous_data
+end
+
+download -.transform to general format.-> save_download_results
+save_download_results --> compare
+compare --> save_compare_results
+save_compare_results --> dataset_adapter
+dataset_adapter --> resource_adapter
+resource_adapter --> write_destination
+
+get_previous_datasets -.transform to general format.-> save_previous_data
+save_previous_data --> compare
+
+compare -.Logs.-> save_log_report
+download --> fetch
+fetch --> validate
+validate --> download
+```
+
 ### Runner
 
 We use Apache Airflow for the Runner.
@@ -287,12 +359,12 @@ Config in CKAN MetaStore, ETL in new System
 **Pulling Config**
 
 * Define a spec format for sources
-* Script to convert this to AirFlow DAGs
-* Script to convert CKAN Harvest sources into the spec and hence into AirFlow DAGs
+* Script to convert this to Airflow DAGs
+* Script to convert CKAN Harvest sources into the spec and hence into Airflow DAGs
 
 **Showing Status and Errors**
 
-* We create a viewer from AirFlow status => JS SPA
+* We create a viewer from Airflow status => JS SPA
 * and then embed in CKAN Classic Admin UI
 
 ```mermaid

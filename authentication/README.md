@@ -84,6 +84,8 @@ When I'm using the CLI app (or anything else outside browser), I want to be able
 
 ## CKAN 2 (CKAN Classic)
 
+### Basic CKAN authentication
+
 In classic system, we have basic CKAN authentication. Below is how registration page looks like:
 
 ![CKAN Classic register page](../img/ckan-register.png)
@@ -94,8 +96,13 @@ Registration flow in CKAN Classic:
 sequenceDiagram
 
   user->>ckan: fill in the form and submit
-  ckan->>ckan: validate inputs
-  ckan->>db: write a row in 'users' table
+  ckan->>ckan: check access (if user can create user)
+  ckan->>ckan: parse params
+  ckan->>ckan: check recaptcha
+  ckan->>ckan: call 'user_create' action
+  ckan->>ckan.model: add a new user into db
+  ckan->>ckan: create an activity
+  ckan->>ckan: log the user
   ckan->>user: redirect to dashboard
 ```
 
@@ -132,10 +139,6 @@ sequenceDiagram
   ckan.oauth->>ckan.oauth: add cookies
   ckan.oauth->>user: redirect to dashboard
 ```
-
-### Limitations
-
-Implementing SSO in CKAN Classic can be complicated. The available options of extensions are very limited, e.g., only one that is maintained - https://github.com/conwetlab/ckanext-oauth2, however, it's quite risky to rely on that single solution. It looks likely that we will need to develop our own CKAN Classic extension to be able to implement various custom/additional requirements.
 
 ## CKAN 3 (Next Gen)
 

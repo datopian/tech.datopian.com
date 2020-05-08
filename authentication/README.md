@@ -142,15 +142,23 @@ sequenceDiagram
 
 ## CKAN 3 (Next Gen)
 
-### CKAN Next Gen as OAuth client
+We have considered some of popular and/or modern solutions for identity management that we can implement in CKAN 3:
 
-- PassportJS (node module for SSO via OAuth and OpenID) - http://www.passportjs.org/
-  - Providers: google, github, facebook, twitter, ... (supports many more options)
-- Auth (separate service that is OAuth client + storage of user accounts) - https://github.com/datopian/auth
-  - Providers: github and google (but adding more should be relatively simple)
-- We also can implement it per provider but it would be painful, e.g., each provider has slightly different implementations.
+|  | PassportJS | Auth0 | AuthN | ORY/Kratos | Datopian/auth |
+|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|-------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| Architecture | Node module for Express app | Separate service | Separate service | Separate service | Separate service |
+| Self-service account management | Couldn't find any info | fully supported | update profile, changing password | update profile, add/update email addresses, and changing passwords | Can only change username at the moment. No docs about deleting. |
+| Account administration | Same | fully supported | update, lock, unlock, archive, import accounts | create, read, delete, import, update details | create, read, delete |
+| Docs | ok docs: 5/10 | great docs: 9/10 | generally good docs: 7/10 | generally great docs with some pages missing/WIP: 8/10 | Limited but being added: 5/10 |
+| Identity types | N/A | it uses roles instead | N/A | Possible to have several identity types and schemas (eg, user vs admin vs service). | N/A |
+| Username / Email / phone number & Password | Basic feature is available | supported | Supported with some additional feature: username policy - restricting to specific domain and/or email is username | Very flexible, eg, we can have several identifiers username + email. This is something we missed in CKAN Classic. | N/A |
+| Single Sign-on | 500+ different providers including Google, Github, Facebook etc. | Many options available out of the box | Google, Github, Facebook and Discord | Google and GitHub out of the box. | Google and Github out of the box. |
+| Adding a new SSO provider | No need since almost all possible providers can be added as plugins. However, adding custom provider might require some effort. | No need | Not clear how to add another provider. | Adding any OAuth provider is easy. E.g., adding Facebook is requires adding some more configs. | Requires implementation (?) |
+| Passwordless | Supported | Supported | Supported | Mentioned as supported but probably WIP | N/A |
 
-### Sequence diagram showing the auth flow
+### Existing work
+
+In datahub.io we have implemented SSO via Google/Github. Below is sequence diagram showing the auth flow with datopian/auth + frontend express app (similar to CKAN 3 frontend):
 
 ```mermaid
 sequenceDiagram

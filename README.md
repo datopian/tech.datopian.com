@@ -18,9 +18,9 @@ footer: Copyright © 2016-present Datopian
     </p>
   </div>
   <div class="feature">
-    <h2>CKAN Next Gen</h2>
+    <h2>CKAN Architectures</h2>
     <p>
-      <a href="/next-gen/">Read more &raquo;</a>
+      <a href="/ckan-architectures/">Read more &raquo;</a>
     </p>
   </div>
   <div class="feature">

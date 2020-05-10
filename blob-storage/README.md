@@ -5,9 +5,13 @@ Blob Storage can be provided via:
 * Local file system
 * Cloud storage
 
-## CKAN 2 (Classic)
 
-TODO: discussion of ckanext-cloudstorage
+## Introduction
+
+* Features
+* Key Job stories (if lots have an appendix for full job stories)
+* Key components
+
 
 ## Direct to Cloud Upload
 
@@ -46,7 +50,11 @@ Questions
 * And do you enforce that from your app
   * Request for token needs to include the destination file path
 
-## Next Gen
+## CKAN 2 (Classic)
+
+TODO: discussion of current FileStore and ckanext-cloudstorage
+
+## CKAN 3 (Next Gen)
 
 * datahub.io has full implementation this via BitStore
 * working client usage code in DataHub JS client SDK `push` method: https://github.com/datopian/datahub-client/blob/master/lib/utils/datahub.js#L33

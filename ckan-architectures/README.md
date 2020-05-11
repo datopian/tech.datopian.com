@@ -353,3 +353,5 @@ SQLite | Database | | Unknown use. Possibly a worker dependency.
 ### Next Gen
 
 Prior to this page, we had one called "Next Gen." It has intersections with this article, although it focuses more on the benefits of microservices. The page still exists in [/architectures-of-ckan/next-gen](./next-gen.md)
+
+<mermaid />

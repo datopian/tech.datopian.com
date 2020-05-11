@@ -146,6 +146,16 @@ We have considered some of popular and/or modern solutions for identity manageme
 
 https://docs.google.com/spreadsheets/d/1qXZyzAbA2NtpnoSZRJ2K_EbaWJnvxkrKVzQ_2rD5eQw/edit#gid=0
 
+Shortlist based on scores from the spreadsheet above:
+
+- Auth0
+- AuthN
+- Ory/Kratos
+
+Recommendation:
+
+All projects from the shortlist can be considered for a project. It worth to give a try for each of them and find out what works best for your project's needs. Testing out Auth0 should be straightforward and take less than an hour. AuthN and Ory/Kratos would require to build docker images and to run it locally but overall it should not be time consuming.
+
 ### Existing work
 
 In datahub.io we have implemented SSO via Google/Github. Below is sequence diagram showing the auth flow with datopian/auth + frontend express app (similar to CKAN 3 frontend):

@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "markdown-it-footnote": "",
-    "mermaid": "^8.1.0"
+    "mermaid": "8.1.0"
   }
 }

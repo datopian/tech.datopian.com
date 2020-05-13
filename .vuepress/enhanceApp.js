@@ -1,7 +1,7 @@
 const redirectList= [
   {
     path: "/next-gen/",
-    redirect: "/ckan-architectures/next-gen/"
+    redirect: "/ckan-v3/"
   }
 ];
 

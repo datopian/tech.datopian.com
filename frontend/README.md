@@ -4,89 +4,34 @@ The (read) frontend component covers all of the traditional "read" frontend func
 
 This page is primarily about the Next Gen approach to the Frontend, however we provide a brief overview of the Classic approach at the start.
 
-## Key Features
+## Features
 
-As Job Stories
+* **Home Page** When visiting the data portal's home page, I want to see an overview of the portal (e.g. datasets) so that I understand if it's relevant for me.
+* **Search/Browse the Catalog** When looking for dataset, I want to search for specific strings (keywords, topics etc.) so that I can find it quickly, if available.  
+* **Dataset Showcase** When considering using a dataset I want to see a description and key information (title etc) and (if possible) data preview so that I understand what it contains and decide if I want to use it.
+* **Organization and User Profiles**
+* **Groups/Topics/Collections**
+* **Custom additional pages**
 
-Check https://gitlab.com/datopian/tech/kb/-/issues/21
+Developer Experience
 
-### Home Page
-
-When visiting the data portal's home page,
-I want to see an overview of the portal (e.g. datasets)
-so that I understand if it's relevant for me.
-
-### Search/Browse the Catalog
-
-When looking for dataset,
-I want to search for specific strings (keywords, topics etc.)
-so that I can find it quickly, if available.
-
-### Dataset Showcase
-
-When considering using a dataset I want to
-see a description and key information (title etc) and (if possible) data preview
-so that I understand what it contains and decide if I want to use it.
-
-### Organization and Profile pages
-
-### Groups/Topics
-
-### Other pages as needed
-
-## Developer Experience (DX) Features
-
-### Custom Home Page
-
-When building a data portal home page I want to be able to customize it completely, integrating different widgets so that I have a great landing experience for users
-
-### Simple Theming
-
-**When working with a new stakeholder,
-I want to have a style and appearence specific to the project
-so that I can present stakeholder's brand to their users.**
-
-### Rich customization (new routes, major page changes)
-
-**When working on a data portal,
-I want to add frontend functionality to existing templates
-so that I can build upon past work and still extend the project to my own needs.**
-
-When building up a new frontend I want to quickly add standard pages and components (and tweak them) so that I have a basic functional site quickly
-
-**When working on a data portal,
-I want to build it using Javascript
-so that I can rely on the latest frontend technologies (frameworks/libraries).**
-
-**When delivering a data portal,
-I want to quickly and easily deploy changes to my frontend
-so that I can reduce the feedback loop.**
+* Custom Home Page: When building a data portal home page I want to be able to customize it completely, integrating different widgets so that I have a great landing experience for users
+* Theming (simple): **When working on a new site, I want to style it for the project so that it has a distintive look and feel aligned to the client's needs
+* Rich customization (new routes, major page changes)
+  * **When working on a data portal, I want to add frontend functionality to existing templates so that I can build upon past work and still extend the project to my own needs.**
+  * When building up a new frontend I want to quickly add standard pages and components (and tweak them) so that I have a basic functional site quickly
+* Use common languages and tooling: * **When working on a data portal, I want to build it using Javascript so that I can rely on the latest frontend technologies (frameworks/libraries).**
+* Deploy quickly: **When delivering a data portal, I want to quickly and easily deploy changes to my frontend so that I can reduce the feedback loop.**
 
 ## CKAN Classic
 
 The Frontend is implemented in the core app spread across various controllers, templates etc. For extending/theming a template, you have to write an extension (`ckanext-mysite`), and either override or inherit from the default files.
 
-### Home page
-
-The CKAN default template shows:
-
-* Site title
-* Search element
-* The latest organizations.
-* The latest groups.
-
-In order to change this, we need to create a CKAN extension and modify templates etc.
-
-### Search/Browse the Catalog
-
-Already available in CKAN Classic (v2) with ability to search by facets etc., see an example here - https://demo.ckan.org/dataset
-
-### Dataset Showcase
-
-It is already available by default, for example:
-
-* Dataset page - https://demo.ckan.org/dataset/dataset_389383
-* Resource page - https://demo.ckan.org/dataset/dataset_389383/resource/331f57d1-74fc-46ad-9885-50eb26dde13a
+* Home page. The CKAN default template shows: Site title, Search element, The latest organizations, The latest groups. In order to change this, we need to create a CKAN extension and modify templates etc.
+* Search/Browse the Catalog Already available in CKAN Classic (v2) with ability to search by facets etc., see an example here - https://demo.ckan.org/dataset
+* Dataset Showcase. It is already available by default, for example:
+  * Dataset page - https://demo.ckan.org/dataset/dataset_389383
+  * Resource page - https://demo.ckan.org/dataset/dataset_389383/resource/331f57d1-74fc-46ad-9885-50eb26dde13a
 
 In CKAN Classic we have a dataset (package) and resource pages:
 

@@ -8,20 +8,21 @@ This page is primarily about the Next Gen approach to the Frontend, however we p
 
 * **Home Page** When visiting the data portal's home page, I want to see an overview of the portal (e.g. datasets) so that I understand if it's relevant for me.
 * **Search/Browse the Catalog** When looking for dataset, I want to search for specific strings (keywords, topics etc.) so that I can find it quickly, if available.  
-* **Dataset Showcase** When considering using a dataset I want to see a description and key information (title etc) and (if possible) data preview so that I understand what it contains and decide if I want to use it.
-* **Organization and User Profiles**
-* **Groups/Topics/Collections**
+* **Dataset Showcase** When exploring a dataset I want to see a description and key information (title etc) and (if possible) data preview and download options so that I understand what it contains and decide if I want to use it or download it.
+* **Organization and User Profiles**: I want to see the data published by a particular team, organization or user so that I can find the data I want or understand what a particular group are doing
+* **Groups/Topics/Collections**: I want to browse datasets by topic so that I can find the data I want or find unexpected results
 * **Custom additional pages**
+* **Permissions**: I want to restrict access to some of the above based on a user's role and memberships so that I can share data with only the appropriate people
 
 Developer Experience
 
-* Custom Home Page: When building a data portal home page I want to be able to customize it completely, integrating different widgets so that I have a great landing experience for users
-* Theming (simple): **When working on a new site, I want to style it for the project so that it has a distintive look and feel aligned to the client's needs
-* Rich customization (new routes, major page changes)
-  * **When working on a data portal, I want to add frontend functionality to existing templates so that I can build upon past work and still extend the project to my own needs.**
+* **Theme** (simple): When working on a new site, I want to style it for the project so that it has a distintive look and feel aligned to the client's needs
+  * **Customize Home Page**: When building a data portal home page I want to be able to customize it completely, integrating different widgets so that I have a great landing experience for users
+* **Rich customization** (new routes, major page changes)
+  * When working on a data portal, I want to add frontend functionality to existing templates so that I can build upon past work and still extend the project to my own needs.
   * When building up a new frontend I want to quickly add standard pages and components (and tweak them) so that I have a basic functional site quickly
-* Use common languages and tooling: * **When working on a data portal, I want to build it using Javascript so that I can rely on the latest frontend technologies (frameworks/libraries).**
-* Deploy quickly: **When delivering a data portal, I want to quickly and easily deploy changes to my frontend so that I can reduce the feedback loop.**
+* **Use common languages and tooling**: When working on a data portal, I want to build it using Javascript so that I can rely on the latest frontend technologies (frameworks/libraries).
+* **Deploy quickly**: When delivering a data portal, I want to quickly and easily deploy changes to my frontend so that I can reduce the feedback loop.
 
 ## CKAN Classic
 
@@ -30,32 +31,24 @@ The Frontend is implemented in the core app spread across various controllers, t
 * Home page. The CKAN default template shows: Site title, Search element, The latest organizations, The latest groups. In order to change this, we need to create a CKAN extension and modify templates etc.
 * Search/Browse the Catalog Already available in CKAN Classic (v2) with ability to search by facets etc., see an example here - https://demo.ckan.org/dataset
 * Dataset Showcase. It is already available by default, for example:
-  * Dataset page - https://demo.ckan.org/dataset/dataset_389383
-  * Resource page - https://demo.ckan.org/dataset/dataset_389383/resource/331f57d1-74fc-46ad-9885-50eb26dde13a
-
-In CKAN Classic we have a dataset (package) and resource pages:
-
-- A dataset (package) page - this is where we can see summary of resources and package level metadata such as package title, description, license etc.
-- A resource page - showcase of individual resource including views etc.
-
-Links to source code:
-
-- Package controller - https://github.com/ckan/ckan/blob/master/ckan/controllers/package.py
-- Package view module - https://github.com/ckan/ckan/blob/master/ckan/views/dataset.py
-- Resource view module - https://github.com/ckan/ckan/blob/master/ckan/views/resource.py
-- Package and resource templates - https://github.com/ckan/ckan/tree/master/ckan/templates/package
+  * Dataset page - https://demo.ckan.org/dataset/dataset_389383 - a summary of resources and package level metadata such as package title, description, license etc.
+    * Package controller - https://github.com/ckan/ckan/blob/master/ckan/controllers/package.py
+    * Package view module - https://github.com/ckan/ckan/blob/master/ckan/views/dataset.py
+  * Resource page - https://demo.ckan.org/dataset/dataset_389383/resource/331f57d1-74fc-46ad-9885-50eb26dde13a - showcase of individual resource including views etc.
+    * Resource view module - https://github.com/ckan/ckan/blob/master/ckan/views/resource.py
+    * Package and resource templates - https://github.com/ckan/ckan/tree/master/ckan/templates/package
 
 ### Developer Experience (DX)
 
 Docs - https://docs.ckan.org/en/2.8/theming/index.html
+
 * You need to do it in a new CKAN extension and follow recommended standards. There are no easy ways of reusing code from other projects, since most often they are not written in the required languages/frameworks/libraries.
 * Nowdays, the best to do it is to create an extension for each of the components.
 * There's no easy documented path for achieving this.
 * The easier way is to deploy a complete CKAN v2 stack using Docker Compose.
 
 - Theming - https://docs.ckan.org/en/2.8/theming/index.html
-- Create new helper functions
-https://docs.ckan.org/en/2.8/theming/templates.html#template-helper-functions
+- Create new helper functions https://docs.ckan.org/en/2.8/theming/templates.html#template-helper-functions
 
 ### Theming
 
@@ -73,7 +66,7 @@ There are two main issues:
 * Theming and frontend work is slow, painful and difficult for standard frontend ddvs because a) it requires installing and interacting with the full (complex) CKAN b) you use very specific frontend stack (python etc rather than javascript) c) template spaghetti (the curse of a million "slots") (did inheritance rather tha composition)
 * There is too much coupling of frontend and backend e.g. logic layer doing dictize. Poor separation of concerns.
 
-Here we're consolidating all challenges we have identified:
+In more detail:
 
 * Theming - styling, templating:
   * It uses Bootstrap 3 (out-dated). An upgrade takes significant amount of effort because all the existing themes rely, or may rely, on it.

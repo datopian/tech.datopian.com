@@ -155,3 +155,9 @@ To make your dashboard live on the data portal, you need to:
 2. Wait until your work gets reviewed and merged into "master" branch.
 3. Implement any requested changes in your work.
 4. Done! Your dashboard is now available at https://domain.com/dashboards/your-dashboard-name
+
+
+## Research
+
+* http://dashing.io/ - no longer maintained as of 2016
+  * Replaced by https://smashing.github.io/

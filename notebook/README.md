@@ -2,9 +2,7 @@
 
 Our lab notebook. Our informal thoughts. Our very raw blog.
 
-## 2020-05-16 @rufuspollock
-
-Reading about Go modules and dependency management (in inquiry for data package management)
+## Go modules and dependency management (re data package management) 2020-05-16 @rufuspollock
 
 Generally Go does stuff well. They also punted on dependency management initially. First, you just installed a url it was up to you to manage your depedencies. Then there was a period of chaos as several package/dependency managers fought it out (GoDeps etc). Then, ~ 2018 the community came together led by Russ Cox and came up with a very solid proposal which is official as of 2019.
 

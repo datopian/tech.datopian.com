@@ -180,31 +180,52 @@ sequenceDiagram
 How does this conceptual framework map to an evolution of CKAN 2 to CKAN 3?
 
 ```mermaid
-graph LR
+graph TD
 
-id[Identity Determination]
-persist[Identity Persistence]
-accounts[Accounts Storage]
-accountui[Account Management]
-logout[Logout]
-login[Login]
-
-subgraph "Third Party"
-  id
+subgraph "CKAN Classic"
+  Signup["Classic signup, e.g., self-service or by sysadmin"]
+  Login["Classic login if you're using the classic UI"]
+  OAuth["OAuth2(ORY/Hydra)"]
 end
 
-subgraph "CKAN 3"
-  persist
-  login
-  logout
-  accountui
+subgraph "Authentication service (ORY/Kratos)"
+  SSO["Social Sign-On: Github, Google, Facebook"]
+  CC["CKAN Classic"]
+  Admins["Sysadmin users"]
+  Curators["Data curators"]
+  Users["Regular users"]
 end
 
-subgraph "CKAN 2"
-  accounts
+subgraph "Frontend v3"
+  SignupFront["Signup via Kratos"]
+  LoginFront["Login via Kratos"]
 end
+
+SignupFront --"Regular user"--> SSO
+LoginFront --"Regular user"--> SSO
+
+LoginFront --"Data curator"--> CC
+
+CC --> Admins
+CC --> Curators
+SSO --> Users
+
+CC --"Redirect"--> OAuth
+OAuth --> Login
 ```
 
+Sequence diagram of login process:
+
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdEJyb3dzZXItPj5Gcm9udGVuZDogUmVxdWVzdCB0byBgL2F1dGgvbG9naW5gXG4gIEZyb250ZW5kLT4-S3JhdG9zOiBBdXRoIHJlcXVlc3RcbiAgS3JhdG9zLT4-QnJvd3NlcjogUmVkaXJlY3QgdG8gYC9hdXRoL2xvZ2luP3JlcXVlc3Q9e2lkfWAgcGFyYW1cbiAgQnJvd3Nlci0-PkZyb250ZW5kOiBHZXQgYC9hdXRoL2xvZ2luP3JlcXVlc3Q9e2lkfWBcbiAgRnJvbnRlbmQtPj5LcmF0b3M6IEZldGNoIGRhdGEgZm9yIHJlbmRlcmluZyB0aGUgZm9ybVxuICBLcmF0b3MtPj5Gcm9udGVuZDogTG9naW4gb3B0aW9uc1xuICBGcm9udGVuZC0-PkJyb3dzZXI6IFJlbmRlciB0aGUgbG9naW4gZm9ybSB3aXRoIGF2YWlsYWJsZSBvcHRpb25zXG4gIEJyb3dzZXItPj5Gcm9udGVuZDogU3VwcGx5IGZvcm0gZGF0YVxuICBGcm9udGVuZC0-PktyYXRvczogVmFsaWRhdGUgYW5kIGxvZ2luXG4gIEtyYXRvcy0-PkZyb250ZW5kOiBTZXQgc2Vzc2lvblxuICBGcm9udGVuZC0-PkJyb3dzZXI6IFJlZGlyZWN0IHRvIC9kYXNoYm9hcmRcblxuXG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdEJyb3dzZXItPj5Gcm9udGVuZDogUmVxdWVzdCB0byBgL2F1dGgvbG9naW5gXG4gIEZyb250ZW5kLT4-S3JhdG9zOiBBdXRoIHJlcXVlc3RcbiAgS3JhdG9zLT4-QnJvd3NlcjogUmVkaXJlY3QgdG8gYC9hdXRoL2xvZ2luP3JlcXVlc3Q9e2lkfWAgcGFyYW1cbiAgQnJvd3Nlci0-PkZyb250ZW5kOiBHZXQgYC9hdXRoL2xvZ2luP3JlcXVlc3Q9e2lkfWBcbiAgRnJvbnRlbmQtPj5LcmF0b3M6IEZldGNoIGRhdGEgZm9yIHJlbmRlcmluZyB0aGUgZm9ybVxuICBLcmF0b3MtPj5Gcm9udGVuZDogTG9naW4gb3B0aW9uc1xuICBGcm9udGVuZC0-PkJyb3dzZXI6IFJlbmRlciB0aGUgbG9naW4gZm9ybSB3aXRoIGF2YWlsYWJsZSBvcHRpb25zXG4gIEJyb3dzZXItPj5Gcm9udGVuZDogU3VwcGx5IGZvcm0gZGF0YVxuICBGcm9udGVuZC0-PktyYXRvczogVmFsaWRhdGUgYW5kIGxvZ2luXG4gIEtyYXRvcy0-PkZyb250ZW5kOiBTZXQgc2Vzc2lvblxuICBGcm9udGVuZC0-PkJyb3dzZXI6IFJlZGlyZWN0IHRvIC9kYXNoYm9hcmRcblxuXG5cdFx0XHRcdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
+
+From ORY/Kratos:
+
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gIHBhcnRpY2lwYW50IEIgYXMgQnJvd3NlclxuICBwYXJ0aWNpcGFudCBLIGFzIE9SWSBLcmF0b3NcbiAgcGFydGljaXBhbnQgQSBhcyBZb3VyIEFwcGxpY2F0aW9uXG5cblxuICBCLT4-SzogSW5pdGlhdGUgTG9naW5cbiAgSy0-PkI6IFJlZGlyZWN0cyB0byB5b3VyIEFwcGxpY2F0aW9uJ3MgL2xvZ2luIGVuZHBvaW50XG4gIEItPj5BOiBDYWxscyAvbG9naW5cbiAgQS0tPj5LOiBGZXRjaGVzIGRhdGEgdG8gcmVuZGVyIGZvcm1zIGV0Y1xuICBCLS0-PkE6IEZpbGxzIG91dCBmb3JtcywgY2xpY2tzIGUuZy4gXCJTdWJtaXQgTG9naW5cIlxuICBCLT4-SzogUE9TVHMgZGF0YSB0b1xuICBLLS0-Pks6IFByb2Nlc3NlcyBMb2dpbiBJbmZvXG5cbiAgYWx0IExvZ2luIGRhdGEgdmFsaWRcbiAgICBLLS0-PkI6IFNldHMgc2Vzc2lvbiBjb29raWVcbiAgICBLLT4-QjogUmVkaXJlY3RzIHRvIGUuZy4gRGFzaGJvYXJkXG4gIGVsc2UgTG9naW4gZGF0YSBpbnZhbGlkXG4gICAgSy0tPj5COiBSZWRpcmVjdHMgdG8geW91ciBBcHBsaWNhaXRvbidzIC9sb2dpbiBlbmRwb2ludFxuICAgIEItPj5BOiBDYWxscyAvbG9naW5cbiAgICBBLS0-Pks6IEZldGNoZXMgZGF0YSB0byByZW5kZXIgZm9ybSBmaWVsZHMgYW5kIGVycm9yc1xuICAgIEItLT4-QTogRmlsbHMgb3V0IGZvcm1zIGFnYWluLCBjb3JyZWN0cyBlcnJvcnNcbiAgICBCLT4-SzogUE9TVHMgZGF0YSBhZ2FpbiAtIGFuZCBzbyBvbi4uLlxuICBlbmRcbiIsIm1lcm1haWQiOnsidGhlbWUiOiJuZXV0cmFsIiwic2VxdWVuY2VEaWFncmFtIjp7ImRpYWdyYW1NYXJnaW5YIjoxNSwiZGlhZ3JhbU1hcmdpblkiOjE1LCJib3hUZXh0TWFyZ2luIjowLCJub3RlTWFyZ2luIjoxNSwibWVzc2FnZU1hcmdpbiI6NDUsIm1pcnJvckFjdG9ycyI6dHJ1ZX19fQ)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gIHBhcnRpY2lwYW50IEIgYXMgQnJvd3NlclxuICBwYXJ0aWNpcGFudCBLIGFzIE9SWSBLcmF0b3NcbiAgcGFydGljaXBhbnQgQSBhcyBZb3VyIEFwcGxpY2F0aW9uXG5cblxuICBCLT4-SzogSW5pdGlhdGUgTG9naW5cbiAgSy0-PkI6IFJlZGlyZWN0cyB0byB5b3VyIEFwcGxpY2F0aW9uJ3MgL2xvZ2luIGVuZHBvaW50XG4gIEItPj5BOiBDYWxscyAvbG9naW5cbiAgQS0tPj5LOiBGZXRjaGVzIGRhdGEgdG8gcmVuZGVyIGZvcm1zIGV0Y1xuICBCLS0-PkE6IEZpbGxzIG91dCBmb3JtcywgY2xpY2tzIGUuZy4gXCJTdWJtaXQgTG9naW5cIlxuICBCLT4-SzogUE9TVHMgZGF0YSB0b1xuICBLLS0-Pks6IFByb2Nlc3NlcyBMb2dpbiBJbmZvXG5cbiAgYWx0IExvZ2luIGRhdGEgdmFsaWRcbiAgICBLLS0-PkI6IFNldHMgc2Vzc2lvbiBjb29raWVcbiAgICBLLT4-QjogUmVkaXJlY3RzIHRvIGUuZy4gRGFzaGJvYXJkXG4gIGVsc2UgTG9naW4gZGF0YSBpbnZhbGlkXG4gICAgSy0tPj5COiBSZWRpcmVjdHMgdG8geW91ciBBcHBsaWNhaXRvbidzIC9sb2dpbiBlbmRwb2ludFxuICAgIEItPj5BOiBDYWxscyAvbG9naW5cbiAgICBBLS0-Pks6IEZldGNoZXMgZGF0YSB0byByZW5kZXIgZm9ybSBmaWVsZHMgYW5kIGVycm9yc1xuICAgIEItLT4-QTogRmlsbHMgb3V0IGZvcm1zIGFnYWluLCBjb3JyZWN0cyBlcnJvcnNcbiAgICBCLT4-SzogUE9TVHMgZGF0YSBhZ2FpbiAtIGFuZCBzbyBvbi4uLlxuICBlbmRcbiIsIm1lcm1haWQiOnsidGhlbWUiOiJuZXV0cmFsIiwic2VxdWVuY2VEaWFncmFtIjp7ImRpYWdyYW1NYXJnaW5YIjoxNSwiZGlhZ3JhbU1hcmdpblkiOjE1LCJib3hUZXh0TWFyZ2luIjowLCJub3RlTWFyZ2luIjoxNSwibWVzc2FnZU1hcmdpbiI6NDUsIm1pcnJvckFjdG9ycyI6dHJ1ZX19fQ)
+
+
+Kratos to Hydra in CKAN Classic:
+
+WIP
 
 Questions
 
@@ -212,7 +233,8 @@ Questions
 * How would we avoid having to support identity persistence, delegation etc in both NG frontend and Classic Admin UI?
   * Can we share cookies (e.g. via using subdomains)
 * How is login, identity determination etc done at least for frontend in DataHub.io
-* Should account UI really be in NG frontned vs Classic Admin UI?
+* Should account UI really be in NG frontend vs Classic Admin UI?
+* how can we handle "invite a user" to my org set up ... (it's basically post processing after sign up ...)
 
 <mermaid />
 

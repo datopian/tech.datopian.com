@@ -2,6 +2,47 @@
 
 Our lab notebook. Our informal thoughts. Our very raw blog.
 
+## 10 things I regret about NodeJS by Ryan Dahl (2018) 2020-05-17 @rufuspollock
+
+Valuable generally and more great lessons for data packaging.
+
+https://www.youtube.com/watch?v=M3BM9TB-8yA
+
+### package.json and npm were a mistake
+
+Why package.json was a mistake: https://youtu.be/M3BM9TB-8yA?t=595
+
+![](https://i.imgur.com/Ia0qtVm.png)
+
+* `npm` + a centralized repo are unnecessary (and were a mistake)
+* doesn't like centralized npm repo (I agree) and look what go are doing. Sure, you probably have something via the backdoor at the end (e.g. go is getting that) for caching and reliability purposes, but it is not strictly necessary.
+
+ASIDE: It's the core tool (node) that make a metadata format and packager relevant and successful. It's node require allowing using of `package.json` or bundling `npm` in by defaultonly 
+
+* Kind of obvious when you think about it
+* Something i've always said re Data Packages (but not strongly enough and not followed enough): the tooling comes first and the format is, in many ways, a secondary conveinience. To be fair to myself (and others) we did write `dpm` first (in 2007!), and do a lot of stuff with the workflow and toolchain but its easy to get distracted.
+
+![](https://i.imgur.com/5E0Hffs.png)
+
+* modules aren't strictly necessary and `package.json` metadata is not needed
+* on the web you just have js file and you can include them ...
+* "package.json has all this unnecessary noise in it. like license, repository. Why am i filling this out. I feel like a book-keeper or something. This is just unnecessary stuff *to do* when all I am trying to do is link to a library" [ed: **I think this is a major relevance for Data Packages. There's a tension between the book-keepers who want lots of metadata for publishing etc ... and ... the data science and data engineers who just want to get something done. If I had a choice (and I do!) I would prioritize the latter massively. And they just care about stuff like a) table schema b) get me the data on my hard disk fast**]
+* "If only relative files and URLs were used when importing, the path defines the version. There is no need to list dependencies" [ed: cf Go that did this right]
+  * And he's borrowed from Go for deno.land
+
+### Vendoring by default with `node_modules` was a mistake
+
+Vendoring by default with `node_modules` was a mistake - just use an env variable `$NODE_PATH`
+
+* `node_modules` then becomes massive
+* module resolution is (needlessly) complex
+
+### General point: KISS / YAGNI
+
+E.g. `index.js`was "cute" but unnecessary, allowing `require xxx` without an extension (e.g. `.js` or `.ts` ) means you have to probe the file system.
+
++data package. +data packaging. +frictionless. +lessons
+
 ## Go modules and dependency management (re data package management) 2020-05-16 @rufuspollock
 
 Generally Go does stuff well. They also punted on dependency management initially. First, you just installed a url it was up to you to manage your depedencies. Then there was a period of chaos as several package/dependency managers fought it out (GoDeps etc). Then, ~ 2018 the community came together led by Russ Cox and came up with a very solid proposal which is official as of 2019.

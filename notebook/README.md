@@ -1,6 +1,6 @@
 # Notebook
 
-Our lab notebook. Our informal thoughts. Our very raw blog.
+Our lab notebook. Informal thoughts. A very raw blog.
 
 ## 10 things I regret about NodeJS by Ryan Dahl (2018) 2020-05-17 @rufuspollock
 
@@ -174,10 +174,96 @@ In CKAN v2:
 
 In CKAN v3: propose to separate these explicitly ...
 
-## 2020-04-23 @rufuspollock
+## Data Portal vs DataHub vs Data OS 2020-04-23 @rufuspollock
 
-Data Portal vs DataHub vs Data OS
+Data Portal vs DataHub vs Data OS -- naming and definitions.
 
-TODO: Is a Data Portal a DataHub? Is a DataHub a DataOS? If not, what are the differences?
+Is a Data Portal a DataHub? Is a DataHub a DataOS? If not, what are the differences?
 
 +todo
+
+## Data Concepts - from Atoms to Organisms 2020-03-05 @rufuspollock
+
+```
+Point -> Line -> Plane (0d -> 1d -> 2d -> 3d)
+
+Atom -> Molecule -> Cell -> Organism
+```
+
+```mermaid
+graph TD
+
+cell[Cell]
+row[Row]
+column[Column]
+table["Table (Sheet)"]
+cube["Database (Dataset)"]
+
+cell --> row
+cell --> column
+row --> table
+column -->  table
+table --> cube
+```
+
+```
+          Domain =>
+Dimension
+    |
+    V
+```
+
+| Dimension |  ... | Math | Spreadsheets | Databases | Tables etc | Frictionless | Pandas | R | 
+|--|--|--|--|--|--|--|--|--|
+| 0d | Datum | Value | Cell | Value | Scalar? | N/A | Value | ? |
+| 1d | ....  | Array / Vector | Row  | Row | Row | N/A |
+| 1d | ....  | N/A | Column | 
+| 2d | Grid? | Matrix | Sheet | Table | Table | TableSchema |
+| 3d | Cube  | 3d Matrix | Spreadsheet | Database (or Cube) | N/A | ? |  ? | ? |
+| 4d+ | HyperCube | n-d Matrix | 
+
+What's crucial about a table is that it is not just an array of arrays or a rowset but a rowset plus a fieldset.
+
+```
+Field => FieldSet
+Row => RowSet
+```
+
+A Table is a FieldSet x RowSet (+ other information)
+
+There is the question of whether there is some kind of connection or commonality at each dimension up ... e.g. you could have an array of arrays where each array has different fields ... 
+
+```json
+{ "first": "joe", "height": 3 }
+{ "last": "gautama", "weight": 50 }
+```
+
+But a table has common fields.
+
+```json
+{ "first": "joe", "height": 3 }
+{ "first": "siddarta", "height": 50 }
+```
+
+(NB: one could always force a group of rows with disparate fields into being a table by creating the union of all the fields but that's hacky)
+
+So a table is a RowSet plus a FieldSet where each row conforms to that FieldSet.
+
+Similarly, we can aggregate tables. By default here the tables do *not* share any commonality -- sheets in a spreadsheet need not share any common aspect, nor do tables in a database.  If they do, then we have a cube.
+
+NEXT: moving to flows / processes.
+
+## Is there room / need for a simple dataflow library?  2020-02-23 @rufuspollock
+
+Is there room / need for a simple dataflow library ...?
+
+What kind of library?
+
+* So Apache Beam /Google DataFlow is great ... and it is pretty complex and designed for use out of the box in parallel etc
+* Apache Nifi: got a nice UI, Java and heavy duty.
+* My own experience (even just now with key metrics) is i want something that will load and pipe data between processors
+
+Ideas 
+
+* create-react-app for data flows: quickly scaffold data flows
+* What is the default runner

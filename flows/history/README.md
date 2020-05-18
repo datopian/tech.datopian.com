@@ -195,14 +195,14 @@ subgraph Source
   view[timeseries-1<br/>Uses vix-daily]
 end
 
-subgraph Generated Resources
+subgraph "Generated Resources"
   gcsv[derived/vix-daily.csv]
   gjson[derived/vix-daily.json]
   gjsonpre[derived/vix-daily-10k.json]
   gjsonpre2[derived/view-time-series-1.json]
 end
 
-subgraph Generated Views
+subgraph "Generated Views"
   preview[Table Preview]
 end
 
@@ -238,12 +238,12 @@ dumpdp --> dump
 dcsv --> dnode
 dcsv --> dsqlite
 
-subgraph Dumpers 1
+subgraph "Dumpers 1"
   dcsv[Derived CSV]
   djson[Derived JSON]
 end
 
-subgraph Dumpers 2 - after Dumper 1
+subgraph "Dumpers 2 - after Dumper 1"
   dsqlite[SQLite]
   dnode[Node]
 end
@@ -296,12 +296,12 @@ parse --> viewgen
 viewgen --> previewgen
 previewgen --view-10k.json--> dump
 
-subgraph Dumpers 1
+subgraph "Dumpers 1"
   dcsv[Derived CSV]
   djson[Derived JSON]
 end
 
-subgraph Dumpers 2 - after Dumper 1
+subgraph "Dumpers 2 - after Dumper 1"
   dsqlite[SQLite]
   dnode[Node]
   viewgen[Preview View Gen<br/><em>Adds preview views</em>]
@@ -355,17 +355,17 @@ view2gen --> preview2gen
 preview1gen --view1-10k.json--> dump
 preview2gen --view2-10k.json--> dump
 
-subgraph Dumpers 1 sheet 1
+subgraph "Dumpers 1 sheet 1"
   d1csv[Derived CSV]
   d1json[Derived JSON]
 end
 
-subgraph Dumpers 1 sheet 2
+subgraph "Dumpers 1 sheet 2"
   d2csv[Derived CSV]
   d2json[Derived JSON]
 end
 
-subgraph Dumpers 2 - after Dumper 1
+subgraph "Dumpers 2 - after Dumper 1"
   dsqlite[SQLite]
   dnode[Node]
   view1gen[Preview View Gen<br/><em>Adds preview views</em>]
@@ -516,3 +516,4 @@ pipeline
   dependencies
 ```
 
+<mermaid />

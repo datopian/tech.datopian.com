@@ -1,7 +1,6 @@
----
-title: Data Factory and Data Flows Design - Oct 2017 to Apr 2018
-date: 2018-04-08
----
+# Data Factory and Flows Design - Oct 2017 to Apr 2018
+
+Date: 2018-04-08
 
 :::tip NOTE
 This is a miscellaneous content from various HackMD docs. I'm preserving because either a) there is material to reuse here that I'm not sure is elsewhere b) there were various ideas in here we used later (and it's useful to see their origins).
@@ -15,9 +14,7 @@ Key content:
 :::
 
 
-# Data Factory Design
-
-TODOs
+## Plan April 2018
 
 * tutorial (what we want our first post to look like)
   * And then implement minimum for that
@@ -31,7 +28,7 @@ TODOs
 
 [frictionless-lib]: http://okfnlabs.org/blog/2018/02/15/design-pattern-for-a-core-data-library.html
 
-# 8 April 2018
+## 8 April 2018
 
 Lots of note on DataFlow which are now moved and refactored into https://github.com/datahq/dataflow-demo
 
@@ -87,7 +84,7 @@ end
 ```
 
 
-# 5 Oct 2017
+## 5 Oct 2017
 
 Notes:
 
@@ -102,7 +99,7 @@ Questions:
 
 * Tests in assembler ...
 
-## Domain Model
+### Domain Model
 
 ```mermaid
 graph TD
@@ -186,7 +183,7 @@ As a Publisher I want to customize whether I generate a preview for a file or no
 >
 > As a Publisher I want to upload an Excel file and have csv versions of each sheet and an sqlite version
 
-## Overview
+### Overview
 
 *This is what we want*
 
@@ -217,9 +214,9 @@ view --> gjsonpre2
 preview --> gjsonpre
 ```
 
-## How does this work?
+### How does this work?
 
-### Simple example: no previews, single CSV in source
+#### Simple example: no previews, single CSV in source
 
 ```mermaid
 graph LR
@@ -273,7 +270,7 @@ outputs:
  - ...  see https://github.com/datahq/pm/issues/17
 ```
 
-### With previews
+#### With previews
 
 ```mermaid
 graph LR

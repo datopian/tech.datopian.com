@@ -354,4 +354,8 @@ SQLite | Database | | Unknown use. Possibly a worker dependency.
 
 Prior to this page, we had one called "Next Gen." It has intersections with this article, although it focuses more on the benefits of microservices. For the time being, the page still exists in [/ckan-v3/next-gen](./next-gen.md), although it may get merged with this one in the future.
 
+### Old CKAN v3 Page
+
+Prior to this page, we had one called "CKAN v3." It collects naming conventions used in DataHub. For the time being, the page still exists in [/ckan-v3/v3-old](./v3-old.md), although it may get merged with this one in the future.
+
 <mermaid />

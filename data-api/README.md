@@ -19,7 +19,7 @@ Direct download of a whole data file is the default method of access for data in
 *Fig 1: Contrasting Download and API based access*
 
 ```bash
-# simple direct file access. You download 
+# simple direct file access. You download
 https://my-data-portal.org/my-dataset/my-csv-file.csv
 
 # API based access. Find the first 5 records with 'awesome'
@@ -65,8 +65,8 @@ The functionality associated to the Data APIs can be divided in 4 areas:
 * **Read API**:  web API for accessing structured data (i.e. per record) with querying etc.
   * Custom API & Complex functions: e.g. aggregations, join
   * Permissions
-  * Tracking & Analytics: rate-limiting etc 
-* **Data Load / Ingest**: loading data in bulk into the system that powers the data API. 
+  * Tracking & Analytics: rate-limiting etc
+* **Data Load / Ingest**: loading data in bulk into the system that powers the data API.
   * Bulk Load: bulk import of individual data files
   * Write API: usually secondary because of its limited performance vs bulk loading
   * Maybe includes some ETL => this takes us more into data factory
@@ -103,7 +103,7 @@ When querying the API as a Power User I want to use SQL so that I can do complex
 
 When querying a dataset with geo attributes such as location I want to be able use geo-oriented functionality e.g. find all items near X so that I can find the records I want by location
 
-#### Free Text Query (Google Style / ElasticSearch Style) 
+#### Free Text Query (Google Style / ElasticSearch Style)
 
 When querying I want to do a google style search in data e.g. query for "brown" and find all rows with brown in them or do `brown road_name:*jfk*` and get all results with brown in them and whose field `road_name` has `jfk` in it so that I can provide a flexible query interface to my users
 
@@ -117,7 +117,7 @@ As a Data Curator I want to create a custom API for one or more resources so tha
 
 As a Consumer I want to search across all the data in the Data Portal at once so that I can find the value I want quickly and easily … (??)
 
-#### 
+####
 
 As a Consumer (researcher/student …) I want to look for datasets with particular variables in  them so that I can quickly locate the data I want for my work
 
@@ -152,22 +152,7 @@ This probably is *not* a Data API epic -- rather it would come under the Data Ex
 
 ### Data Load
 
-As a Publisher i want to load my dataset (resource) into the DataStore quickly and reliably so that my data is available over the data API
-
-* Be “tolerant” where possible of bad data …
-* And get feedback if it went wrong and how I can fix it …
-* I want to update the schema for the DataStore so data has right types (and be
-* I want to be able to update with a new resource file and only have it load the most recent
-
-#### Correct the types in the DataStore (after load?)
-
-#### Track Performance Status as [Cloud] Sysadmin
-
-As a Datopian Cloud Sysadmin I want to know what is happening with “DataLoad” so that I can fix if problems for clients
-
-#### One Data Load Service per Cloud
-
-As a Datopian Cloud Manager I want to have one “DataLoad” service I maintain rather than one per instance for efficiency …
+Read about [Data Load here](/load/).
 
 ### Bulk Export
 
@@ -208,7 +193,7 @@ Here's how CKAN 2 implements the four components described above:
 
 The CKAN DataStore extension provides an ad-hoc database for storage of structured data from CKAN resources.
 
-See the DataStore extension: https://github.com/ckan/ckan/tree/master/ckanext/datastore 
+See the DataStore extension: https://github.com/ckan/ckan/tree/master/ckanext/datastore
 
 Datastore API: https://docs.ckan.org/en/2.8/maintaining/datastore.html#the-datastore-api
 
@@ -268,7 +253,7 @@ datastore --> pg
 filestore -. or via .-> xloader
 xloader --> pg
 ```
- 
+
 Sequence diagram showing the journey of a tabular file into the DataStore:
 
 ```mermaid
@@ -311,7 +296,7 @@ Data Load [So-so]
 * No support for Frictionless Data spec sand their ability to specific incoming data structure (CSV format, encoding, column types etc).
 	* Dependent on error-prone guessing of types or manual type conversion
 	* Makes it painful to integrate with broader data processing pipeline (e.g. clean separation would allow type guessing to be optimized elsewhere in another part of the ETL pipeline)
-* Excel loading won't work or won't load all sheets 
+* Excel loading won't work or won't load all sheets
 * DataPusher
 	* https://github.com/ckan/ckanext-xloader#key-differences-from-datapusher
 	* Works terribly with loading a bit big data. It may for no reason crash after hour of loading. And after reload it goes along
@@ -320,7 +305,7 @@ Data Load [So-so]
 * XLoader:
 	* Doesn't work with XLS(X)
 	* has problems fetching resources from Blob Storage (it fails and need to wait until the Resource is uploaded.)
-	* raising Exception NotFound when CKAN has a delay creating resources 
+	* raising Exception NotFound when CKAN has a delay creating resources
 	* re-submits Resources when creating a new Resource
 	* XLoader sets `datastore_active` before data is uploaded
 
@@ -389,4 +374,3 @@ NB: even if you want to go direct loading route (a la XLoader) and forget types 
 Back onto Postgres by default just like CKAN 2. May also explore using other backends esp from Cloud Providers e.g. BigQuery or AWS RedShift etc.
 
 <mermaid />
-

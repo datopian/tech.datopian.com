@@ -6,7 +6,7 @@ CKAN has a rich tech stack so we have opted to standardize our instructions with
 
 If you already have Docker-compose, you are ready to go!
 
-If not, please, follow instructions on [how to install docker-compose](https://docs.docker.com/compose/install/)
+If not, please, follow instructions on [how to install docker-compose](https://docs.docker.com/compose/install/).
 
 On Ubuntu you can run:
 
@@ -62,19 +62,18 @@ You can navigate to `http://localhost:5000`
 
 ![CKAN Home Page](https://i.imgur.com/T5LWo8A.png)
 
-and log in with the credentials that docker-compose setup created for you [user: `ckan_admin` password:`test1234`]
+and log in with the credentials that docker-compose setup created for you [user: `ckan_admin` password:`test1234`].
 
 ::: tip
-For the key concepts of what is CKAN and how it works you can read the [CKAN User Guide](https://docs.ckan.org/en/2.8/user-guide.html).
+To learn key concepts about CKAN, including what it is and how it works, you can read the [CKAN User Guide](https://docs.ckan.org/en/2.8/user-guide.html).
 :::
 
 ## Next Steps
 
-[Play around with CKAN portal](/ckan/play-around)
+[Play around with CKAN portal](/ckan/play-around).
 
 ## Troubleshooting
 
 Login / Logout button breaks the experience:
 
-- Change the `http://ckan:5000` to `http://localhost:5000`. A complete fix is described in the [Play around with CKAN portal](/ckan/play-around). ( You next step ;) )
-
+- Change the URL from `http://ckan:5000` to `http://localhost:5000`. A complete fix is described in the [Play around with CKAN portal](/ckan/play-around). (Your next step. ;))

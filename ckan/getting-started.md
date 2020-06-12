@@ -19,6 +19,7 @@ sudo apt-get install docker-compose
 
 ```
 git clone https://github.com/okfn/docker-ckan
+# or git clone git@github.com:okfn/docker-ckan.git
 cd docker-ckan
 ```
 

@@ -56,3 +56,32 @@ with beam.Pipeline('DirectRunner') as p:
   # nodes visited is done using the specified local runner.
 ```
 
+## Runners
+
+* Airflow
+* Argo workflows
+
+
+### Notes
+
+* https://delta.io/ - acid for data lakes
+
+### airtunnel
+
+https://github.com/joerg-schneider/airtunnel
+
+* https://medium.com/bcggamma/airtunnel-a-blueprint-for-workflow-orchestration-using-airflow-173054b458c3 - excellent piece on how to pattern airflow - "airtunnel", plus overview of key tooling
+
+  > This is why we postulate to have a central declaration file (as in YAML or JSON) per data asset, capturing all these properties required to run a generalized task (carried out by a custom operator). In other words, operators are designed in a generic way and receive the name of a data asset, from which they can grab its declaration file and learn how to parameterize and carry out the specific task.
+
+```
+├── archive
+├── ingest
+│   ├── archive
+│   └── landing
+├── ready
+└── staging
+    ├── intermediate
+    ├── pickedup
+    └── ready
+```

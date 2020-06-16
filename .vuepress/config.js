@@ -16,6 +16,7 @@ module.exports = {
   themeConfig: {
     repo: 'https://gitlab.com/datopian/tech/tech.datopian.com',
     repoLabel: 'Contribute!',
+    lastUpdated: 'Last update',
     editLinks: true,
     sidebar: 'auto',
     nav: [

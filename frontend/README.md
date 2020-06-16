@@ -16,8 +16,9 @@ This page is primarily about the Next Gen approach to the Frontend, however we p
 
 Developer Experience
 
-* **Theme** (simple): When working on a new site, I want to style it for the project so that it has a distintive look and feel aligned to the client's needs
+* **Theme** (simple): When developing a new portal, I want to theme it quickly and easily so that it's look and feel aligned to the client's needs.
   * **Customize Home Page**: When building a data portal home page I want to be able to customize it completely, integrating different widgets so that I have a great landing experience for users
+  * **i18n**: I want to be able to i18n content and enable the client to do this so that we have a site in the client's locale
 * **Rich customization** (new routes, major page changes)
   * When working on a data portal, I want to add frontend functionality to existing templates so that I can build upon past work and still extend the project to my own needs.
   * When building up a new frontend I want to quickly add standard pages and components (and tweak them) so that I have a basic functional site quickly

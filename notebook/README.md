@@ -2,6 +2,44 @@
 
 Our lab notebook. Informal thoughts. A very raw blog.
 
+## Commonalities of Harvesting and Data(Store) Loading 2020-06-01 @rufuspollock
+
+tags: portal, load, factory
+
+Harvesting and data loading (for data API) are almost identical as mechanisms. As such, they can share the same "data factory" system.
+
+Data API load to backing DB (CKAN DataStore + DataPusher stuff)
+
+```mermaid
+graph LR
+
+subgraph Factory
+  read --> process
+  process --> load
+  orchestrator
+end
+load --> db[DB = DataStore]
+
+orchestrator --> api
+api --> wui[Dataset Admin UI]
+```
+
+Harvesting
+
+```mermaid
+graph LR
+
+subgraph Factory
+  read --> process
+  process --> load[Load - sync with CKAN]
+  orchestrator
+end
+load --> db[DB = MetaStore]
+
+orchestrator --> api
+api --> wui[Harvesting Admin UI]
+```
+
 ## 10 things I regret about NodeJS by Ryan Dahl (2018) 2020-05-17 @rufuspollock
 
 Valuable generally and more great lessons for data packaging.
@@ -267,3 +305,5 @@ Ideas
 
 * create-react-app for data flows: quickly scaffold data flows
 * What is the default runner
+
+<mermaid />

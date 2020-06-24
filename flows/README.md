@@ -104,5 +104,3 @@ Different from X
     * Only Java support
 * Bubbles http://bubbles.databrewery.org/documentation.html - https://www.slideshare.net/Stiivi/data-brewery-2-data-objects
 * mETL https://github.com/ceumicrodata/mETL mito ETL (yaml config files)
-
-<mermaid />

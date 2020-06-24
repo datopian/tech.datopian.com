@@ -236,8 +236,6 @@ Questions
 * Should account UI really be in NG frontend vs Classic Admin UI?
 * how can we handle "invite a user" to my org set up ... (it's basically post processing after sign up ...)
 
-<mermaid />
-
 ## Appendix
 
 ### More job stories

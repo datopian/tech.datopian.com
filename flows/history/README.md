@@ -515,5 +515,3 @@ pipeline
   schedule
   dependencies
 ```
-
-<mermaid />

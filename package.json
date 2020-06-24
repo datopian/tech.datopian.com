@@ -7,7 +7,8 @@
   "author": "Datopian <contact@datopian.com>",
   "devDependencies": {
     "@vuepress/plugin-google-analytics": "^1.3.0",
-    "vuepress": "^1.3.0"
+    "vuepress": "^1.3.0",
+    "vuepress-plugin-mermaidjs": "^1.5.1"
   },
   "scripts": {
     "start": "yarn start:docs",
@@ -15,7 +16,6 @@
     "build:docs": "npx vuepress build"
   },
   "dependencies": {
-    "markdown-it-footnote": "",
-    "mermaid": "8.1.0"
+    "markdown-it-footnote": ""
   }
 }

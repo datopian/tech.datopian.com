@@ -656,9 +656,3 @@ Jobs summary
 Individual jobs
 
 ![](https://i.imgur.com/ljKEk0l.png)
-
-
-
-
-<mermaid />
-

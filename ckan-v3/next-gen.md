@@ -201,6 +201,3 @@ end
 a -.network call.-> b
 a -.network call.-> c
 ```
-
-<mermaid />
-

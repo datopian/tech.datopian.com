@@ -177,5 +177,3 @@ Status: Beta (June 2020)
 ### Design
 
 See [Design page &raquo;](./design/)
-
-<mermaid />

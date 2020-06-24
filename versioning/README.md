@@ -95,7 +95,3 @@ Git has following terminology
 
 * Commit <=> Revision
 * Tag <=> Tag
-
-
-
-<mermaid />

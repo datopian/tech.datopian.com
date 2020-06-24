@@ -305,5 +305,3 @@ Ideas
 
 * create-react-app for data flows: quickly scaffold data flows
 * What is the default runner
-
-<mermaid />

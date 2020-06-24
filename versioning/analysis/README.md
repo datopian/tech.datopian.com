@@ -29,5 +29,3 @@ versioning --add path--> metastore-lib
 metastore-lib --if not path not url & sha256 & lfs configured--> write[write dp.json + files with lfs pointers]
 metastore-lib --if url path--> nothing[write dp.json]
 ```
-
-<mermaid />

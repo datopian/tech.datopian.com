@@ -307,8 +307,6 @@ Suggested config file (`now.json`):
 }
 ```
 
-<mermaid />
-
 ## Appendix
 
 - [SCQH for Why Decoupled](/frontend/analysis/)

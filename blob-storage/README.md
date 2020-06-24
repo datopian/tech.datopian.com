@@ -72,6 +72,3 @@ See https://github.com/Azure/azure-storage-php/issues/170
 https://docs.microsoft.com/en-us/rest/api/storageservices/put-block-list
 
 https://github.com/ojczeo/vue-azure-multipart-upload
-
-<mermaid />
-

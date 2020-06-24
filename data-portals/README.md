@@ -289,5 +289,3 @@ Data Portals were originally called a variety of names including "Data Catalog".
 Many initial data portals were "open" or public: that is anyone could access them -- and the data they listed. This reflected the fact that these data portals were set up by governments seeking to maximize the value of their data by sharing it as widely as possible.
 
 However, there is no reason a data portal need be "open". In fact, data portals internal to an enterprise are usually restricted to the organization or even specific teams within the enterprise.
-
-<mermaid />

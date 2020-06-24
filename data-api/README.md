@@ -254,5 +254,3 @@ See [Load page](/load/).
 ### DataStore
 
 Back onto Postgres by default just like CKAN 2. May also explore using other backends esp from Cloud Providers e.g. BigQuery or AWS RedShift etc.
-
-<mermaid />

@@ -45,6 +45,3 @@ enhance --> render
 enhance --> useredit[User edits views]
 useredit --> render
 ```
-
-<mermaid />
-

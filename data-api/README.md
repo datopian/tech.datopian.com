@@ -35,7 +35,9 @@ Whilst Data APIs are in many ways more flexible than direct download they have d
 * APIs are much more costly and complex to create and maintain than direct download
 * API queries are slow and limited in size because they run in real-time in memory. Thus, for bulk access e.g. of the entire dataset direct download is much faster and more efficient (download a 1GB CSV directly is easy and takes seconds but attempting to do so via the API may crash the server and be very slow).
 
+<!--
 TODO: do more to compare and contrast download vs API access (e.g. what each is good for, formats,  etc)
+-->
 
 
 ### Why Data APIs?
@@ -210,65 +212,7 @@ curl -X POST http://127.0.0.1:5000/api/3/action/datastore_create \
 
 ### Data Load
 
-Provided by either DataPusher or XLoader.
-
-#### DataPusher
-
-Service (API) For pushing tabular data to datastore.
-
-Do not confuse with ckanext/datapusher in ckan core codbase. That's simply an extension communicating with the DataPusher API. That is a standalone service , running separately from CKAN app.
-
-https://github.com/ckan/datapusher
-
-https://docs.ckan.org/projects/datapusher/en/latest/
-
-https://docs.ckan.org/en/2.8/maintaining/datastore.html#datapusher-automatically-add-data-to-the-datastore
-
-#### XLoader
-
-Does simple load into DB as strings and then casts. As a result much faster than DataPusher. However, you then need to do explicit data-casting after the fact.
-
-https://github.com/ckan/ckanext-xloader
-
-* `load_csv`: https://github.com/ckan/ckanext-xloader/blob/master/ckanext/xloader/loader.py#L40
-* Loader: https://github.com/ckan/ckanext-xloader/blob/master/ckanext/xloader/jobs.py#L100
-
-How does the queue system work: job queue is done by RQ, which is simpler and is backed by Redis and allows access to the CKAN model. Job results are currently still stored in its own database, but the intention is to move this relatively small amount of data into CKAN's database, to reduce the complication of install.
-
-#### Flow of Data in Data Load
-
-```mermaid
-graph TD
-
-datastore[Datastore API]
-datapusher[DataPusher]
-pg[Postgres DB]
-filestore[File Store]
-xloader[XLoader]
-
-filestore --"Tabular data"--> datapusher
-datapusher --> datastore
-datastore --> pg
-
-filestore -. or via .-> xloader
-xloader --> pg
-```
-
-Sequence diagram showing the journey of a tabular file into the DataStore:
-
-```mermaid
-sequenceDiagram
-    Publisher->>CKAN Instance: Add tabular resource from disk or URL
-    CKAN Instance-->>FileStore: Upload data to storage
-    CKAN Instance-->>Datapusher: Add job to queue
-    Datapusher-->>Datastore: Run the job
-    Datastore-->>Postgres: Create table per resource and insert data
-```
-
-#### FAQs
-
-Q: What happens with non-tabular data?
-A: CKAN has a list of types of data it can process into the DataStore (TODO:link) and will only process those.
+See [Load page][(/load/).
 
 ### DataStore
 
@@ -281,8 +225,6 @@ https://docs.ckan.org/en/2.8/maintaining/datastore.html#setting-up-the-datastore
 Sharp Edges
 
 * connection between MetaStore (main CKAN objects DB) and DataStore is not always well maintained e.g, if I call “purge_dataset” action, it will remove stuff from MetaStore but it won’t delete a table from DataStore. This does not break UX but your DataStore DB raises in size and you might have junk tables with lots of data.
-* No connection between DataStore system and CKAN validation extension powered by GoodTables https://github.com/frictionlessdata/ckanext-validation Thus, for example, users may edit the DataStore Data Dictionary and be confused that this has no impact on validation. More generally, data validation and data loading might naturally be part of one overall ETL process but Data Load system is not architected in a way that makes this easy to add.
-	* Even more generally, the Data Load system is an hand-crafted, bespoke mini-ETL process. It would seem better to use high-quality third-party ETL tooling here rather than hand-roll be that for pipeline creation, monitoring, orchestration etc.
 
 DataStore (Data API)
 
@@ -290,25 +232,6 @@ DataStore (Data API)
 * Indexes are auto-created and no way to customize per resource. This can lead to issues on loading large datasets.
 * No API gateway (i.e. no way to control DDOS’ing, to do rate limiting etc)
 * SQL queries not working (with private datasets)
-
-Data Load [So-so]
-
-* No support for Frictionless Data spec sand their ability to specific incoming data structure (CSV format, encoding, column types etc).
-	* Dependent on error-prone guessing of types or manual type conversion
-	* Makes it painful to integrate with broader data processing pipeline (e.g. clean separation would allow type guessing to be optimized elsewhere in another part of the ETL pipeline)
-* Excel loading won't work or won't load all sheets
-* DataPusher
-	* https://github.com/ckan/ckanext-xloader#key-differences-from-datapusher
-	* Works terribly with loading a bit big data. It may for no reason crash after hour of loading. And after reload it goes along
-	* Is slow esp for large datasets and even smallish datasets e.g. 25Mb
-	* often fails due to e.g. data validation/casting errors but this not clear (and unsatisfying to the user)
-* XLoader:
-	* Doesn't work with XLS(X)
-	* has problems fetching resources from Blob Storage (it fails and need to wait until the Resource is uploaded.)
-	* raising Exception NotFound when CKAN has a delay creating resources
-	* re-submits Resources when creating a new Resource
-	* XLoader sets `datastore_active` before data is uploaded
-
 
 ## CKAN 3 (Next Gen)
 
@@ -326,48 +249,7 @@ Status: Design Phase
 
 ### Data Load
 
-Key points: this is classic ETL -- let's reuse those patterns and tooling.
-
-* Run as a separate microservice with zero coupling with CKAN core code (=> gives cleaner separation and testing)
-* Use Frictionless Data patterns and specs where possible e.g. Table Schema for describing or inferring the data schema
-* Use common ETL / [Data Flows][] patterns and frameworks
-
-[Data Flows]: /flows/
-
-Status: Alpha Implementation
-
-* Spec of new Data Loader: https://gitlab.com/datopian/tech/data-loader-next-gen/issues/1
-* Working Data Loader (in progress): https://gitlab.com/datopian/data-loader-next-gen
-
-#### Design
-
-:::warning
-This is incomplete
-:::
-
-Crude Overview
-
-```mermaid
-graph LR
-
-usercsv[User has CSV,XLS etc]
-userdr[User has Tabular Data Resource]
-dr[Tabular Data Resource]
-
-usercsv --1. some steps--> dr
-userdr -. direct .-> dr
-dr --2. load --> datastore[DataStore]
-```
-
-What is a Tabular Data Resource? See Frictionless Specs. For our purposes:
-
-* A "Good" CSV file: Valid CSV - with one header row, No blank header etc...
-* Encoding worked out -- usually we should have already converted to utf-8
-* Dialect - https://frictionlessdata.io/specs/csv-dialect/
-* Table Schema https://frictionlessdata.io/specs/table-schema
-
-NB: even if you want to go direct loading route (a la XLoader) and forget types you still need encoding etc sorted -- and it still fits in diagram above (Table Schema is just trivial -- everything is strings).
-
+See [Load page](/load/).
 
 ### DataStore
 

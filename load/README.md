@@ -1,6 +1,19 @@
 # Data Load
 
-## Features
+## Introduction
+
+Data load covers functionality for automatedly loading structured data into portal, usually into the system that powers the [data API][dapi].
+
+It is distinct from uploading files ("blobs") to the portal and from a "write" data API. It is a part of the larger [Data API (DataStore)][dapi] component. The load terminology comes from ETL (extract, transform, load).
+
+It includes:
+
+* Bulk Load: bulk import of individual data files
+* (Potentially) some ETL -- this takes us more into data factory
+
+[dapi]: /data-api/
+
+### Features
 
 As a Publisher i want to load my dataset (resource) into the DataStore quickly and reliably so that my data is available over the data API.
 
@@ -9,151 +22,160 @@ As a Publisher i want to load my dataset (resource) into the DataStore quickly a
 * I want to update the schema for the DataStore so data has right types (and be
 * I want to be able to update with a new resource file and only have it load the most recent
 
-### Correct the types in the DataStore (after load?)
+#### Correct the types in the DataStore (after load?)
 
-### Track Performance Status as [Cloud] Sysadmin
+#### Track Performance Status as [Cloud] Sysadmin
 
 As a Datopian Cloud Sysadmin I want to know what is happening with “DataLoad” so that I can fix if problems for clients
 
-### One Data Load Service per Cloud
+#### One Data Load Service per Cloud
 
 As a Datopian Cloud Manager I want to have one “DataLoad” service I maintain rather than one per instance for efficiency …
 
-## Analysis
+### Flows
 
-We need a Loader that took "good" Tabular Data Resource or Tabular Data Packages and load it into the Classic DataStore
+#### Automatic load
+
+* Users uploads a file to portal using the Dataset editor
+  * This is stored into the blob storage (i.e. local or cloud storage)
+* A "PUSH" notification is triggered to loader service
+* Loader service load file to data API backend (a structured database with web API)
 
 ```mermaid
-graph LR
-
-goodcsv[Tabular Resource / Package]
-datastore[CC DataStore]
-
-goodcsv --load--> datastore
+sequenceDiagram
+  participant a as User
+  participant b as RemoteLocation
+  participant c as CKAN
+  participant d as Loader
+  participant e as DataStore
+  
+  a->>c: create a resource with a location of remote file
+  c->>d: push notification
+  d->>b: pull it
+  d->>e: push it
 ```
 
-### Steps to get tabular data in datastore
+#### Sequence diagram for manual load
+
+The load to the data API system can also be triggered manually:
+
+```mermaid
+sequenceDiagram
+  participant a as User
+  participant b as RemoteLocation
+  participant c as CKAN
+  participant d as Loader
+  participant e as DataStore
+  
+  a->>c: click on upload button
+  c->>d: push notification
+  d->>b: pull it
+  d->>e: push it
+```
+
+## CKAN v2
+
+Provided by either DataPusher or XLoader.
+
+### DataPusher
+
+Service (API) For pushing tabular data to datastore.
+
+Do not confuse with ckanext/datapusher in ckan core codbase. That's simply an extension communicating with the DataPusher API. That is a standalone service , running separately from CKAN app.
+
+https://github.com/ckan/datapusher
+
+https://docs.ckan.org/projects/datapusher/en/latest/
+
+https://docs.ckan.org/en/2.8/maintaining/datastore.html#datapusher-automatically-add-data-to-the-datastore
+
+### XLoader
+
+Does simple load into DB as strings and then casts. As a result much faster than DataPusher. However, you then need to do explicit data-casting after the fact.
+
+https://github.com/ckan/ckanext-xloader
+
+* `load_csv`: https://github.com/ckan/ckanext-xloader/blob/master/ckanext/xloader/loader.py#L40
+* Loader: https://github.com/ckan/ckanext-xloader/blob/master/ckanext/xloader/jobs.py#L100
+
+How does the queue system work: job queue is done by RQ, which is simpler and is backed by Redis and allows access to the CKAN model. Job results are currently still stored in its own database, but the intention is to move this relatively small amount of data into CKAN's database, to reduce the complication of install.
+
+### Flow of Data in Data Load
 
 ```mermaid
 graph TD
 
-tdr[Tabular Data Resource on disk from CSV in FileStore of a resource]
-loadtdr[Load Tabular Data Resource Metadata]
+datastore[Datastore API]
+datapusher[DataPusher]
+pg[Postgres DB]
+filestore[File Store]
+xloader[XLoader]
 
-dscreate[Create Table in DS if not exists]
-cleartable[Clear DS table if existing content]
-pushdatacopy[Load to DS via PG copy]
-done[Data in DataStore]
+filestore --"Tabular data"--> datapusher
+datapusher --> datastore
+datastore --> pg
 
-tdr --> loadtdr
-loadtdr --> dscreate
-dscreate --> cleartable
-
-cleartable --> pushdatacopy
-
-pushdatacopy --> done
-
-logstore[LogStore]
-
-cleartable -. log .-> logstore
-pushdatacopy -. log .-> logstore
+filestore -. or via .-> xloader
+xloader --> pg
 ```
 
-### What is datastore and how to create the DataStore entry
-
-https://github.com/ckan/ckan/tree/master/ckanext/datastore
-* provides an ad hoc database for storage of structured data from CKAN resources
-* Connection with Datapusher: https://docs.ckan.org/en/2.8/maintaining/datastore.html#datapusher-automatically-add-data-to-the-datastore
-* Datastore API: https://docs.ckan.org/en/2.8/maintaining/datastore.html#the-datastore-api
-  * Making Datastore API requests: https://docs.ckan.org/en/2.8/maintaining/datastore.html#making-a-datastore-api-request
-
-#### Create an entry
-
-```
-curl -X POST http://127.0.0.1:5000/api/3/action/datastore_create -H "Authorization: {YOUR-API-KEY}"
-
-resource
--d '{
-  "resource": {"package_id": "{PACKAGE-ID}"},
-  "fields": [ {"id": "a"}, {"id": "b"} ]
-  }'
-```
-
-https://docs.ckan.org/en/2.8/maintaining/datastore.html#ckanext.datastore.logic.action.datastore_create
-
-### Options for Loading
-
-There are 3 different paths we could take:
+Sequence diagram showing the journey of a tabular file into the DataStore:
 
 ```mermaid
-graph TD
-
-pyloadstr[Load in python in streaming mode]
-cleartable[Clear DS table if existing content]
-pushdatacopy[Load to DS via PG copy]
-pushdatads[Load to DS via DataStore API]
-pushdatasql[Load to DS via sql over PG api]
-done[Data in DataStore]
-dataflows[DataFlows SQL loader]
-
-cleartable -- 1 --> pyloadstr
-pyloadstr --> pushdatads
-pyloadstr --> pushdatasql
-cleartable -- 2 --> dataflows
-dataflows --> pushdatasql
-cleartable -- 3 --> pushdatacopy
-
-pushdatasql --> done
-pushdatacopy --> done
-pushdatads --> done
+sequenceDiagram
+    Publisher->>CKAN Instance: Add tabular resource from disk or URL
+    CKAN Instance-->>FileStore: Upload data to storage
+    CKAN Instance-->>Datapusher: Add job to queue
+    Datapusher-->>Datastore: Run the job
+    Datastore-->>Postgres: Create table per resource and insert data
 ```
 
-#### Pros and Cons of different approaches
+### FAQs
 
-|Criteria | Datastore Write API | PG Copy | Dataflows |
-|---------|:--------- |:------- | ---------: |
-| Speed   | Low       |  High   | ???     |
-|Error Reporting| Yes |  Yes    | No(?)   |
-|Easy of implementation|  Yes | No(?) | Yes |
-Works Big data| No | Yes | Yes(?) |
-|Works well in parrallel| No | Yes(?) | Yes(?)
+Q: What happens with non-tabular data?
+A: CKAN has a list of types of data it can process into the DataStore (TODO:link) and will only process those.
 
-### DataFlows
+### What Issues are there?
 
-https://github.com/datahq/dataflows
+Generally: the Data Load system is an hand-crafted, bespoke mini-ETL process. It would seem better to use high-quality third-party ETL tooling here rather than hand-roll be that for pipeline creation, monitoring, orchestration etc.
 
-Dataflows is a framework for loading, processing, manipulating data.
+Specific examples:
 
-* Loader (Loading from external source (or disk)): https://github.com/datahq/dataflows/blob/master/dataflows/processors/load.py
-* Load to an SQL db (Dump processed data) https://github.com/datahq/dataflows/blob/master/dataflows/processors/dumpers/to_sql.py
-* What is error reporting, what is runner system ..., does it have a UI? does it have a queue system?
-  * Think data package pipelines is taking care of all of these. https://github.com/frictionlessdata/datapackage-pipelines
-    * DPP itself is also a ETL framework, just much heavier and a bit complicated.
+* No connection between DataStore system and CKAN validation extension powered by GoodTables https://github.com/frictionlessdata/ckanext-validation Thus, for example, users may edit the DataStore Data Dictionary and be confused that this has no impact on validation. More generally, data validation and data loading might naturally be part of one overall ETL process but Data Load system is not architected in a way that makes this easy to add.
+* No support for Frictionless Data spec sand their ability to specific incoming data structure (CSV format, encoding, column types etc).
+	* Dependent on error-prone guessing of types or manual type conversion
+	* Makes it painful to integrate with broader data processing pipeline (e.g. clean separation would allow type guessing to be optimized elsewhere in another part of the ETL pipeline)
+* Excel loading won't work or won't load all sheets
+* DataPusher
+	* https://github.com/ckan/ckanext-xloader#key-differences-from-datapusher
+	* Works terribly with loading a bit big data. It may for no reason crash after hour of loading. And after reload it goes along
+	* Is slow esp for large datasets and even smallish datasets e.g. 25Mb
+	* often fails due to e.g. data validation/casting errors but this not clear (and unsatisfying to the user)
+* XLoader:
+	* Doesn't work with XLS(X)
+	* has problems fetching resources from Blob Storage (it fails and need to wait until the Resource is uploaded.)
+	* raising Exception NotFound when CKAN has a delay creating resources
+	* re-submits Resources when creating a new Resource
+	* XLoader sets `datastore_active` before data is uploaded
 
-## Notes an QA
 
-* Note: TDR needs info on CKAN Resource source so we can create right datastore entry ..
-* No need to validate as we assume it is good ...
-  * We might want to do that ... still
-* Pros and Cons
-  * Speed
-  * Error reporting ...
-    * What happens with Copy if you hit an error (e.g. a bad cast?)
-    * https://infinum.co/the-capsized-eight/superfast-csv-imports-using-postgresqls-copy
-    * https://wiki.postgresql.org/wiki/Error_logging_in_COPY
-  * Ease of implementation
-  * Good with inserting Big data
-* Create as strings and cast later ... ?
-* xloader implementation with COPY command: https://github.com/ckan/ckanext-xloader/blob/fb17763fc7726084f67f6ebd640809ecc055b3a2/ckanext/xloader/loader.py#L40
+## CKAN v3
 
-Raw insert ~ 15m (on 1m rows)
-Insert with begin / commit ~5m
-copy ~82s (though may have limit on b/w) -- and what happens if pipe breaks
+The v3 implementation is named 💨🥫 AirCan: https://github.com/datopian/aircan
 
-Q: Is it better to but everything in DB as a string and cast later or cast and insert in DB.
-A: Probably cast first and insert after.
+Its a lightweight, standalone service using AirFlow.
 
-Q: Why do we rush to insert the data in DB? We will have to wait until it's casted anyways befroe use
-A: It's much faster to do operations id DB than outside.
+Status: Beta (June 2020)
+
+* Run as a separate microservice with zero coupling with CKAN core (=> gives cleaner separation and testing)
+* Use Frictionless Data patterns and specs where possible e.g. Table Schema for describing or inferring the data schema
+* Uses AirFlow as the runner
+* Uses common ETL / [Data Flows][] patterns and frameworks
+
+[Data Flows]: /flows/
+
+### Design
+
+See [Design page &raquo;](./design/)
 
 <mermaid />

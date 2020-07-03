@@ -18,6 +18,10 @@ module.exports = {
     repoLabel: 'Contribute!',
     lastUpdated: 'Last update',
     editLinks: true,
+    algolia: {
+      apiKey: '8a3294a79d914a3ae946190f9ce08fb7',
+      indexName: 'datopian_tech'
+    },
     sidebar: 'auto',
     nav: [
       { text: 'Home', link: '/' },

@@ -34,7 +34,7 @@ Containers are the first class citizen in DX that plays instrumental roles in im
 
 DX Basic workflow implementation a well known GitOps pattern in Cloud Native approach. As depicted in the diagram, a user commits the code changes which trigger CI automation and upon PR merge CD process kicks in using ArgoCD Operator.
 
-![CICD](images/GitOps_Workflow.jpg)
+![CICD](./images/GitOps_Workflow.jpg)
 
 By Utilizing ArgoCD and Helm, the rollback requirement can be acahived.
 
@@ -81,7 +81,7 @@ Every production environment should have Backup/Restore, Migration and DR strate
 
 ## Detailed design
 
-![CICD](images/DX_architecture.jpg)
+![CICD](./images/DX_architecture.jpg)
 
 1.  This is Cloud agonistics design, tries to minimize the Vendor specific features.
 2.  VPN is the only way to access K8s cluster and Services running in a private network. This includes the ArgoCD UI, Prometheus dashboard, grafana, kube-dashboard, and Kibana console.

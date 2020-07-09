@@ -53,3 +53,15 @@ For now, please see the item related to debugging. At Datopian, we also use [Sta
 ### How Do I Rollback
 
 For rolling back changes made to either Helm Chart or application code, you should write and push a new commit. Due to implementation details of Kubernetes, you might have to manually restart services (you can do that via Argo CD). For instance, if your application reads environment variables only on startup, it won't matter if Kubernetes replaced them while it's running. You should kill the container and see Kubernetes recreating it automatically.
+
+### How Do It Create The Cluster
+
+It's under [How to Use the Developer Experience (DX) Setup](/dx/how-to-use-the-dx-setup/#create-the-cluster).
+
+### Install Argo CD in the Cluster
+
+It's under [How to Use the Developer Experience (DX) Setup](/dx/how-to-use-the-dx-setup/#install-argo-cd-in-the-cluster).
+
+### Deploy a New Application
+
+It's under [How to Use the Developer Experience (DX) Setup](/dx/how-to-use-the-dx-setup/#deploy-a-new-application).

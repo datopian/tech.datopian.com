@@ -158,4 +158,8 @@ Now, you must tell Argo CD to start managing a deployment for this new Helm Char
     ```
 7. Add a DNS entry for the project (and the ingress defined in `values.yaml` or `values.[env].yaml`) in Cloudflare.
 
-Now, access the newly deployed application in the address defined in Cloudflare.
+Now, access the newly deployed application in the address defined in Cloudflare. -- ask Irio to define an address.
+
+After you have your new app address defined in Cloudflare, you have to [create certificate](https://gitlab.com/datopian/tech/devops/-/blob/master/quickstart-guide-to-cert-manager-in-k8s.md). 
+For dev/test purposes you can access your new app at `localhost:3000` by port-forward: 
+`kubectl port-forward service/aircan-dev-dx-ckan-aircan -n aircan-dev 3000:80` from the `cli`.

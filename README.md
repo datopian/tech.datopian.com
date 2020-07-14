@@ -99,4 +99,10 @@ footer: Copyright © 2016-present Datopian
       <a href="/import-ui/">Read more &raquo;</a>
     </p>
   </div>
+  <div class="feature">
+    <h2>Developer Experience</h2>
+    <p>
+      <a href="/dx/">Read more &raquo;</a>
+    </p>
+  </div>
 </div>

@@ -2,14 +2,11 @@
 
 ## Introduction
 
-Data load covers functionality for automatedly loading structured data into portal, usually into the system that powers the [data API][dapi].
+Data load covers functionality for automatedly loading structured data such as tables into a data management system. Data load is usually part of a larger [Data API (DataStore)][dapi] component.
 
-It is distinct from uploading files ("blobs") to the portal and from a "write" data API. It is a part of the larger [Data API (DataStore)][dapi] component. The load terminology comes from ETL (extract, transform, load).
+Load is distinct from uploading raw files ("blobs") and from a "write" data API: from blobs because the data is structured (e.g. rows and columns) and that structure is expected to be preserved; from a write data API because the data is imported in bulk (e.g. a whole CSV file) rather than writing one row at a time.
 
-It includes:
-
-* Bulk Load: bulk import of individual data files
-* (Potentially) some ETL -- this takes us more into data factory
+The load terminology comes from ETL (extract, transform, load) though in reality this functionality will often include some extraction and transformation -- extracting the structured data from the source formats and potentially transformation if data needs some cleaning.
 
 [dapi]: /data-api/
 
@@ -17,20 +14,15 @@ It includes:
 
 As a Publisher i want to load my dataset (resource) into the DataStore quickly and reliably so that my data is available over the data API.
 
-* Be “tolerant” where possible of bad data …
-* And get feedback if it went wrong and how I can fix it …
-* I want to update the schema for the DataStore so data has right types (and be
+* Be “tolerant” where possible of bad data so that it still loads
+* And get feedback of load progress and especially if it went wrong and how I can fix it so that I know my data is loaded (or if not what I can do about it)
+* I want to update the schema for the dataso data has right types (before and/or after load)
 * I want to be able to update with a new resource file and only have it load the most recent
 
-#### Correct the types in the DataStore (after load?)
+For sysadmins:
 
-#### Track Performance Status as [Cloud] Sysadmin
-
-As a Datopian Cloud Sysadmin I want to know what is happening with “DataLoad” so that I can fix if problems for clients
-
-#### One Data Load Service per Cloud
-
-As a Datopian Cloud Manager I want to have one “DataLoad” service I maintain rather than one per instance for efficiency …
+* Track Performance: As a Datopian Cloud Sysadmin I want to know if there are issues so that I can promptly address any problems for clients
+* One Data Load Service per Cloud: As a Datopian Cloud Manager I may want to have one “DataLoad” service I maintain rather than one per instance for efficiency …
 
 ### Flows
 
@@ -167,8 +159,8 @@ Its a lightweight, standalone service using AirFlow.
 
 Status: Beta (June 2020)
 
-* Run as a separate microservice with zero coupling with CKAN core (=> gives cleaner separation and testing)
-* Use Frictionless Data patterns and specs where possible e.g. Table Schema for describing or inferring the data schema
+* Runs as a separate microservice with zero coupling with CKAN core (=> gives cleaner separation and testing)
+* Uses Frictionless Data patterns and specs where possible e.g. Table Schema for describing or inferring the data schema
 * Uses AirFlow as the runner
 * Uses common ETL / [Data Flows][] patterns and frameworks
 

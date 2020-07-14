@@ -29,9 +29,8 @@ This structure is more oriented to the initial development of a feature topic wh
 
 * [ ] Introduction
   * [ ] 1 short headline paragraph
-  * [ ] Features
-  * [ ] Key Job stories (if lots have an appendix for full job stories)
-  * [ ] Key components
+  * [ ] Features and/or Key Job stories (if lots have an appendix for full job stories)
+  * [ ] Key components and/or Flows
 * [ ] How this works in CKAN 2
   * [ ] Organize corresponding to the key components (and maybe a bit job stories)
   * [ ] Limitations / issues

@@ -2,14 +2,6 @@
 sidebar: auto
 ---
 
-::: warning
-**These docs are a work in progress!**
-
-If you have issues, [submit an issue](https://gitlab.com/datopian/tech/tech.datopian.com/issues).
-
-If you have improvements, [submit a merge request](https://gitlab.com/datopian/tech/tech.datopian.com/merge_requests)
-:::
-
 # Data Explorer
 
 The Datopian Data Explorer is a React single page application and framework for creating and displaying rich data explorers (think Tableau-lite). Use stand-alone or with CKAN. For CKAN it is a drop-in replacement for ReclineJS in CKAN Classic.

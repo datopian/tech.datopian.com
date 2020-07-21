@@ -15,8 +15,8 @@ The load terminology comes from ETL (extract, transform, load) though in reality
 As a Publisher i want to load my dataset (resource) into the DataStore quickly and reliably so that my data is available over the data API.
 
 * Be “tolerant” where possible of bad data so that it still loads
-* And get feedback of load progress and especially if it went wrong and how I can fix it so that I know my data is loaded (or if not what I can do about it)
-* I want to update the schema for the dataso data has right types (before and/or after load)
+* Get feedback on load progress, especially if something went wrong (with info on how I can fix it), so that I know my data is loaded (or if not what I can do about it)
+* I want to update the schema for the data so that the data has right types (before and/or after load)
 * I want to be able to update with a new resource file and only have it load the most recent
 
 For sysadmins:
@@ -36,7 +36,7 @@ For sysadmins:
 ```mermaid
 sequenceDiagram
   participant a as User
-  participant b as RemoteLocation
+  participant b as Blob Storage
   participant c as CKAN
   participant d as Loader
   participant e as DataStore
@@ -45,6 +45,7 @@ sequenceDiagram
   c->>d: push notification
   d->>b: pull it
   d->>e: push it
+  d-->>c: success (or failure) notification
 ```
 
 #### Sequence diagram for manual load
@@ -54,7 +55,7 @@ The load to the data API system can also be triggered manually:
 ```mermaid
 sequenceDiagram
   participant a as User
-  participant b as RemoteLocation
+  participant b as Blob Storage
   participant c as CKAN
   participant d as Loader
   participant e as DataStore
@@ -63,6 +64,7 @@ sequenceDiagram
   c->>d: push notification
   d->>b: pull it
   d->>e: push it
+  d-->>c: success (or failure) notification
 ```
 
 ## CKAN v2
@@ -71,9 +73,7 @@ Provided by either DataPusher or XLoader.
 
 ### DataPusher
 
-Service (API) For pushing tabular data to datastore.
-
-Do not confuse with ckanext/datapusher in ckan core codbase. That's simply an extension communicating with the DataPusher API. That is a standalone service , running separately from CKAN app.
+Service (API) For pushing tabular data to datastore. Do not confuse it with `ckanext/datapusher` in ckan core codbase which is simply an extension communicating with the DataPusher API. DataPusher itself is a standalone service, running separately from CKAN app.
 
 https://github.com/ckan/datapusher
 
@@ -83,7 +83,10 @@ https://docs.ckan.org/en/2.8/maintaining/datastore.html#datapusher-automatically
 
 ### XLoader
 
-Does simple load into DB as strings and then casts. As a result much faster than DataPusher. However, you then need to do explicit data-casting after the fact.
+XLoader runs as async jobs within CKAN and bulk loads data via Postgres COPY command. This is fast but it does mean it only loads data as strings and explicit type-casting must be done after the load (the user must edit the data dictionary). XLoader was built to address 2 major issues with DataPusher:
+
+* Speed: DataPusher converts data row by row and writes over the DataStore write API and hence is quite slow.
+* Dirty data: DataPusher attempts to guess data types and then cast and this regularly led to failures which though logical were frustrating to users. XLoader gets the data in (as strings) and let's the user sort out types later.
 
 https://github.com/ckan/ckanext-xloader
 

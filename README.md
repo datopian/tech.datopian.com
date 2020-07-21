@@ -105,4 +105,10 @@ footer: Copyright © 2016-present Datopian
       <a href="/dx/">Read more &raquo;</a>
     </p>
   </div>
+  <div class="feature">
+    <h2>DataHub</h2>
+    <p>
+      <a href="/datahub/">Read more &raquo;</a>
+    </p>
+  </div>
 </div>

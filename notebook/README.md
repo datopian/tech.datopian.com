@@ -2,6 +2,48 @@
 
 Our lab notebook. Informal thoughts. A very raw blog.
 
+## Data Factory 2020-07-23 @rufuspollock
+
+I've used the term Data Factory but it's not in common use. At the same time, there doesn't seem to be a good term out there in common use for what I'm referring to.
+
+What am I referring to?
+
+I can start with terms we do have decent-ish terminlogy for: data pipelines or data flows.
+
+Idea is reasonably simple: I'm doing stuff to some data and it involves a series of processing steps which I want to run in order. It may get more complex: rather than a linear sequence of tasks I may have branching and/or parallelization.
+
+Because data "flows" through these steps from one end to the otehr we end up with terminology like "flow" or "pipeline".
+
+Broken down into its components we have two things:
+
+* Tasks: the individual processing nodes (aka Processors / Operators)
+* Pipeline: which combines these tasks into a whole (aka Flow, Graph, DAG ...) 
+
+[NB: tasks in an actual flow could either be bespoke to that flow or are configured instances of a template / abstract tasks e.g. load from s3 might be be a template task which as a live task in an actual flow will be configured with a specific bucket.]
+
+So far, so good.
+
+But what is the name for a system (like AirFlow, Luigi) for creating, managing and running data pipelines?
+
+My answer: a Data Factory.
+
+What I don't like with this is that it messes with the metaphor: factories are different from pipelines. If we went with Data Factory then we should talk about "assembly lines" rather than "pipelines" and "workers" (?) rather than tasks. If one stuck with water we'd end up with something like a Data Plant but that sounds weird.
+
+Analogy: for data we clearly have a file and dataset. And a system for organizing and managing datasets is a data catalog or data management system. So what's the name for the system for processing datasets ...
+
+And finally :checkered_flag: I should mention [AirCan][], our own Data Factory system we've been developing built on AirFlow.
+
+[AirCan]: https://github.com/datopian/aircan/
+
+### Appendix: Terminology match up
+
+| Concept |  Airflow | Luigi |
+|---------|----------|-------|
+| Processor |  Task  | Task  |
+| Pipeline  | DAG    | ?     |
+| Pipeline (complex, branching) | DAG |
+
+
 ## Commonalities of Harvesting and Data(Store) Loading 2020-06-01 @rufuspollock
 
 tags: portal, load, factory

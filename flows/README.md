@@ -2,17 +2,19 @@
 
 A Data Flow is a work*flow* or processing *flow* for transforming or analysing data. A Factory is the system for creating and orchestrating these flows.
 
-In a data system, a Flow is fundamental *operation* whilst the Dataset is the fundamental *object*.
-
 ```
-    Data      <--->    Transformations
+Objects
 
-  Row                     Operator
-  File                      Flow 
-  Dataset                 Factory
+Row
+  File
+    Dataset
+
+Transformations
+
+Operator
+  Pipeline
+    Flow 
 ````
-
-Flows are therefore complementary to Data.
 
 NTS
 

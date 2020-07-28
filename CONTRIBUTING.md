@@ -68,7 +68,7 @@ Copy and pastable version for issues:
 
 The above layout is more oriented to those designing and build the solution - and less to users. As a feature gets more mature in CKAN v3 we may want to refactor to have a structure more focused on using the feature and move design information down or even out to a separate page.
 
-The following is a suggested structure that would be appropriaate -- and a good one generally for a READMEs for tools or products.
+The following is a suggested structure that would be appropriate -- and a good one generally for a READMEs for tools or products.
 
 * [ ] Intro: short paragraph describing
 * [ ] Pros / features of this approach e.g. memory consumption, data validation etc, testing

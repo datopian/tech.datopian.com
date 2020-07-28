@@ -4,6 +4,10 @@
 
 Design of a DMS publishing system, with a focus on CKAN v3 / DataHub.
 
+Goal: an elegant single page application (that is easy to reuse and customize) that takes you from choosing your data file to a data package. Aka "a javascript app for turning a CSV into a data package".
+
+This application would form the UI part of a "manual" user flow of importing a data file into a Data Portal.
+
 ### The framework approach
 
 As a product, the Publish system should be thought of more as a framework than a single solution: a set of patterns, components and flows that can be composed together to build different applications and workflows.
@@ -14,14 +18,24 @@ This approach is is designed to be extensible so that new workflows and their re
 
 ## Design
 
-Technology:
+### Principles and Remarks
+
+* Simplicity: a focus on extraordinary, easy and elegant user experience
+* Speed: not only responsiveness, but also speed to being "done"
+* Tabular: focus on tabular data to start with
+* Adaptable / Reusable: this system should be rapidly adaptable for other import flows
+	* A copy-and-paste-able template that is then adapt with minor changes
+  * Over time this may evolve to something configurable
+* CKAN-compatible (?): (Longer term) e.g. be able to reuse ckanext-scheming config
+
+### Technology
 
 * Build in Javascript as a SPA (single page application)
 * Use React as the framework
 * ? Assume we can use NextJS as the SSR/SSG app
 * Use Apollo local storage (rather than Redux) for state management
 
-Architecture
+### Architecture
 
 * Encapsulate interaction with backend in a library. Backend is CKAN MetaStore and Blob Storage access, raw Blob Storage itself (almost certainly cloud)
 * Split UI into clear components and even sub-applications (for example, a sub-application for resource adding)

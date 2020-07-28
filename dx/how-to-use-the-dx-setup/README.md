@@ -37,6 +37,7 @@ Before running applications in the cluster, you need something: a cluster.
     * Cloud SQL Admin.
     * Compute Admin.
     * Compute Network Admin.
+    * Compute Storage Admin
 3. Download the credentials file (in JSON) for this service account.
 4. Enable the following Google Cloud APIs:
     * [Cloud Resource Manager API](https://console.developers.google.com/apis/api/cloudresourcemanager.googleapis.com/overview)

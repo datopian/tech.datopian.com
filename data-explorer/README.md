@@ -258,3 +258,7 @@ See [a real-world example here](https://gitlab.com/datopian/clients/ckan-montrea
 In order to build files for production, run `npm run build` or `yarn build`.
 
 You need to have **node version >= 12** in order to build files. Otherwise a 'heap out of memory error' gets thrown.
+
+## Appendix: Design
+
+See [Data Explorer Design page &raquo;](./design/)

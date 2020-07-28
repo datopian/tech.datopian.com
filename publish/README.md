@@ -71,6 +71,50 @@ And in any case most of us start from files not datasets (even if datasets evolv
 
 ### Flows
 
+* Publish flows are highly custom: different platforms have different needs
+* At the same time there are core workflows that most people will use (and customize)
+* The flows shown here are therefore illustrative and inspirational rather than definitive
+
+The 30,000 foot view:
+
+```mermaid
+graph TD
+
+user[User with data and/or metadata]
+publish[Publish process]
+platform["Storage (metadata and blobs)"]
+
+user --> publish --> platform
+```
+
+Let's start with the simplest case of adding a single file:
+
+```mermaid
+graph TD
+
+addfile[Drop a file]
+metadata[Add Metadata]
+upload[Upload to Storage]
+save[Save]
+
+addfile -.in the background.-> upload
+addfile --> metadata
+upload -.progress reporting.-> save
+metadata --> save
+```
+
+Notes
+
+* Alternative to "Drop a file" would be to just "Link" to a file that is already online and available
+
+:::tip
+We think a "file driven" approach where the flow starts with a user adding a file (and doing upload) is preferable to an appraoch where you start with a dataset and metatdata (as is the default today in CKAN) and then add files.
+
+Why? First, a file is what the user has immediately to hand and it is concrete whilst "metadata" is abstract. Second, common tools for storing files e.g. Dropbox or Google Drive start with providing a file - only later, and optionally, do you rename it, move it etc.
+
+That said, with tools like GitHub or Gitlab one needs to create a "project", albeit a minimal one, before being able to push any content. However, GitHub and Gitlab are developer oriented tools that can assume a willingness to tolerate a slightly more cumbersome UX. Furthermore, on those platfomrs there is no use case of providing a single file - a user must create a git repo first.
+:::
+
 #### Overview Deck
 
 **Deck**: This deck (Feb 2019) provides an overview of the core flow publishing a single tabular file e.g. CSV and includes a a basic UI mockup illustrating the flow described below.

@@ -10,7 +10,7 @@ Publication as a process can be divided into the following cases:
 
 * Manual: publication is done by people via a user interfaces or other tool
 * Programmatic: publication is done programatically using APIs and is usually part of automated processes
-* Hybrid: which combines manual and programmatic, for example, harvesting where setup and configuration may be done in a UI by a person and then the process runs automatically and programmatically. In addition, new harvesting flows require programmatic setup.
+* Hybrid: which combines manual and programmatic, for example, harvesting where setup and configuration may be done in a UI by a person and then the process runs automatically and programmatically. In addition, some new harvesting flows require programmatic setup (e.g. writing a harvester in Python for a new source data format).
 
 **Focus on Manual** we will focus on the manual in this section: programmatic is by nature largely up to the client programmer (assuming the APIs are there) whilst [Harvesting][] has a section of its own. That said, many concepts here are relevant for other cases e.g. material on [profiles][] and [schemas][].
 
@@ -25,9 +25,9 @@ Publication as a process can be divided into the following cases:
 
 ### Examples
 
-At its simplest, a publishing process can be simply a form to provide some metadata about a data file or dataset -- with the data itself stored elsewhere. This could be appropriate for a classic pure catalog application.
+At its simplest, a publishing process can just involve providing a few metadata fields in a form -- with the data itself stored elsewhere.
 
-At the other end of the spectrum, we could have a multi-stage and complex process including, for example:
+At the other end of the spectrum, we could have a multi-stage and complex process like this:
 
 * multiple (simultaneous) resource upload with shared metadata e.g. I'm creating a timeseries dataset with the last 12 months of data and I want each file to share the same column information but to have different titles
 * a variety of metadata profiles

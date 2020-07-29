@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Datopian Technical Docs',
-  description: 'All our technical documentation in one place',
+  title: 'Datopian Tech',
+  description: 'An overview of our technology',
   markdown: {
     linkify: true,
     typographer: true,
@@ -16,7 +16,7 @@ module.exports = {
   themeConfig: {
     repo: 'https://gitlab.com/datopian/tech/tech.datopian.com',
     repoLabel: 'Contribute!',
-    lastUpdated: 'Last update',
+    lastUpdated: 'Modified',
     editLinks: true,
     algolia: {
       apiKey: '8a3294a79d914a3ae946190f9ce08fb7',

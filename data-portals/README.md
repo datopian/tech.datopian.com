@@ -6,7 +6,7 @@
 
 ## Introduction: Data Portals are Gateways to Data
 
-A Data Portal is a gateway to data. That gateway can be big or small, open or limited. For example, data.gov provides a gateway to US Government for everyone, whilst an enterprise "intra" data portal is limited to that company's personnel.
+A Data Portal is a gateway to data. That gateway can be big or small, open or restricted. For example, data.gov is open to everyone, whilst an enterprise "intra" data portal is restricted to its personnel.
 
 A Data Portal's core purpose is to enable the rapid discovery and use of data. However, as a flexible, central point of truth on an organizations data assets, a Data Portal can become essential data infrastructure and be extended or integrated to provide many additional features:
 

@@ -4,13 +4,13 @@
 
 Publish functionality covers the whole area of creating and editing datasets and resources, including data upload. The core job story is something like:
 
-> When a Data Curator has a data file or dataset they want to add it manually (e.g. via drag and drop etc) to their data portal/platform quickly and easily so that it is avaialble there.
+> When a Data Curator has a data file or dataset they want to add it to their data portal/platform quickly and easily so that it is available there.
 
-Publication as a process can be divided into the following cases:
+Publication can be divided by its *mode*:
 
-* Manual: publication is done by people via a user interfaces or other tool
-* Programmatic: publication is done programatically using APIs and is usually part of automated processes
-* Hybrid: which combines manual and programmatic, for example, harvesting where setup and configuration may be done in a UI by a person and then the process runs automatically and programmatically. In addition, some new harvesting flows require programmatic setup (e.g. writing a harvester in Python for a new source data format).
+* **Manual**: publication is done by people via a user interfaces or other tool
+* **Programmatic**: publication is done programatically using APIs and is usually part of automated processes
+* **Hybrid**: which combines manual and programmatic. An example would be harvesting where setup and configuration may be done in a UI manually with the process then running automatically and programmatically (in addition, some new harvesting flows require manual programmatic setup e.g. writing a harvester in Python for a new source data format).
 
 **Focus on Manual** we will focus on the manual in this section: programmatic is by nature largely up to the client programmer (assuming the APIs are there) whilst [Harvesting][] has a section of its own. That said, many concepts here are relevant for other cases e.g. material on [profiles][] and [schemas][].
 
@@ -29,13 +29,17 @@ At its simplest, a publishing process can just involve providing a few metadata 
 
 At the other end of the spectrum, we could have a multi-stage and complex process like this:
 
-* multiple (simultaneous) resource upload with shared metadata e.g. I'm creating a timeseries dataset with the last 12 months of data and I want each file to share the same column information but to have different titles
-* a variety of metadata profiles
-* data validation (prior to ingest) including checking for PII (personally identifiable infromation) 
-* complex workflow related to approval e.g. only publish if at least two people have approved
-* embargoing (only make public at time X)
+* Multiple (simultaneous) resource upload with shared metadata e.g. I'm creating a timeseries dataset with the last 12 months of data and I want each file to share the same column information but to have different titles
+* A variety of metadata profiles
+* Data validation (prior to ingest) including checking for PII (personally identifiable infromation) 
+* Complex workflow related to approval e.g. only publish if at least two people have approved
+* Embargoing (only make public at time X)
 
 ### Features
+
+* Create and edit datasets and resources
+* File upload as part of resource creation
+* Custom metadata for both profile and schemas
 
 ### Job Stories
 
@@ -61,21 +65,31 @@ When adding a resource which is tabular (e.g. csv, excel) I want to enter the (t
 
 When adding a resource which is currently stored in dropbox/gdrive/onedrive I want to pull the bytes directly from there so as to speed up the upload process
 
-### Remarks
+### Domain Model
 
-Most ordinary data users don't distinguish resources and datasets in their everyday use. They also prefer a single (denormalized) view onto their data.
+The domain model here is that of the [DMS]() and we recommend visiting that page for more information. The key items are:
 
-Normalization is not normal for users (it is a convenience, economisation and consistency device)
+* Project
+* Dataset
+* Resource
 
-And in any case most of us start from files not datasets (even if datasets evolve later).
+[DMS]: /dms/
 
-### Flows
+### Principles
+
+* Most ordinary data users don't distinguish resources and datasets in their everyday use. They also prefer a single (denormalized) view onto their data.
+* Normalization is not normal for users (it is a convenience, economisation and consistency device)
+* And in any case most of us start from files not datasets (even if datasets evolve later).
+* Minimize the information the user has to provide to get going. For example, does a user *have* to provide a license to start with? If that is not absolutely required leave this item for later.
+* Automate where you can but only where you can guess reliably. If you do guess, give the user ability to modify. Otherwise, magic often turns into mud. For example, if we are guessing file types let the user check and correct this.
+
+## Flows
 
 * Publish flows are highly custom: different platforms have different needs
 * At the same time there are core workflows that most people will use (and customize)
 * The flows shown here are therefore illustrative and inspirational rather than definitive
 
-The 30,000 foot view:
+### The 30,000 foot view
 
 ```mermaid
 graph TD
@@ -87,7 +101,67 @@ platform["Storage (metadata and blobs)"]
 user --> publish --> platform
 ```
 
-Let's start with the simplest case of adding a single file:
+### Dataset: High Level
+
+```mermaid
+graph TD
+
+project[Project/Dataset create]
+addres["Add resource(s)"]
+save[Save / Commit]
+
+project --> addres
+addres --> save
+````
+
+### Adding in dataset metadata
+
+```mermaid
+graph TD
+
+project[Project/Dataset create]
+addres["Add resource(s)"]
+addmeta["Add dataset metadata"]
+save[Save / Commit]
+
+project --> addres
+addres -.optional.-> addmeta
+addmeta -.-> save
+addres -.-> save
+````
+
+The approach above is "file driven" rather than "metadata driven", in the sense that you are start by providing a file rather than providing metadata.
+
+Here's the metadata driven flow:
+
+```mermaid
+graph TD
+
+project[Project/Dataset create]
+addres["Add resource(s)"]
+addmeta[Add dataset metadata]
+save[Save / Commit]
+
+project --> addmeta
+addmeta --> addres
+addres --> save
+addmeta -.-> save
+```
+
+:::tip Comment: The file driven approach is preferable
+We think the "file driven" approach where the flow starts with a user adding and uploading a file (and then adding metadata) is preferable to an metadata driven approach where you start with a dataset and metatdata and then add files (as is the default today in CKAN).
+
+Why do we think a file driven approach is better? a) a file is what the user has immediately to hand b) it is concrete whilst "metadata" is abstract c) common tools for storing files e.g. Dropbox or Google Drive start with providing a file - only later, and optionally, do you rename it, move it etc.
+
+That said, tools like GitHub or Gitlab require one to create a "project", albeit a minimal one, before being able to push any content. However, GitHub and Gitlab are developer oriented tools that can assume a willingness to tolerate a slightly more cumbersome UX. Furthermore, the default use case is that you have a git repo that you wish to push so the the use case of a non-technical user uploading files is clearly secondary. Finally, in these systems you can create a project just to have an issue tracker or wiki (without having fiile storage). In this case, creating the project first makes sense.
+
+In a DMS, we are often dealing with non-technical or semi-technical users. Thus, providing a simple, intuitive flow is preferable. That said, one may still have a very lightweight project creation flow so that we have a container for the files (just as in, say, Google Drive you already have a folder to put your files in).
+:::
+
+
+### Adding a resource
+
+From here on, we'll zoom in on the "publish" part of that process. Let's start with the simplest case of adding a single resource in the form of an uploading file:
 
 ```mermaid
 graph TD
@@ -106,14 +180,6 @@ metadata --> save
 Notes
 
 * Alternative to "Drop a file" would be to just "Link" to a file that is already online and available
-
-:::tip
-We think a "file driven" approach where the flow starts with a user adding a file (and doing upload) is preferable to an appraoch where you start with a dataset and metatdata (as is the default today in CKAN) and then add files.
-
-Why? First, a file is what the user has immediately to hand and it is concrete whilst "metadata" is abstract. Second, common tools for storing files e.g. Dropbox or Google Drive start with providing a file - only later, and optionally, do you rename it, move it etc.
-
-That said, with tools like GitHub or Gitlab one needs to create a "project", albeit a minimal one, before being able to push any content. However, GitHub and Gitlab are developer oriented tools that can assume a willingness to tolerate a slightly more cumbersome UX. Furthermore, on those platfomrs there is no use case of providing a single file - a user must create a git repo first.
-:::
 
 #### Overview Deck
 

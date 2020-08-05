@@ -4,9 +4,9 @@ This document is an introduction to the technical design of Data Management Syst
 
 ## Domain Model
 
-* Project: a data project. It has has a single dataset in the same way GitHub or Gitlab "project" has a single repo.
-* Dataset
-* Resource (or File)
+* Project: a data project. It has has a single dataset in the same way GitHub or Gitlab "project" has a single repo. Traditionally in, say CKAN, this has been implicit and identified with the dataset. There are, however, important differences: a project can include a dataset but also other related functionality such as issues, workflows etc.
+* Dataset: a set of data, usually zero or more resources.
+* Resource (or File): a single data object.
 
 Revisioning
  

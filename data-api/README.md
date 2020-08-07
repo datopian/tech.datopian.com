@@ -14,7 +14,7 @@ A Data API provides *API* access to data stored in a Data Portal. APIs provide g
 
 ### API vs Bulk Access
 
-Direct download of a whole data file is the default method of access for data in a data portal. API access complements this "bulk", direct download approach, and, in some situations may become the primary access option (so-called "API first"), or, even replace it -- for example, data may be stored solely in a structured database with read and write APIs as the default access method.
+Direct download of a whole data file is the default method of access for data in a data portal. API access complements this direct download in "bulk" approach. In some situations API access may be the primary access option (so-called "API first"). In other cases, structured storage and API read/write may be the *only* way the data is stored and there is no bulk storage -- for example, this would be a natural approach for time series data which is being rapidly updated e.g. every minute.
 
 *Fig 1: Contrasting Download and API based access*
 
@@ -119,12 +119,11 @@ As a Data Curator I want to create a custom API for one or more resources so tha
 
 As a Consumer I want to search across all the data in the Data Portal at once so that I can find the value I want quickly and easily … (??)
 
-####
+#### Search for variables used in datasets
 
 As a Consumer (researcher/student …) I want to look for datasets with particular variables in  them so that I can quickly locate the data I want for my work
 
 * Search across the column names so that ??
-
 
 #### Track Usage of my Data API
 

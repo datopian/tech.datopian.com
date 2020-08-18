@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* Kubeconfig to access the cluster (ask DevOps team)
+* Access to the cluster (ask the DevOps team about kubeconfig)
 * [Argo CD CLI](https://argoproj.github.io/argo-cd/cli_installation/)
   * Get the executable suitable for your platform from [argo-cd releases](https://github.com/argoproj/argo-cd/releases)
   * Copy it in your `$PATH` (e.g. `/usr/local/bin`)

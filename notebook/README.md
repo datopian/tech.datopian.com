@@ -2,6 +2,58 @@
 
 Our lab notebook. Informal thoughts. A very raw blog.
 
+## How Views should work in CKAN v3 (Next Gen) 2020-08-10  @rufuspollock
+
+Two key points:
+
+1. Views should become an explicit (data) project level object
+2. Previews: should be very simple and work *without* data API so they work with revisions
+
+Why?
+
+* I can't show a view on dataset page atm (why not?)
+* I have multiview view inside reclinejs but reset are single views ...
+* I can't create views across multiple resources
+* Views often depend on data API
+  * Which causes problems with revisions and viewing old revisions of resources
+* They are nested under resources but they aren't really part of a resource
+
+Distinguish 3 concepts
+
+* Query UI (explorer)
+* Preview: a very simple method for previewing specific raw data types e.g. csv, excel, json, xml, text, geojson etc ...
+  * Key aspect are ability to sample a part and to present.
+* Viz: graph, map, ... (visualizations)
+
+## What a (future) Data Project looks like 
+
+NB: To understand what a project is see [DMS](/dms/).
+
+It helps me to be very concreate and imagine what this looks looks like on disk:
+
+```
+datapackage.json # dataset
+data.csv    # dataset resources (could be anywhere)
+views.yml
+data-api.yml
+flows.yml
+```
+
+Or, a bit more elegantly:
+
+```
+data/
+  gdp.csv | gdp.pdf | ...
+views/
+  graph.json | table.json | ...
+api/
+  gdp.json | gdp-ppp.json | ...
+flows/
+  ...
+README.md
+datapackage.json    # ? does this just contain resources or more than that? Just resources
+```
+
 ## Data Factory 2020-07-23 @rufuspollock
 
 I've used the term Data Factory but it's not in common use. At the same time, there doesn't seem to be a good term out there in common use for what I'm referring to.

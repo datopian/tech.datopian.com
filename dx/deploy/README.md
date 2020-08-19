@@ -2,50 +2,52 @@
 
 ## Prerequisites
 
-* Access to the cluster (ask DevOps team)
+* Access to the cluster (ask the DevOps team about kubeconfig)
 * [Argo CD CLI](https://argoproj.github.io/argo-cd/cli_installation/)
-  * Get the executable suitable for your platform from [this page](https://github.com/argoproj/argo-cd/releases)
+  * Get the executable suitable for your platform from [argo-cd releases](https://github.com/argoproj/argo-cd/releases)
   * Copy it in your `$PATH` (e.g. `/usr/local/bin`)
     * For the rest of this guide, we will assume an executable named `argocd`
 * [Google Cloud SDK](https://cloud.google.com/sdk/docs/downloads-interactive)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
----
----
----
-
 ## Recipes
 
-### Deploy a project from the old ckan-cloud cluster
+### Deploy a project
+
+#### Create new project and modify templates
+
+In order to deploy a new project we will need to update DX helm templates per your needs. To make life easier create a new repository for our project and add it as an origin remote to the [dx-helm-template](https://gitlab.com/datopian/experiments/dx-helm-template)
 
 > NOTE: Replace \<project-name\> with the name of the project you want to create, e.g. "dx-helm-ed"
 
 1. [Create a new GitLab repository](https://gitlab.com/projects/new?namespace_id=5587649) for the new deployment
-1. Clone the deployment template
+1. Clone the deployment template and add the new repository as an origin remote 
+    > \<repo-url\> is the URL of your new repo
     ```
-    # SSH
-    $ git clone git@gitlab.com:datopian/experiments/dx-helm-template.git <project-name>
-    # or HTTPS
     $ git clone https://gitlab.com/datopian/experiments/dx-helm-template <project-name>
     $ cd <project-name>
     $ git remote rename origin upstream
+    $ git remote add origin <repo-url>
     ```
 1. Customize the template (more info [here](#template-customization))
-1. Add and commit your changes to the Git repository (see inline file comments for explanations).
+1. Add and commit your changes to the Git repository
+    ```
+    $ git add .
+    $ git push -u --all origin
+    ```
 1. (optional) Update Helm dependecies:
     ```
     $ cd <directory containing chart.yaml>
     $ helm dependency update
+    $ cd - && git add . && git push -u --all origin
     ```
-    Now `git add` / `git commit` the dependencies updates
-1. Push the modified template into the new project
-    > \<repo-url\> is the push / origin URL of your new repo
-    ```
-    $ git remote add origin <repo-url>
-    $ git push -u --all origin
-    ```
+
+#### Create Tokens and connect to Argo CD
+
+Time to create Argo CD application in order to continiously deploy new project. For that we need to connect to Argo CD, reserve a new namspace in kubernetes cluster, and get deploy tokens from Gitlab:
+
 1. Create a read-only Deploy Token for the new repository (Settings > Repository > Deploy Tokens). 
-1. Time to connect to the remote Argo CD and login using the CLI:
+1. Connect to the remote Argo CD and login using the CLI:
 
     ```
     $ kubectl port-forward service/my-release-argocd-server 8080:80
@@ -81,23 +83,26 @@
     --dest-namespace <name>-dev \
     --server localhost:8080
     ```
+
+#### Add DNS and create certificates
+
 1. Add a DNS entry for the project, as defined in the `values.yaml` file(s).
 1. After you have your new app address defined in DNS, you have to [create certificate](https://gitlab.com/datopian/tech/devops/-/blob/master/quickstart-guide-to-cert-manager-in-k8s.md). 
 
 
-#### Template customization
+## Template customization
 
 
-##### File system structure
+### File system structure
 
-Rename the top level directory to match your project name (without environment name, e.g. `ed`, not `ed-staging`).
+Rename the top level directory to match your project name (without environment name, e.g. `py-project`, not `py-project-staging`).
 
-##### Chart.yaml
+### Chart.yaml
 
 * `name` - the name of the project
 * `description` - the description
 
-##### Values YAML files
+### Values YAML files
 
 Each environment you deploy should have a specific values.\<env-name\>.yaml file, e.g. values.staging.yaml.
 These files will be used when creating the environments within the cluster.
@@ -106,12 +111,12 @@ For now, we store all secret environment variables in the `env.ckan` key, and we
 We are currently working towards a better / easier to use implementation which would avoid plain text storing of variables.
 
 
-#### Change dependencies versions
+## Changing dependency versions
 
 
-##### Solr
+### Solr
 
-The default Solr version in our CKAN template is 6.6.6, which is newer than what some `ckan.io` instances are using. In some cases, you will want to run the earlier 5.5.5 version, to ensure compatibility with the existing code. In order to do that, you need to clone te source chart for DX CKAN, modify it and rebuild as a dependency of your project.
+The default Solr version in our CKAN template is 6.6.6, which is newer than what some `ckan.io` instances are using. In some cases, you will want to run the earlier 5.5.5 version, to ensure compatibility with the existing code. In order to do that, you need to clone the source chart for DX CKAN, modify it and rebuild as a dependency of your project.
 
 1. Clone the source chart in a directory the same level with your project
     ```
@@ -138,11 +143,11 @@ The default Solr version in our CKAN template is 6.6.6, which is newer than what
 1. Profit! (i.e. go to Argo CD interface and watch the new Solr image being deployed)
 
 
-### Post Installation tasks
+## Post Installation tasks
 
 In order to have everything set up and running, there are some (still) manual steps needed to make sure everything is deployed correctly:
 
-#### Solr initialization (6.x)
+### Solr initialization (6.x)
 
 
 First get an archive of the Solr init package from CKAN Cloud Operator:
@@ -177,7 +182,7 @@ $ curl -v "http://localhost:8983/solr/admin/collections?action=CREATE&name=ckan&
 ```
 
 
-#### CKAN database initialization
+### CKAN database initialization
 
 
 Same as with Solr, you need to identfy the CKAN pod and connect to it:
@@ -251,7 +256,7 @@ $ kubectl exec -it -n <namespace> <pod-name> -- sh
 ```
 
 
-### Updating deployed code
+## Updating deployed code
 
 If you already deployed your application to the DX cluster (congratulations, BTW!), you might want to update the running code, i.e. pushing a new release. This usually involves rebuilding the image and recreating the pods:
 
@@ -260,7 +265,7 @@ If you already deployed your application to the DX cluster (congratulations, BTW
 1. Rebuild the running CKAN pods by simply deleting them (either via Argo UI or `kubectl`). See [above](#debugging) for how to do that.
 
 
-### Rolling back a release
+## Rolling back a release
 
 For rolling back changes made to either Helm Chart or application code, you should write and push a new commit. Due to implementation details of Kubernetes, you might have to manually restart services (you can do that via Argo CD). For instance, if your application reads environment variables only on startup, it won't matter if Kubernetes replaced them while it's running. You should delete all running pods using them and Kubernetes should start recreating everything.
   

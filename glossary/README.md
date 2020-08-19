@@ -30,8 +30,10 @@ Confusingly, an actual physical file/resource can correspond to multiple logical
 
 ## Schema
 
-A schema for data:
+A schema for data (specifically a resource). For example:
 
-* The set of fields present
-* Their types
-* Any other restrictions e.g. all positive
+* The set of fields present e.g the columns in the spreadsheet
+* Thee type of each field e.g. is this column a string, number, date etc
+* Other restrictions e.g. all values in this field are positive
+
+See Frictionless Table Schema for a detailed spec: http://frictionlessdata.io/table-schema/

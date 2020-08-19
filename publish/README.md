@@ -159,6 +159,15 @@ In a DMS, we are often dealing with non-technical or semi-technical users. Thus,
 :::
 
 
+### Dataset Metadata editor
+
+There are lots of ways this can be designed. We always encourage minimalism.
+
+
+* Adding information e.g. license, description, author …
+* ? Default the license (and explain what the license means …)
+
+
 ### Adding a resource
 
 From here on, we'll zoom in on the "publish" part of that process. Let's start with the simplest case of adding a single resource in the form of an uploading file:
@@ -166,7 +175,7 @@ From here on, we'll zoom in on the "publish" part of that process. Let's start w
 ```mermaid
 graph TD
 
-addfile[Drop a file]
+addfile[Select a file]
 metadata[Add Metadata]
 upload[Upload to Storage]
 save[Save]
@@ -179,7 +188,50 @@ metadata --> save
 
 Notes
 
-* Alternative to "Drop a file" would be to just "Link" to a file that is already online and available
+* Alternative to "Select a file" would be to just "Link" to a file that is already online and available
+
+
+### Adding a Schema (Data Dictionary) for a resource
+
+One part of a publishing flow would be to describe the [schema][] for a resource. Usually, we restrict this to tabular data resources and hence this is a Table Schema.
+
+[schema]: /glossary/#schema
+
+Usually adding and editing a schema for a resource will be an integrated part of managing the overall metadata for the resource but it can also be a standalone step. The following flow focuses solely on the add schema:
+
+```mermaid
+graph TD
+
+addfile[Select a file]
+infer[Infer the fields, their names and perhaps their types]
+edit[Edit the fields and their details e.g. description, types]
+save[Save]
+
+addfile --> infer
+infer --> edit
+edit --> infer
+```
+
+Notes
+
+* We recommend using [Frictionless Table Schema][] as format for storing table schema information
+
+[Frictionless Table Schema]: https://frictionlessdata.io/table-schema/
+
+#### Schema editor
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRD7XUc9iBYjEH11Zqsfrk7tAv688UTqEJMxOg4Bc-9p4Vkrcq8Oghpe5OfimfVoEzjfDRMLeUNIP63/pub?w=695&amp;h=434">
+
+* can add title as well as description? Maybe we should have both but i often find them duplicative and why do people want a title …? (For display in charting …)
+* Could pivot the display if lots of columns (e.g. have cols down left). This is traditional approach e.g. in CKAN 2 data dictionary
+
+   ![](https://i.imgur.com/nhb5H7Q.png)
+
+Advanced:
+
+* Displaying validation errors could/should be live as you change types …  (highlight with a hover)
+* add semantic/taxonomy option (after format) i.e. ability to set rich type
+
 
 #### Overview Deck
 
@@ -340,6 +392,16 @@ Details
 3. Review the headers
     * Here is what we found
     * More than one option for headers - try to reconcile
+
+## CKAN 2
+
+### Data Dictionary
+
+Integrated with DataStore extension since CKAN v2.7. Old documentation with visuals at:
+
+https://extensions.ckan.org/extension/dictionary/
+
+### Issues
 
 
 ## Design

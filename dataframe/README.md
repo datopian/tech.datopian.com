@@ -133,7 +133,7 @@ The Blaze ecosystem is a set of libraries that help users store, describe, query
 A list of existing libraries.
 
 *Note: when we started research on this in 2015 there were none that we could find so a good sign that they are developing.*
-
+* https://github.com/opensource9ja/danfojs 274⭐️ - ACTIVE Last update Aug 2020
 * https://github.com/StratoDem/pandas-js 280⭐️ - INACTIVE last update sep 2017
 * https://github.com/fredrick/gauss 428⭐️ - INACTIVE last update 2015 - JavaScript statistics, analytics, and data library - Node.js and web browser ready
 * https://github.com/Gmousse/dataframe-js 283⭐️ - INACTIVE? started in 2016 and largely inactive since 2018 (though minor update in early 2019)

@@ -220,6 +220,8 @@ Notes
 
 #### Schema editor
 
+**Fig 1.2: Schema editor wireframe**
+
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRD7XUc9iBYjEH11Zqsfrk7tAv688UTqEJMxOg4Bc-9p4Vkrcq8Oghpe5OfimfVoEzjfDRMLeUNIP63/pub?w=695&amp;h=434">
 
 * can add title as well as description? Maybe we should have both but i often find them duplicative and why do people want a title …? (For display in charting …)

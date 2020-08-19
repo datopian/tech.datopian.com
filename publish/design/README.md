@@ -39,7 +39,9 @@ This approach is is designed to be extensible so that new workflows and their re
 
 * Encapsulate interaction with backend in a library. Backend is CKAN MetaStore and Blob Storage access, raw Blob Storage itself (almost certainly cloud)
 * Split UI into clear components and even sub-applications (for example, a sub-application for resource adding)
-* All internal data related objects: Dataset, Resource, Table Schema etc will be in [Frictioness format][f11s]
+* Use [Frictioness specs][f11s] for structuring storage of data objects such as Dataset, Resource, Table Schema etc will be in
+* The specification of these formats themselves will be done in JSON schema and JSON Schema is what we use for specifying  new metadata profiles (usually extensions or customizations of the base Frictionless ones)
+* Data schemas are described using Table Schema (for tabular data) or JSON Schema.
 
 Diagram: SDK library encapsulates interaction with backend
 
@@ -130,3 +132,27 @@ Question:
 * support for azure https://github.com/transloadit/uppy/issues/1591 (seems like it can work but maybe issue with large files (?))
 
 [f11s]: https://f11s.com/
+
+## Appendix: Project Creation Flow Comparison
+
+### Github
+
+Step 1
+
+![](https://i.imgur.com/J5logpK.png)
+
+Step 2
+
+![](https://i.imgur.com/ruAQxCL.png)
+
+### Gitlab
+
+Step 1
+
+![](https://i.imgur.com/jhtK4Ew.png)
+
+Step 2
+
+![](https://i.imgur.com/me8uTRo.png)
+
+![](https://i.imgur.com/8HjRRFR.png)

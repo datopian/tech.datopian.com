@@ -60,27 +60,44 @@ On the write side they provide support for:
 * **Datasets stored as structured data by default** and which can therefore be updated in part, a few records at a time, rather than all at once (as with blob storage)
 
 
-## Data APIs have 4 Core Components
+## Domain Model
 
-The functionality associated to the Data APIs can be divided in 4 areas:
+The functionality associated to the Data APIs can be divided in 6 areas:
 
-* **Read API**:  web API for accessing structured data (i.e. per record) with querying etc.
+* **Descriptor**: metadata describing and specifying the API e.g. general metadata e.g. name, title, description, schema, and permissions
+* **Manager** for creating 
+  * API: for creating and editing Data API's descriptors (which triggers creation of storage and service endpoint)
+  * UI: for doing this manually
+* **Service** (read):  web API for accessing structured data (i.e. per record) with querying etc. *When we simply say "Data API" this is usually what we are talking about*
   * Custom API & Complex functions: e.g. aggregations, join
-  * Permissions
   * Tracking & Analytics: rate-limiting etc
-* **Data Load / Ingest**: loading data in bulk into the system that powers the data API.
-  * Bulk Load: bulk import of individual data files
   * Write API: usually secondary because of its limited performance vs bulk loading
+  * Bulk export of query results especially large ones (or even export of the whole dataset in the case where the data is stored directly in the DataStore rather than the FileStore). This is an increasingly important featurea lower priority but if required it is substantive feature to implement.
+* **Data Load**: bulk loading data into the system that powers the data API. **This is covered in a [separate Data Load page](/data-load/).
+  * Bulk Load: bulk import of individual data files
   * Maybe includes some ETL => this takes us more into data factory
-* **Bulk Export**: of query results especially large ones (or even export of the whole dataset in the case where the data is stored directly in the DataStore rather than the FileStore). This is usually a lower priority but if required it is substantive feature to implement.
-* **DataStore (Structured Store)**: the underlying structured store for the data. This could be considered a separate component that the Data API uses or as part of the Data API -- in some cases the store and API are completely wrapped together, e.g. ElasticSearch is both a store and a rich Web API.
+* **Storage (Structured)**: the underlying structured store for the data (and its layout). For example, Postgres and its table structure.This could be considered a separate component that the Data API uses or as part of the Data API -- in some cases the store and API are completely wrapped together, e.g. ElasticSearch is both a store and a rich Web API.
 
 :::tip
 **Visualization** is not part of the API but the demands of viz are important in designing the system
 :::
 
+## Job Stories
 
 ### Read API
+
+When I'm building a client application or extracting data  I want to get data quickly and reliably via an API so that I can focus on building the app rather than manging the data
+
+* Performance: Querying data is **quick**
+* Filtering: I want to filter data easily so that I can get the slice of data that I need.
+* ❗ unlimited query size for downloading eg, can download filtered data with millions of rows
+* can get results in 3 formats: CSV, JSON and Excel.
+* SQL API (?)
+* Query UI
+* ❗ GraphQL API
+* ❗ [MarketsData] custom views/cubes (including pivoting)
+
+:exclamation: = something not present atm
 
 #### Retrieve records via an API with filtering (per resource) (if tabular?)
 
@@ -88,6 +105,10 @@ When I am building a web app, a rich viz, display the data, etc I want to have a
 
 * I want examples
 * I want a playground interface …
+
+#### Bulk Export
+
+When I have a query with a large amount of results I want to be able to download all of those results so that I can analyse them with my own tools
 
 #### Multiple Formats
 
@@ -139,7 +160,7 @@ As a Publisher I want to only allow specific people to access data via the data 
 
 * Want this to mirror the same restrictions I have on the dataset / resources elsewhere (?)
 
-#### UI for Exploring Data
+### UI for Exploring Data
 
 :::warning
 This probably is *not* a Data API epic -- rather it would come under the Data Explorer.
@@ -150,14 +171,11 @@ This probably is *not* a Data API epic -- rather it would come under the Data Ex
 * I want to download filtered data
 * ...
 
+### Write API
 
-### Data Load
+When adding data I want to write new rows via the data API so that the new data is available via the API
 
-Read about [Data Load here](/load/).
-
-### Bulk Export
-
-When I have a query with a large amount of results I want to be able to download all of those results so that I can analyse them with my own tools
+* ? do we also want a way to do bulk additions?
 
 
 ### DataStore
@@ -236,15 +254,13 @@ DataStore (Data API)
 
 Following the general [next gen microservices approach][ng], the Data API is separated into distinct microservices.
 
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTseHlGgyLLyLMHcBhwR5iNVcXxVgf0pY-N7qRW1dyW2RqXaYAagDO1G_xzT7FJq3F7EWdCtEb_CLuc/pubhtml?gid=201228653&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="500"></iframe>
-
 [ng]: /next-gen/
 
 ### Read API
 
 Approach: Refactor current DataStore API into a standalone microservice. Key point would be to break out permissioning. Either via a call out to separate permissioning service or a simple JWT approach where capability is baked in.
 
-Status: Design Phase
+Status: In Progress (RFC)
 
 ### Data Load
 
@@ -253,3 +269,5 @@ See [Load page](/load/).
 ### DataStore
 
 Back onto Postgres by default just like CKAN 2. May also explore using other backends esp from Cloud Providers e.g. BigQuery or AWS RedShift etc.
+
+* BigQuery: https://github.com/datopian/ckanext-datastore-bigquery

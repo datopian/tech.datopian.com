@@ -2,28 +2,98 @@
 
 Our lab notebook. Informal thoughts. A very raw blog.
 
+## Composition vs Inheritance approaches to building applications and esp web apps 2020-08-20 @rufuspollock
+
+tl;dr: composition is better than inheritance but many systems are built with inheritance 
+
+Imagine we want a page like this:
+
+```
+<header>
+{{title}}
+</footer>
+```
+
+Inheritance / Slot model
+
+```
+def render_home:
+  return render('base_template.html'< {
+    title="hello world"
+  })
+```
+
+Composition / declarative
+
+```
+def render_home:
+  mytitle = 'hello world'
+  response.write(get_header())
+  response.write(mytitle)
+  response.write(get_footer()
+```
+
+You can write templates two ways:
+
+### Inheritance
+
+Base template
+
+```html
+# base.html
+<header>
+<title>{{title}}</title>
+
+{{content}}
+</footer>
+```
+
+`blog-post.html`
+
+```
+{%extends base.html %}
+<block name="title">{{title}} -- Blog</block>
+```
+
+### Composition
+
+`blog-post.html`
+
+```
+<include/partial name='header.html' title="..."/>
+
+{{content}}
+
+<include name='footer.html' />
+```
+
+
+
 ## How Views should work in CKAN v3 (Next Gen) 2020-08-10  @rufuspollock
 
 Two key points:
 
 1. Views should become an explicit (data) project level object
-2. Previews: should be very simple and work *without* data API so they work with revisions
+2. Previews: should be very simple and work *without* data API
 
 Why?
 
-* I can't show a view on dataset page atm (why not?)
-* I have multiview view inside reclinejs but reset are single views ...
-* I can't create views across multiple resources
-* Views often depend on data API
-  * Which causes problems with revisions and viewing old revisions of resources
-* They are nested under resources but they aren't really part of a resource
+* Views should become an explicit (data) project level object
+  * So I can show a view on dataset page (atm I can't)
+  * I have multiview view inside reclinejs but rest are single views ... (this is confusing)
+  * I can't create views across multiple resources
+  * They are nested under resources but they aren't really part of a resource
+* Previews: should be very simple and work *without* data API
+  * so they work with revisions (atm views often depend on data API which causes problems with revisions and viewing old revisions of resources)
 
 Distinguish 3 concepts
 
-* Query UI (explorer)
 * Preview: a very simple method for previewing specific raw data types e.g. csv, excel, json, xml, text, geojson etc ...
   * Key aspect are ability to sample a part and to present.
 * Viz: graph, map, ... (visualizations)
+* Query UI: UI for creating queries
+* Viz Builder: a UI for creating charts, tables, maps etc
+* Explorer (dashboard): combines query UI, Viz Builder and Viz Renderer
 
 ## What a (future) Data Project looks like 
 

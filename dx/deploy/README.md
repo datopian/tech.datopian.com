@@ -265,6 +265,15 @@ If you already deployed your application to the DX cluster (congratulations, BTW
 1. Rebuild the running CKAN pods by simply deleting them (either via Argo UI or `kubectl`). See [above](#debugging) for how to do that.
 
 
+## Updating CKAN Helm Chart
+
+In Helm's model, dependencies are vendorized and commited together with the source code of a Helm Chart. If you're interested in the latest version of a dependency – for instance, [CKAN's chart](https://gitlab.com/datopian/experiments/dx-helm-ckan) – you need to explicitly tell Helm to pull the updates.
+
+1. Clone [dx-helm-ckan](https://gitlab.com/datopian/experiments/dx-helm-ckan) in the same folder as your Helm Chart (e.g., dx-helm-nhs).
+2. From the `dx-helm-nhs` folder, run `helm dependency update nhs`, where `nhs` is the name of your Helm Chart.
+3. Commit the updated chart (as `nhs/charts/ckan-0.1.0.tgz`).
+
+
 ## Rolling back a release
 
 For rolling back changes made to either Helm Chart or application code, you should write and push a new commit. Due to implementation details of Kubernetes, you might have to manually restart services (you can do that via Argo CD). For instance, if your application reads environment variables only on startup, it won't matter if Kubernetes replaced them while it's running. You should delete all running pods using them and Kubernetes should start recreating everything.

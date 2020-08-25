@@ -101,7 +101,7 @@ platform["Storage (metadata and blobs)"]
 user --> publish --> platform
 ```
 
-### Dataset: High Level
+### Add Dataset: High Level
 
 ```mermaid
 graph TD
@@ -114,7 +114,7 @@ project --> addres
 addres --> save
 ````
 
-### Adding in dataset metadata
+### Add Dataset: Mid Level
 
 ```mermaid
 graph TD
@@ -168,7 +168,7 @@ There are lots of ways this can be designed. We always encourage minimalism.
 * ? Default the license (and explain what the license means …)
 
 
-### Adding a resource
+### Add a Resource
 
 From here on, we'll zoom in on the "publish" part of that process. Let's start with the simplest case of adding a single resource in the form of an uploading file:
 
@@ -191,7 +191,7 @@ Notes
 * Alternative to "Select a file" would be to just "Link" to a file that is already online and available
 
 
-### Adding a Schema (Data Dictionary) for a resource
+### Schema (Data Dictionary) for a Resource
 
 One part of a publishing flow would be to describe the [schema][] for a resource. Usually, we restrict this to tabular data resources and hence this is a Table Schema.
 
@@ -209,7 +209,7 @@ save[Save]
 
 addfile --> infer
 infer --> edit
-edit --> infer
+edit --> save
 ```
 
 Notes
@@ -397,6 +397,14 @@ Details
 
 ## CKAN 2
 
+In CKAN 2 the data publishing flow is a integral part of core CKAN. See this section of the user guide for a walkhthrough: https://docs.ckan.org/en/2.9/user-guide.html#features-for-publishers
+
+Key points of note:
+
+* Classic python webapp approach using a combination of html templates (in Jinja) with processing code in Python backend code using controllers etc.
+* Customization is done via client extensions using CKAN extensions model
+* There is also a dedicated extension ckanext-scheming for creating froms from a JSON DSL.
+
 ### Data Dictionary
 
 Integrated with DataStore extension since CKAN v2.7. Old documentation with visuals at:
@@ -405,6 +413,12 @@ https://extensions.ckan.org/extension/dictionary/
 
 ### Issues
 
+* Classic webapp is showing its age vs modern javascript based web application development. Nowadays, you'd usually build a UI like this in javascript and e.g. React or VueJS. This has implications for both:
+  * UX: e.g. general lack of responsiveness, client side operations etc.
+  * Development: miss out on modern dev stack
+* Extension model has got complex and cumbersome: the template inheritance model is now somewhat byzantine to navigate. Changing data structures can operate at multiple levels.
+  * The extension approach is "inheritance" based 
+* ckanext-scheming uses its own DSL. Today, one would probably use JSON Schema and use a javascript framework.
 
 ## Design
 

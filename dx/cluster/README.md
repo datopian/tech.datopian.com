@@ -40,6 +40,7 @@ Before running applications in the cluster, you need something: a cluster.
     * Compute Storage Admin
 3. Download the credentials file (in JSON) for this service account.
 4. Enable the following Google Cloud APIs:
+    * [Cloud Composer API](https://console.cloud.google.com/marketplace/product/google/composer.googleapis.com/overview)
     * [Cloud Resource Manager API](https://console.developers.google.com/apis/api/cloudresourcemanager.googleapis.com/overview)
     * [Cloud SQL Admin API](https://console.developers.google.com/apis/api/sqladmin.googleapis.com/overview)
     * [Compute Engine API](https://console.developers.google.com/apis/api/compute.googleapis.com/overview)

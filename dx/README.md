@@ -12,8 +12,11 @@ In summary, DX is how we call the newly proposed best practices for developing a
 
 ### Deploy a New Application
 
-See [Deploy &raquo;](./deploy)
+See [Deploy &raquo;](./deploy).
 
+### Run A Data Migration Between Environments
+
+See [Data Migration &raquo;](./data-migration).
 
 ## Cluster
 

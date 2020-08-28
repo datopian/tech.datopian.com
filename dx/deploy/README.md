@@ -176,7 +176,7 @@ Once you've logged in, push the transferred zip file to Solr:
 $ curl -X POST \
 --header "Content-Type:application/octet-stream" \
 --data-binary @- \
-"http://localhost:8983/solr/admin/configs?action=UPLOAD&name=ckan_28_default"
+"http://localhost:8983/solr/admin/configs?action=UPLOAD&name=ckan_28_default" < /tmp/ckan_default.zip
 
 $ curl -v "http://localhost:8983/solr/admin/collections?action=CREATE&name=ckan&collection.configName=ckan_28_default&replicationFactor=3&numShards=1"
 ```

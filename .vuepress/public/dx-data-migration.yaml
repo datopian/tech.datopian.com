@@ -26,33 +26,19 @@ kind: ConfigMap
 metadata:
   name: files
 data:
-  basic_provisioning.sql: |
-    DROP ROLE "ckan";
-    DROP ROLE "ckan-datastore";
-    DROP ROLE "ckan-datastore-ro";
-    DROP DATABASE "ckan";
-    DROP DATABASE "ckan-datastore";
-
-    CREATE ROLE "ckan" WITH LOGIN PASSWORD 'ckan' NOSUPERUSER NOCREATEDB NOCREATEROLE;
-    CREATE DATABASE "ckan";
-
-    CREATE ROLE "ckan-datastore" WITH LOGIN PASSWORD 'ckan-datastore' NOSUPERUSER NOCREATEDB NOCREATEROLE;
-    CREATE DATABASE "ckan-datastore";
-
-    CREATE ROLE "ckan-datastore-ro" WITH LOGIN PASSWORD 'ckan-datastore-ro' NOSUPERUSER NOCREATEDB NOCREATEROLE;
-
-    GRANT "ckan" to "default";
-    GRANT "ckan-datastore" to "default";
-    GRANT "ckan-datastore-ro" to "default";
-
   migrate.sh: |
-    cd /files
-    psql $DX_DEV_URI -f basic_provisioning.sql
-    sh migrate_database.sh $CKAN_CLOUD_CKAN_URI $DX_DEV_URI/ckan &
-    sh migrate_database.sh $CKAN_CLOUD_DATASTORE_URI $DX_DEV_URI/ckan-datastore &
+    echo 'Starting Loading CKAN DB'
+    wget $CKAN_CLOUD_CKAN_DUMP -O ckan.gz
+    echo unziping
+    gunzip ckan.gz
+    echo unzipped
+    ls ckan -al
+    psql $DX_DEV_URI < ckan
+    echo 'Starting load Datastore DB'
+    wget $CKAN_CLOUD_DATASTORE_DUMP -O datastore.gz
+    gunzip datastore.gz
+    psql $DX_DEV_URI < datastore
 
-  migrate_database.sh: |
-    pg_dump --format=plain --no-owner --no-acl $1 | psql $2;
 ---
 apiVersion: v1
 kind: Secret
@@ -60,6 +46,7 @@ type: Opaque
 metadata:
   name: envvars
 stringData:
-  CKAN_CLOUD_DATASTORE_URI: "postgresql://ckan-staging-datastore:password@origin-ip:5432/ckan-staging-datastore"
-  CKAN_CLOUD_CKAN_URI: "postgresql://ckan-staging:password@origin-ip:5432/ckan-staging"
-  DX_DEV_URI: "postgresql://default:password@destination-ip:5432"
+  CKAN_CLOUD_CKAN_DUMP: "https://storage.googleapis.com/cluster-backups-prod/gcloud_sql/2020/01/01/01/myinstance_202001010101.gz"
+  # You can leave datastore URL empty if not required
+  CKAN_CLOUD_DATASTORE_DUMP: "https://storage.googleapis.com/cluster-backups-prod/gcloud_sql/2020/01/01/01/myinstance-datastore_202001010101.gz"
+  DX_DEV_URI: "postgresql://default:password@0.00.000.0:5432"

@@ -5,7 +5,7 @@ This article is still under testing and development.
 :::
 
 1. Install kubectl and kubectx.
-2. [Download the file containing the manifests](/dx-data-migration.yaml) and personalize it according to your needs. Most specifically: environment variables in `Secret/envvars`, and `ConfigMap/files`' `migrate.sh` file.
+2. [Download the file containing the manifests](/dx-data-migration.yaml) and personalize secrets according to your needs. You will need to ask @devops team for DB dumps if you don't have access to backup bucket from `ckan-cloud` project
 3. Apply the manifests in a new namespace:
     ```sh
     kubectx gke_ckan-cloud_europe-west1-c_ckan-cloud-prod-eu

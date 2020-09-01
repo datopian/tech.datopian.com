@@ -1,36 +1,18 @@
 name: Continuous Deployment
-on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  build:
+on: [push]
+  deploy:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-
-    # Cache node_modules
-    - uses: actions/cache@v2
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Configure
+      run: yarn install
+    - name: Build
+      run: yarn build:docs
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.5.9
       with:
-        path: '**/node_modules'
-        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-    # Build commands to run
-    - name: Use Node.js '9.11.1'
-      uses: actions/setup-node@v1
-      with:
-        node-version: '9.11.1'
-    - run: yarn install
-    - run: yarn build:docs
-    - run: cp -r .vuepress/dist public
-
-    # Upload `public` directory
-    - uses: actions/upload-artifact@v2
-      with:
-        name: public
-        path: public
+        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: .vuepress/dist

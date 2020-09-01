@@ -8,11 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
-    - name: Configure
-      run: yarn install
-    - name: Build
-      run: yarn build:docs
+      # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+      uses: actions/checkout@v2.3.1
+      with:
+        persist-credentials: false
+
+    - name: Install and Build
+      run: |
+        yarn install
+        yarn build:docs
+
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@3.5.9
       with:

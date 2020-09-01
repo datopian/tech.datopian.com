@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Data Factory and Flows Design - Oct 2017 to Apr 2018 | Datopian Tech</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    
+    <meta name="description" content="An overview of our technology">
+    <link rel="preload" href="/assets/css/0.styles.2870a88c.css" as="style"><link rel="preload" href="/assets/js/app.b2e9f401.js" as="script"><link rel="preload" href="/assets/js/3.bcd1af25.js" as="script"><link rel="preload" href="/assets/js/50.0625637d.js" as="script"><link rel="prefetch" href="/assets/js/10.31b4becf.js"><link rel="prefetch" href="/assets/js/11.61e8b0a8.js"><link rel="prefetch" href="/assets/js/12.da1ffab3.js"><link rel="prefetch" href="/assets/js/13.69df0dde.js"><link rel="prefetch" href="/assets/js/14.02c8dbf0.js"><link rel="prefetch" href="/assets/js/15.3c60557e.js"><link rel="prefetch" href="/assets/js/16.220efa0c.js"><link rel="prefetch" href="/assets/js/17.b53e891f.js"><link rel="prefetch" href="/assets/js/18.3d84c2e0.js"><link rel="prefetch" href="/assets/js/19.6c99d2d1.js"><link rel="prefetch" href="/assets/js/20.a6ad4257.js"><link rel="prefetch" href="/assets/js/21.3908f846.js"><link rel="prefetch" href="/assets/js/22.0af7c1c1.js"><link rel="prefetch" href="/assets/js/23.1f1cd939.js"><link rel="prefetch" href="/assets/js/24.11301040.js"><link rel="prefetch" href="/assets/js/25.0bcc3912.js"><link rel="prefetch" href="/assets/js/26.b40fd249.js"><link rel="prefetch" href="/assets/js/27.3f277e82.js"><link rel="prefetch" href="/assets/js/28.092b873b.js"><link rel="prefetch" href="/assets/js/29.07c2d256.js"><link rel="prefetch" href="/assets/js/30.38aaa3ef.js"><link rel="prefetch" href="/assets/js/31.ba2d52ff.js"><link rel="prefetch" href="/assets/js/32.730e64b3.js"><link rel="prefetch" href="/assets/js/33.52ad0cf6.js"><link rel="prefetch" href="/assets/js/34.3ac8171d.js"><link rel="prefetch" href="/assets/js/35.5908e21c.js"><link rel="prefetch" href="/assets/js/36.ca16feff.js"><link rel="prefetch" href="/assets/js/37.40ac6e38.js"><link rel="prefetch" href="/assets/js/38.9dcde0fe.js"><link rel="prefetch" href="/assets/js/39.2dcc50be.js"><link rel="prefetch" href="/assets/js/4.67c1c541.js"><link rel="prefetch" href="/assets/js/40.526ae612.js"><link rel="prefetch" href="/assets/js/41.8437e67e.js"><link rel="prefetch" href="/assets/js/42.9dba26ae.js"><link rel="prefetch" href="/assets/js/43.5aec4f2e.js"><link rel="prefetch" href="/assets/js/44.c9fa7e68.js"><link rel="prefetch" href="/assets/js/45.547fd2b3.js"><link rel="prefetch" href="/assets/js/46.6288ce46.js"><link rel="prefetch" href="/assets/js/47.3f9504e2.js"><link rel="prefetch" href="/assets/js/48.5ed9a002.js"><link rel="prefetch" href="/assets/js/49.9c9d3b44.js"><link rel="prefetch" href="/assets/js/5.3528fdbe.js"><link rel="prefetch" href="/assets/js/51.0d0f860d.js"><link rel="prefetch" href="/assets/js/52.b3cf974e.js"><link rel="prefetch" href="/assets/js/53.7ce23a1d.js"><link rel="prefetch" href="/assets/js/54.37e94e6d.js"><link rel="prefetch" href="/assets/js/55.dfb4f38d.js"><link rel="prefetch" href="/assets/js/56.14079b2e.js"><link rel="prefetch" href="/assets/js/57.d2da994f.js"><link rel="prefetch" href="/assets/js/58.2ac98946.js"><link rel="prefetch" href="/assets/js/59.cc7c6235.js"><link rel="prefetch" href="/assets/js/6.e289864b.js"><link rel="prefetch" href="/assets/js/60.12fc97ff.js"><link rel="prefetch" href="/assets/js/61.c3912c79.js"><link rel="prefetch" href="/assets/js/62.8f0f58fe.js"><link rel="prefetch" href="/assets/js/63.79b5b5a9.js"><link rel="prefetch" href="/assets/js/64.389eabbe.js"><link rel="prefetch" href="/assets/js/65.4b8d0061.js"><link rel="prefetch" href="/assets/js/66.272cc093.js"><link rel="prefetch" href="/assets/js/67.f8aa39ed.js"><link rel="prefetch" href="/assets/js/68.7bc1242a.js"><link rel="prefetch" href="/assets/js/69.cd039252.js"><link rel="prefetch" href="/assets/js/7.d623d12c.js"><link rel="prefetch" href="/assets/js/70.bf54f2ac.js"><link rel="prefetch" href="/assets/js/71.c445a5a2.js"><link rel="prefetch" href="/assets/js/72.546c90d9.js"><link rel="prefetch" href="/assets/js/73.a963dff0.js"><link rel="prefetch" href="/assets/js/74.8618f877.js"><link rel="prefetch" href="/assets/js/75.d1096f6c.js"><link rel="prefetch" href="/assets/js/76.0d393987.js"><link rel="prefetch" href="/assets/js/77.b07ca516.js"><link rel="prefetch" href="/assets/js/78.b89c53a8.js"><link rel="prefetch" href="/assets/js/79.d129c1fc.js"><link rel="prefetch" href="/assets/js/8.c5e0041f.js"><link rel="prefetch" href="/assets/js/9.9073bf3e.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.21ef4710.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.2870a88c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Datopian Tech</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Features" class="dropdown-title"><span class="title">Features</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/views/" class="nav-link">
+  Views
+</a></li></ul></div></div> <a href="https://gitlab.com/datopian/tech/tech.datopian.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Contribute!
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Features" class="dropdown-title"><span class="title">Features</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/views/" class="nav-link">
+  Views
+</a></li></ul></div></div> <a href="https://gitlab.com/datopian/tech/tech.datopian.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Contribute!
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Data Factory and Flows Design - Oct 2017 to Apr 2018</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/flows/history/#plan-april-2018" class="sidebar-link">Plan April 2018</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/flows/history/#_8-april-2018" class="sidebar-link">8 April 2018</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/flows/history/#_5-oct-2017" class="sidebar-link">5 Oct 2017</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/flows/history/#domain-model" class="sidebar-link">Domain Model</a></li><li class="sidebar-sub-header"><a href="/flows/history/#overview" class="sidebar-link">Overview</a></li><li class="sidebar-sub-header"><a href="/flows/history/#how-does-this-work" class="sidebar-link">How does this work?</a></li><li class="sidebar-sub-header"><a href="/flows/history/#with-excel-multiple-sheets" class="sidebar-link">With Excel (multiple sheets)</a></li><li class="sidebar-sub-header"><a href="/flows/history/#overall-component-design" class="sidebar-link">Overall component design</a></li><li class="sidebar-sub-header"><a href="/flows/history/#nts" class="sidebar-link">NTS</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="data-factory-and-flows-design-oct-2017-to-apr-2018"><a href="#data-factory-and-flows-design-oct-2017-to-apr-2018" class="header-anchor">#</a> Data Factory and Flows Design - Oct 2017 to Apr 2018</h1> <p>Date: 2018-04-08</p> <div class="custom-block tip"><p class="custom-block-title">NOTE</p> <p>This is a miscellaneous content from various HackMD docs. I’m preserving because either a) there is material to reuse here that I’m not sure is elsewhere b) there were various ideas in here we used later (and it’s useful to see their origins).</p> <p>Key content:</p> <ul><li>March-April 2018: first planning of what became dataflows (had various names including dataos). A lot of my initial ideas ended up in this micro-demo <a href="https://github.com/datopian/dataflow-demo" target="_blank" rel="noopener noreferrer">https://github.com/datopian/dataflow-demo<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. This evolved with Adam into <a href="https://github.com/datahq/dataflows" target="_blank" rel="noopener noreferrer">https://github.com/datahq/dataflows<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>Autumn 2017: planning of Data Factory which was the data processing system inside <a href="http://DataHub.io" target="_blank" rel="noopener noreferrer">DataHub.io<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. This was more extensive than dataflows (e.g. it included a runner, an assembler etc) and was based original data-package-pipelines and its runner. Issues with that system was part of the motivation for starting work on dataflows.</li></ul> <p>~Rufus May 2020</p></div> <h2 id="plan-april-2018"><a href="#plan-april-2018" class="header-anchor">#</a> Plan April 2018</h2> <ul><li>tutorial (what we want our first post to look like)
+<ul><li>And then implement minimum for that</li></ul></li> <li>programmatic use of pipelines and processors in DPP
+<ul><li>processor abstraction defined …
+<ul><li>DataResource and DataPackage object that looks like <a href="http://okfnlabs.org/blog/2018/02/15/design-pattern-for-a-core-data-library.html" target="_blank" rel="noopener noreferrer">Frictionless Lib pattern<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>processors library split out</li></ul></li> <li>code runner you can call dataos.run.runSyncPipeline</li></ul></li> <li>dataflow init =&gt; python and yaml</li> <li>@adam Write up Data Factory architecture and naming as it currently stands [2h]</li></ul> <h2 id="_8-april-2018"><a href="#_8-april-2018" class="header-anchor">#</a> 8 April 2018</h2> <p>Lots of note on DataFlow which are now moved and refactored into <a href="https://github.com/datahq/dataflow-demo" target="_blank" rel="noopener noreferrer">https://github.com/datahq/dataflow-demo<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>The Domain Model of Factory</p> <ul><li>Staging area</li> <li>Planner</li> <li>Runner</li> <li>Flow
+<ul><li>Pipelines</li> <li>Processors</li></ul></li></ul> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><p>Assembler …</p> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><p>=&gt; Assembler generates a DAG.</p> <ul><li>dest filenames in advance …</li> <li>for each pipeline: pipelines it dpeends on
+<ul><li>e.g. sqlite: depends on on all derived csv pipelines running</li> <li>node depends: all csv, all json pipelines running</li> <li>zip: depends on all csv running</li></ul></li> <li>Pipelines</li></ul> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h2 id="_5-oct-2017"><a href="#_5-oct-2017" class="header-anchor">#</a> 5 Oct 2017</h2> <p>Notes:</p> <ul><li>Adam: finding more and more bugs (edge cases) and then applying fixes but then more issues
+<ul><li>=&gt; Internal data model of pipelines was wrong …</li> <li>Original data model has a store: with one element the pipeline + a state (its idle, invalid, waiting to be executed, running, dirty)</li> <li>Problem starts: you have a very long pipeline …
+<ul><li>something changes and pipeline gets re-added to the queue. then you have same pipeline in queue in two different states. Should not be a state of the pipeline but state of the execution of the pipeline.</li></ul></li> <li>Split model: pipeline (with their hash) + “runs” ordered by time of request</li></ul></li></ul> <p>Questions:</p> <ul><li>Tests in assembler …</li></ul> <h3 id="domain-model"><a href="#domain-model" class="header-anchor">#</a> Domain Model</h3> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><ul><li>Pipelines have no branches they are always linear
+<ul><li>Input: nothing or a file or a datapackage (source is stream or nothing)</li> <li>Output: datapackage - usually dumped to something (could be stream)</li> <li>Pipelines are a list of processors <strong>and</strong> their inputs</li></ul></li> <li>A Flow is a DAG of pipelines
+<ul><li>In our case: one flow produces a “Dataset” at a given “commit/run”</li></ul></li> <li>Source Spec + DataPackage[.json] =&gt; (via assembler) =&gt; Flow Spec</li> <li>Runner
+<ul><li>Pipelines runner: a set of DAG of pipelines (where each pipeline is schedule to run once all dependencies have been run)</li></ul></li> <li>Events =&gt; lead to new flows or pipelines being created … (or existing ones being stopped or destroyed)</li></ul> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><p>State of Factory(flows, state)</p> <p>f(event, state) =&gt; state</p> <p>flow dependencies?</p> <p>Desired properties</p> <ul><li>We economise on runs: we don’t rerun processors (pipelines?) that have same config and input data
+<ul><li>=&gt; one reason for breaking down into smaller “operators” is that we economise here …</li></ul></li> <li>Simplicity: the system is understandable …</li> <li>Processors (pipelines) are atomic - they get their configuration and run …</li> <li>We can generate from a source spec and an original datapackage.json a full set of pipelines / processors.</li> <li>Pipelines as Templates vs Pipelines as instances …</li></ul> <p>pipeline id = hash(pipeline spec, datapackage.json)</p> <p>{pipelineid}/…</p> <p>next pipeline can rely on {pipelineid}</p> <p>Planner …</p> <p>=&gt; a pipeline is never rerun (once it is run)</p> <table><thead><tr><th></th> <th>Factory</th> <th>Airflow</th></tr></thead> <tbody><tr><td>DAG</td> <td>Implicit (no concept)</td> <td>DAG</td></tr> <tr><td>Node</td> <td>Pipelines (or processors?)</td> <td>Operators</td></tr> <tr><td>Running Node</td> <td>? Running pipelines</td> <td>Tasks</td></tr> <tr><td>Comments</td> <td></td> <td></td></tr></tbody></table> <p><a href="https://airflow.incubator.apache.org/concepts.html#workflows" target="_blank" rel="noopener noreferrer">https://airflow.incubator.apache.org/concepts.html#workflows<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h1 id="analysis-from-work-for-preview"><a href="#analysis-from-work-for-preview" class="header-anchor">#</a> Analysis from work for Preview</h1> <p>As a Publisher I want to upload a 50Mb CSV so that the showcase page works - it does not crash by browser (because it is trying to load and display 50Mb of CSV)</p> <p><em>plus</em></p> <p>As a Publisher I want to customize whether I generate a preview for a file or not so that I don’t get inappropriate previews</p> <blockquote><p>As a Publisher I want to have an SQLite version of my data auto-built</p> <p>As a Publisher I want to upload an Excel file and have csv versions of each sheet and an sqlite version</p></blockquote> <h3 id="overview"><a href="#overview" class="header-anchor">#</a> Overview</h3> <p><em>This is what we want</em></p> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h3 id="how-does-this-work"><a href="#how-does-this-work" class="header-anchor">#</a> How does this work?</h3> <h4 id="simple-example-no-previews-single-csv-in-source"><a href="#simple-example-no-previews-single-csv-in-source" class="header-anchor">#</a> Simple example: no previews, single CSV in source</h4> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><div class="language-yaml= extra-class"><pre class="language-text"><code>meta:
+  owner: &lt;owner username&gt;
+  ownerid: &lt;owner unique id&gt;
+  dataset: &lt;dataset name&gt;
+  version: 1
+  findability: &lt;published/unlisted/private&gt;
+inputs:
+ -  # only one input is supported atm
+    kind: datapackage
+    url: &lt;datapackage-url&gt;
+    parameters:
+      resource-mapping:
+        &lt;resource-name-or-path&gt;: &lt;resource-url&gt;
+
+outputs:
+ - ...  see https://github.com/datahq/pm/issues/17
+</code></pre></div><h4 id="with-previews"><a href="#with-previews" class="header-anchor">#</a> With previews</h4> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h3 id="with-excel-multiple-sheets"><a href="#with-excel-multiple-sheets" class="header-anchor">#</a> With Excel (multiple sheets)</h3> <p>Source is vix-daily.xls (with 2 sheets)</p> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><p>datapackage.json</p> <div class="language-javascript= extra-class"><pre class="language-text"><code>{
+  resources: [
+    {
+      &quot;name&quot;: &quot;mydata&quot;
+      &quot;path&quot;: &quot;mydata.xls&quot;
+    }
+  ]
+}
+</code></pre></div><div class="language-yaml= extra-class"><pre class="language-text"><code>meta:
+  owner: &lt;owner username&gt;
+  ownerid: &lt;owner unique id&gt;
+  dataset: &lt;dataset name&gt;
+  version: 1
+  findability: &lt;published/unlisted/private&gt;
+inputs:
+ -  # only one input is supported atm
+    kind: datapackage
+    url: &lt;datapackage-url&gt;
+    parameters:
+      resource-mapping:
+        &lt;resource-name-or-path&gt;: &lt;resource-url&gt;
+
+processing:
+ -
+    input: &lt;resource-name&gt;   # mydata
+    output: &lt;resource-name&gt;  # mydata_sheet1
+    tabulator:
+        sheet: 1
+ -
+    input: &lt;resource-name&gt;   # mydata
+    output: &lt;resource-name&gt;  # mydata_sheet2
+    tabulator:
+        sheet: 2
+</code></pre></div><div class="language-yaml= extra-class"><pre class="language-text"><code>meta:
+  owner: &lt;owner username&gt;
+  ownerid: &lt;owner unique id&gt;
+  dataset: &lt;dataset name&gt;
+  version: 1
+  findability: &lt;published/unlisted/private&gt;
+inputs:
+ -  # only one input is supported atm
+    kind: datapackage
+    url: &lt;datapackage-url&gt;
+    parameters:
+      resource-mapping:
+        &lt;resource-name-or-path&gt;: &lt;resource-url&gt; // excel file
+
+=&gt; (implictly and in cli becomes ...)
+
+...
+
+processing:
+ -
+    input: &lt;resource-name&gt;   # mydata
+    output: &lt;resource-name&gt;  # mydata-sheet1
+    tabulator:
+        sheet: 1
+</code></pre></div><p>Result</p> <div class="language-javascript= extra-class"><pre class="language-text"><code>{
+  resources: [
+    {
+      &quot;name&quot;: &quot;mydata&quot;,
+      &quot;path&quot;: &quot;mydata.xls&quot;
+    },
+    {
+      &quot;path&quot;: &quot;derived/mydata.xls.sheet1.csv&quot;
+      &quot;datahub&quot;: {
+        &quot;derivedFrom&quot;: &quot;mydata&quot;
+      }
+    },
+    {
+      &quot;path&quot;: &quot;derived/mydata.xls.sheet2.csv&quot;
+      &quot;datahub&quot;: {
+        &quot;derivedFrom&quot;: &quot;mydata&quot;
+      }
+    }
+  ]
+}
+</code></pre></div><h3 id="overall-component-design"><a href="#overall-component-design" class="header-anchor">#</a> Overall component design</h3> <p>Assembler …</p> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><p>=&gt; Assembler generates a DAG.</p> <ul><li>dest filenames in advance …</li> <li>for each pipeline: pipelines it dpeends on
+<ul><li>e.g. sqlite: depends on on all derived csv pipelines running</li> <li>node depends: all csv, all json pipelines running</li> <li>zip: depends on all csv running</li></ul></li> <li>Pipelines</li></ul> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h3 id="nts"><a href="#nts" class="header-anchor">#</a> NTS</h3> <div class="language- extra-class"><pre class="language-text"><code>function(sourceSpec) =&gt; (pipelines, DAG)
+
+pipeline
+
+  pipeline-id
+  steps = n *
+    processor
+    parameters
+  schedule
+  dependencies
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://gitlab.com/datopian/tech/tech.datopian.com/edit/master/flows/history/README.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">Modified:</span> <span class="time">9/1/2020, 4:51:22 PM</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.b2e9f401.js" defer></script><script src="/assets/js/3.bcd1af25.js" defer></script><script src="/assets/js/50.0625637d.js" defer></script>
+  </body>
+</html>

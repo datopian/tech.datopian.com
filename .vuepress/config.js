@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   themeConfig: {
-    repo: 'https://gitlab.com/datopian/tech/tech.datopian.com',
+    repo: 'https://github.com/datopian/tech.datopian.com',
     repoLabel: 'Contribute!',
     lastUpdated: 'Modified',
     editLinks: true,

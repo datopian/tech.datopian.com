@@ -6,7 +6,7 @@ Harvesting is the automated collection into a Data Portal of metadata (and maybe
 
 The core epic is: As a Data Portal Manager I want to harvest datasets' metadata (and maybe data) from other portals into my portal so that all the metadata is in one place and hence searchable/discoverable there
 
-### Key Features
+### Features
 
 Key features include:
 
@@ -28,7 +28,7 @@ This insight allows us to see harvesting as just like any other ETL process. At 
 
 We can use standard ETL tools to do harvesting, loosely coupling their operation to the CKAN Classic (or CKAN Next Gen) metastore. 
 
-### Harvesting Domain Model
+### Domain Model
 
 The Harvesting Domain Model has the following conceptual components:
 
@@ -40,7 +40,7 @@ The Harvesting Domain Model has the following conceptual components:
 
 NB: the term harvester is often used both for a pipeline (e.g. the DCAT Harvester) and for a Source e.g. "XYZ Agency data.json Harvester". Because of this confusion we prefer to avoid the term, or to reserve it for an active Source e.g. "the GSA data.json harvester".
 
-### Harvesting Subsystems
+### Components
 
 A Harvesting system has the following key subsystems and components:
 
@@ -69,9 +69,9 @@ A Harvesting system has the following key subsystems and components:
 <!-- TODO: explain how each of these is implemented in NG harvesting (maybe in a table) and compare with Classic -->
 
 
-## How does CKAN Classic do harvesting?
+## CKAN v2
 
-CKAN Classic (v2) implements harvesting via [ckanext-harvest extension][ckanext].
+CKAN v2 implements harvesting via [ckanext-harvest extension][ckanext].
 
 This extension stores configuration in the main DB and harvesters run off a queue process. A detailed analysis of how it works is in [the appendix below](#appendix-ckan-classic-harvesting-in-detail).
 
@@ -99,7 +99,7 @@ Not so good:
   * 6 [open pull requests](https://github.com/ckan/ckanext-harvest/pulls) (some over a year old)
  
 
-## Next Gen Harvesting
+## CKAN v3
 
 Next Gen harvesting decouples the core "ETL" part of harvesting into a small, self-contained microservice that is runnable on its own and communicates with the rest of CKAN over APIs. This is consistent with the general [next gen microservice approach](/next-gen/).
 

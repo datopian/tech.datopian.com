@@ -183,7 +183,7 @@ When adding data I want to write new rows via the data API so that the new data 
 When creating a Data API I want a structured data store (e.g. relational database) so that I can power the Data API and have it be fast, efficient and reliable.
 
 
-## CKAN 2 (CKAN Classic)
+## CKAN v2
 
 In CKAN 2 the bulk of this functionality is in the core extension `ckanext-datastore`:
 
@@ -250,7 +250,7 @@ DataStore (Data API)
 * No API gateway (i.e. no way to control DDOS’ing, to do rate limiting etc)
 * SQL queries not working (with private datasets)
 
-## CKAN 3 (Next Gen)
+## CKAN v3
 
 Following the general [next gen microservices approach][ng], the Data API is separated into distinct microservices.
 

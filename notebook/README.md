@@ -138,8 +138,8 @@ Because data "flows" through these steps from one end to the otehr we end up wit
 
 Broken down into its components we have two things:
 
-* Tasks: the individual processing nodes (aka Processors / Operators)
-* Pipeline: which combines these tasks into a whole (aka Flow, Graph, DAG ...) 
+* Tasks: the individual processing nodes, i.e. a single operator on a unit of data (aka Processors / Operators)
+* Pipeline: which combines these tasks into a whole (aka Flow, Graph, DAG ...). It is a DAG (directed acycle graph) of processors starting from one or more sources and ending in one or more sinks. Note the simple case of a linear flow is very common.
 
 [NB: tasks in an actual flow could either be bespoke to that flow or are configured instances of a template / abstract tasks e.g. load from s3 might be be a template task which as a live task in an actual flow will be configured with a specific bucket.]
 

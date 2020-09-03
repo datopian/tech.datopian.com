@@ -1,6 +1,20 @@
 # Data Flows + Factory - Research
 
-## NTS
+## Tooling
+
+* Luigi & Airflow
+  * These are task runners - managing a dependency graph between 1000s of tasks. 
+  * Neither of them focus on actual data processing and are not a data streaming solution. Tasks do not move data from one to the other.
+  * AirFlow: see further analysis below
+* Nifi: Server based, Java, XML - not really suitable for quick prototyping 
+* Cascading: Only Java support
+* Bubbles http://bubbles.databrewery.org/documentation.html - https://www.slideshare.net/Stiivi/data-brewery-2-data-objects
+* mETL https://github.com/ceumicrodata/mETL mito ETL (yaml config files)
+* Apache Beam: see below
+* https://delta.io/ - acid for data lakes (mid 2020). Comes out of DataBricks. Is this pattern or tooling?
+
+
+## Concepts
 
 * Stream and Batch dichotomy is probably a false one -- and unhelpful. Batch is just some grouping of stream. Batch done regularly enough starts to be a stream.
 * More useful is complete vs incomplete data sources
@@ -11,7 +25,7 @@
 * Balance is often just a cached "sum".
 * Also relevant to datsets: we often think of them as states but really they are a flow.
 
-## Inbox
+### Inbox
 
 * [x] DataFlow paper: "The Dataflow Model: A Practical Approach to BalancingCorrectness, Latency, and Cost in Massive-Scale,Unbounded, Out-of-Order Data Processing" (2015)
 * [ ] Stream vs Batch
@@ -56,12 +70,7 @@ with beam.Pipeline('DirectRunner') as p:
   # nodes visited is done using the specified local runner.
 ```
 
-## Runners
-
-* Airflow
-* Argo workflows
-
-### Airflow
+## Airflow
 
 Airflow organices tasks in a DAG. A DAG (Directed Acyclic Graph) is a collection of all the tasks you want to run, organized in a way that reflects their relationships and dependencies.
 
@@ -78,10 +87,6 @@ References
 * https://medium.com/videoamp/what-we-learned-migrating-off-cron-to-airflow-b391841a0da4
 * https://medium.com/@rbahaguejr/airflow-a-beautiful-cron-alternative-or-replacement-for-data-pipelines-b6fb6d0cddef
 
-
-### Notes
-
-* https://delta.io/ - acid for data lakes
 
 ### airtunnel
 

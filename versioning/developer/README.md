@@ -1,4 +1,4 @@
-# Versioning - Technical Overview
+# Versioning - Technical Overview
 
 > This is technical, developer oriented overview of the next gen versioning project implemented in 2020.
 

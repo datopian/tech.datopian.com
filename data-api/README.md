@@ -260,14 +260,15 @@ Following the general [next gen microservices approach][ng], the Data API is sep
 
 Approach: Refactor current DataStore API into a standalone microservice. Key point would be to break out permissioning. Either via a call out to separate permissioning service or a simple JWT approach where capability is baked in.
 
-Status: In Progress (RFC)
+Status: In Progress (RFC) - see https://github.com/datopian/data-api
 
 ### Data Load
 
-See [Load page](/load/).
+Implemented via AirCan. See [Load page](/load/).
 
-### DataStore
+### Storage
 
 Back onto Postgres by default just like CKAN 2. May also explore using other backends esp from Cloud Providers e.g. BigQuery or AWS RedShift etc.
 
+* See Data API service https://github.com/datopian/data-api
 * BigQuery: https://github.com/datopian/ckanext-datastore-bigquery

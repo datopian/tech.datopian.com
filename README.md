@@ -20,20 +20,21 @@ footer: Copyright © 2016-present Datopian
 
 ## Data Management Systems
 
-[Data Management Systems (DMS)][dms] is a *system* or *framework*. It is a core technology and can be used to create a variety of *solutions* such as Data Portals, Data Catalogs etc.
+A [Data Management System (DMS)][dms] is a *system* or *framework*. It is a core technology and can be used to create a variety of *solutions* such as Data Portals, Data Catalogs, Data Lakes etc.
 
 We have two related DMS stacks:
 
-* [CKAN][] is the open source data management system we created in 2007 and that we continue to develop and maintain. The main information on CKAN is at https://ckan.org/. Here we have some specific notes on how we develop and deploy CKAN as well as our thoughts on the next generation of CKAN (v3).
-  * [Vision for CKAN v3 (next gen)][v3]
-* [DataHub][] -- DataHub represents our vision for a next generation of CKAN and powers DataHub.io. DataHub and CKAN v3 share many of the same core components.
+* [CKAN][] is the open source data management system we created in 2007 and that we continue to develop and maintain. The main information on CKAN is at https://ckan.org/. Here we have some specific notes on how we develop and deploy CKAN as well as our thoughts on the [next generation of CKAN (v3)][v3].
+* [DataHub][] is our version of a next generation of CKAN that powers DataHub.io. DataHub and CKAN v3 share many of the same core components. We are actively working on a DataHub v2 and an outline can be found here https://github.com/datopian/datahub-next
 
-### Applications
+### Solutions
 
-You can use a DMS to build many kinds of specific applications:
+You can use a DMS to build many kinds of specific solutions
 
 * [Data Portals][portals] are gateways to data. That gateway can be big or small, open or restricted. For example, data.gov is open to everyone, whilst an enterprise "intra" data portal is restricted to its personnel.
-* Data Catalog -- for now see https://ckan.org/
+* Data Catalog: see https://ckan.org/
+* Data Lake: you can use a DMS to rapidly create a data lake using existing infrastructure. For example, using the DMS' catalog and storage gateway with existing cloud storage and data processing capabilities.
+* Data Engineering: you can use components of the DMS to rapidly create, orchestrate and supply data pipelines.
 
 [dms]: /dms/
 [portals]: /data-portals/
@@ -45,6 +46,8 @@ You can use a DMS to build many kinds of specific applications:
 
 A DMS has a variety of features. This section provides an overview and links to specific feature pages that include details of how they work in CKAN and CKAN v3 / DataHub.
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRdMzNeIAEkjDRGtBfuocy6zDyRg_qDujSkLrTe69U1qlu_1kfTYN0OL_v4IZKKo0eDXRbCzgzQMlFz/pub?w=622&amp;h=635">
+
 :::tip
 There are many ways to break down features and this is just one framing. We are thinking about others and if you have thoughts please get in touch.
 :::
@@ -53,14 +56,14 @@ There are many ways to break down features and this is just one framing. We are 
   * [Views on data](/views/)
   * [Visualization and Dashboards](/#visualizations-and-dashboards)
 * [Publishing data](/publish/)
-* [Data API and DataStore](/data-api)
-* Authentication and Authorization
-  * [Permissions](/permissions/)
-  * [Identify, Profiles and Authentication](/authentication/)
+* [Data API DataStore](/data-api)
+* [Permissions](/permissions/) and [Authentication](/authentication/)
 * [Versioning](/versioning/)
 * [Harvesting](/harvesting/)
 
-Technical features
+### Components
+
+A DMS has the following key components:
 
 * [HubStore](/hubstore/)
 * [Data Flows and Factory](/flows/)
@@ -71,7 +74,7 @@ Technical features
 
 https://coggle.it/diagram/Xiw2ZmYss-ddJVuK/t/data-portal-feature-breakdown
 
-<iframe width='640' height='360' src='https://embed.coggle.it/diagram/Xiw2ZmYss-ddJVuK/b24d6f959c3718688fed2a5883f47d33f9bcff1478a0f3faf9e36961ac0b862f' frameborder='0' allowfullscreen></iframe>
+<iframe width='853' height='480' src='https://embed.coggle.it/diagram/Xiw2ZmYss-ddJVuK/b24d6f959c3718688fed2a5883f47d33f9bcff1478a0f3faf9e36961ac0b862f' frameborder='0' allowfullscreen></iframe>
 
 ## Visualization and Dashboards
 

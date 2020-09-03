@@ -72,22 +72,7 @@ Also worth mentioning is the potential integration with code: now that your data
 
 ## Design
 
-### Research
-
-For research on how to build the next generation versioning solution see the [Versioning Research page &raquo;](./research.html)
-
-## References
-
-* [Git (and Github) for Data - Rufus Pollock - blog.okfn.org - July 2013](https://blog.okfn.org/2013/07/02/git-and-github-for-data/)
-  * Discussion on okfn-labs: https://lists-archive.okfn.org/pipermail/okfn-labs/2013-July/002690.html
-* [We Need Distributed Revision/Version Control for Data -Rufus Pollock - blog.okfn.org - July 2010](https://blog.okfn.org/2010/07/12/we-need-distributed-revisionversion-control-for-data/)
-* [Diffing and patching tabular data - Paul Fitzpatrick - Aug 2013](http://okfnlabs.org/blog/2013/08/08/diffing-and-patching-data.html)
-* Noms - Noms is a decentralized database philosophically descendant from the Git version control system. https://github.com/attic-labs/noms
-  * Written in Go. Open source (apache license)
-  * Functional but still alpha
-  * Now abandonware as makers of Noms, Attic Labs, were acquired by Salesforce in Jan 2018 and developed stopped at that point. "Nobody is working on this right now. You shouldn't rely on it unless you're willing to take over development yourself." https://github.com/attic-labs/noms/blob/master/README.md#status
-* (Old - last updated in 2018 and largely from before that) Collecting thoughts about data versioning - https://github.com/leeper/data-versioning
-* TODO: See my revisioning work at Data Protocols
+See [Versioning Design doc](./design).
 
 ## Appendix: Mapping against Git
 

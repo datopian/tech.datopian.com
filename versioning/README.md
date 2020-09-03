@@ -75,6 +75,16 @@ Whilst tagging itself is relatively trivial functionality, there may be signific
 
 CKAN v2 (up to v2.8) used `vdm` to provide metadata revisioning. However, there was no data revisioning. In v2.9 `vdm` was removed and metadata revisioning is provided by the activity stream system.
 
+### ckanext-datasetversions
+
+https://github.com/aptivate/ckanext-datasetversions/
+
+There is an extension called ckanext-datasetversions with a basic implementation of dataset versioning. It implements the version as a child - father relationship between datasets. There is a detailed analysis of the package in this document.
+
+The package internally use child_of relationship to model versions: "The plugin models dataset versions internally by creating a parent dataset, with minimal metadata and no resources. A child dataset is created for each version." So new versions are new datasets, and CKAN restrictions applies: these datasets cannot share url or name.
+
+The package was created 4y ago and does not seem to be actively maintained.
+
 ### Limitations
 
 * Data revisioning is not supported.

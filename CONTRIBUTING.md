@@ -28,13 +28,14 @@ The following are recommended structures for DMS feature sections, especially th
 This structure is more oriented to the initial development of a feature topic when we are still analysing and designing the solution.
 
 * [ ] Introduction
-  * [ ] 1 short headline paragraph
-  * [ ] Features and/or Key Job stories (if lots have an appendix for full job stories)
-  * [ ] Key components and/or Flows
-* [ ] CKAN 2
+  * [ ] Short headline paragraph
+  * [ ] Features
+  * [ ] Job Stories (if lots have an appendix for full job stories)
+  * [ ] Components and/or Flows
+* [ ] CKAN v2
   * [ ] Organize corresponding to the key components (and maybe a bit job stories)
   * [ ] Limitations / issues
-* [ ] CKAN 3 
+* [ ] CKAN v3 
   * [ ] Intro incl aims ...
   * [ ] Features / benefits
   * [ ] How it works against the key components
@@ -49,12 +50,12 @@ Copy and pastable version for issues:
 * [ ] Introduction
   * [ ] 1 short headline paragraph
   * [ ] Features
-  * [ ] Key Job stories (if lots have an appendix for full job stories)
-  * [ ] Key components
-* [ ] How this works in CKAN 2
+  * [ ] Job Stories (if lots have an appendix for full job stories)
+  * [ ] Components and/or Flows
+* [ ] CKAN v2
   * [ ] Organize corresponding to the key components (and maybe a bit job stories)
   * [ ] Limitations / issues
-* [ ] CKAN 3 
+* [ ] CKAN v3 
   * [ ] Intro incl aims ...
   * [ ] Features / benefits
   * [ ] How it works against the key components

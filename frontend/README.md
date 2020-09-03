@@ -2,10 +2,10 @@
 
 The (read) frontend component covers all of the traditional "read" frontend functionality of a data portal: front page, searching datasets, viewing datasets etc.
 
-:::tip 📣 
-Announcing Portal.js 🌀 a javascript framework for building rich data portal frontends fast using a modern frontend approach (JavaScript, React, SSR).
+:::tip 📣 Announcing Portal.js
+Portal.js 🌀 is a javascript framework for building rich data portal frontends fast using a modern frontend approach (JavaScript, React, SSR).
 
-Background and motivation in the RFC https://github.com/ckan/ideas/blob/master/rfcs/0005-decoupled-frontend.md
+https://github.com/datopian/portal.js
 :::
 
 ## Features
@@ -96,10 +96,10 @@ In more detail:
 
 ## CKAN v3
 
-:::tip 📣 
-Announcing Portal.js 🌀 a javascript framework for building rich data portal frontends fast using a modern frontend approach (JavaScript, React, SSR).
+:::tip 📣 Announcing Portal.js
+Portal.js 🌀 is a javascript framework for building rich data portal frontends fast using a modern frontend approach (JavaScript, React, SSR).
 
-Background and motivation in the RFC https://github.com/ckan/ideas/blob/master/rfcs/0005-decoupled-frontend.md
+https://github.com/datopian/portal.js
 :::
 
 Previous (stable) version is `frontend-v2`: https://github.com/datopian/frontend-v2. It is written in NodeJS using ExpressJS. For templating it uses [Nunjucks][].

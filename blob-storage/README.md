@@ -87,9 +87,11 @@ There are a variety of issues:
 
 Generally, we at Datopian have seen a lot of issues around multipart / large file upload stability with clients and are still seeing issues when a lot of large files are uploaded via scripts. Fixing and refactoring code related to storage is very costly, and tends to result in client specific "hacks".
 
-## CKAN 3 (Next Gen)
+## CKAN v3
 
-We have built a new cloud-native storage implementation which is backwards compatible with CKAN v2. It is designed as microservice and supports direct to cloud uploads and downloads.
+We offer an approach to blob storage that leverages cloud blob storage directly (i.e.: without having to upload and serve all files via the CKAN web server), unlocking the performance characteristics of the storage backend directly. It is designed as microservice and supports direct to cloud uploads and downloads.
+
+It is backwards compatible with CKAN v2.
 
 Status: Production.
 
@@ -97,8 +99,8 @@ CKAN v2 extension: https://github.com/datopian/ckanext-external-storage
 
 Subcomponents:
 
-* https://github.com/datopian/giftless
-* https://github.com/datopian/ckanext-authz-service
+* https://github.com/datopian/giftless - Giftless is a git-lfs compatible  middleware service to get the location (URLs) and access credentials of the files in the storage server so clients can upload and download with them through HTTP requests.
+* https://github.com/datopian/ckanext-authz-service - This extension uses CKAN’s built-in authentication and authorization capabilities to: a) Generate JWT tokens and provide them via CKAN’s Web API to clients and b) Validate JWT tokens
 
 You can read more about it in the design goals section below.
 

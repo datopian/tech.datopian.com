@@ -4,7 +4,7 @@
 This article is still under testing and development.
 :::
 
-**Before migration please ensure that the source and the target Postgre SQL are running on same version if not there should not be any syntatical changes between version**
+**Before migration please ensure that the source and the target Postgre SQL are running on same version if not there should not be any syntatical differences between versions**
 
 1. Install kubectl and kubectx.
 2. [Download the file containing the manifests](/dx-data-migration.yaml) and personalize it according to your needs. Most specifically: environment variables in `Secret/envvars`, and `ConfigMap/files`' `migrate.sh` file.

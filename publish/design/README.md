@@ -37,6 +37,8 @@ This approach is is designed to be extensible so that new workflows and their re
 
 ### Architecture
 
+* Each step in a flow is "roughly" a react component
+* Each component will pass information between itself and the central store / other components. Those structures that are related to Datasets and Resources wll follow Frictionless formats.
 * Encapsulate interaction with backend in a library. Backend is CKAN MetaStore and Blob Storage access, raw Blob Storage itself (almost certainly cloud)
 * Split UI into clear components and even sub-applications (for example, a sub-application for resource adding)
 * Use [Frictioness specs][f11s] for structuring storage of data objects such as Dataset, Resource, Table Schema etc will be in

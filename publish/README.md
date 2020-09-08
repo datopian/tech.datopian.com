@@ -86,8 +86,56 @@ The domain model here is that of the [DMS]() and we recommend visiting that page
 ## Flows
 
 * Publish flows are highly custom: different platforms have different needs
-* At the same time there are core workflows that most people will use (and customize)
+* At the same time there are core components that most people will use (and customize) e.g. uploading a file, adding dataset metadata etc
 * The flows shown here are therefore illustrative and inspirational rather than definitive
+
+### Evolution of a Flow
+
+Here's a simple illustration of how a publishing flow might evolve:
+
+```mermaid
+graph LR
+
+a[Add a file]
+b[Add metadata]
+c[Save]
+
+
+a --> b
+b --> c
+```
+
+```mermaid
+graph LR
+
+a[Add a file]
+b[Add metadata]
+c[Save]
+d[Add table schema]
+
+
+a --> b
+b -.-> d
+d -.-> c
+```
+
+
+```mermaid
+graph LR
+
+a[Add a file]
+b[Add metadata]
+c[Save]
+d[Add table schema]
+e[Check for PII]
+
+a --> b
+b -.-> d
+d -.-> e
+e --> c
+```
+
+PII = personally identifiable info
 
 ### The 30,000 foot view
 

@@ -40,7 +40,7 @@ At this point, you should be able to access the portal on http://ckan:5000.
 
 ![CKAN Home Page](https://i.imgur.com/T5LWo8A.png)
 
-Let's add some fixtures to it. For software, a fixture is something used consistently (in this case, data for you to play around with). Run the following from your terminal:
+Let's add some fixtures to it. For software, a fixture is something used consistently (in this case, data for you to play around with). Run the following from your terminal (do NOT cut the previous docker process as this one depends on the already launched docker, run in another terminal):
 
 ```sh
 docker-compose -f docker-compose.dev.yml exec ckan-dev paster --plugin=ckan create-test-data -c production.ini

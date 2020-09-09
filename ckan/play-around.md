@@ -46,6 +46,17 @@ Let's add some fixtures to it. For software, a fixture is something used consist
 docker-compose -f docker-compose.dev.yml exec ckan-dev paster --plugin=ckan create-test-data -c production.ini
 ```
 
+Optionally you can `exec` into a running container using 
+
+```sh
+docker exec -it [name of container] sh
+```
+
+and run the `paster` command there
+```sh
+paster --plugin=ckan create-test-data -c production.ini
+```
+
 You should be able to see 2 new datasets on home page:
 
 ![CKAN with data](https://i.imgur.com/BiSifyb.png)

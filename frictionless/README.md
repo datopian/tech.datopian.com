@@ -2,7 +2,7 @@
 
 ## What's a Data Package?
 
-A [Data Package](https://frictionlessdata.io/data-packages/) is a simple container format used to describe and package a collection of data (a dataset).
+A [Data Package](https://frictionlessdata.io/data-package/) is a simple container format used to describe and package a collection of data (a dataset).
 
 A Data Package can contain any kind of data. At the same time, Data Packages can be specialized and enriched for specific types of data so there are, for example, Tabular Data Packages for tabular data, Geo Data Packages for geo data etc.
 

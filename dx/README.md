@@ -43,6 +43,17 @@ In a recent incident, when changing other things in the Terraform project, I ask
 
 I was only able to prevent this unintended downgrade with ease because 1. I was aware that we were upgrading CloudAMQP, so Terraform asking to go to the free plan didn't make much sense to me; 2. I paid special attention to the diff before accepting Terraform to go forward; and 3. The diff was simple enough that both CloudAMQP's intergration with Terraform and Terraform itself were able to recover from the surprising diff. If we weren't lucky, Terraform would just break and say that its cached state (how all the services looked the last time we used Terraform) does not represent the current reality and it needs manual recover. This would prevent me and others from continuing to use Terraform for other applications until we manually checked all the services we have declared, deleted them, and importing them again, with the current live state. As the Terraform state is a JSON file with 1,000's of lines, it's not something we want to manually fix if we have the chance.
 
+### How Does HTTPS Work In The Cluster?
+
+_or How Does The Certificate Manager Uses The Ingress (Nginx Or Traefik) To Communicate With Let's Encrypt To Generate TLS Certificates And Maintain Them Always Up-To-Date._
+
+Please watch this series of videos:
+
+1. [How does HTTPS work? What's a CA? What's a self-signed Certificate?](https://youtu.be/T4Df5_cojAs)
+2. [Create a Kubernetes TLS Ingress from scratch in Minikube](https://youtu.be/7K0gAYmWWho)
+3. [Automatically Provision TLS Certificates in K8s with cert-manager](https://youtu.be/JJTJfl-V_UM)
+4. [Use cert-manager with Let's Encrypt® Certificates Tutorial: Automatic Browser-Trusted HTTPS](https://youtu.be/etC5d0vpLZE)
+
 ## Cluster
 
 ### How Do It Create The Cluster

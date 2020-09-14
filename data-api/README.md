@@ -1,14 +1,10 @@
 # Data APIs (and the DataStore)
 
-Much of the richer functionality of Data Portals such as data visualization and exploration require API data access rather than bulk download. Data APIs provide this functionality.
-
-:::tip
-Data APIs covers the DataStore functionality in CKAN. We prefer Data API over DataStore as a term because it shifts the focus to the functionality (the API) rather than the underlying implementation (a structured data storage such as RDBMS).
-:::
-
 ## Introduction
 
-A Data API provides *API* access to data stored in a Data Portal. APIs provide granular, per record access to datasets and their component data files. They offer rich querying functionality to select the records you want, and, potentially, other functionality such as aggregation. Data APIs can also provide write access, though this has traditionally been rarer.[^rarer]
+A Data API provides *API* access to data stored in a DMS. APIs provide granular, per record access to datasets and their component data files. They offer rich querying functionality to select the records you want, and, potentially, other functionality such as aggregation. Data APIs can also provide write access, though this has traditionally been rarer.[^rarer]
+
+Furthermore, much of the richer functionality of DMSes and Data Portals such as data visualization and exploration require API data access rather than bulk download.
 
 [^rarer]: It is rarer  because write access usually means a) the data for this dataset is a structured database rather than a data file (which is normally more expensive both in terms b) the Data Portal has now become the primary (or semi-primary) home of this dataset rather simply being the host of a dataset whose home and maintenance is elsewhere.
 

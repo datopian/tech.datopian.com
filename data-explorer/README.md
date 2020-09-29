@@ -263,7 +263,7 @@ You need to have **node version >= 12** in order to build files. Otherwise a 'he
 
 If the changes involve component updates that live in separate repositories make sure to upgrade them too before building:
 1. Prepare the component with dist version (eg run yarn build:package in the component repo, see https://tech.datopian.com/data-explorer/datastore-query-builder/#release for an example)
-2. run `yarn upgrade <package>` to get latest changes, e.g. `yarn upgrade @datopian/datastore-query-builder`
+2. run `yarn add <package>` to get latest changes, e.g. `yarn add @datopian/datastore-query-builder` (do not use `yarn upgrade`, see here on why https://github.com/datopian/data-explorer/issues/28#issuecomment-700792966)
 3. you can verify changes in `yarn.lock` - there should be the latest component commit id
 4. `yarn build` in data-explorer
 

@@ -18,6 +18,14 @@ See [Deploy &raquo;](./deploy).
 
 See [Data Migration &raquo;](./data-migration).
 
+### Setting Up Monitoring and Alerts
+
+See [Monitoring and Alerts &raquo;](./monitoring).
+
+### Using Logging
+
+See [Using Logging &raquo;](./logging).
+
 ### What's The Purpose Of Terraform In Our Stack?
 
 _or Why You Should Not Manually Change Terraform-Managed Resources Using Google Cloud Console (Or Other Ui For Different Services)?_

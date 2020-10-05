@@ -7,17 +7,26 @@ This guide is about adding and managing data in CKAN programmatically and it ass
 * You are familiar with key concepts like metadata, data etc.
 * You are working programmatically e.g. in one of Python, R, JavaScript, etc.
 
+## Frictionless Formats
+
+Clients use [Frictionless formats][f11s] by default for describing dataset and resource objects passed to client methods. Internally, we then use the a CKAN<=>Frictionless Mapper ([js][c2f], [python][c2fpy] to convert to CKAN formats before calling the API. Thus, you can use Frictionless Formats by default with the client. (As CKAN moves to Frictionless to default this will gradually become unnecessary).
+
+[f11s]: https://specs.frictionlessdata.io/
+[c2f]: https://github.com/datopian/frictionless-ckan-mapper-js
+
 ## Quick start
 
-This guide currently assumes you are using Python. R and Javascript examples are coming soon.
+This guide currently uses a Python idiom by default (e.g. lower case, underscore). You can adapt to R and Javascript as needed and we provide alternative examples where possible.
 
 ### Prerequisites
 
-[Install the SDK](https://github.com/datopian/ckan3-py-sdk#install) for your language and configure it.
+Install the SDK for your language and configure it.
 
-Visit the repo and follow the instructions below. 
+* Python: https://github.com/datopian/ckan3-py-sdk#install) 
+* Javascript: ...
+* R: coming soon
 
-Create a client:
+### Create a client
 
 ```python
 from ckanclient import Client
@@ -26,12 +35,6 @@ endpoint = 'https://my-ckan.com/'
 token = 'xxxx'              # your CKAN API key
 org_name = 'my-org'         # default organization on CKAN to add datasets to
 client = Client(endpoint, token, org_name)
-```
-
-We will also use the Frictionless library in what follows for abstracting loading files and datasets from disk:
-
-```python
-import frictionless as f11s
 ```
 
 ### Upload a resource (file) (and implicitly create a new Dataset)
@@ -80,3 +83,34 @@ client.update_metadata(
     metadata: {'maintainer_email': 'sample@datopian.com'}
 )
 ```
+
+For details of metadata see the metadata reference below ...
+
+## API - Porcelain
+
+### `retrieve`
+
+### `push`
+
+## API - Plumbing
+
+### Action API
+
+### Storage
+
+
+## Metadata reference
+
+:::tip NOTE
+Your site may have custom metadata that differs from the default set below.
+:::
+
+## Generating templates
+
+TODO
+
+## Design Principles
+
+The client SHOULD use Frictionless formats by default for describing dataset and resource objects passed to client methods.
+
+In addition, where more than metadata is needed (e.g. we need to access the data stream of get the schema) we expect the Dataset and Resource object to follow the Frictionless Data Lib pattern https://github.com/frictionlessdata/project/blob/master/rfcs/0004-frictionless-data-lib-pattern.md

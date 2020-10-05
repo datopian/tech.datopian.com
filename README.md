@@ -87,7 +87,7 @@ https://coggle.it/diagram/Xiw2ZmYss-ddJVuK/t/data-portal-feature-breakdown
 
 The Frictionless Data toolkit. See https://frictionlessdata.io/
 
-Our teaem created whilst at Open Knowledge Foundatioin and continue to co-steward it.
+Our team created whilst at Open Knowledge Foundatioin and continue to co-steward it.
 
 ## OpenSpending
 

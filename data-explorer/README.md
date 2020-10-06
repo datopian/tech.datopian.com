@@ -259,6 +259,24 @@ In order to build files for production, run `npm run build` or `yarn build`.
 
 You need to have **node version >= 12** in order to build files. Otherwise a 'heap out of memory error' gets thrown.
 
+### Component changes
+
+If the changes involve component updates that live in separate repositories make sure to upgrade them too before building:
+1. Prepare the component with dist version (eg run yarn build:package in the component repo, see https://tech.datopian.com/data-explorer/datastore-query-builder/#release for an example)
+2. run `yarn add <package>` to get latest changes, e.g. `yarn add @datopian/datastore-query-builder` (do not use `yarn upgrade`, see here on why https://github.com/datopian/data-explorer/issues/28#issuecomment-700792966)
+3. you can verify changes in `yarn.lock` - there should be the latest component commit id
+4. `yarn build` in data-explorer
+
+### Testing not yet released component changes
+
+If there are some changes to be tested that are not ready to be released in a component the best option is to use
+cosmos directly in the component repository, but if that is not enough you can add the dependency from a branch
+temporarily:
+
+```
+yarn add https://github.com/datopian/datastore-query-builder.git#<branch name>
+```
+
 ## Appendix: Design
 
 See [Data Explorer Design page &raquo;](./design/)

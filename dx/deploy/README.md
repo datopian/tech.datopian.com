@@ -14,6 +14,11 @@
 
 ### Deploy a project
 
+#### Special prerequisites
+
+* A Docker image of the needed CKAN instance (e.g. a CI artifact from a GitLab project)
+* Access to Datopian's Cloudflare account
+
 #### Create new project and modify templates
 
 In order to deploy a new project we will need to update DX helm templates per your needs. To make life easier create a new repository for our project and add it as an origin remote to the [dx-helm-template](https://gitlab.com/datopian/experiments/dx-helm-template)
@@ -34,12 +39,6 @@ In order to deploy a new project we will need to update DX helm templates per yo
     ```
     $ git add .
     $ git push -u --all origin
-    ```
-1. (optional) Update Helm dependecies:
-    ```
-    $ cd <directory containing chart.yaml>
-    $ helm dependency update
-    $ cd - && git add . && git push -u --all origin
     ```
 
 #### Create Tokens and connect to Argo CD
@@ -84,11 +83,25 @@ Time to create Argo CD application in order to continiously deploy new project. 
     --server localhost:8080
     ```
 
-#### Add DNS and create certificates
+#### Add DNS entries
 
-1. Add a DNS entry for the project, as defined in the `values.yaml` file(s).
-1. After you have your new app address defined in DNS, you have to [create certificate](https://gitlab.com/datopian/tech/devops/-/blob/master/quickstart-guide-to-cert-manager-in-k8s.md). 
+If Datopian is hosting the project, we need to add one or more DNS records to point to the new instance. Our domains are managed by Cloudflare, so in order to do this you need to either have access to their administrative area, or ask someone who has to do it for you.
 
+First, all DNS entries need to point to the new cluster's load balancer, which lives at `nginx-prod-lb.datopian.com`.
+
+Second, make sure you create DNS entries for all the URLs you need your deployment to respond to. For example, if you have a CKAN instance and a Node API client, both might need to be publicly acessible. Failing to create all DNS records declared in `values.yaml` as public URLs will result in failure to generate and deploy valid Let's Encrypt SSL certificates.
+
+
+#### Create certificates
+
+Certificates will be created automatically by `cert-manager`. There are two key points which allow controlling how `cert-manager` reacts to your deployment:
+
+
+1. The public URLs defined in `ckan.ingress.tls.hosts`.
+The list of hosts defined in the ingress settings is picked up by `cert-manager` for generating certificates.
+
+2. The value of `ckan.general.useProductionCerts`.
+If set to `true`, it will use the **production** Let's Encrypt API to generate valid certificates recognized by all browers. If set to `false` (default) it will generate 
 
 ## Template customization
 
@@ -107,7 +120,7 @@ Rename the top level directory to match your project name (without environment n
 Each environment you deploy should have a specific values.\<env-name\>.yaml file, e.g. values.staging.yaml.
 These files will be used when creating the environments within the cluster.
 
-For now, we store all secret environment variables in the `env.ckan` key, and we're not going to use `sealedSecrets`.
+For now, we store all secret environment variables in the `ckan.ckan.env` key, and we're not going to use `sealedSecrets`.
 We are currently working towards a better / easier to use implementation which would avoid plain text storing of variables.
 
 
@@ -116,25 +129,19 @@ We are currently working towards a better / easier to use implementation which w
 
 ### Solr
 
-The default Solr version in our CKAN template is 6.6.6, which is newer than what some `ckan.io` instances are using. In some cases, you will want to run the earlier 5.5.5 version, to ensure compatibility with the existing code. In order to do that, you need to clone the source chart for DX CKAN, modify it and rebuild as a dependency of your project.
+The default Solr version in our CKAN template is 6.6.6, which is newer than what some `ckan.io` instances are using. In some cases, you will want to run the earlier 5.5.5 version, to ensure compatibility with the existing code, or even bump it higher to the latest version for bleeding edge features.
 
-1. Clone the source chart in a directory the same level with your project
-    ```
-    $ git clone git@gitlab.com:datopian/experiments/dx-helm-ckan
-    $ cd dx-helm-ckan
-    ```
-1. Adjust the image.tag property in CKAN's values.yaml
+> For higher versions of Solr (7.x, 8.x), authentication needs to be enabled for solr cores via Zookeeper. Global authentication will not work, as health and readiness checks will fail. As a workaround, we can enable authentication only on the core(s), but allow unauthenticated requests still. A dedicated mini-tutorial will follow.
+
+Until recently, we were managing nested dependencies by doing custom CKAN chart builds. If you used that technique before, you might want to upgrade your existing deployments to use this much easier and cleaner way.
+
+1. Adjust the `ckan.solr.image.tag` property in values.yaml
     ```yaml
-    solr:
-      image:
-        tag: 5.5.5
+    ckan:
+      solr:
+        image:
+          tag: 5.5.5
 
-    ```
-1. Build and update dependecies in your project
-    ```
-    $ cd ../<project-directory>
-    $ helm dependency build
-    $ helm dependency update
     ```
 1. Commit the update and push
     ```
@@ -265,13 +272,11 @@ If you already deployed your application to the DX cluster (congratulations, BTW
 1. Rebuild the running CKAN pods by simply deleting them (either via Argo UI or `kubectl`). See [above](#debugging) for how to do that.
 
 
-## Updating CKAN Helm Chart
+## Pinning down a CKAN Docker image version
 
-In Helm's model, dependencies are vendorized and commited together with the source code of a Helm Chart. If you're interested in the latest version of a dependency – for instance, [CKAN's chart](https://gitlab.com/datopian/experiments/dx-helm-ckan) – you need to explicitly tell Helm to pull the updates.
+If you need stricter version control over the deployed CKAN image, jsut use the `ckan.ckan.image.tag` property in the `values.yaml` file in your Helm chart. Please note that the Continuous Deployment flow will now be interrupted by the additional (explicit) action of updating the `values.yaml` file and committing / pushing the updates for the Helm chart. If automatic sync is enabled in your app, it will get deployed without any other intervention.
 
-1. Clone [dx-helm-ckan](https://gitlab.com/datopian/experiments/dx-helm-ckan) in the same folder as your Helm Chart (e.g., dx-helm-nhs).
-2. From the `dx-helm-nhs` folder, run `helm dependency update nhs`, where `nhs` is the name of your Helm Chart.
-3. Commit the updated chart (as `nhs/charts/ckan-0.1.0.tgz`).
+Either way, you will need an explicit action (deleting the pod to redeploy vs. updating the chart). It is up to you, as a maintainer, how you want to manage the deployment.
 
 
 ## Rolling back a release

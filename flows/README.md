@@ -1,18 +1,19 @@
-# Data Flows and Factory
+# Data Factory and Flows
 
 ## Introduction
 
-A Data Factory is a system for processing data using Data flows. Specifically:
+A Data Factory is a set of services/components to process and integrate data (coming from different sources). Plus patterns / methods for integrating with CKAN and the DataHub.
 
-* Flow = a work*flow* or processing *flow* for transforming or analysing data.
-* Factory is the system for creating and orchestrating flows.
+A Data Factory does its processing in (work)*flows*. Thus, we could make the following definition:
+
+* A Flow is a work*flow* or processing *flow* for transforming or analysing data.
+* A Factory is a system for creating and managing (orchestrating, monitoring etc) those flows.
 
 ### Domain Model
 
 * Tasks
 * DAGs (Flows)
 * Factory
-
 
 ## CKAN v3
 
@@ -23,6 +24,10 @@ The Data Factory system is called AirCan and is built on top of AirFlow. Compone
 * GUI: Under development.
 
 Status: Beta. AirCan and ckanext-aircan are in active use in production. GUI is under development.
+
+### Design
+
+See [Design page](./design).
 
 
 ## Links

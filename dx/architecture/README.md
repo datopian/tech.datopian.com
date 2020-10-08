@@ -6,7 +6,7 @@ This document describes the target infrastructure and CI/CD pipeline architectur
 
 The proposed solution architecture is intended to be simple, automated and shouldn't require any kubernetes knowledge.
 
-The core of the architecture is a DevOps toolchain, which is comprised of the following tools:
+The core of the architecture is a DevOps toolchain following GitOps best practice. It is comprised of the following tools:
 
 * Gitlab VCS
 * Helm charts
@@ -14,6 +14,84 @@ The core of the architecture is a DevOps toolchain, which is comprised of the fo
 * ArgoCD CD pull pipeline
 
 ArgoCD is a new approach to deploy software, which follows GitOps best practice.
+
+:::tip
+If unfamiliar with GitOps please read the Appendix below.
+:::
+
+## Terminology
+
+We follow ArgoCD terminology:
+
+* Projects: an overall project containing one or more appplications/environments e.g. XYZ data portal
+* Application: aka Instance/Environment e.g. production, staging, dev etc of XYZ data portal
+* Service: a single microservice that is part of an Application
+
+## Description of the CI/CD pipeline stages
+
+1. Gitlab **Repo #1** (App repo): Source code is pushed to the CKAN repo
+2. Gitlab **Repo #1** (App repo): CI build pipeline is triggered
+3. Gitlab **Repo #1** (App repo): Unit tests, security scans, code quality and linters run
+4. Gitlab **Repo #1** (App repo): Docker image is built
+5. Gitlab **Repo #1** (App repo): Docker image is pushed to the Docker Registry
+6. Gitlab **Repo #2** (Helm repo): Environment repository helm chart values file is updated
+7. ArgoCD **Repo #2** (Helm repo): K8s manifests are synced with the helm environment **Repo #2**
+
+```mermaid
+sequenceDiagram
+	DatopianDev->>+RepoPath1(App): Commit and push code
+    RepoPath1(App)->>+Tests: Trigger CI
+    Tests->>+DockerRegistry: Docker image is built
+    RepoPath1(App)->>+RepoPath2(Helm): Environment repo helm values updated with a new Docker image tag
+    ArgoCD->>RepoPath2(Helm): Pull pipeline syncs helm values
+    ArgoCD->>Kubernetes: Sync a helm release
+    
+```
+
+## Deploying an Application 
+
+1. Generate a Gitlab **Repo #1** (Application and Helm repository) by running a one-line command
+A black-box for a developer (what happens under the hood):
+    * **Repo #1** (App repo + Helm Repo) a project is initialized on Gitlab with a template project files
+    * ArgoCD **Repo #2** (ArgoCD repo) config file is added with a new application to ArgoCD. From now on ArgoCD will sync **Repo #2** (Helm repo) with k8s
+3. Push your code to **Repo #1** (App repo) and check your first deployment on k8s
+
+### Project Repo Layout
+
+Projects live inside the `deploys` group.
+
+```
+# create new repo on gitlab at datopian/applications/xxx
+$ git clone that-repo
+$ create-ckan-k8s-app --template XXX ...
+$ tree
+
+README.md        # optional
+CREATE_CKAN_K8S_APP_VERSION
+.gitlab-ci.yml
+helm/
+  templates/...
+  values/...
+service0-aka-ckan-core
+  Dockerfile (if custom one needed)
+service1      (if customization needed)
+  Dockerfile
+service2      # completely specific to this application
+  code
+  Dockerfile
+```
+
+
+## FAQs / TODOs
+
+* How do we handle different "environments" (staging, production etc) of a given application?
+  * ~~ANS: different branches~~
+  * ~~ANS: different repos~~
+  * ANS: different directories (or different `values.yml`)
+    * When you create an application in ArgoCD you link it to a values.yml
+  * TODO: What are the pros/cons of using branches vs "directory or file" approach
+* What about automated "PRs" for new service releases e.g. i update frontend service and then get a PR on helm repo
+
 
 ## GitOps best practice
 
@@ -73,38 +151,7 @@ Argo CD is implemented as a kubernetes controller which continuously monitors ru
 * Prometheus metrics
 * Parameter overrides for overriding ksonnet/helm parameters in Git
 
-## DX is awesome
-
-### Description of the CI/CD pipeline stages
-
-1. Gitlab **Repo #1** (App repo): Source code is pushed to the CKAN repo
-2. Gitlab **Repo #1** (App repo): CI build pipeline is triggered
-3. Gitlab **Repo #1** (App repo): Unit tests, security scans, code quality and linters run
-4. Gitlab **Repo #1** (App repo): Docker image is built
-5. Gitlab **Repo #1** (App repo): Docker image is pushed to the Docker Registry
-6. Gitlab **Repo #2** (Helm repo): Environment repository helm chart values file is updated
-7. ArgoCD **Repo #2** (Helm repo): K8s manifests are synced with the helm environment **Repo #2**
-
-```mermaid
-sequenceDiagram
-	DatopianDev->>+RepoPath1(App): Commit and push code
-    RepoPath1(App)->>+Tests: Trigger CI
-    Tests->>+DockerRegistry: Docker image is built
-    RepoPath1(App)->>+RepoPath2(Helm): Environment repo helm values updated with a new Docker image tag
-    ArgoCD->>RepoPath2(Helm): Pull pipeline syncs helm values
-    ArgoCD->>Kubernetes: Sync a helm release
-    
-```
-
-### DX is awesome: Simple steps
-
-1. Generate a Gitlab **Repo #1** (Application and Helm repository) by running a one-line command
-A black-box for a developer (what happens under the hood):
-    * **Repo #1** (App repo + Helm Repo) a project is initialized on Gitlab with a template project files
-    * ArgoCD **Repo #2** (ArgoCD repo) config file is added with a new application to ArgoCD. From now on ArgoCD will sync **Repo #2** (Helm repo) with k8s
-3. Push your code to **Repo #1** (App repo) and check your first deployment on k8s
-
-## References
+### References
 
 * GitOps https://www.gitops.tech/
 * ArgoCD https://argoproj.github.io/argo-cd/

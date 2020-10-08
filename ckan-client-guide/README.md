@@ -12,9 +12,7 @@ This guide is about adding and managing data in CKAN programmatically and it ass
 Clients use [Frictionless formats](https://specs.frictionlessdata.io/) by default for describing dataset and resource objects passed to client methods. Internally, we then use the a *CKAN <=> Frictionless Mapper* (both [in JavaScript]( https://github.com/datopian/frictionless-ckan-mapper-js ) and [in Python](https://github.com/frictionlessdata/frictionless-ckan-mapper)) to convert objects to CKAN formats before calling the API. **Thus, you can use _Frictionless Formats_ by default with the client**.
 
 ::::tip
-
 As CKAN moves to Frictionless to default this will gradually become unnecessary.
-
 ::::
 
 ## Quick start
@@ -27,9 +25,9 @@ If needed, you can adapt the instructions to JavaScript and R (coming soon) by u
 
 Install the client for your language of choice:
 
-* For Python, [use `pip install ckan-client`](https://github.com/datopian/ckan-client-py#install)
-* For JavaScript, [use `npm install https://github.com/datopian/ckan-client-js.git`](https://github.com/datopian/ckan-client-js#install)
-* R (_coming soon_)
+* Python: https://github.com/datopian/ckan-client-py#install
+* JavaScript: https://github.com/datopian/ckan-client-js#install
+* R: _coming soon_
 
 ### Create a client
 
@@ -148,11 +146,9 @@ Arguments:
 | `transform_response` | `function` | `None`     | function to mutate the response data before returning it (useful to convert to and from CKAN and Frictionless formats). |
 
 ::::tip NOTE
-
 The CKAN API uses the CKAN dataset and resource formats (rather than Frictionless formats).
 
 In other words, to stick to Frictionless formats, you can pass `frictionless_ckan_mapper.frictionless_to_ckan` as `transform_payload`, and `frictionless_ckan_mapper.ckan_to_frictionless` as `transform_response`.
-
 ::::
 
 #### In JavaScript
@@ -166,11 +162,9 @@ Arguments:
 | `useHttpGet` | <code>object</code> | <code>false</code> | Optional, if `True` will make `GET` request, otherwise `POST`. |
 
 ::::tip NOTE
-
 The JavaScript implementation uses the CKAN dataset and resource formats (rather than Frictionless formats).
 
 In other words, to stick to Frictionless formats, you need to convert from Frictionless to CKAN before calling `action` , and from CKAN to Frictionless after calling `action`.
-
 ::::
 
 ## Metadata reference
@@ -378,7 +372,6 @@ $ jsv data-resource.json --output py
 ```
 
 :::details Output
-
 ```python
 dataset_metadata = {
     "profile": "data-resource",  # The profile of this descriptor.
@@ -404,7 +397,6 @@ dataset_metadata = {
     # [example] "hash": "SHA256:5262f12512590031bbcc9a430452bfd75c2791ad6771320bb4b5728bfb78c4d0"
 }
 ```
-
 ::::
 
 ### JavaScript
@@ -414,7 +406,6 @@ $ jsv data-resource.json --output js
 ```
 
 ::::details Output
-
 ```javascript
 const datasetMetadata = {
   // The profile of this descriptor.
@@ -466,7 +457,6 @@ const datasetMetadata = {
   // [example] hash: "SHA256:5262f12512590031bbcc9a430452bfd75c2791ad6771320bb4b5728bfb78c4d0"
 };
 ```
-
 ::::
 
 ### R
@@ -476,7 +466,6 @@ $ jsv data-resource.json --output r
 ```
 
 ::::details Output
-
 ```r
 # The profile of this descriptor.
 profile <- "data-resource"
@@ -516,7 +505,6 @@ hash <- "d25c9c77f588f5dc32059d2da1136c02"
 # [example] hash <- "SHA256:5262f12512590031bbcc9a430452bfd75c2791ad6771320bb4b5728bfb78c4d0"
 
 ```
-
 ::::
 
 ## Design Principles

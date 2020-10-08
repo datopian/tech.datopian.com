@@ -94,14 +94,23 @@ Second, make sure you create DNS entries for all the URLs you need your deployme
 
 #### Create certificates
 
+**If we control the domain**
+
 Certificates will be created automatically by `cert-manager`. There are two key points which allow controlling how `cert-manager` reacts to your deployment:
 
-
-1. The public URLs defined in `ckan.ingress.tls.hosts`.
+1. The public URLs defined in `ingress.tls.hosts`.
 The list of hosts defined in the ingress settings is picked up by `cert-manager` for generating certificates.
 
-2. The value of `ckan.general.useProductionCerts`.
-If set to `true`, it will use the **production** Let's Encrypt API to generate valid certificates recognized by all browers. If set to `false` (default) it will generate 
+2. The value of `general.useProductionCerts`.
+If set to `true`, it will use the **production** Let's Encrypt API to generate valid certificates recognized by all browers. If set to `false` (default) it will generate staging certificates using the staging Let's Encrypt server.
+
+It is good practice to use the staging certificates until all the app aspects are settled. Using the production certificates while still tunign the deployment / fixing deployment issues might trigger too many requests to the ACME server and hit the rate limit, thus pausing new certificate requests for the entire domain (e.g. ckan.io or datopian.com) until the limit expires.
+
+
+**If we use a client controlled domain**
+
+When the client is controlling the domain and is pointing one or more subdomains to our new deployment, there is an extra step to be taken: there is a `ingress.enableExternal` value which by default is `false`. You need to set it to `true` in order to let `cert-manager` know which certificate issuer to use. For more info about how `cert-manager` is deployed and the way it works in our infrastructure, see [our `cert-manager` guide](https://gitlab.com/datopian/tech/devops/-/blob/master/quickstart-guide-to-cert-manager-in-k8s.md).
+
 
 ## Template customization
 

@@ -135,6 +135,68 @@ Question:
 
 [f11s]: https://f11s.com/
 
+
+## Previous work
+
+* 2019: https://github.com/datopian/import-ui - alpha React App. Working demo at http://datopian.github.io/import-ui
+* 2018: https://github.com/datopian/data-import-ui (unfinished React App)
+* https://github.com/datahq/pm/issues/90 
+* https://github.com/frictionlessdata/datapackage-ui 
+* Cf also openspending version
+  * can take from openspending but do it right :-)
+* the spreadsheet view is best - see [example](https://docs.google.com/spreadsheets/d/1RoKbiTXaxT_N5Vio93Er-BA3ev3iwWlu4KYv-M7kvqc/edit#gid=0)
+  * maybe given option to rotate if a lot of rows
+* v1 should assume tidy data
+* (?) v2 should allow for some simple wrangling to get tidy data (??)
+* This is a template for people building their own configurers
+
+
+### Original Flow for DataHub `data` cli in 2016
+
+Context:
+
+* you are pushing the raw file
+* and the extraction to get one or more data tables ...
+* in the background we are creating a data package + pipeline
+
+```
+data push {file}
+```
+
+Algorithm:
+
+1. Detect type / format
+2. Choose the data (e.g. sheet from excel)
+3. Review the headers
+4. Infer data-types and review
+5. [Add constraints]
+6. Data validation
+7. Upload
+8. Get back a link - view page (or the raw url) e.g. http://datapackaged.com/core/finance-vix
+    * You can view, share, publish, [fork]
+
+Details
+
+1. Detect file type
+
+    1. file extension
+      1. Offer guess
+      2. Probable guess (options?)
+      3. Unknown - tell us
+    2. Detect encoding (for CSV)
+
+2. Choose the data
+    1. Good data case
+      1. 1 sheet => ok
+      2. Multiple sheets guess and offer
+      3. Multiple sheets - ask them (which to include)
+    2. bad data case - e.g. selecting within table
+
+3. Review the headers
+    * Here is what we found
+    * More than one option for headers - try to reconcile
+
+
 ## Appendix: Project Creation Flow Comparison
 
 ### Github

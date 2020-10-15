@@ -197,6 +197,71 @@ Details
     * More than one option for headers - try to reconcile
 
 
+## Appendix: Integration into CKAN v2 Flow
+
+See https://github.com/datopian/datapub/issues/38
+
+### Current system
+
+```mermaid
+graph TD
+
+dnew[Click Dataset New]
+dmeta[Dataset Metadata]
+
+dnew --> dmeta
+
+rnew[New Resource]
+
+dmeta --saves dataset as draft--> rnew
+rnew --finish--> dpage[Dataset Page]
+rnew --add another--> rnew
+rnew --previous-->dmeta
+
+
+dedit[Click Edit Dataset] --> dupdate[Update Dataset Metadata]
+dupdate --save/update--> dpage
+dedit --resources--> res[Resources page]
+res --add new--> rnew
+res --click on existing resource --> redit[Resource Edit]
+redit --delete--> dpage
+redit --update--> resview[Resource view page]
+```
+
+### New system
+
+```mermaid
+graph TD
+
+dnew[Click Dataset New]
+dmeta[Dataset Metadata]
+
+dnew --> dmeta
+
+rnew[New Resource]
+
+dmeta --saves dataset as draft--> rnew
+rnew --save and publish + redirect--> dpage[Dataset Page]
+
+dedit[Click Edit Dataset] --> dupdate[Update Dataset Metadata]
+dupdate --save/update--> dpage
+dedit --resources--> res[Resources page]
+res --add new--> rnew
+res --click on existing resource --> redit[Resource Edit]
+redit --delete--> dpage
+redit --update--> resview[Resource view page]
+```
+
+Resource editor
+
+```mermaid
+graph TD
+
+start --> remove
+remove --> showupload[Show Upload/Link options]
+```
+
+
 ## Appendix: Project Creation Flow Comparison
 
 ### Github

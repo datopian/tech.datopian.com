@@ -1,19 +1,28 @@
-# Data Factory and Flows
+# Data Processing: Data Flows and Data Factories
 
 ## Introduction
 
-A Data Factory is a set of services/components to process and integrate data (coming from different sources). Plus patterns / methods for integrating with CKAN and the DataHub.
+A common aspect of data management is **processing** data in some way or another: cleaning it, converting it from one format to another, integrating different datasets together etc. Such processing usually takes place in what are termed data (work)flows or pipelines. Each flow or pipeline consists of one or more stages with one particular operation (task) being done with the data at each stage. Finally, there is a need for something to manage and orchestrate the data flows/pipelines. This overall system which includes both the flows themselves and the framework for managing them we term a "Data Factory".
 
-A Data Factory does its processing in (work)*flows*. Thus, we could make the following definition:
+Let's have some concrete examples of simple pipelines:
 
-* A Flow is a work*flow* or processing *flow* for transforming or analysing data.
-* A Factory is a system for creating and managing (orchestrating, monitoring etc) those flows.
+* Loading a raw CSV file into a database (e.g. to power the data API)
+* Converting a file from one format to another e.g. CSV to JSON
+* Loading a file, validating it and then computing some summary statistics
 
 ### Domain Model
 
-* Tasks
-* DAGs (Flows)
-* Factory
+* Tasks: a single processing step that is applied to data
+* DAGs (Flows): a flow or pipeline of tasks. These tasks form a "directed acyclic graph" (DAG) where each task is a node.
+* Factory: a system for creating and managing (orchestrating, monitoring etc) those flows.
+
+Each flow or pipeline consists of one or more stages with one particular operation (task) being done with the data at each stage.
+
+In a basic setup a flow is linear: the data arrives, operation A happens, then operation B, and, finally operation C. However, more complex flows/pipelines can involve branching e.g. the data arrives, then operation A, then there is a branch and operation B and C can happen independently.
+
+## CKAN v2
+
+CKAN v2 really only has one data factory system: the Data Load system which is focused on loading data to the DataStore. This system is covered on the [Data Load page][load].
 
 ## CKAN v3
 

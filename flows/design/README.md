@@ -148,6 +148,12 @@ Qus:
 
 * For Data Factory what do I do with Runs that are stale etc - how do I know who they are associated with. Can I store metadata on my Runs like who requested it etc.
 
+### UI Design
+
+Example from Github:
+
+![](https://i.imgur.com/xnTRq5T.png)
+
 ## Appendix
 
 ### Notes re AirCan API

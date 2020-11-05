@@ -69,7 +69,15 @@ sequenceDiagram
 
 ## CKAN v2
 
-Provided by either DataPusher or XLoader.
+The actual loading is provided by either DataPusher or XLoader. There is a common UI. There is no explicit API to trigger a load -- instead it is implicitly triggered, for example when a Resource is updated.
+
+### UI
+
+The UI shows runs of the data loading system with information on success or failure. It also allows eidtors to manually retrigger a load.
+
+![](https://i.imgur.com/fSh2cwK.png)
+
+TODO: add more screenshots
 
 ### DataPusher
 

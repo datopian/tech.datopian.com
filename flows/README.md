@@ -22,17 +22,29 @@ In a basic setup a flow is linear: the data arrives, operation A happens, then o
 
 ## CKAN v2
 
-CKAN v2 really only has one data factory system: the Data Load system which is focused on loading data to the DataStore. This system is covered on the [Data Load page][load].
+CKAN v2 has two implicit data factory system embedded in other functionality. These systems are technically entirely independent:
+
+* Data Load system for loading data to the DataStore -- see [Data Load page &raquo;](/load/)
+* Harvesting system for importing dataset metadata from other catalogs -- see [Harvesting page &raquo;](/harvesting/)
 
 ## CKAN v3
 
-The Data Factory system is called AirCan and is built on top of AirFlow. Components:
+The Data Factory system is called AirCan and is built on top of AirFlow. AirCan itself can be used on its own or integrated with CKAN.
 
-* Data Factory service: https://github.com/datopian/aircan. This is a set of AirFlow DAGs designed for common data processing operations in a DMS such as loading data into Data API storage.
-* CKAN v2 extension: https://github.com/datopian/ckanext-aircan. This hooks key actions from CKAN into AirCan and provides an API to run flows (DAGs).
+AirCan:
+
+* Runner: Apache AirFlow
+* Pipelines/DAGs: https://github.com/datopian/aircan. This is a set of AirFlow DAGs designed for common data processing operations in a DMS such as loading data into Data API storage.
+
+CKAN integration:
+
+* CKAN extension: https://github.com/datopian/ckanext-aircan. This hooks key actions from CKAN into AirCan and provides an API to run the flows (DAGs).
 * GUI: Under development.
 
-Status: Beta. AirCan and ckanext-aircan are in active use in production. GUI is under development.
+**Status**: Beta. AirCan and ckanext-aircan are in active use in production. GUI is under development.
+
+**Documentation**: including setup and use of the all the components including CKAN integration can be found in https://github.com/datopian/aircan 
+
 
 ### Design
 
@@ -55,4 +67,3 @@ See also [History page](./history).
   * https://github.com/datahq/dataflows/blob/master/PROCESSORS.md
 * https://github.com/datopian/dataflow-demo - Rufus outline on a very simple tool from April 2018
 * https://github.com/datopian/factory - datahub.io Factory "The service is responsible for running the flows for datasets that are frequently updated and maintained by Datahub. Service is using Datapackage Pipelines is a framework for declarative stream-processing of tabular data, and DataFlows to run the flows through pipelines to process the datasets."
-

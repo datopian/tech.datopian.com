@@ -49,7 +49,7 @@ The main way to address these problems while gaining extra benefits is to move t
 
 Thus, we recommend building the next version of CKAN – CKAN v3 – on a microservices approach.
 
-:::info
+:::tip
 CKAN v3 is sometimes also referred to as CKAN Next Gen(eration).
 :::
 
@@ -115,6 +115,17 @@ graph TB
 
 The hybrid approach means we can evolve CKAN v2 "Classic" to CKAN v3 "Next Gen" incrementally. In particular, it allows people to keep using their existing v2 extensions, and upgrade them to new microservices gradually.
 
+### Comparison of Approaches
+
+|              | CKAN v2 (Classic) | CKAN v3 (Next Gen) | CKAN v3 Hybrid |
+| ------------ | ------------------| -------------------| ---------------|
+| Architecture | Monolithic        | Microservice       | Microservice with v2 core |
+| Language     | Python            | You can write services in any language you like.<br><br>Frontend default: JS.<br>Backend default: Python | Python and any language you like for microservices. |
+| Frontend (and theming) | Python with Python CKAN extension | Flexible. Default is modern JS/NodeJS based | Can use old frontend but default to new JS-based frontend. |
+| Data Packages | Add-on, no integration | Default internal and external format | Data Packages with converter to old CKAN format. |
+| Extension | Extensions are libraries that are added to core runtime. They must therefore be built in python and are loaded into the core process at build time. "Template/inheritance" model where hooks are in core and it is core that loads and calls plugins. This means that if a hook does not exist in core then the extension is stymied. | Extensions are microservices and can be written in any language. They are loaded into the url space via kubernetes routing manager. Extensions hook into "core" via APIs (rather than in code). Follows a "composition" model rather than inheritance model | Can use old style extensions or microservices. |
+| Resource Scaling | You have a single application so scaling is of the core application. | You can scale individual microservices as needed. | Mix of v2 and v3 |
+
 ## Why v3: Long Version
 
 What are the problems with CKAN v2's monolithic architecture in relation to microservices v3?
@@ -146,7 +157,7 @@ This diagram is based on the file `docker-compose.yml` of [github.com/okfn/docke
  
 A difference from this diagram to the file is that we are not including DataPusher, as it is not a required dependency.
 
-:::info
+:::tip
 Databases may run as Docker containers, or rely on third-party services such as Amazon Relational Database Service (RDS).
 :::
 

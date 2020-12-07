@@ -31,11 +31,13 @@ You can use a DMS to build many kinds of specific solutions
 
 * [Data Portals][portals] are gateways to data. That gateway can be big or small, open or restricted. For example, data.gov is open to everyone, whilst an enterprise "intra" data portal is restricted to its personnel.
 * Data Catalog: see https://ckan.org/
+* Metadata manager: see [Publishing][]
 * Data Lake: you can use a DMS to rapidly create a data lake using existing infrastructure. For example, using the DMS' catalog and storage gateway with existing cloud storage and data processing capabilities.
 * Data Engineering: you can use components of the DMS to rapidly create, orchestrate and supply data pipelines.
 
 [dms]: /dms/
 [portals]: /data-portals/
+[Publishing]: /publish/
 [DataHub]: /datahub/
 [CKAN]: /ckan/
 [v3]: /ckan-v3/

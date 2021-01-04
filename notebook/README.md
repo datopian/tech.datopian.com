@@ -2,6 +2,50 @@
 
 Our lab notebook. Informal thoughts. A very raw blog.
 
+## Data Factory Concepts 2020-09-03 @rufuspollock
+
+Had this conceptual diagram hanging round for a couple of years.
+
+```
+Objects
+
+Row
+  File
+    Dataset
+
+Transformations
+
+Operator
+  Pipeline
+    Flow 
+````
+
+NTS
+
+* A factory could be a (DA)G of flows b/c could be dependencies between them ... e.g. run ComputeKeyMetrics only after all other flows have run ...
+* But not always like that: flows can be completely independent.
+
+## Current Data Factory Components (early 2019)
+
+```
+      Factory - Runners, SaaS platform etc
+
+datapackage-pipelines -> (dataflows-server / dataflows-runner)
+dataflows-cli : generators, hello-world, 'init', 'run'
+goodtables.io
+"blueprints": standard setups for a factory (auto-guessed?)
+
+            DataFlows: Flow Libs
+
+dataflows : processor definition and chaining
+processors-library: stdlib, user contributed items [dataflows-load-csv]
+
+            Data Package Libs
+
+data.py, DataPackage-py, GoodTables, ...
+tabulator, tableschema
+```
+
 ## Composition vs Inheritance approaches to building applications and esp web apps 2020-08-20 @rufuspollock
 
 tl;dr: composition is better than inheritance but many systems are built with inheritance 

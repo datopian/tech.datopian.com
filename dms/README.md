@@ -32,6 +32,46 @@ Data Factory
 * DAG (Pipeline)
 * Run (Job)
 
+### GraphQL version
+
+```graphql=
+type Project {
+  id: ID!
+  description: String
+  readme: String
+  dataset: Dataset
+  views: [View]
+  issues: [Issue]
+  actions: [Action]
+}
+
+type Dataset {
+  # data package descriptor structure
+  id: ID
+  name: String
+  ...
+  resources: [Resource]
+}
+
+type Resource {
+  # follows Frictionless Resource
+  path: ...
+  id: ...
+  name: ...
+  schema: Schema
+}
+
+# Table Schema usually ...
+type Schema {
+
+}
+
+# dataset view e.g. table, graph, map etc
+type View {
+  id: ID!
+}
+```
+
 ## Actions / Flows [component]
 
 * View Dataset: [Showcase page] a page displaying the dataset (or a resource)

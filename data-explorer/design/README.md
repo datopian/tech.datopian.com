@@ -28,20 +28,35 @@ As a User from city council, I want to see my city related data (eg, traffic) on
 
 [Data Explorer] As a Power User I want to do SQL queries on the datastore so that I can dsiplay / download the results and get insight without having to download into my own tool and do that wrangling 
 
+## Definitions
+
+* Preview: a display (of a sample) of a resource
+* Previewer: a method for previewing specific raw data types e.g. csv, excel, json, xml, text, geojson etc …
+* Viz: table, graph, map, ... (visualizations)
+* Viz Builder: a UI for creating graphs, maps etc
+* Query UI: a UI for building queries of a dataset
+* Explorer: Query UI + Viz Builder + Viz (renderer)
 
 ## Components
 
 Definitions for feature clusters
 
-* Preview: "preview" a variety of data types starting with tabular and geodata and extending to PDFS and HTML etc etc.
+* View: "(pre)view" a variety of data formats, most importantly tabular and geodata, and extending to PDFs, JSON HTML etc.
+  * Tabular: 
+  * Geo: 
+  * Chart: 
+  * Maps: 
+  * Everything else: this is more a preview
   * Pluggable system
   * Resource proxy (cors issues)
-* Data Explorer
-* Chart Builder
-* Map Builder
-  * Lite
-  * Complex
-* Rich Viz
+* Data Explorer: think "tableau lite", a rich app for querying/loading data and then displaying that in tables, charts, mpas etc.
+* Builders:
+  * Query Builder: 
+  * Chart Builder: a wizard for building charts 
+  * Map Builder
+    * Lite: set popups etc. 
+    * Complex: think carto
+* Rich Viz: bespoke, complex visualization
 * Dashboard: something that has many widgets displayed at once
   * Basic: no linkage between widgets (basic controls)
   * Complex: linkage between widgets (e.g. zooming on the map changes the map, or clicking the map changes the charts)

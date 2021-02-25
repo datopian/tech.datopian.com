@@ -1,6 +1,38 @@
-# Versioning Design Research
+# Versioning 
 
-## References
+## The Advantages of a Git-Based Approach
+
+* Excellent command line support out of the box (git)
+* Full revisioning and tagging and more (e.g. branches) in an extremely robust system
+* Support for non-dataset files in same place ... (e.g. code, visualization, data processing, data analytics)
+
+### What shall we use to create the Hub part of the DataHub
+
+* CKAN Classic MetaStore
+* Gitea or Gitlab or Github ...
+
+For now definitely CKAN Classic MetaStore
+
+### What shall we use to create / manage git repos for us?
+
+* GitHub
+* Gitea
+* Azure Git Repos https://azure.microsoft.com/en-us/services/devops/repos/
+
+## Metadata flow
+
+```mermaid
+graph TD
+
+ckan --> versioning[ckanext-versioning]
+versioning --add path--> metastore-lib
+metastore-lib --if not path not url & sha256 & lfs configured--> write[write dp.json + files with lfs pointers]
+metastore-lib --if url path--> nothing[write dp.json]
+```
+
+## Research
+
+### References
 
 * [Git (and Github) for Data - Rufus Pollock - blog.okfn.org - July 2013](https://blog.okfn.org/2013/07/02/git-and-github-for-data/)
   * Discussion on okfn-labs: https://lists-archive.okfn.org/pipermail/okfn-labs/2013-July/002690.html
@@ -13,7 +45,7 @@
 * (Old - last updated in 2018 and largely from before that) Collecting thoughts about data versioning - https://github.com/leeper/data-versioning
 * TODO: See Rufus' revisioning work at Data Protocols
 
-## Context: (Dataset) Versioned Blob Trees
+### Context: (Dataset) Versioned Blob Trees
 
 ```mermaid
 graph TD
@@ -25,7 +57,7 @@ vbt --datapackage.json--> DatasetVersionedBlobTree
 
 * We could also add things like a dataflows.yml to a repo to make a data pipeline or a model.pkl file to store your machine learning analysis ...
 
-## Context: Project => Project Hub
+### Context: Project => Project Hub
 
 ```mermaid
 graph TD
@@ -38,7 +70,7 @@ vbt --registry of projects, users, teams and ownership--> hub[Hub of Gits aka Gi
 dvbt --registry of projects, users, teams and ownership--> dhub[Hub of Data Projects aka DatasetHub]
 ```
 
-## Approaches for storing large files and versioning them
+### Approaches for storing large files and versioning them
 
 For now I'll assume we use Git for versioning *and* we want large files outside of git.
 
@@ -50,7 +82,7 @@ It seems to me some hybrid could be achieved using extensions to Data Resource (
 
 See also this matrix comparison https://docs.google.com/spreadsheets/d/1gc7vxcFt9OSVL7JoXXo9KSBVG4oIASaL08vdvoEst4o/edit#gid=1833965075
 
-### Git LFS option
+#### Git LFS option
 
 Use git-lfs and build a custom lfs server to store to arbitrary cloud storage.
 
@@ -59,7 +91,7 @@ Use git-lfs and build a custom lfs server to store to arbitrary cloud storage.
 
 For example, suppose i have a project using an AWS public dataset. In this approach i have to first copy that large dataset down, add to git (lfs) and push into my own cloud storage via git lfs.
 
-### Manifest option (dvc approach and datahub.io)
+#### Manifest option (dvc approach and datahub.io)
 
 We store a manifest in git of the "local" paths that are not in git but in cloud storage.
 
@@ -108,14 +140,14 @@ Cons:
 
 ---
 
-# Research
+## Research
 
-## Git
+### Git
 
 See https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain
 
 
-## Git-Hubs and how they work ...
+### Git-Hubs and how they work ...
 
 * It turns out git really needs to be backed onto disk (you couldn't put git on s3 because of latency)
   * This has a good analysis https://github.com/go-gitea/gitea/issues/2959 that led me to this excellent post https://github.blog/2016-04-05-introducing-dgit/
@@ -123,7 +155,7 @@ See https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain
   * Gitaly is a Git RPC service for handling all the git calls made by GitLab. As of GitLab 11.5, almost all application code accesses Git repositories through Gitaly instead of direct disk access. GitLab.com production no longer uses direct disk access to touch Git repositories
 
 
-## Git-Hub APIs for creating files etc
+### Git-Hub APIs for creating files etc
 
 * Github: does not support creating a "commit" with multiple files in standard API but does in low level "Data API" https://developer.github.com/v3/git/ (via https://github.com/isaacs/github/issues/199)
 * Gitea: Can create and update files (but not in bulk)
@@ -131,7 +163,7 @@ See https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain
   * https://try.gitea.io/api/swagger#/repository/repoUpdateFile
 
 
-## Git LFS
+### Git LFS
 
 Git LFS works as follows:
 
@@ -155,7 +187,7 @@ Implementation has 3 components:
 
 API https://github.com/git-lfs/git-lfs/blob/master/docs/api/README.md
 
-### File Storage flow
+#### File Storage flow
 https://github.com/datopian/datahub-client/blob/master/lib/utils/datahub.js#L22
 
 In storing a file there are the following steps
@@ -168,12 +200,12 @@ In storing a file there are the following steps
 * Store to them
   * Note there are only certain protocols supported
 
-### Servers
+#### Servers
 
 * Official Test Implementation: https://github.com/git-lfs/lfs-test-server - 507*, official test server
 * NodeJS + S3 Implementation: https://github.com/Caellian/node-git-lfs
 
-### Batch API
+#### Batch API
 
 https://github.com/git-lfs/git-lfs/blob/master/docs/api/batch.md
 
@@ -187,13 +219,13 @@ https://github.com/git-lfs/git-lfs/blob/master/docs/api/basic-transfers.md
 
 They say that tus.io may be supported ... (and that in theory supports s3 tho' issues with multipart https://tus.io/blog/2016/03/07/tus-s3-backend.html)
 
-### Batch Upload to Cloud Storage
+#### Batch Upload to Cloud Storage
 
 Looks like this is def possible. Here's someone doing it with GCS:
 
 https://github.com/git-lfs/git-lfs/issues/3567
 
-### FAQs
+#### FAQs
 
 * Can you plug in to cloud provider or choice => Yes, you can with a custom server
 * Size limitations at the big providers e.g. github is less than 2Gb
@@ -207,13 +239,13 @@ https://github.com/git-lfs/git-lfs/issues/3567
   * See "Please add multipart file downloads" https://github.com/git-lfs/git-lfs/issues/802 Proposed 2015 and still open
 
 
-## Git Annex
+### Git Annex
 
 * Seems to do content addressing built in ...
 * May not be compatible with minio due to minor header issue (may be fixed now?) https://github.com/minio/minio/issues/5007
 * Example of working with s3 backend (via datalab it sounds like)  https://git-annex.branchable.com/forum/slow_s3_transfer/
 
-## Content Addressed Storage
+### Content Addressed Storage
 
 https://en.wikipedia.org/wiki/Content-addressable_storage
 
@@ -232,7 +264,7 @@ Garbage collection: how do you do it ...
 * https://www.usenix.org/system/files/conference/fast13/fast13-final91.pdf - 2013 paper. Sort of useful.
 
 
-## DVC
+### DVC
 
 https://dvc.org "Data Version Control"
 
@@ -250,7 +282,7 @@ Basically, it combines part of all of these
 
 NB: this is actually untrue about Git-LFS. Git LFS server could be backed by any cloud storage.
 
-## Misc
+### Misc
 
 * https://towardsdatascience.com/why-git-and-git-lfs-is-not-enough-to-solve-the-machine-learning-reproducibility-crisis-f733b49e96e8 Argues against git-lfs and talks about dvc. However, my further reading on LFS suggests this article is attacking a bit of a straw man i.e. the Git LFS backend as provided by Github (which is expensive and limited). However, it is quite straightforward to back Git LFS onto your own cloud storage.
 * https://developer.lsst.io/  - large synoptic survey telescope. Have built their own datahub afaict

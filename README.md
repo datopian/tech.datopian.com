@@ -53,13 +53,15 @@ There are many ways to break down features and this is just one framing. We are 
 :::
 
 * [Discovering and showcasing data (catalog and presenting)](/frontend/)
-  * [Views on data](/views/)
-  * [Visualization and Dashboards](/#visualizations-and-dashboards)
+* [Views on data](/views/) including visualizing and previewing data as well [Data Explorers][explorer] and [Dashboards][]
 * [Publishing data](/publish/)
 * [Data API DataStore](/data-api)
 * [Permissions](/permissions/) and [Authentication](/authentication/)
 * [Versioning](/versioning/)
 * [Harvesting](/harvesting/)
+
+[Dashboards]: /dashboards/
+[explorer]: /data-explorer/
 
 ### Components
 
@@ -75,13 +77,6 @@ A DMS has the following key components:
 https://coggle.it/diagram/Xiw2ZmYss-ddJVuK/t/data-portal-feature-breakdown
 
 <iframe width='853' height='480' src='https://embed.coggle.it/diagram/Xiw2ZmYss-ddJVuK/b24d6f959c3718688fed2a5883f47d33f9bcff1478a0f3faf9e36961ac0b862f' frameborder='0' allowfullscreen></iframe>
-
-## Visualization and Dashboards
-
-* [Data Explorer][explorer]
-* [Dashboards](/dashboards/)
-
-[explorer]: /data-explorer/
 
 ## Frictionless
 

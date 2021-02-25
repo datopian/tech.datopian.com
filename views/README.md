@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Publishers and users of data want data presented in tables, graphs and maps for a variety of reasons from simple eyeballing to drawing out key insights. We collect all ways of presentating data in ways that makes it more human "viewable" under the term "views" or "data views".
+Publishers and users of data want data presented in tables, graphs maps to make it more *human* "readable".[^1] We use the term "view" or "data view" ofr all these various ways of presenting data in more human "readable" ways.
+
+[^1]: for an introduction to the power and art of visual presentation data see e.g. Tufte *Visualizing Information*.
 
 ```mermaid
 graph LR
@@ -10,11 +12,20 @@ graph LR
   data --> graph[Graph]
 ```
 
-To be able to present data in this way this we need to provide:
+At base, views need:
 
-* A descriptive language for specifying a view particular presentations such as tables, graph and maps.
-* A tool-chain to create these presentations from specifications and the data.
-* Tooling to allow users to create these views
+* **A descriptive language**: for *specifying* views such as tables, graphs and maps (and their source data).
+* **Rendering tools**: take those specifications and render actual "live on the web" tables, graphs and maps from those specifications (and their source data)
+
+In addition, we may want:
+
+* **Wizards**: to enable (non-technical) users to create tables, graphs, maps etc -- and to select the input data to power them.
+* **Explorers**: that build on the views and wizards to allow users to do interactive data exploratio via live filtering and viewing.
+* **Dashboards** that combine tables, charts, maps etc (often with widgets that allow users to adjust these e.g. to select a country that updates associated charts).
+
+:::tip
+Often when we say "view" we identify with the particular presentation such as the table or graph. E.g. we say "this table is a view of that data". However, when you stop and think, strictly a view is more than that, for example it includes the title for the table. Formally, for us a view will include the combination of the presentation specification, the data sources that feed, plus any general metadata such as a title and description.
+:::
 
 ## Definitions
 
@@ -97,3 +108,12 @@ useredit --> render
 ## CKAN v3
 
 In CKAN v3 and DataHub these are provied through the use of Frictionless (Data Package) "Views" and associated tooling.
+
+See:
+
+* https://github.com/datopian/datapackage-views-js
+  * https://github.com/frictionlessdata/datapackage-render-js
+* [Data Explorer][] page in this site.
+
+For more on the technical background see the [Views Design page &raquo;][design].
+

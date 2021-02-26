@@ -1,4 +1,6 @@
-# Views - Design
+# Views - Design
+
+Design of [Views](/views/).
 
 ## Concepts and Background
 

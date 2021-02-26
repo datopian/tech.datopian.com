@@ -9,7 +9,7 @@ Publishers and users of data want data presented in tables, graphs maps to make 
 ```mermaid
 graph LR
   data[Your Data] --> table[Table]
-  data --> graph[Graph]
+  data --> grap[Graph]
 ```
 
 At base, views need:

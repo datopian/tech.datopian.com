@@ -89,20 +89,37 @@ Generally, we at Datopian have seen a lot of issues around multipart / large fil
 
 ## CKAN v3
 
-We offer an approach to blob storage that leverages cloud blob storage directly (i.e.: without having to upload and serve all files via the CKAN web server), unlocking the performance characteristics of the storage backend directly. It is designed as microservice and supports direct to cloud uploads and downloads.
+An approach to blob storage that leverages cloud blob storage directly (i.e. without having to upload and serve all files via the CKAN web server), unlocking the performance characteristics of the storage backend directly. It is designed with a microservice approach and supports direct to cloud uploads and downloads. The key components are listed in the next section. You can read more about the overall design approach in the [design section below](#Design).
 
-It is backwards compatible with CKAN v2.
+It is backwards compatible with CKAN v2 and has been successfully deployed with CKAN v2.8 and v2.9.
 
-Status: Production.
+**Status: Production.**
 
-CKAN v2 extension: https://github.com/datopian/ckanext-external-storage
+### Components
 
-Subcomponents:
+* [ckanext-blob-storage](https://github.com/datopian/ckanext-blob-storage) (formerly known as ckanext-external-storage)
+  * Hooking CKAN to Giftless replacing resource storage
+  * Depends on giftless-client and ckanext-authz-service
+  * Doesn't implement IUploader - completely overrides upload / download routes for resources
+* [Giftless](https://github.com/datopian/giftless) - Git LFS compatible implementation for storage with some extras on top. This hands out access tokens to store data in cloud storage.
+  * Docs at https://giftless.datopian.com
+  * Backends for Azure, Google Cloud Storage and local
+  * Multipart support (on top of standard LFS protocol)
+  * Accepts JWT tokens for authentication and authorization
+* [ckanext-authz-service](https://github.com/datopian/ckanext-authz-service/) - This extension uses CKAN’s built-in authentication and authorization capabilities to: a) Generate JWT tokens and provide them via CKAN’s Web API to clients and b) Validate JWT tokens.
+  * Allows hooking CKAN's authentication and authorization capabilities to generate signed JWT tokens, to integrate with external systems
+  * Not specific for Giftless, but this is what it was built for
+* [ckanext-asset-storage](https://github.com/datopian/ckanext-asset-storage) - this takes care of storing non-data assets e.g. organization images etc.
+  * CKAN IUploader for assets (not resources!)
+  * Pluggable backends - currently local and Azure
+  * Much cleaner than older implementations (ckanext-cloudstorage etc.)
 
-* https://github.com/datopian/giftless - Giftless is a git-lfs compatible  middleware service to get the location (URLs) and access credentials of the files in the storage server so clients can upload and download with them through HTTP requests.
-* https://github.com/datopian/ckanext-authz-service - This extension uses CKAN’s built-in authentication and authorization capabilities to: a) Generate JWT tokens and provide them via CKAN’s Web API to clients and b) Validate JWT tokens
+Clients:
 
-You can read more about it in the design goals section below.
+* [giftless-client-py](https://github.com/datopian/giftless-client) - Python client for Git LFS and Giftless-specific features
+  * Used by ckanext-blob-storage and other tools
+* [giftless-client-js](https://github.com/datopian/giftless-client-js) - Javascript client for Git LFS and Giftless-specific features
+  * Used by ckanext-blob-storage and other tools for creating uploaders in the UI
 
 ## Design
 

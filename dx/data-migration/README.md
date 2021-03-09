@@ -29,10 +29,10 @@ This article is still under testing and development.
     ```
 6. Update the permission of `uploads` so that they are publically accessible and the images for groups/organizations can be loaded
     ```
-    gsutil acl ch -r -u AllUsers:R gs://<bucket-name>/<file-location>/<file>
+     gsutil -m acl ch -r -u AllUsers:R gs://<bucket-name>/<directory_location>
 
     # Example
-    gsutil acl ch -r -u AllUsers:R gs://dx-test-staging/ckan/storage/uploads/group/2016-10.png
+    gsutil acl ch -r -u AllUsers:R gs://dx-test-staging/ckan/storage/uploads/group/
 
     You need to follow this step to all the file/images available in the directory as granting permission only to the directory doesn't make all files inside it public.
     ```

@@ -24,9 +24,13 @@ Also worth mentioning is the potential integration with code: now that your data
 
 ### Terminology
 
-Versioning as a term can be confusing because it is ambiguous. For example, when some people say "version" they mean a revision e.g. "does this tool support data versioning" (i.e. does it support recording each change to the data). Whilst, when other people say "version" they mean a (revision) tag e.g. "what version of this software are you using" (answer: "version 1.3".
+Versioning as a term can be confusing because it is ambiguous. For example, when some people say "version" they mean a revision e.g. "does this tool support data versioning" (i.e. does it support recording each change to the data). Whilst, when other people say "version" they mean a release (revision tag) e.g. "what version of this software are you using" (answer: "version 1.3".[^rda]
 
-We avoid this ambiguity by using specific terms -- revisioning and (revision) tagging -- for these different features and reserving versioning for the overall system incorporating these.
+We avoid this ambiguity by using specific terms -- revisioning and releases -- for these different features and reserving versioning for the overall system incorporating these.
+
+[^rda]: Our terminology is the same as that identified by the [Research Data Alliance Data Versioning Working Group Report (2020)][rda-report]. They use the terminology Revision and Release (they also include Manifestation for the same data in e.g. different formats taking inspiration from FRBR).
+
+[rda-report]: https://www.rd-alliance.org/group/data-versioning-wg/outcomes/principles-and-best-practices-data-versioning-all-data-sets-big
 
 #### Revisioning
 
@@ -56,64 +60,51 @@ Notes:
     ```
 * Branch labelling and management: with a DAG one can have multiple "branches" rather than just the single "trunk" of the linear case. With branches it can be useful to label these branches and to designate a "master" or primary branch to which new revisions are appended by default.
 
-#### Tagging
+#### Releases
 
-Tagging is the ability to "tag" a revision, i.e. create a labelled pointer to that revisions e.g. `v1.2`.
+A Release is a specifically labelled revision (or tagged in git terminology) e.g. "v1.2". It is named Release because it is usually identifying a significant change in the data and hence something worthy of being "released" (i.e. formally shared). The tagging terminology arises because the simplest way to implement is "tag" a revision, i.e. create a labelled pointer to that revisions e.g. `v1.2`.
 
-Often referred to as revision tagging to disambiguate it from normal tagging with keywords.
+In addition, to a convenient name e.g. `v1.2` a release may also incorporate other metadata, for example a description e.g. `Introduced new column xyz and reformatted column abc`.
 
-In addition, to a convenient name e.g. `v1.2` a tag may also incorporate other metadata, for example a description e.g. `Introduced new column xyz and reformatted column abc`.
-
-Whilst tagging itself is relatively trivial functionality, there may be significant business and technical processses associated. For example, a tag may be the basis for a "release".
+A release in itself is relatively simple functionality (once we have revisions). However, there may be significant business and technical processses associated e.g. downstream users have to make changes for a major release.
 
 ### Domain Model
 
 * Revision: an object recording metadata of a revision e.g. when it happened, who created it etc.
-* (Revision) Tag: a pointer to a specific revision with additional metadata e.g. name, description.
+* Release: a pointer to a specific revision with additional metadata e.g. name, description.
 
 ## CKAN v2
 
-CKAN v2 (up to v2.8) used `vdm` to provide metadata revisioning. However, there was no data revisioning. In v2.9 `vdm` was removed and metadata revisioning is provided by the activity stream system.
+Out of the box CKAN has the following support:
 
-### ckanext-datasetversions
+* Revisioning: CKAN v2 (up to v2.8) used `vdm` to provide metadata revisioning. However, there was no data revisioning. In v2.9 `vdm` was removed and metadata revisioning is provided by the activity stream system.
+* Releases: no support for releases.
 
-https://github.com/aptivate/ckanext-datasetversions/
-
-There is an extension called ckanext-datasetversions with a basic implementation of dataset versioning. It implements the version as a child - father relationship between datasets. There is a detailed analysis of the package in this document.
-
-The package internally use child_of relationship to model versions: "The plugin models dataset versions internally by creating a parent dataset, with minimal metadata and no resources. A child dataset is created for each version." So new versions are new datasets, and CKAN restrictions applies: these datasets cannot share url or name.
-
-The package was created 4y ago and does not seem to be actively maintained.
-
-### Limitations
+There are significant limitations:
 
 * Data revisioning is not supported.
-* Revision tags are not supported.
+* Releass (revision tags) are not supported.
 * Only linear revision trees i.e. no branching
 
+There have been efforts to implement this functionality via extensions however the functionality is limited (see e.g. Appendix re ckanext-datasetversions).
+
+**Recently as part of CKAN v3 work there is now support for data versioning in CKAN v2 (>= 2.8) via extensions.**
 
 ## CKAN v3
 
-We offer an approach to data versioning that is integrated with CKAN, but does not implement large amounts of custom logic in order to achieve versioning, and instead, leverages git, the world’s most popular software for versioning, for this purpose.
+The CKAN v3 approach is based on extensions that are backwards compatible with CKAN v2. Implementing data versioning in CKAN involves three distinct aspects:
 
-It is backwards compatible with CKAN v2.
+* *Data* revisioning (CKAN already has metadata revisioning).
+* Releases: support creating and managing releases (named labels plus a description for a specific revision of a dataset e.g. “v1.0”)
+* General UI and functionality: things like diffs, reverting, etc
 
-Status: Beta
+The first of these is is accomplished by using the new [Blob Storage v3](/blob-storage/#ckan-v3).
 
-CKAN v2 extension: [ckanext-versioning][]: This CKAN extension adds a full data versioning capability to CKAN including:
+The latter two are accomplished via [ckanext-versions][] extension.
 
-*  Metadata and data is revisioned so that all updates create new revision and old versions of the metadata and data are accessible
-* Create and manage “revision tags” (named labels plus a description for a specific revision of a dataset e.g. “v1.0”)
-* Diffs, reverting, etc
+**Status: Beta**
 
-Subcomponents:
-
-* **[metastore-lib](https://github.com/datopian/metastore-lib/)**: Library for storing dataset metadata, with versioning support and pluggable backends including GitHub. metastore-lib is used by ckanext-versioning and requires environment variables related to the Github Repository where the data is gonna be stored and the access token.
-* **[frictionless-ckan-mapper (python)](https://github.com/frictionlessdata/frictionless-ckan-mapper)**: A library for mapping CKAN metadata <=> Frictionless metadata.
-
-Important: ckanext-versioning depends on [Blob Storage v3](/blob-storage/#ckan-v3)
-
-[ckanext-versioning]: https://github.com/datopian/ckanext-versioning
+[ckanext-versions]: https://github.com/datopian/ckanext-versions
 
 
 ## Design
@@ -131,3 +122,13 @@ Git terminology on left, our terminology on the right.
 
 * Commit <=> Revision
 * Tag <=> Release
+
+## Appendix: ckanext-datasetversions
+
+https://github.com/aptivate/ckanext-datasetversions/
+
+There is an extension called ckanext-datasetversions with a basic implementation of dataset versioning. It implements the version as a child - father relationship between datasets. There is a detailed analysis of the package in this document.
+
+The package internally use child_of relationship to model versions: "The plugin models dataset versions internally by creating a parent dataset, with minimal metadata and no resources. A child dataset is created for each version." So new versions are new datasets, and CKAN restrictions applies: these datasets cannot share url or name.
+
+The package was created 4y ago and does not seem to be actively maintained.

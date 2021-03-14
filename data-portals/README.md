@@ -6,7 +6,7 @@
 
 ## Introduction: Data Portals are Gateways to Data
 
-A Data Portal is a gateway to data. That gateway can be big or small, open or restricted. For example, data.gov is open to everyone, whilst an enterprise "intra" data portal is restricted to its personnel.
+A Data Portal is a gateway to data. That gateway can be big or small, open or restricted. For example, data.gov is open to everyone, whilst an enterprise "intra" data portal is restricted to that enterprise (and perhaps even to certain people within it).
 
 A Data Portal's core purpose is to enable the rapid discovery and use of data. However, as a flexible, central point of truth on an organizations data assets, a Data Portal can become essential data infrastructure and be extended or integrated to provide many additional features:
 
@@ -20,11 +20,9 @@ The rise of Data Portals reflect the rapid growth in the volume and variety of d
 
 Concretely: how does Jane in the new data science team know that Geoff in accounting has the spreadsheet she needs for her analysis for the COO? Moreover, it is not enough just to have a dataset's location: if users are easily to discover and access data it has to be suitably organized and presented.
 
-Data portals answer this need: by making it easy to find and access data, a data portal helps solve these problems. As a result, data portals have become essential tools for organizations to bring order to the "data swamp" and unlock the value of their data assets.[^case][^1]
+Data portals answer this need: by making it easy to find and access data, a data portal helps solve these problems. As a result, data portals have become essential tools for organizations to bring order to the "data swamp" and unlock the value of their data assets.[^1]
 
-[^case]: TODO: maybe link to case studies ...
-
-[^1]: ASIDE: the nature of the problem that Data Portals solve (i.e. bringing order to diverse, distributed data assets) explains why data portals first arose in Government and as *open* data portals. Government had lots of useful data, much of it shareable, but poorly organized and strewn all over the place. In addition, much of the value of that data lay in unexpected or unforeseen uses. Thus, Data Portals in their modern form started in Government in the mid-late 2000s. They then spread into large companies and then with the spread of data into all kinds of organizations big and small.
+[^1]: The nature of the problem that Data Portals solve (i.e. bringing order to diverse, distributed data assets) explains why data portals first arose in Government and as *open* data portals. Government had lots of useful data, much of it shareable, but poorly organized and strewn all over the place. In addition, much of the value of that data lay in unexpected or unforeseen uses. Thus, Data Portals in their modern form started in Government in the mid-late 2000s. They then spread into large companies and then with the spread of data into all kinds of organizations big and small.
 
 ## Why Data Portals?
 

@@ -1,5 +1,5 @@
 ---
-heroImage: https://www.datopian.com/img/datopian-logo.png
+heroImage: https://playbook.datopian.com/img/datopian-dark-logotype.svg
 heroText: Datopian Engineering
 tagline: Experts in data management 
 pageClass: home
@@ -9,7 +9,7 @@ footer: Copyright © 2016-present Datopian
 <div class="hero">
   <h1>Datopian Tech 👩‍💻</h1>
 
-  <a href="https://datopian.com/"><img src="https://www.datopian.com/img/datopian-logo.png" /></a>
+  <a href="https://datopian.com/"><img src="https://playbook.datopian.com/img/datopian-dark-logotype.svg" /></a>
 
   <p class="description">
     We are experts in data management

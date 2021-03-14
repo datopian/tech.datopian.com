@@ -12,8 +12,8 @@ footer: Copyright © 2016-present Datopian
   <a href="https://datopian.com/"><img src="https://playbook.datopian.com/img/datopian-dark-logotype.svg" /></a>
 
   <p class="description">
-    We are experts in data management
-    <br/>
+    We are experts in data management and engineering
+    <br/><br/>
     This is an overview of our technology
   </p>
 </div>

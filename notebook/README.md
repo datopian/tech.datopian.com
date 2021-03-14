@@ -2,6 +2,16 @@
 
 Our lab notebook. Informal thoughts. A very raw blog.
 
+## A DMS is a tool, a Data Portal is a solution 2021-03-14 @rufuspollock
+
+Over the years, we've seen many different terms used in relation to describing software like CKAN and the solutions it is used to create e.g. data catalog, data portal, data management system, data platform etc.
+
+Over, personally, I've converged towards [data management system (DMS)](/dms/) and [data portal](/data-portals). But I've still got two and even people in my own team ask me to clarify what the difference is. Recently it became clear to me:
+
+**A data management system (DMS) is a tool. A data portal is a solution.**
+
+And a data management system is a tool you can use to build a data portal. Just like you can use a hammer to build a house. 
+
 ## Data Factory Concepts 2020-09-03 @rufuspollock
 
 Had this conceptual diagram hanging round for a couple of years.

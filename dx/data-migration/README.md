@@ -4,6 +4,8 @@
 This article is still under testing and development.
 :::
 
+**Before migration please ensure that the source and the target Postgre SQL are running on same version if not there should not be any syntatical differences between versions**
+
 1. Install kubectl and kubectx.
 2. [Download the file containing the manifests](/dx-data-migration.yaml) and personalize it according to your needs. Most specifically: environment variables in `Secret/envvars`, and `ConfigMap/files`' `migrate.sh` file.
 3. Apply the manifests in a new namespace:
@@ -24,6 +26,15 @@ This article is still under testing and development.
 
     # Copy something:
     $ mc cp -r prod/ckan/montreal-dev/uploads dx/dx-montreal-staging/
+    ```
+6. Update the permission of `uploads` so that they are publically accessible and the images for groups/organizations can be loaded
+    ```
+     gsutil -m acl ch -r -u AllUsers:R gs://<bucket-name>/<directory_location>
+
+    # Example
+    gsutil acl ch -r -u AllUsers:R gs://dx-test-staging/ckan/storage/uploads/group/
+
+    You need to follow this step to all the file/images available in the directory as granting permission only to the directory doesn't make all files inside it public.
     ```
 
 For reference, here are the most commonly used hosts that are already configured:

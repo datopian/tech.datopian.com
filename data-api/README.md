@@ -88,12 +88,14 @@ When I'm building a client application or extracting data  I want to get data qu
 
 * Performance: Querying data is **quick**
 * Filtering: I want to filter data easily so that I can get the slice of data that I need.
-* ❗ unlimited query size for downloading eg, can download filtered data with millions of rows
+  * ❗ unlimited query size for downloading eg, can download filtered data with millions of rows
 * can get results in 3 formats: CSV, JSON and Excel.
-* SQL API (?)
+* API formats
+  * "Restful" API (?)
+  * SQL API (?)
+  * ❗ GraphQL API (?)
+  * ❗ custom views/cubes (including pivoting)
 * Query UI
-* ❗ GraphQL API
-* ❗ [MarketsData] custom views/cubes (including pivoting)
 
 :exclamation: = something not present atm
 
@@ -227,7 +229,7 @@ curl -X POST http://127.0.0.1:5000/api/3/action/datastore_create \
 
 ### Data Load
 
-See [Load page][(/load/).
+See [Load page](/load/#ckan-v2).
 
 ### DataStore
 

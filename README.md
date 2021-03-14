@@ -20,10 +20,12 @@ footer: Copyright © 2016-present Datopian
 
 ## Data Management Systems
 
-A [Data Management System (DMS)][dms] is a *framework*. It can be used to create a variety of *solutions* such as Data Portals, Data Catalogs, Data Lakes etc. We have developed two DMS stacks that share a set of underlying core components:
+A [Data Management System (DMS)][dms] is a *framework*. It can be used to create a variety of *solutions* such as [Data Portals][], Data Catalogs, Data Lakes etc. We have developed two DMS stacks that share a set of underlying core components:
 
 * [CKAN][]: the open source data management system we created in 2007 and that we continue to develop and maintain. The main information on CKAN is at https://ckan.org/. Here we have some specific notes on how we develop and deploy CKAN as well as our thoughts on the [next generation of CKAN (v3)][v3].
 * [DataHub][]: our version of a next generation of CKAN that powers DataHub.io. DataHub and CKAN v3 share many of the same core components. We are actively working on a DataHub v2 and an outline can be found here https://github.com/datopian/datahub-next
+
+[Data Portals]: /data-portals/
 
 ### Solutions
 
@@ -80,9 +82,9 @@ https://coggle.it/diagram/Xiw2ZmYss-ddJVuK/t/data-portal-feature-breakdown
 
 ## Frictionless
 
-The Frictionless Data toolkit. See https://frictionlessdata.io/
+The Frictionless approach to data. See https://frictionlessdata.io/
 
-Our team created whilst at Open Knowledge Foundatioin and continue to co-steward it.
+Our team created this whilst at Open Knowledge Foundatioin and continue to co-steward it.
 
 ## OpenSpending
 
@@ -102,12 +104,14 @@ Old cluster
 * [Exporting from CKAN-Cloud](/migration/)
 * [Cloud](/cloud/) - start on CKAN cloud documentation
 
-## Glossary
+## Research
 
-[Glossary &raquo;](/glossary/)
+* [Data Frames and what would a JS data frame library look like](/dataframe/)
+* [Dataset Relationships](/relationships/)
 
-## Notebook
+## Miscellaneous
 
-[Notebook -- our informal blog](/notebook/)
+* [Glossary &raquo;](/glossary/)
+* [Notebook -- our informal blog &raquo;](/notebook/)
 
 [dx]: /dx/

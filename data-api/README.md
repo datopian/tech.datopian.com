@@ -2,15 +2,17 @@
 
 ## Introduction
 
-A Data API provides *API* access to data stored in a DMS. APIs provide granular, per record access to datasets and their component data files. They offer rich querying functionality to select the records you want, and, potentially, other functionality such as aggregation. Data APIs can also provide write access, though this has traditionally been rarer.[^rarer]
+A Data API provides *API* access to data stored in a [DMS][]. APIs provide granular, per record access to datasets and their component data files. They offer rich querying functionality to select the records you want, and, potentially, other functionality such as aggregation. Data APIs can also provide write access, though this has traditionally been rarer.[^rarer]
 
-Furthermore, much of the richer functionality of DMSes and Data Portals such as data visualization and exploration require API data access rather than bulk download.
+Furthermore, much of the richer functionality of a DMS or Data Portal such as data visualization and exploration require API data access rather than bulk download.
+
+[DMS]: /dms/
 
 [^rarer]: It is rarer  because write access usually means a) the data for this dataset is a structured database rather than a data file (which is normally more expensive both in terms b) the Data Portal has now become the primary (or semi-primary) home of this dataset rather simply being the host of a dataset whose home and maintenance is elsewhere.
 
 ### API vs Bulk Access
 
-Direct download of a whole data file is the default method of access for data in a data portal. API access complements this direct download in "bulk" approach. In some situations API access may be the primary access option (so-called "API first"). In other cases, structured storage and API read/write may be the *only* way the data is stored and there is no bulk storage -- for example, this would be a natural approach for time series data which is being rapidly updated e.g. every minute.
+Direct download of a whole data file is the default method of access for data in a DMS. API access complements this direct download in "bulk" approach. In some situations API access may be the primary access option (so-called "API first"). In other cases, structured storage and API read/write may be the *only* way the data is stored and there is no bulk storage -- for example, this would be a natural approach for time series data which is being rapidly updated e.g. every minute.
 
 *Fig 1: Contrasting Download and API based access*
 
@@ -69,7 +71,7 @@ The functionality associated to the Data APIs can be divided in 6 areas:
   * Tracking & Analytics: rate-limiting etc
   * Write API: usually secondary because of its limited performance vs bulk loading
   * Bulk export of query results especially large ones (or even export of the whole dataset in the case where the data is stored directly in the DataStore rather than the FileStore). This is an increasingly important featurea lower priority but if required it is substantive feature to implement.
-* **Data Load**: bulk loading data into the system that powers the data API. **This is covered in a [separate Data Load page](/data-load/).
+* **Data Load**: bulk loading data into the system that powers the data API. **This is covered in a [separate Data Load page](/data-load/).**
   * Bulk Load: bulk import of individual data files
   * Maybe includes some ETL => this takes us more into data factory
 * **Storage (Structured)**: the underlying structured store for the data (and its layout). For example, Postgres and its table structure.This could be considered a separate component that the Data API uses or as part of the Data API -- in some cases the store and API are completely wrapped together, e.g. ElasticSearch is both a store and a rich Web API.

@@ -39,16 +39,80 @@ To develop a base distribution of CKAN Enterprise, we want to build a demo proje
 * compare against other instances of CKAN;
 * demonstrate for the potential clients.
 
-High level overview of required steps:
+High level overview of the planned features with ETA:
 
-| Name        | Description                          | Effort | ETA |
-| ----------- | ------------------------------------ | ------ | --- |
-| Init        | Select CKAN version and deploy to DX | s      | Q2  |
-| Blobstore   | Integrate Giftless for raw storage   | s      | Q2  |
-| DataLoader  | Develop Aircan for loading data      | m      | Q2  |
-| DataLoader  | Integrate Aircan for loading data    | s      | Q2/3|
-| Data API    | Integrate new Data API (read)        | m      | Q2  |
-| Frontend    | Build a theme using PortalJS         | m      | Q2  |
-| DataExplorer| Integrate into PortalJS              | s      | Q2  |
-| Permissions | Develop permissions in read frontend | m      | Q3  |
-| Auth        | Integrate                            | s      | Q3  |
+| Name                          | Description                          | Effort | ETA |
+| ----------------------------- | ------------------------------------ | ------ | --- |
+| [Init](#Init)                 | Select CKAN version and deploy to DX | xs     | Q2  |
+| [Blobstore](#Blobstore)       | Integrate Giftless for raw storage   | s      | Q2  |
+| [Versioning](#Versioning)     | Develop/integrate new versioning sys | l      | Q2  |
+| [DataLoader](#DataLoader)     | Develop/integrate Aircan             | xl     | Q2  |
+| [Data API](#Data-API)         | Integrate new Data API (read)        | m      | Q2  |
+| [Frontend](#Frontend)         | Build a theme using PortalJS         | m      | Q2  |
+| [DataExplorer](#DataExplorer) | Integrate into PortalJS              | s      | Q2  |
+| [Permissions](#Permissions)   | Develop permissions in read frontend | xl     | Q3  |
+| [Auth](#Auth)                 | Integrate                            | s      | Q3  |
+
+### Init
+
+Initialize a new project for development of CKAN Enterprise.
+
+Tasks:
+
+* Boot project in Datopian-DX cluster
+* Use CKAN v2.8.x (latest patch) or 2.9.x
+* Don't setup DataPusher
+* Namespace: `ckan-enterprise`
+* Domain: `enterprise.ckan.datopian.com`
+
+### Blobstore
+
+https://tech.datopian.com/blob-storage/#blob-storage
+
+### Versioning
+
+https://tech.datopian.com/versioning/design/#versioning
+
+### DataLoader
+
+https://tech.datopian.com/load/#introduction
+
+### Data API
+
+* Install new [Data API service](https://github.com/datopian/data-api) in the project
+* Install Hasura service in the project
+* Set it up to work with DB of CKAN Enterprise
+* Read more about Data API here https://tech.datopian.com/data-api/#read-api-3
+
+Notes:
+
+* We could experiment and use various features of Hasura, eg:
+  * Setting up row/column limits per user role (permissions)
+  * Subscriptions to auto load new data rows
+
+### Frontend
+
+PortalJS for the read frontend of CKAN Enterprise. Read more https://tech.datopian.com/frontend/#frontend.
+
+### DataExplorer
+
+A new Data Explorer based on GraphQL API: https://github.com/datopian/data-explorer-graphql
+
+### Permissions
+
+https://tech.datopian.com/permissions/#permissions-authorization
+
+### Auth
+
+Next generation, Kratos based, authentication (mostly SSO with no Traditional login by default) with following options out of the box:
+
+* GitHub
+* Google
+* Facebook
+* Microsoft
+
+Easy to add:
+
+* Discord
+* GitLab
+* Slack

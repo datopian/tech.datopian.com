@@ -2,21 +2,11 @@
 
 ## Introduction
 
-CKAN Enterprise is our name for what we hope would become our standard "base" distribution for CKAN going forward. It consists of the following:
+CKAN Enterprise is our name for what we plan would become our standard "base" distribution for CKAN going forward:
 
-* CKAN 2.8 + dependencies (probably we'll use later versions, eg, 2.9 or 2.10 etc.)
-* CKAN v3 blob storage following https://tech.datopian.com/blob-storage/#ckan-3-next-gen
-  * https://github.com/datopian/giftless
-  * https://github.com/datopian/ckanext-external-storage
-  * https://github.com/datopian/ckanext-authz-service
-* etc.
-
-At some point soon it would also include AirCan setup (instead of DataPusher) but this is not yet there yet as of Nov 2020.
-
-[Future] We would also want it be easy to add common other features e.g.
-
-* Harvesting
-* ...
+* It is a CKAN standard code base with micro-services.
+* Enterprise grade data catalog and portal targeted at Gov (open data portals) and Enterprise (Data Catalogs +).
+* It is also known as [Datopian DMS](https://www.datopian.com/datopian-dms/).
 
 ## Roadmap 2021 and beyond
 
@@ -45,13 +35,13 @@ High level overview of the planned features with ETA:
 | ----------------------------- | ------------------------------------ | ------ | --- |
 | [Init](#Init)                 | Select CKAN version and deploy to DX | xs     | Q2  |
 | [Blobstore](#Blobstore)       | Integrate Giftless for raw storage   | s      | Q2  |
-| [Versioning](#Versioning)     | Develop/integrate new versioning sys | l      | Q2  |
-| [DataLoader](#DataLoader)     | Develop/integrate Aircan             | xl     | Q2  |
+| [Versioning](#Versioning)     | Develop/integrate new versioning sys | l      | Q3  |
+| [DataLoader](#DataLoader)     | Develop/integrate Aircan             | xl     | Q3  |
 | [Data API](#Data-API)         | Integrate new Data API (read)        | m      | Q2  |
-| [Frontend](#Frontend)         | Build a theme using PortalJS         | m      | Q2  |
+| [Frontend](#Frontend)         | Build a theme using PortalJS         | s      | Q2  |
 | [DataExplorer](#DataExplorer) | Integrate into PortalJS              | s      | Q2  |
-| [Permissions](#Permissions)   | Develop permissions in read frontend | xl     | Q3  |
-| [Auth](#Auth)                 | Integrate                            | s      | Q3  |
+| [Permissions](#Permissions)   | Develop permissions in read frontend | xl     | Q4  |
+| [Auth](#Auth)                 | Integrate                            | s      | Q4  |
 
 ### Init
 
@@ -67,7 +57,10 @@ Tasks:
 
 ### Blobstore
 
-https://tech.datopian.com/blob-storage/#blob-storage
+* https://tech.datopian.com/blob-storage/#blob-storage
+* https://github.com/datopian/giftless
+* https://github.com/datopian/ckanext-external-storage
+* https://github.com/datopian/ckanext-authz-service
 
 ### Versioning
 

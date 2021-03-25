@@ -19,7 +19,7 @@ CKAN Enterprise is our name for what we plan would become our standard "base" di
 | Frontend (public) | Build-in frontend into CKAN Classic python app (some projects are using nodejs app)        | PortalJS or nodejs app                                          |
 | Data Explorer     | ReclineJS (some projects that uses nodejs app for frontend have React based Data Explorer) | GraphQL based Data Explorer                                     |
 | Auth              | Traditional login/password + extendable with CKAN Classic extensions                       | SSO with default Google, Github, Facebook and Microsoft options |
-| Permissions       | CKAN Classic based permissions                                                             | N/A                                                             |
+| Permissions       | CKAN Classic based permissions                                                             | Existing permissions exposed via JWT based authz API            |
 
 ## Timeline 2021
 
@@ -40,7 +40,7 @@ High level overview of the planned features with ETA:
 | [Data API](#Data-API)         | Integrate new Data API (read)        | m      | Q2  |
 | [Frontend](#Frontend)         | Build a theme using PortalJS         | s      | Q2  |
 | [DataExplorer](#DataExplorer) | Integrate into PortalJS              | s      | Q2  |
-| [Permissions](#Permissions)   | Develop permissions in read frontend | xl     | Q4  |
+| [Permissions](#Permissions)   | Develop permissions in read frontend | m      | Q4  |
 | [Auth](#Auth)                 | Integrate                            | s      | Q4  |
 
 ### Init
@@ -57,18 +57,15 @@ Tasks:
 
 ### Blobstore
 
-* https://tech.datopian.com/blob-storage/#blob-storage
-* https://github.com/datopian/giftless
-* https://github.com/datopian/ckanext-external-storage
-* https://github.com/datopian/ckanext-authz-service
+See https://tech.datopian.com/blob-storage/#ckan-v3
 
 ### Versioning
 
-https://tech.datopian.com/versioning/design/#versioning
+See https://tech.datopian.com/versioning/#ckan-v3
 
 ### DataLoader
 
-https://tech.datopian.com/load/#introduction
+See https://tech.datopian.com/load/
 
 ### Data API
 

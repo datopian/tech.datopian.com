@@ -31,7 +31,7 @@ Often when we say "view" we identify with the particular presentation such as th
 
 * Preview: a display (of a sample) of a resource
 * Previewer: a method for previewing specific raw data types e.g. csv, excel, json, xml, text, geojson etc …
-* Viz: table, graph, map, ... (visualizations)
+* Viz: visualizations e.g. table, graph, map, ...
 * Viz Builder: a UI for creating graphs, maps etc
 * Query UI: a UI for building queries of a dataset
 * Explorer: Query UI + Viz Builder + Viz (renderer)
@@ -49,18 +49,18 @@ Definitions for feature clusters
   * Pluggable system
   * Resource proxy (cors issues)
 * [Data Explorer][]: think "tableau lite", a rich app for querying/loading data and then displaying that in tables, charts, maps etc.
-* Builders:
-  * Query Builder:
-  * Chart Builder: a wizard for building charts
-  * Map Builder
-    * Lite: set popups etc.
-    * Complex: think carto
+  * Builders:
+    * Query Builder:
+    * Chart Builder: a wizard for building charts
+    * Map Builder
+      * Lite: set popups etc.
+      * Complex: think carto
 * Rich Viz: bespoke, complex visualization
 * Dashboard: something that has many widgets displayed at once
   * Basic: no linkage between widgets (basic controls)
   * Complex: linkage between widgets (e.g. zooming on the map changes the map, or clicking the map changes the charts)
 
-[Data Explorer](/data-explorer/)
+[Data Explorer]: /data-explorer/
 
 
 ## CKAN v2

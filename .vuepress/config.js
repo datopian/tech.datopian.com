@@ -35,11 +35,28 @@ module.exports = {
   },
   plugins: [
     'vuepress-plugin-mermaidjs',
+    // removing until GA 4 is supported - see https://github.com/vuejs/vuepress/issues/2713
+    // using the head tag below to insert for now
+    // [
+    //  '@vuepress/plugin-google-analytics',
+    //  {
+    //    'ga': ''
+    //  }
+  ],
+  head: [
     [
-      "@vuepress/plugin-google-analytics",
+      'script',
       {
-        ga: "G-XESJBM03F5" 
-      }
-    ]
-  ]
+        async: true,
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-XESJBM03F5',
+      },
+    ],
+    [
+      'script',
+      {},
+      [
+        "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-XESJBM03F5');",
+      ],
+    ],
+  ],
 }

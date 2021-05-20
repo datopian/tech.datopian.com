@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A common aspect of data management is **processing** data in some way or another: cleaning it, converting it from one format to another, integrating different datasets together etc. Such processing usually takes place in what are termed data (work)flows or pipelines. Each flow or pipeline consists of one or more stages with one particular operation (task) being done with the data at each stage. Finally, there is a need for something to manage and orchestrate the data flows/pipelines. This overall system which includes both the flows themselves and the framework for managing them we term a "Data Factory".
+A common aspect of data management is **processing** data in some way or another: cleaning it, converting it from one format to another, integrating different datasets together etc. Such processing usually takes place in what are termed data (work)flows or pipelines. Each flow or pipeline consists of one or more stages with one particular operation (task) being done with the data at each stage. Finally, there is a need for something to manage and orchestrate the data flows/pipelines. This overall system which includes both the flows themselves and the framework for managing them needs a name. We call it  a "Data Factory".
 
 Let's have some concrete examples of simple pipelines:
 
@@ -10,15 +10,40 @@ Let's have some concrete examples of simple pipelines:
 * Converting a file from one format to another e.g. CSV to JSON
 * Loading a file, validating it and then computing some summary statistics
 
+Fig 1: A simple data pipeline to clean up a CSV file
+
+```mermaid
+graph TD
+
+source[Source data e.g. load from CSV]
+t1[Transform 1 e.g. delete trailing rows]
+t2[Transform 2 e.g. lower case everything]
+sink[Write output to CSV]
+
+source -- resource --> t1 --resource--> t2 --resource--> sink
+```
+
 ### Domain Model
 
 * Tasks: a single processing step that is applied to data
-* DAGs (Flows): a flow or pipeline of tasks. These tasks form a "directed acyclic graph" (DAG) where each task is a node.
+* Flows (DAGs): a flow or pipeline of tasks. These tasks form a "directed acyclic graph" (DAG) where each task is a node.
 * Factory: a system for creating and managing (orchestrating, monitoring etc) those flows.
 
 Each flow or pipeline consists of one or more stages with one particular operation (task) being done with the data at each stage.
 
 In a basic setup a flow is linear: the data arrives, operation A happens, then operation B, and, finally operation C. However, more complex flows/pipelines can involve branching e.g. the data arrives, then operation A, then there is a branch and operation B and C can happen independently.
+
+**Fig 2: An illustration of a Generic Branching Flow (DAG)**
+
+```mermaid
+graph TD
+
+a[Source] --> b
+a --> c
+b --> d
+c --> d
+d --> sink[Sink]
+```
 
 ## CKAN v2
 

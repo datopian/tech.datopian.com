@@ -6,6 +6,8 @@ This document describes the architectures of CKAN v2 ("CKAN Classic"), CKAN v3 (
 
 You will also find out how to do common tasks such as theming or testing, in each of the architectures.
 
+*Note: this blog post has an overview of the more decoupled, microservices approach at the core of v3: https://www.datopian.com/2021/05/17/a-more-decoupled-ckan/*
+
 ## CKAN v2, CKAN v3 and Why v3
 
 In yellow, you see one single Python process:

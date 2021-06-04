@@ -63,7 +63,7 @@ On the write side they provide support for:
 The functionality associated to the Data APIs can be divided in 6 areas:
 
 * **Descriptor**: metadata describing and specifying the API e.g. general metadata e.g. name, title, description, schema, and permissions
-* **Manager** for creating 
+* **Manager** for creating and editing APIs.
   * API: for creating and editing Data API's descriptors (which triggers creation of storage and service endpoint)
   * UI: for doing this manually
 * **Service** (read):  web API for accessing structured data (i.e. per record) with querying etc. *When we simply say "Data API" this is usually what we are talking about*
@@ -71,13 +71,13 @@ The functionality associated to the Data APIs can be divided in 6 areas:
   * Tracking & Analytics: rate-limiting etc
   * Write API: usually secondary because of its limited performance vs bulk loading
   * Bulk export of query results especially large ones (or even export of the whole dataset in the case where the data is stored directly in the DataStore rather than the FileStore). This is an increasingly important featurea lower priority but if required it is substantive feature to implement.
-* **Data Load**: bulk loading data into the system that powers the data API. **This is covered in a [separate Data Load page](/data-load/).**
+* **Data Loader**: bulk loading data into the system that powers the data API. **This is covered in a [separate Data Load page](/data-load/).**
   * Bulk Load: bulk import of individual data files
   * Maybe includes some ETL => this takes us more into data factory
 * **Storage (Structured)**: the underlying structured store for the data (and its layout). For example, Postgres and its table structure.This could be considered a separate component that the Data API uses or as part of the Data API -- in some cases the store and API are completely wrapped together, e.g. ElasticSearch is both a store and a rich Web API.
 
 :::tip
-**Visualization** is not part of the API but the demands of viz are important in designing the system
+**Visualization** is not part of the API but the demands of visualization are important in designing the system.
 :::
 
 ## Job Stories

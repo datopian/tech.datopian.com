@@ -2,6 +2,76 @@
 
 Our lab notebook. Informal thoughts. A very raw blog.
 
+# Data Literate - a small Product Idea 2021-05-17 @rufuspollock
+
+I want to write a README with data and vis in it and preview it ...
+
+* Markdown is becoming a lingua franca for writing developer and even research docs
+  * It's quick and ascii-like
+  * It's widely supported
+  * It's extensible ...
+* Frontend tooling is rapidly evolving ...
+  * The distant between code and a tool is declining => I might as well write code ...
+* MDX = Markdown + react
+* RStudio did this a while ago ...
+* Missing part is data ...
+  * You have juputer notebooks etc ... => they are quite high end ...
+
+```
+Notebooks (jupyter, literate programming) ==> 
+  Write text and code together
+  Write code like in a terminal
+  Data oriented
+```
+
+Visualization
+
+React
+
+Markdown ...
+
+---
+
+Here the kinds of doc i want to write
+
+```
+## A Dataset
+
+\```
+# Global Solar Supply (Annual)
+
+Solar energy supply globally.
+
+Source: International Energy Association https://www.iea.org/reports/solar-pv.
+
+| Year | Generation (TWh) | % of total energy |
+|--|--|
+|2008|12|
+|2009|20|
+|2010|32|
+|2011|63|
+|2012|99|
+|2013|139|
+|2014|190|
+|2015|251|
+|2016|329|
+|2017|444|
+|2018|585|
+|2019|720| 2.7 |
+\```
+
+Europe Brent Spot Prices (Annual/ Monthly/ Weekly/ Daily) from U.S. Energy Information Administration (EIA).
+
+Source: https://www.eia.gov/dnav/pet/hist/RBRTEd.htm
+```
+
+### Notes
+
+R Markdown - https://rmarkdown.rstudio.com
+
+> Use a productive notebook interface to weave together narrative text and code to produce elegantly formatted output. 
+
+
 ## A DMS is a tool, a Data Portal is a solution 2021-03-14 @rufuspollock
 
 Over the years, we've seen many different terms used to describe software like CKAN and the solutions it is used to create e.g. data catalog, data portal, data management system, data platform etc.

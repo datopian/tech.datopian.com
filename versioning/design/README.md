@@ -310,8 +310,11 @@ NB: this is actually untrue about Git-LFS. Git LFS server could be backed by any
 * https://www.datalad.org/ Providing a data portal and a versioning system for everyone, DataLad lets you have your data and control it too.
   * https://github.com/datalad 178*
   * Uses git and git-annex
-  * Classic somewhat crude academic effort i suspect
-  * Doesn't have a web UI. Just a command line which is a wrapper around git stuff
+  * Works well with gin (see next)
+  * Born to solve data distribution and management problem in academic (neuroimaging) setting
+  * Doesn't have a web UI. Just a command line which is a wrapper around git and git-annex
+  * Has extended user oriented documentation: http://handbook.datalad.org/
+  * JOSS publication under review with a nice overview: https://github.com/openjournals/joss-reviews/issues/3262
 * https://gin.g-node.org/
   * Modern Research Data Management for Neuroscience ...distributed version control, flavoured for science
   * Powered by gogs

@@ -118,3 +118,29 @@ views: [
 ]
 ```
 
+## Research
+
+### Our One
+
+![](https://i.imgur.com/XAdHq26.jpg)
+
+### Redash
+
+![](https://i.imgur.com/6JssnLA.png)
+
+### Metabase
+
+https://github.com/metabase/metabase
+
+![](https://i.imgur.com/bOjIKdE.png)
+
+### CKAN Classic
+
+![](https://i.imgur.com/tGdupkz.png)
+
+![](https://i.imgur.com/fDtjGSk.png)
+
+### Rufus' Data Explorer (2014)
+
+![](https://i.imgur.com/XJMHRes.png)
+

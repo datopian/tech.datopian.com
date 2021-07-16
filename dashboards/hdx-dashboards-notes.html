@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HDX Technical Architecture for Quick Dashboards | Datopian Tech</title>
+    <meta name="generator" content="VuePress 1.7.0">
+    <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-XESJBM03F5"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XESJBM03F5');</script>
+    <meta name="description" content="An overview of our technology">
+    
+    <link rel="preload" href="/assets/css/0.styles.d75de8d6.css" as="style"><link rel="preload" href="/assets/js/app.9ae97248.js" as="script"><link rel="preload" href="/assets/js/3.d799bd9e.js" as="script"><link rel="preload" href="/assets/js/28.bc68c583.js" as="script"><link rel="prefetch" href="/assets/js/10.ee63a4d5.js"><link rel="prefetch" href="/assets/js/11.17e0f31f.js"><link rel="prefetch" href="/assets/js/12.903532db.js"><link rel="prefetch" href="/assets/js/13.6eb9e3f2.js"><link rel="prefetch" href="/assets/js/14.45800f2d.js"><link rel="prefetch" href="/assets/js/15.530f1caf.js"><link rel="prefetch" href="/assets/js/16.0706ce2b.js"><link rel="prefetch" href="/assets/js/17.4aeeac21.js"><link rel="prefetch" href="/assets/js/18.f93ad47f.js"><link rel="prefetch" href="/assets/js/19.21c8357b.js"><link rel="prefetch" href="/assets/js/20.7083d06c.js"><link rel="prefetch" href="/assets/js/21.6121a03b.js"><link rel="prefetch" href="/assets/js/22.d97cbbbf.js"><link rel="prefetch" href="/assets/js/23.d585ec31.js"><link rel="prefetch" href="/assets/js/24.3492763a.js"><link rel="prefetch" href="/assets/js/25.292cc9ed.js"><link rel="prefetch" href="/assets/js/26.d8940581.js"><link rel="prefetch" href="/assets/js/27.3380ddab.js"><link rel="prefetch" href="/assets/js/29.a3d6e1a4.js"><link rel="prefetch" href="/assets/js/30.c8803030.js"><link rel="prefetch" href="/assets/js/31.1718b1cf.js"><link rel="prefetch" href="/assets/js/32.85c1f8c8.js"><link rel="prefetch" href="/assets/js/33.775e8747.js"><link rel="prefetch" href="/assets/js/34.7bf65bab.js"><link rel="prefetch" href="/assets/js/35.ff8f2794.js"><link rel="prefetch" href="/assets/js/36.58803d6c.js"><link rel="prefetch" href="/assets/js/37.9bdd4b37.js"><link rel="prefetch" href="/assets/js/38.c547b28b.js"><link rel="prefetch" href="/assets/js/39.77d62965.js"><link rel="prefetch" href="/assets/js/4.87a98c1d.js"><link rel="prefetch" href="/assets/js/40.48bcf0f8.js"><link rel="prefetch" href="/assets/js/41.a164c9a8.js"><link rel="prefetch" href="/assets/js/42.0c5da929.js"><link rel="prefetch" href="/assets/js/43.00555e36.js"><link rel="prefetch" href="/assets/js/44.82e56b55.js"><link rel="prefetch" href="/assets/js/45.7600f97c.js"><link rel="prefetch" href="/assets/js/46.892c30ca.js"><link rel="prefetch" href="/assets/js/47.d0d1233e.js"><link rel="prefetch" href="/assets/js/48.7cf3d085.js"><link rel="prefetch" href="/assets/js/49.57712d49.js"><link rel="prefetch" href="/assets/js/5.c7bb7cc8.js"><link rel="prefetch" href="/assets/js/50.d1687b22.js"><link rel="prefetch" href="/assets/js/51.b1f671f1.js"><link rel="prefetch" href="/assets/js/52.a3620ba7.js"><link rel="prefetch" href="/assets/js/53.964b2c84.js"><link rel="prefetch" href="/assets/js/54.b9c03422.js"><link rel="prefetch" href="/assets/js/55.986c66c3.js"><link rel="prefetch" href="/assets/js/56.e15d054b.js"><link rel="prefetch" href="/assets/js/57.3348d40a.js"><link rel="prefetch" href="/assets/js/58.52b28abc.js"><link rel="prefetch" href="/assets/js/59.af0431a1.js"><link rel="prefetch" href="/assets/js/6.3c2e490e.js"><link rel="prefetch" href="/assets/js/60.51603881.js"><link rel="prefetch" href="/assets/js/61.fb3710f9.js"><link rel="prefetch" href="/assets/js/62.ae37d327.js"><link rel="prefetch" href="/assets/js/63.4909605b.js"><link rel="prefetch" href="/assets/js/64.e4827efe.js"><link rel="prefetch" href="/assets/js/65.78e5aadb.js"><link rel="prefetch" href="/assets/js/66.70040c3d.js"><link rel="prefetch" href="/assets/js/67.b5e26c15.js"><link rel="prefetch" href="/assets/js/68.26fc110b.js"><link rel="prefetch" href="/assets/js/69.80229dbf.js"><link rel="prefetch" href="/assets/js/7.7e8bc420.js"><link rel="prefetch" href="/assets/js/70.6dbe86bf.js"><link rel="prefetch" href="/assets/js/71.5ea64cfd.js"><link rel="prefetch" href="/assets/js/72.e6aa1f00.js"><link rel="prefetch" href="/assets/js/73.e7ddc351.js"><link rel="prefetch" href="/assets/js/74.8e3e50e5.js"><link rel="prefetch" href="/assets/js/75.7b52f115.js"><link rel="prefetch" href="/assets/js/76.d2919968.js"><link rel="prefetch" href="/assets/js/77.bfeedf51.js"><link rel="prefetch" href="/assets/js/78.3a5c4169.js"><link rel="prefetch" href="/assets/js/79.4edb0ee4.js"><link rel="prefetch" href="/assets/js/8.89ab08e5.js"><link rel="prefetch" href="/assets/js/80.e0fdf646.js"><link rel="prefetch" href="/assets/js/81.336f6819.js"><link rel="prefetch" href="/assets/js/82.8f42a8ea.js"><link rel="prefetch" href="/assets/js/83.710601dd.js"><link rel="prefetch" href="/assets/js/84.296de3a8.js"><link rel="prefetch" href="/assets/js/85.3b60c237.js"><link rel="prefetch" href="/assets/js/9.4feba4ce.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.62a8c583.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d75de8d6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Datopian Tech</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Features" class="dropdown-title"><span class="title">Features</span> <span class="arrow down"></span></button> <button type="button" aria-label="Features" class="mobile-dropdown-title"><span class="title">Features</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/views/" class="nav-link">
+  Views
+</a></li></ul></div></div> <a href="https://github.com/datopian/tech.datopian.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Contribute!
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Features" class="dropdown-title"><span class="title">Features</span> <span class="arrow down"></span></button> <button type="button" aria-label="Features" class="mobile-dropdown-title"><span class="title">Features</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/views/" class="nav-link">
+  Views
+</a></li></ul></div></div> <a href="https://github.com/datopian/tech.datopian.com" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Contribute!
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>HDX Technical Architecture for Quick Dashboards</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/dashboards/hdx-dashboards-notes.html#bite-generation" class="sidebar-link">Bite generation</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#extending-to-non-hxl-data" class="sidebar-link">Extending to non-HXL data</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#compiled-view-generation" class="sidebar-link">Compiled View generation</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#file-and-dataset" class="sidebar-link">File (and Dataset)</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#recipe" class="sidebar-link">Recipe</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#bite-compiled-view" class="sidebar-link">Bite / Compiled View</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#dashboard" class="sidebar-link">Dashboard</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/dashboards/hdx-dashboards-notes.html#notes" class="sidebar-link">Notes</a></li></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#charts" class="sidebar-link">Charts</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#map" class="sidebar-link">Map</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/dashboards/hdx-dashboards-notes.html#tables" class="sidebar-link">Tables</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="hdx-technical-architecture-for-quick-dashboards"><a href="#hdx-technical-architecture-for-quick-dashboards" class="header-anchor">#</a> HDX Technical Architecture for Quick Dashboards</h1> <p>Notes from analysis and discussion in 2018.</p> <h1 id="concepts"><a href="#concepts" class="header-anchor">#</a> Concepts</h1> <ul><li>Bite (View): a description of an individual chart / map / fact and its data (source)
+<ul><li>bite (for Simon): title, desc, data (compiled), uniqueid, map join info</li> <li>view (Data Package views): title, desc, data sources (on parent data package), transforms, …</li> <li>compiled view: title, desc, data (compiled)</li></ul></li> <li>Data source:
+<ul><li>Single HXL file (Currently, Simon’s approach requires that all the data is in a single table so there is always a single data source.)</li> <li>Data Package(s)</li></ul></li> <li>Creator / Editor: creating and editing the dashboard (given the source datasets)</li> <li>Renderer: given dashboard config render the dashboard</li></ul> <h1 id="dashboard-creator"><a href="#dashboard-creator" class="header-anchor">#</a> Dashboard Creator</h1> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h2 id="bite-generation"><a href="#bite-generation" class="header-anchor">#</a> Bite generation</h2> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h2 id="extending-to-non-hxl-data"><a href="#extending-to-non-hxl-data" class="header-anchor">#</a> Extending to non-HXL data</h2> <p>It is easy to extend this to non-HXL data by using base HXL types and inference e.g.</p> <div class="language- extra-class"><pre class="language-text"><code>date            =&gt; #date
+geo             =&gt; #geo+lon
+geo             =&gt; #geo+lat
+string/category =&gt; #indicator
+</code></pre></div><div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h1 id="dashboard-renderer"><a href="#dashboard-renderer" class="header-anchor">#</a> Dashboard Renderer</h1> <p>Rendering the dashboard involves:</p> <div class="spinner" style="background:rgb(66, 185, 131);" data-v-1bbcb91a></div><h2 id="compiled-view-generation"><a href="#compiled-view-generation" class="header-anchor">#</a> Compiled View generation</h2> <p>See <a href="https://docs.datahub.io/developers/views/" target="_blank" rel="noopener noreferrer">https://docs.datahub.io/developers/views/<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <hr> <h1 id="architecture-proposal"><a href="#architecture-proposal" class="header-anchor">#</a> Architecture Proposal</h1> <ul><li>data loader library
+<ul><li>File: rows, fields (rows, columns)</li></ul></li> <li>type inference (?)
+<ul><li>syntax: table schema infer</li> <li>semantics (not now)</li></ul></li> <li>data transform library (include hxl support)</li> <li>suggester library</li> <li>renderer library</li></ul> <p>Interfaces / Objects</p> <ul><li>File</li> <li>(Dataset)</li> <li>Transform</li> <li>Algorithm / Recipe</li> <li>Bite / View</li> <li>Ordered Set of Bites</li> <li>Dashboard</li></ul> <h2 id="file-and-dataset"><a href="#file-and-dataset" class="header-anchor">#</a> File (and Dataset)</h2> <p><a href="http://okfnlabs.org/blog/2018/02/15/design-pattern-for-a-core-data-library.html" target="_blank" rel="noopener noreferrer">http://okfnlabs.org/blog/2018/02/15/design-pattern-for-a-core-data-library.html<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://github.com/datahq/data.js" target="_blank" rel="noopener noreferrer">https://github.com/datahq/data.js<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>File<br>
+rows<br>
+descriptor<br>
+schema<br>
+schema</p> <h2 id="recipe"><a href="#recipe" class="header-anchor">#</a> Recipe</h2> <div class="language-json= extra-class"><pre class="language-text"><code>{
+  'id':'chart0001',
+  'type':'chart',
+  'subType':'row',
+  'ingredients':[{'name':'what','tags':['#activity-code-id','#sector']}],
+  'criteria':['what &gt; 4', 'what &lt; 11'],
+  'variables': ['what', 'count()'],
+  'chart':'',
+  'title':'Count of {1}',
+'priority': 8,
+}
+</code></pre></div><h2 id="bite-compiled-view"><a href="#bite-compiled-view" class="header-anchor">#</a> Bite / Compiled View</h2> <div class="language-json= extra-class"><pre class="language-text"><code>{  
+  bite: array [...data for chart...],  
+  id: string &quot;...chart bite ID...&quot;,  
+  priority: number,  
+  subtype: string &quot;...bite subtype - row, pie...&quot;,  
+  title: string &quot;...title of bite...&quot;,  
+  type: string &quot;...bite type...&quot;,  
+  uniqueID: string &quot;...unique ID combining bite and data structure&quot;,  
+}  
+</code></pre></div><p>=&gt;</p> <h2 id="dashboard"><a href="#dashboard" class="header-anchor">#</a> Dashboard</h2> <div class="language-json= extra-class"><pre class="language-text"><code>{
+  &quot;title&quot;:&quot;&quot;,
+  &quot;subtext&quot;:&quot;&quot;,
+  &quot;filtersOn&quot;:true,
+  &quot;filters&quot;:[],
+  &quot;headlinefigures&quot;:0,
+  &quot;headlinefigurecharts&quot;:[
+  ],
+  &quot;grid&quot;:&quot;grid5&quot;,
+  &quot;charts&quot;:[				
+    {
+      &quot;data&quot;:&quot;https://proxy.hxlstandard.org/data.json?filter01=append&amp;append-dataset01-01=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1FLLwP6nxERjo1xLygV7dn7DVQwQf0_5tIdzrX31HjBA%2Fedit%23gid%3D0&amp;filter02=select&amp;select-query02-01=%23status%3DFunctional&amp;url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1R9zfMTk7SQB8VoEp4XK0xAWtlsQcHgEvYiswZsj9YA4%2Fedit%23gid%3D0&quot;,
+      &quot;chartID&quot;:&quot;&quot;
+    },      
+    {
+      &quot;data&quot;:&quot;https://proxy.hxlstandard.org/data.json?filter01=append&amp;append-dataset01-01=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1FLLwP6nxERjo1xLygV7dn7DVQwQf0_5tIdzrX31HjBA%2Fedit%23gid%3D0&amp;filter02=select&amp;select-query02-01=%23status%3DFunctional&amp;url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1R9zfMTk7SQB8VoEp4XK0xAWtlsQcHgEvYiswZsj9YA4%2Fedit%23gid%3D0&quot;,
+      &quot;chartID&quot;:&quot;&quot;
+    }
+  ]
+}
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>var config = {
+  layout: 2x2 // in city-indicators dashboard is handcrafted in layout
+  widgets: [
+    {
+      elementId / data-id: ...
+      view: {
+        metadata: { title, sources: &quot;World Bank&quot;}
+        resources: rule for creating compiled list of resources. [ { datasetId: ..., resourceId: ..., transform: ...} ]
+        specType: 
+        viewspec: 
+      }
+    },
+    {
+    
+    },
+  ]
+  datasets: [
+    list of data package urls ...
+  ]
+}
+</code></pre></div><p>Simon’s example</p> <p><a href="https://simonbjohnson.github.io/hdx-iom-dtm/" target="_blank" rel="noopener noreferrer">https://simonbjohnson.github.io/hdx-iom-dtm/<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <div class="language-javascript= extra-class"><pre class="language-text"><code>{
+   // metadata for dashboard
+  &quot;title&quot;:&quot;IOM DTM Example&quot;,
+  &quot;subtext&quot;:&quot; ....&quot;,
+  &quot;headlinefigures&quot;: 3,
+  &quot;grid&quot;: &quot;grid5&quot;, // user chosen layout for dashboard. Choice of 10 grids
+  &quot;headlinefigurecharts&quot;: [ //widgets - headline widget
+    {
+      &quot;data&quot;: &quot;https://beta.proxy.hxlstandard.org/data/1d0a79/download/africa-dtm-baseline-assessments-topline.csv&quot;,
+      &quot;chartID&quot;: &quot;text0013/#country+name/1&quot; // bite Id
+      // elementId: ... // implicit from order in grid ...
+    },
+    {
+      &quot;data&quot;: &quot;https://beta.proxy.hxlstandard.org/data/1d0a79/download/africa-dtm-baseline-assessments-topline.csv&quot;,
+      &quot;chartID&quot;: &quot;text0012/#affected+hh+idps/5&quot;
+    },
+    {
+      &quot;data&quot;: &quot;https://beta.proxy.hxlstandard.org/data/1d0a79/download/africa-dtm-baseline-assessments-topline.csv&quot;,
+      &quot;chartID&quot;:&quot;text0012/#affected+idps+ind/6&quot;
+    }
+  ],
+  &quot;charts&quot;: [	// chart widgets			
+    {
+      &quot;data&quot;: &quot;https://beta.proxy.hxlstandard.org/data/1d0a79/download/africa-dtm-baseline-assessments-topline.csv&quot;,
+      &quot;chartID&quot;: &quot;map0002/#adm1+code/4/#affected+idps+ind/6&quot;,
+      &quot;scale&quot;:&quot;log&quot;  // chart config ... 
+    },
+    {
+      &quot;data&quot;: &quot;https://beta.proxy.hxlstandard.org/data/1d0a79/download/africa-dtm-baseline-assessments-topline.csv&quot;,
+      &quot;chartID&quot;: &quot;chart0009/#country+name/1/#affected+idps+ind/6&quot;,
+      &quot;sort&quot;:&quot;descending&quot;
+    }
+  ]
+}
+</code></pre></div><p>Algorithm</p> <ol><li><p>Extract the data references to a common list of datasets and fetch them</p></li> <li><p>You generate compiled data via hxl.js plus own code transforming to final data for charting etc</p> <div class="language- extra-class"><pre class="language-text"><code>function transformChart(rawSourceData (csv parsed), bite) =&gt; [ [ ...], [...]] - data for chart
+  
+  hxl.js
+  custom code
+  
+function transformMap
+
+function transformText ...
+</code></pre></div><p><a href="https://github.com/SimonbJohnson/hxlbites.js" target="_blank" rel="noopener noreferrer">https://github.com/SimonbJohnson/hxlbites.js<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://github.com/SimonbJohnson/hxlbites.js/blob/master/hxlBites.js#L957" target="_blank" rel="noopener noreferrer">https://github.com/SimonbJohnson/hxlbites.js/blob/master/hxlBites.js#L957<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <div class="language- extra-class"><pre class="language-text"><code>hb.reverse(bite) =&gt; compiled bite (see above) (data, chartConfig)
+</code></pre></div></li> <li><p>generate dashboard html and compute element ids in actual page element ids computed from grid setup</p></li> <li><p>Now have a final dashboard config</p> <div class="language- extra-class"><pre class="language-text"><code>widgets: [
+  {
+    data: [ [...], [...]]
+    widgetType: text, chart, map ...
+    elementId: // element to bind to ... 
+  }
+]
+</code></pre></div></li> <li><p>Now use specific renderer libraries e.g. leaflet, plotly/chartist etc to render out into page</p> <p><a href="https://github.com/SimonbJohnson/hxldash/blob/master/js/site.js#L294" target="_blank" rel="noopener noreferrer">https://github.com/SimonbJohnson/hxldash/blob/master/js/site.js#L294<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></li></ol> <h3 id="notes"><a href="#notes" class="header-anchor">#</a> Notes</h3> <p>“Source” version of dashboard with data uncompiled.</p> <p>Compiled version of dashboard with final data inline …</p> <p>hxl.js takes an array of arrays … and outputs array of arrays …</p> <div class="language- extra-class"><pre class="language-text"><code>{
+  schema: [...]
+  data: [...]
+}
+</code></pre></div><h1 id="renderer"><a href="#renderer" class="header-anchor">#</a> Renderer</h1> <ul><li>Renderer for the dashboard</li> <li>Renderer for each widget</li></ul> <div class="language- extra-class"><pre class="language-text"><code>function createChart(bite, elementId) =&gt; svg in bite
+</code></pre></div><h2 id="charts"><a href="#charts" class="header-anchor">#</a> Charts</h2> <ul><li>Data Package View =&gt; svg/png etc
+<ul><li>plotly</li> <li>vega (d3)</li> <li><a href="https://github.com/frictionlessdata/datapackage-render-js" target="_blank" rel="noopener noreferrer">https://github.com/frictionlessdata/datapackage-render-js<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li> <li>chartist</li> <li>react-charts</li></ul> <h2 id="map"><a href="#map" class="header-anchor">#</a> Map</h2> <ul><li>Leaflet</li> <li>react-leaflet</li></ul> <h2 id="tables"><a href="#tables" class="header-anchor">#</a> Tables</h2> <p>…</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/datopian/tech.datopian.com/edit/master/dashboards/hdx-dashboards-notes.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Modified:</span> <span class="time">7/16/2021, 10:42:00 AM</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.9ae97248.js" defer></script><script src="/assets/js/3.d799bd9e.js" defer></script><script src="/assets/js/28.bc68c583.js" defer></script>
+  </body>
+</html>

@@ -126,10 +126,11 @@ Sequence diagram showing the journey of a tabular file into the DataStore:
 
 ```mermaid
 sequenceDiagram
+    Publisher->>CKAN Instance: Create a resource (or edit existing one) in a dataset
     Publisher->>CKAN Instance: Add tabular resource from disk or URL
     CKAN Instance-->>FileStore: Upload data to storage
     CKAN Instance-->>Datapusher: Add job to queue
-    Datapusher-->>Datastore: Run the job
+    Datapusher-->>Datastore: Run the job - push data via API
     Datastore-->>Postgres: Create table per resource and insert data
 ```
 

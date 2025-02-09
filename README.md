@@ -4,9 +4,7 @@ title: Datopian Tech
 
 <div class="hero">
   <h1>Datopian Tech 👩‍💻</h1>
-
   <a href="https://datopian.com/"><img src="https://www.datopian.com/assets/images/layout/datopian-logotype.png" /></a>
-
   <p class="description">
     We are experts in data management and engineering
     <br/><br/>
@@ -76,7 +74,7 @@ A DMS has the following key components:
 
 https://coggle.it/diagram/Xiw2ZmYss-ddJVuK/t/data-portal-feature-breakdown
 
-<iframe width='853' height='480' src='https://embed.coggle.it/diagram/Xiw2ZmYss-ddJVuK/b24d6f959c3718688fed2a5883f47d33f9bcff1478a0f3faf9e36961ac0b862f' frameborder='0' allowfullscreen></iframe>
+<iframe width='853' height='480' src='https://embed.coggle.it/diagram/Xiw2ZmYss-ddJVuK/b24d6f959c3718688fed2a5883f47d33f9bcff1478a0f3faf9e36961ac0b862f' frameborder='0' allowFullScreen></iframe>
 
 ## Frictionless
 

@@ -5,7 +5,7 @@ title: Datopian Tech
 <div class="hero">
   <h1>Datopian Tech 👩‍💻</h1>
 
-  <a href="https://datopian.com/"><img src="https://playbook.datopian.com/img/datopian-dark-logotype.svg" /></a>
+  <a href="https://datopian.com/"><img src="https://www.datopian.com/assets/images/layout/datopian-logotype.png" /></a>
 
   <p class="description">
     We are experts in data management and engineering

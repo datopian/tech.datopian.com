@@ -1,16 +1,12 @@
 ---
-title: Datopian Tech
+title: Datopian Tech 👩‍💻
 ---
 
-<div class="hero">
-  <h1>Datopian Tech 👩‍💻</h1>
-  <a href="https://datopian.com/"><img src="https://www.datopian.com/assets/images/layout/datopian-logotype.png" /></a>
-  <p class="description">
-    We are experts in data management and engineering
-    <br/><br/>
-    This is an overview of our technology
-  </p>
-</div>
+![](https://www.datopian.com/assets/images/layout/datopian-logotype.png)
+
+## We are experts in data management and engineering
+
+## This is an overview of our technology
 
 ## Data Management Systems
 

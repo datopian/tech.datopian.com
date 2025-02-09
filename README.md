@@ -1,13 +1,5 @@
-# The content of this repository has been moved to the datahub.io website, see https://datahub.io/docs/dms
-
-___
-
 ---
-heroImage: https://playbook.datopian.com/img/datopian-dark-logotype.svg
-heroText: Datopian Engineering
-tagline: Experts in data management 
-pageClass: home
-footer: Copyright © 2016-present Datopian
+title: Datopian Tech
 ---
 
 <div class="hero">

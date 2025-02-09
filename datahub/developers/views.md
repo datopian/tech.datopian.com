@@ -40,7 +40,7 @@ It consists of two parts, the first describes the general tool chain we have. Th
 * [Data Package Views introduction and spec][views]
 * [datapackage-render-js][] - this is the library that implements conversion from the data package views spec to vega/plotly and then svg or png
 
-[views]: /publishers/views/
+[views]: /docs/dms/publishers/views
 [datapackage-render-js]: https://github.com/frictionlessdata/datapackage-render-js
 [dpr-js]: https://github.com/frictionlessdata/dpr-js
 
@@ -164,5 +164,5 @@ Notice that DataHub views render a table view per tabular resource. If GeoJSON r
 
 There is a separate page with [additional research material regarding views specification and tooling][views-research].
 
-[views-research]: /developers/views-research/
+[views-research]: /docs/dms/datahub/developers/views-research
 

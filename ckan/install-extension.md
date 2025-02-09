@@ -6,7 +6,7 @@ sidebar: auto
 
 A CKAN extension is a Python package that modifies or extends CKAN. Each extension contains one or more plugins that must be added to your CKAN config file to activate the extension’s features.
 
-In this sections we will teach you only how to install existing extensions. See [next steps](/ckan/create-extension) in case you need to create or modify extensions
+In this sections we will teach you only how to install existing extensions. See [next steps](/dms/ckan/create-extension) in case you need to create or modify extensions
 
 ## Add new extension
 
@@ -73,4 +73,4 @@ http://ckan:5000/hello/world/John-Doe
 
 ## Next steps
 
-[Create your own extension](/ckan/create-extension)
+[Create your own extension](/dms/ckan/create-extension)

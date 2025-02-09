@@ -33,8 +33,7 @@ cp .env.example .env
 
 Build and Run the instances:
 
-::: tip
-`docker-compose` must be run with `sudo`. If you want to change this, you can follow the steps below. NOTE: The `docker` group grants privileges equivalent to the `root` user.  
+> [!tip]'docker-compose' must be run with 'sudo'. If you want to change this, you can follow the steps below. NOTE: The 'docker' group grants privileges equivalent to the 'root' user.  
 
 Create the `docker` group: `sudo groupadd docker`  
 
@@ -48,7 +47,6 @@ RUN chown -R ckan:ckan /var/lib/ckan/storage
 ```
 
 At this point, you can log out and log back in for these changes to apply. You can also use the command `newgrp docker` to temporarily enable the new group for the current terminal session.
-:::
 
 ```
 docker-compose -f docker-compose.dev.yml up --build
@@ -64,16 +62,16 @@ You can navigate to `http://localhost:5000`
 
 and log in with the credentials that docker-compose setup created for you [user: `ckan_admin` password:`test1234`].
 
-::: tip
-To learn key concepts about CKAN, including what it is and how it works, you can read the [CKAN User Guide](https://docs.ckan.org/en/2.8/user-guide.html).
-:::
+>[!tip]To learn key concepts about CKAN, including what it is and how it works, you can read the User Guide.
+[CKAN User Guide](https://docs.ckan.org/en/2.8/user-guide.html).
+
 
 ## Next Steps
 
-[Play around with CKAN portal](/ckan/play-around).
+[Play around with CKAN portal](/dms/ckan/play-around).
 
 ## Troubleshooting
 
 Login / Logout button breaks the experience:
 
-- Change the URL from `http://ckan:5000` to `http://localhost:5000`. A complete fix is described in the [Play around with CKAN portal](/ckan/play-around). (Your next step. ;))
+- Change the URL from `http://ckan:5000` to `http://localhost:5000`. A complete fix is described in the [Play around with CKAN portal](/dms/ckan/play-around). (Your next step. ;))

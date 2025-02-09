@@ -70,16 +70,16 @@ In addition to its architecture, Next Gen provides a variety of improvements and
 
 And each of these features is easily deployed into an existing CKAN solution!
 
-[frontend]: /frontend/
-[explorer]: /data-explorer/
-[dashboards]: /dashboards/
-[harvesting]: /harvesting/
+[frontend]: /docs/dms/frontend
+[explorer]: /docs/dms/data-explorer
+[dashboards]: /docs/dms/dashboards
+[harvesting]: /docs/dms/harvesting
 
 ## Roadmap
 
 The journey to Next Gen from Classic can proceed step by step -- it does not need to be a big bang. Like refurbishing and extending a house, we can add a room here or renovate a room there whilst continuing to live happily in the building (and benefitting as our new bathroom comes online, or we get a new conservatory!).
 
-Here's an overview of the journey to Next Gen and current implementation status. More granular information on particular features may sometimes be found on the individual feature page, for example for [Harvesting here](/harvesting/#design).
+Here's an overview of the journey to Next Gen and current implementation status. More granular information on particular features may sometimes be found on the individual feature page, for example for [Harvesting here](/dms/harvesting#design).
 
 ```mermaid
 graph LR

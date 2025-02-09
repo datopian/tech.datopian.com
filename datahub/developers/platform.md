@@ -4,7 +4,7 @@ The DataHub platform follows a service oriented architecture. It is built from a
 
 ## Architecture
 
-<p style="text-align: center;">Fig 1: Data Flow through the system</p>
+<p style={{textAlign: "center"}}>Fig 1: Data Flow through the system</p>
 
 ```mermaid
 graph TD
@@ -29,7 +29,7 @@ pipeline-store -.publish.-> metastore[MetaStore]
 metastore[MetaStore] --api--> frontend
 ```
 
-<p style="text-align: center;">Fig 2: Components Perspective - from the Frontend</p>
+<p style={{"textAlign": "center"}}>Fig 2: Components Perspective - from the Frontend</p>
 
 ```mermaid
 graph TD
@@ -148,7 +148,7 @@ The command line interface.
 
 https://github.com/datahq/datahub-cli
 
-[views]: /developers/views
+[views]: /docs/dms/views
 [web-app]: http://datahub.io/
 
 ## Domain model

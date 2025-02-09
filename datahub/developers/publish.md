@@ -92,7 +92,7 @@ Package Storage->>Metadata Storage API: publish
 pipeline store->>Metadata Storage API: publish
 Metadata Storage API->>Upload Agent CLI: OK / Not OK
 ```
-<br>
+<br/>
 
 * Upload API - see `POST /source/upload` in *source* section of [API][api]
 * Authentication API - see `GET /auth/check` in *auth* section of [API][api].
@@ -100,8 +100,8 @@ Metadata Storage API->>Upload Agent CLI: OK / Not OK
 
 See example [code snippet in DataHub CLI][publish-code]
 
-[api]: /developers/api/
+[api]: /docs/dms/datahub/developers/api
 [publish-code]: https://github.com/datahq/datahub-cli/blob/b869d38073248903a944029cf93eddf3ef50001a/bin/data-push.js#L34
 
-[api]: /developers/api/
+[api]: /docs/dms/datahub/developers/api
 

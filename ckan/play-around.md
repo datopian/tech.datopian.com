@@ -8,24 +8,24 @@ In this section, we are going to show some basic functionality of CKAN focused o
 
 ## Prerequisites
 
-- We assume you've already completed the [Getting Started Guide](/ckan).
+- We assume you've already completed the [Getting Started Guide](/dms/ckan/getting-started).
 - You have a basic understanding of Key data portal concepts:
 
 CKAN is a tool for making data portals to manage and publish datasets. You can read about the key concepts such as Datasets and Organizations in the User Guide -- or you can just dive in and play around!
 
-https://docs.ckan.org/en/2.8/user-guide.html
+https://docs.ckan.org/en/2.9/user-guide.html
 
-::: tip
+>[!tip]
 Install a [JSON formatter plugin for Chrome](https://chrome.google.com/webstore/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa?hl=en) or browser of your choice.
 
 If you are familiar with the command line tool `curl`, you can use that.
 
 In this tutorial, we will be using `curl`, but for most of the commands, you can paste a link in your browser. For POST commands, you can use [Postman](https://www.getpostman.com/) or [Google Chrome Plugin](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop).
-:::
+
 
 ## First steps
 
-::: tip
+>[!tip]
 By default the portal is accessible on http://localhost:5000. Let's update your `/etc/hosts` to access it on http://ckan:5000:
 
 ```
@@ -34,7 +34,6 @@ vi /etc/hosts      # You can use the editor of your choice
 127.0.0.1 ckan
 ```
 
-:::
 
 At this point, you should be able to access the portal on http://ckan:5000.
 
@@ -43,7 +42,7 @@ At this point, you should be able to access the portal on http://ckan:5000.
 Let's add some fixtures to it. For software, a fixture is something used consistently (in this case, data for you to play around with). Run the following from your terminal (do NOT cut the previous docker process as this one depends on the already launched docker, run in another terminal):
 
 ```sh
-docker-compose -f docker-compose.dev.yml exec ckan-dev paster --plugin=ckan create-test-data -c production.ini
+docker-compose -f docker-compose.dev.yml exec ckan-dev ckan seed basic
 ```
 
 Optionally you can `exec` into a running container using 
@@ -52,14 +51,16 @@ Optionally you can `exec` into a running container using
 docker exec -it [name of container] sh
 ```
 
-and run the `paster` command there
+and run the `ckan` command there
 ```sh
-paster --plugin=ckan create-test-data -c production.ini
+ckan seed basic
 ```
 
 You should be able to see 2 new datasets on home page:
 
 ![CKAN with data](https://i.imgur.com/BiSifyb.png)
+
+To get more details on ckan commands please visit [CKAN Commands Reference](https://docs.ckan.org/en/2.9/maintaining/cli.html#ckan-commands-reference).
 
 ### Check CKAN API
 
@@ -76,7 +77,7 @@ You should see something like this:
   "help": "https://ckan:5000/api/3/action/help_show?name=status_show",
   "success": true,
   "result": {
-  "ckan_version": "2.8.2",
+  "ckan_version": "2.9.x",
   "site_url": "https://ckan:5000",
   "site_description": "Testing",
   "site_title": "CKAN Demo",
@@ -174,7 +175,7 @@ http://ckan:5000/api/3/action/resource_show?id=288455e8-c09c-4360-b73a-8b55378c4
 }
 ```
 
-*Note:* These are only a few examples. You can find a full list of API actions in the [CKAN API guide](https://docs.ckan.org/en/2.8/api/#action-api-reference).
+*Note:* These are only a few examples. You can find a full list of API actions in the [CKAN API guide](https://docs.ckan.org/en/2.9/api/#action-api-reference).
 
 ### Create Organizations, Datasets and Resources
 
@@ -200,7 +201,7 @@ You can see sysadmin credentials in the file `.env`. By default, they should be
 
 #### Create Organization
 
-You can create an organization from the browser easily, but let's use [CKAN API](https://docs.ckan.org/en/2.8/api/#ckan.logic.action.create.organization_create) to do so.
+You can create an organization from the browser easily, but let's use [CKAN API](https://docs.ckan.org/en/2.9/api/#ckan.logic.action.create.organization_create) to do so.
 
 ```sh
 curl -X POST http://ckan:5000/api/3/action/organization_create -H "Authorization: 9c04a69d-79f4-4b4b-b4e1-f2ac31ed961c" -d '{
@@ -281,4 +282,4 @@ That's it! Now you should be able to see your dataset on the portal at http://ck
 
 ## Next steps
 
-* [Install Extensions](/ckan/install-extension).
+* [Install Extensions](/dms/ckan/install-extension).

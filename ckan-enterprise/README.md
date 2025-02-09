@@ -57,22 +57,22 @@ Tasks:
 
 ### Blobstore
 
-See https://tech.datopian.com/blob-storage/#ckan-v3
+See [blob storage](/dms/blob-storage#ckan-v3)
 
 ### Versioning
 
-See https://tech.datopian.com/versioning/#ckan-v3
+See [versioning](/dms/versioning#ckan-v3)
 
 ### DataLoader
 
-See https://tech.datopian.com/load/
+See [DataLoader](/dms/load)
 
 ### Data API
 
 * Install new [Data API service](https://github.com/datopian/data-api) in the project
 * Install Hasura service in the project
 * Set it up to work with DB of CKAN Enterprise
-* Read more about Data API here https://tech.datopian.com/data-api/#read-api-3
+* Read more about Data API [here](/dms/data-api#read-api-3)
 
 Notes:
 
@@ -82,7 +82,7 @@ Notes:
 
 ### Frontend
 
-PortalJS for the read frontend of CKAN Enterprise. Read more https://tech.datopian.com/frontend/#frontend.
+PortalJS for the read frontend of CKAN Enterprise. [Read more](/dms/frontend/#frontend).
 
 ### DataExplorer
 
@@ -90,7 +90,7 @@ A new Data Explorer based on GraphQL API: https://github.com/datopian/data-explo
 
 ### Permissions
 
-https://tech.datopian.com/permissions/#permissions-authorization
+See [permissions](/dms/permissions#permissions-authorization).
 
 ### Auth
 

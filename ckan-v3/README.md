@@ -51,9 +51,7 @@ The main way to address these problems while gaining extra benefits is to move t
 
 Thus, we recommend building the next version of CKAN – CKAN v3 – on a microservices approach.
 
-:::tip
-CKAN v3 is sometimes also referred to as CKAN Next Gen(eration).
-:::
+[!tip]CKAN v3 is sometimes also referred to as CKAN Next Gen(eration).
 
 With microservices, each piece of functionality runs in its own service and process. 
 
@@ -122,7 +120,7 @@ The hybrid approach means we can evolve CKAN v2 "Classic" to CKAN v3 "Next Gen" 
 |              | CKAN v2 (Classic) | CKAN v3 (Next Gen) | CKAN v3 Hybrid |
 | ------------ | ------------------| -------------------| ---------------|
 | Architecture | Monolithic        | Microservice       | Microservice with v2 core |
-| Language     | Python            | You can write services in any language you like.<br><br>Frontend default: JS.<br>Backend default: Python | Python and any language you like for microservices. |
+| Language     | Python            | You can write services in any language you like.<br/><br/>Frontend default: JS.<br/>Backend default: Python | Python and any language you like for microservices. |
 | Frontend (and theming) | Python with Python CKAN extension | Flexible. Default is modern JS/NodeJS based | Can use old frontend but default to new JS-based frontend. |
 | Data Packages | Add-on, no integration | Default internal and external format | Data Packages with converter to old CKAN format. |
 | Extension | Extensions are libraries that are added to core runtime. They must therefore be built in python and are loaded into the core process at build time. "Template/inheritance" model where hooks are in core and it is core that loads and calls plugins. This means that if a hook does not exist in core then the extension is stymied. | Extensions are microservices and can be written in any language. They are loaded into the url space via kubernetes routing manager. Extensions hook into "core" via APIs (rather than in code). Follows a "composition" model rather than inheritance model | Can use old style extensions or microservices. |
@@ -159,9 +157,8 @@ This diagram is based on the file `docker-compose.yml` of [github.com/okfn/docke
  
 A difference from this diagram to the file is that we are not including DataPusher, as it is not a required dependency.
 
-:::tip
-Databases may run as Docker containers, or rely on third-party services such as Amazon Relational Database Service (RDS).
-:::
+>[!tip]Databases may run as Docker containers, or rely on third-party services such as Amazon Relational Database Service (RDS).
+
 
 
 ```mermaid
@@ -211,7 +208,7 @@ Redis | Database | | Lightweight key-value store, used for caching and job queue
 
 ### CKAN v3 (Next Gen)
 
-CKAN Next Gen is still a DMS, as CKAN Classic; but rather than a monolithical architecture, it follows the microservices approach. CKAN Classic is not a dependency anymore, as we have smaller services providing functionality that we may or many not choose to include. This description is based on [Datopian's Technical Documentation](http://tech.datopian.com/next-gen/#roadmap).
+CKAN Next Gen is still a DMS, as CKAN Classic; but rather than a monolithical architecture, it follows the microservices approach. CKAN Classic is not a dependency anymore, as we have smaller services providing functionality that we may or many not choose to include. This description is based on [Datopian's Technical Documentation](/docs/dms/ckan-v3/next-gen/#roadmap).
 
 ```mermaid
 graph LR
@@ -365,4 +362,4 @@ SQLite | Database | | Unknown use. Possibly a worker dependency.
 
 ### Old Next Gen Page
 
-Prior to this page, we had one called "Next Gen." It has intersections with this article, although it focuses more on the benefits of microservices. For the time being, the page still exists in [/ckan-v3/next-gen](./next-gen.md), although it may get merged with this one in the future.
+Prior to this page, we had one called "Next Gen." It has intersections with this article, although it focuses more on the benefits of microservices. For the time being, the page still exists in [/ckan-v3/next-gen](/dms/ckan-v3/next-gen), although it may get merged with this one in the future.

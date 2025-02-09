@@ -30,7 +30,7 @@ People = data wranglers = those who use machines (e.g. code, command line tools)
 
 As a Publisher I want to publish a file/dataset and view/share just with a few people (or even just myself)
 
-* ~~"Private" link: /{username}/{uuid}~~
+* ~~"Private" link: {'/{username}/{uuid}'}~~
 * I want JSON as well as CSV versions of my data
 * I want a preview
 * I want to be notified clearly if something went wrong and what I can do to fix it.
@@ -38,7 +38,7 @@ As a Publisher I want to publish a file/dataset and view/share just with a few p
 As a Publisher I want to publish a file/dataset and share publicly with everyone
 
 * Viewable on my profile
-* Public link: nice urls /{username}/{dataset-name}
+* Public link: nice urls {'/{username}/{dataset-name}'}
 
 For the pipeline =>
 
@@ -267,7 +267,7 @@ Notes
 * Permissions: must be a member of the Publisher
 	* Internally: DataPackageCreate or DataPackageUpdate capability
 * Handle conflicts: if data package already exists, return 409. Client instructions should be already exists and use "--force" or similar to overwrite
-* API endpoint behind the scenes: POST {api}/package/
+* API endpoint behind the scenes: POST {'{api}/package/'}
 * TODO: private data packages
 	* And payment!
 
@@ -431,7 +431,7 @@ As a (potential) Publisher I want to preview a datapackage I have prepared so th
 
 *Rufus: also need for an online validation tool*
 
-#### See How Much a Data Package is Used (Downloaded) {2d}
+#### See How Much a Data Package is Used (Downloaded) {'{2d}'}
 
 As a Consumer i want to see how much the data has been downloaded so that i can choose most popular (=> probably most reliable and complete) in the case when there are several alternatives for my usecase (maybe from different publishers)
 
@@ -592,26 +592,26 @@ When we talk about versioning we can mean two things:
 
 As a Publisher I want to tag a version of my data on the command line so that … [see so that’s below]
 
-dpmpy tag {tag-name}
+dpmpy tag {'{tag-name}'}
 
-=> tag current “latest” on the server as {tag-name}
+=> tag current “latest” on the server as {'{tag-name}'}
 
-* Do we restrict {tag-name} to semver? I don’t think so atm.
-* As a {Publisher} I want to tag datapackage to create a snapshot of data on the registry server, so that consumers can refer to it
-* As a {Publisher} I want to be warned that a tag exists, when I try to overwrite it, so that I don’t accidentally overwrite stable tagged data, which is relied on by consumers.
-* As a {Publisher} I want to be able to overwrite the previously tagged datapackage, so that I can fix it if I mess up.
+* Do we restrict {'{tag-name}'} to semver? I don’t think so atm.
+* As a {'{Publisher}'} I want to tag datapackage to create a snapshot of data on the registry server, so that consumers can refer to it
+* As a {'{Publisher}'} I want to be warned that a tag exists, when I try to overwrite it, so that I don’t accidentally overwrite stable tagged data, which is relied on by consumers.
+* As a {'{Publisher}'} I want to be able to overwrite the previously tagged datapackage, so that I can fix it if I mess up.
 * The versioning here happens server side
 	* Is this confusing for users? I.e. they are doing something local.
 
 Background “so that” user story epics:
 
-* As a {Publisher} I want to version my Data Package and keep multiple versions around including older versions so that I do not break consumer systems when I change my Data Package (whether schema or data) [It is not just the publisher who wants this, it is a consumer - see below]
-* As a {Publisher} I want to be able to get access to a previous version I tagged so that I can return to it and review it (and use it)
+* As a {'{Publisher}'} I want to version my Data Package and keep multiple versions around including older versions so that I do not break consumer systems when I change my Data Package (whether schema or data) [It is not just the publisher who wants this, it is a consumer - see below]
+* As a {'{Publisher}'} I want to be able to get access to a previous version I tagged so that I can return to it and review it (and use it)
 	* so that i can recover old data if i delete it myself or compare how things changed over time
 
 #### Explicit Versioning - Consumer
 
-As a {Consumer} (of a Data Package) I want to know full details when and how the data package schema has changed and when so that I can adjust my scripts to handle it.
+As a {'{Consumer}'} (of a Data Package) I want to know full details when and how the data package schema has changed and when so that I can adjust my scripts to handle it.
 
 Important info to know for each schema change:
 
@@ -628,16 +628,16 @@ Important info to know for each schema change:
 
 ***Automated versioning / automated tracking**: Explicit versioning relies on the publisher, and humans can forget or not care enough about others. So to help consumers my suggestion would be to always track schema changes of uploaded packages on the server, and allow users to review those changes on the website. (We might even want to implement auto-tagging or not allowing users to upload a package with the same version but a different schema without forcing)*
 
-As a {Consumer} I want to get a sense how outdated is the datapackage, that I have downloaded before, so that I can decide if I should update or not.
+As a {'{Consumer}'} I want to get a sense how outdated is the datapackage, that I have downloaded before, so that I can decide if I should update or not.
 
 * I want to preview a DataPackage changelog (list of all available versions/tags with brief info) online, sorted by creation time, so that I can get a sense how data or schema has changed since some time in the past. Important brief info:
 	* Time when published
 	* How many rows added/deleted for each resource data
 	* What fields(column names) changed, added or deleted for each resource.
 
-As a {Consumer} I want to view a Datapackage at a particular version online, so that I can present/discuss the particular data timeslice of interest with other people.
+As a {'{Consumer}'} I want to view a Datapackage at a particular version online, so that I can present/discuss the particular data timeslice of interest with other people.
 
-As a {Consumer} I want to download a Data package at a particular version so that I know it is compatible with my scripts and system
+As a {'{Consumer}'} I want to download a Data package at a particular version so that I know it is compatible with my scripts and system
 
 * Online: I want to pick the version I want from the list, and download it (as zip for ex.)
 * CLI: I want to specify tag or version when using the `install` command.
@@ -747,25 +747,25 @@ As a ??? I want to see who are the top publihers and users so that I can emulate
 
 ##### Create and Edit Profile
 
-As {Owner ...} I want to edit my profile so that it is updated with new information
+As {'{Owner ...}'} I want to edit my profile so that it is updated with new information
 
 ##### Add and Manage Members
 
-As an {Owner of a Publisher in the Registry} I want to invite an existing user to become a member of my publisher
+As an {'{Owner of a Publisher in the Registry}'} I want to invite an existing user to become a member of my publisher
 
 * Auto lookup by user name (show username and fullname) - standard as per all sites
 * User gets a notification on their dashboard + email with link to accept invite
 * If invite is accepted notify the publisher (?) - actually do not do this.
 
-As an {Owner of a Publisher in the Registry} I want to invite someone using their email to sign up and become a member of my Publisher so that they are authorized to publish data packages under my Publisher.
+As an {'{Owner of a Publisher in the Registry}'} I want to invite someone using their email to sign up and become a member of my Publisher so that they are authorized to publish data packages under my Publisher.
 
-As an {Publisher Owner} I want to remove someone from membership in my publisher so they no longer have ability to publish or modify my data packages
+As an {'{Publisher Owner}'} I want to remove someone from membership in my publisher so they no longer have ability to publish or modify my data packages
 
-As a {Publisher Owner} I want to view all the people in my organization and what roles they have so that I can change these if I want
+As a {'{Publisher Owner}'} I want to view all the people in my organization and what roles they have so that I can change these if I want
 
-As a {Publisher Owner} I want to make a user an “owner” so they have full control
+As a {'{Publisher Owner}'} I want to make a user an “owner” so they have full control
 
-As a {Publisher Owner} I want to remove a user as an “owner” so they are just a member and no longer have full control
+As a {'{Publisher Owner}'} I want to remove a user as an “owner” so they are just a member and no longer have full control
 
 ### 7. Web Hooks and Extensions
 

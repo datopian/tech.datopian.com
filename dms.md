@@ -1,87 +1,68 @@
-# DMS (Data Management System)
+# Data Management Systems
 
-This document is an introduction to the technical design of Data Management Systems (DMS). This also covers Data Portals since Data Portals are one major solution one can build with a data management system.
+A Data Management System (DMS) is a _framework_. It can be used to create a variety of _solutions_ such as [Data Portals][], [Data Catalogs][], [Data Lakes][] (or Data Meshes) etc. We have developed two DMS stacks that share a set of underlying core components:
 
-## Domain Model
+- [CKAN][]: the open source data management system we created in 2007 and that we continue to develop and maintain. The main information on CKAN is at https://ckan.org/. Here we have some specific notes on how we develop and deploy CKAN as well as our thoughts on the [next generation of CKAN (v3)][v3].
+- [DataHub][]: a simpler version of CKAN focused on SaaS platform at DataHub.io. DataHub and CKAN v3 share many of the same core components.
 
-* Project: a data project. It has has a single dataset in the same way GitHub or Gitlab "project" has a single repo. Traditionally in, say CKAN, this has been implicit and identified with the dataset. There are, however, important differences: a project can include a dataset but also other related functionality such as issues, workflows etc.
-* Dataset: a set of data, usually zero or more resources.
-* Resource (or File): a single data object.
+[data portals]: /dms/data-portals
+[data lakes]: /dms/data-lake
+[data catalogs]: /dms/data-portals
+[CKAN]: /dms/ckan
 
-Revisioning
- 
-* Revision
-* Tag
-* (Branch)
+### Solutions
 
-Presentation
+You can use a DMS to build many kinds of specific solutions
 
-* View
-* Showcase
-* Data API
+- [Data Portals][portals] are gateways to data. That gateway can be big or small, open or restricted. For example, data.gov is open to everyone, whilst an enterprise "intra" data portal is restricted to its personnel.
+- Data Catalog: see https://ckan.org/
+- Metadata manager: see [Publishing][]
+- Data Lake: you can use a DMS to rapidly create a data lake using existing infrastructure. For example, using the DMS' catalog and storage gateway with existing cloud storage and data processing capabilities.
+- Data Engineering: you can use components of the DMS to rapidly create, orchestrate and supply data pipelines.
 
-Identity and Permissions
+[dms]: /docs/dms/dms
+[portals]: /docs/dms/data-portals
+[publishing]: /docs/dms/publish
+[datahub]: /docs/dms/datahub
+[ckan]: /docs/dms/ckan
+[v3]: /docs/dms/ckan-v3
 
-* Account
-* Profile
-* Permission
+### Features
 
-Data Factory
+A DMS has a variety of features. This section provides an overview and links to specific feature pages that include details of how they work in CKAN and CKAN v3 / DataHub.
 
-* Task
-* DAG (Pipeline)
-* Run (Job)
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRdMzNeIAEkjDRGtBfuocy6zDyRg_qDujSkLrTe69U1qlu_1kfTYN0OL_v4IZKKo0eDXRbCzgzQMlFz/pub?w=622&amp;h=635" />
 
-### GraphQL version
+> [!tip] There are many ways to break down features and this is just one framing. We are thinking about others and if you have thoughts please get in touch.
 
-```graphql=
-type Project {
-  id: ID!
-  description: String
-  readme: String
-  dataset: Dataset
-  views: [View]
-  issues: [Issue]
-  actions: [Action]
-}
 
-type Dataset {
-  # data package descriptor structure
-  id: ID
-  name: String
-  ...
-  resources: [Resource]
-}
+- [Discovering and showcasing data (catalog and presenting)](/dms/frontend)
+- [Views on data](/dms/views) including visualizing and previewing data as well [Data Explorers][explorer] and [Dashboards][]
+- [Publishing data](/dms/publish)
+- [Data API DataStore](/dms/data-api)
+- [Permissions](/dms/permissions) and [Authentication](/docs/dms/authentication)
+- [Versioning](/dms/versioning)
+- [Harvesting](/dms/harvesting)
 
-type Resource {
-  # follows Frictionless Resource
-  path: ...
-  id: ...
-  name: ...
-  schema: Schema
-}
+[dashboards]: /docs/dms/dashboards
+[explorer]: /docs/dms/data-explorer
 
-# Table Schema usually ...
-type Schema {
+### Components
 
-}
+A DMS has the following key components:
 
-# dataset view e.g. table, graph, map etc
-type View {
-  id: ID!
-}
-```
+- [HubStore](/dms/hubstore)
+- [Data Flows and Factory](/dms/flows)
+  - [Loading to DataStore](/dms/load)
+- [Storage](/dms/storage)
+  - [Blob Storage](/dms/blob-storage)
+  - [Structured Storage - see DataStore](/dms/data-api)
 
-## Actions / Flows [component]
+https://coggle.it/diagram/Xiw2ZmYss-ddJVuK/t/data-portal-feature-breakdown
 
-* View Dataset: [Showcase page] a page displaying the dataset (or a resource)
-  * View a Revision / Tag / Branch:
-* Add / Upload: ...
-* Tag
+<iframe width='540' height='480' src='https://embed.coggle.it/diagram/Xiw2ZmYss-ddJVuK/b24d6f959c3718688fed2a5883f47d33f9bcff1478a0f3faf9e36961ac0b862f' frameBorder='0' allowFullScreen></iframe>
 
-## Components
 
-* **Meta~~Store~~Service**: stores dataset metadata (and revisions)
-* **HubStore**: stores all the users, organizations and their connections to the datasets.
-* **SearchStore + Service**: search index and API
-* **BlobStore**: stores blobs (for files)
+## Miscellaneous
+
+- [Glossary &raquo;](/dms/glossary)

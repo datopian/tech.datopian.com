@@ -40,11 +40,11 @@ You can use a DMS to build many kinds of specific solutions
 
 A DMS has a variety of features. This section provides an overview and links to specific feature pages that include details of how they work in CKAN and CKAN v3 / DataHub.
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vRdMzNeIAEkjDRGtBfuocy6zDyRg_qDujSkLrTe69U1qlu_1kfTYN0OL_v4IZKKo0eDXRbCzgzQMlFz/pub?w=622&amp;h=635">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRdMzNeIAEkjDRGtBfuocy6zDyRg_qDujSkLrTe69U1qlu_1kfTYN0OL_v4IZKKo0eDXRbCzgzQMlFz/pub?w=622&amp;h=635" />
 
-:::tip
-There are many ways to break down features and this is just one framing. We are thinking about others and if you have thoughts please get in touch.
-:::
+
+> [!tip]
+> There are many ways to break down features and this is just one framing. We are thinking about others and if you have thoughts please get in touch.
 
 * [Discovering and showcasing data (catalog and presenting)](/frontend/)
 * [Views on data](/views/) including visualizing and previewing data as well [Data Explorers][explorer] and [Dashboards][]

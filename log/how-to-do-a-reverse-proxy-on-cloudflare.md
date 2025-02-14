@@ -20,7 +20,7 @@ addEventListener('fetch', function(event) {
   event.respondWith(handleRequest(event.request))
 })
 
-const = 
+const proxySite = 'https://flowershow.app/'
 
 async function handleRequest(request) {
   const { pathname } = new URL(request.url)
@@ -36,7 +36,7 @@ async function handleRequest(request) {
   //  return fetch(`https://datahub.io${pathname}`)
   // }
 
-  return fetch(`https://next.datahub.io${pathname}`)
+  return fetch(`${proxySite}${pathname}`)
 }
 
 function MethodNotAllowed(request) {

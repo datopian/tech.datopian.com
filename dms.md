@@ -20,12 +20,12 @@ You can use a DMS to build many kinds of specific solutions
 - Data Lake: you can use a DMS to rapidly create a data lake using existing infrastructure. For example, using the DMS' catalog and storage gateway with existing cloud storage and data processing capabilities.
 - Data Engineering: you can use components of the DMS to rapidly create, orchestrate and supply data pipelines.
 
-[dms]: /docs/dms/dms
-[portals]: /docs/dms/data-portals
-[publishing]: /docs/dms/publish
-[datahub]: /docs/dms/datahub
-[ckan]: /docs/dms/ckan
-[v3]: /docs/dms/ckan-v3
+[dms]: /dms/dms
+[portals]: /dms/data-portals
+[publishing]: /dms/publish
+[datahub]: /dms/datahub
+[ckan]: /dms/ckan
+[v3]: /dms/ckan-v3
 
 ### Features
 

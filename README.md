@@ -1,6 +1,4 @@
----
-title: Datopian Tech 👩‍💻
----
+# Datopian Tech 👩‍💻
 
 ![](https://www.datopian.com/assets/images/layout/datopian-logotype.png)
 
@@ -20,8 +18,10 @@ A [Data Management System (DMS)][dms] is a _framework_. It can be used to create
 [data catalogs]: /dms/data-portals
 [dms]: /dms/dms
 [CKAN]: /dms/ckan
+[datahub]: /dms/datahub
+[v3]: /dms/ckan-v3
 
-[[dms|Read more about DMS]]
+[[dms|Read more about DMS »]]
 
 ## Frictionless
 

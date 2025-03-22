@@ -16,7 +16,7 @@ A [Data Management System (DMS)][dms] is a _framework_. It can be used to create
 [data portals]: /dms/data-portals
 [data lakes]: /dms/data-lake
 [data catalogs]: /dms/data-portals
-[dms]: /dms/dms
+[dms]: /dms
 [CKAN]: /dms/ckan
 [datahub]: /dms/datahub
 [v3]: /dms/ckan-v3

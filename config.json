@@ -2,6 +2,23 @@
   "showEditLink": true,
   "showSidebar": true,
   "nav": {
-    "title": "Datopian Tech"
+    "title": "Datopian Tech",
+    "social": [
+      {
+        "label": "github",
+        "name": "GitHub Profile",
+        "href": "https://github.com/datopian/tech.datopian.com"
+      },
+      {
+        "label": "twitter",
+        "name": "Follow us on Twitter",
+        "href": "https://twitter.com/datopian"
+      },
+      {
+        "label": "linkedin",
+        "name": "Follow us on LinkedIn",
+        "href": "https://www.linkedin.com/company/datopian"
+      }
+    ]
   }
 }

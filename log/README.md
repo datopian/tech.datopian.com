@@ -6,6 +6,7 @@
 - [[how do you consolidate an single chatgpt chat into a single summary]]
 - [[Howto Remove Git LFS]]
 - [[Papertrail 2024-10-23]]
+- [[Why I prefer YAML over JSON]]
 
 Topics
 

@@ -1,5 +1,7 @@
 ---
 sidebar: auto
+authors:
+  - Anuar Ustayev
 ---
 
 # Content Management System (CMS) for Data Portals

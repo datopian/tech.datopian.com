@@ -1,5 +1,8 @@
 # Data Portals
 
+> [!tip]
+> **Would you like to build a fully-functioning data portal in 5 minutes?** PortalJS Cloud is the easiest way to get started with Open Data. Perfect for governments, non-profits, academics, and companies of all sizes. Try it out for free at https://www.portaljs.com.
+
 > *Data Portals have become essential tools in unlocking the value of data for organizations and enterprises ranging from the US government to Fortune 500 pharma companies, from non-profits to startups. They provide a convenient point of truth for discovery and use of an organization's data assets. Read on to find out more.*
 
 ## Introduction: Data Portals are Gateways to Data
